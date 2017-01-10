@@ -517,7 +517,13 @@ table.CodeRay td.code>pre{padding:0}
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#introduction">1. Introduction</a></li>
-<li><a href="#niord-message-model">2. Niord Message Model</a></li>
+<li><a href="#niord-message-model">2. Niord Message Model</a>
+<ul class="sectlevel2">
+<li><a href="#history">2.1. History</a></li>
+<li><a href="#message-model-uml">2.2. Message Model UML</a></li>
+<li><a href="#design-patterns">2.3. Design Patterns</a></li>
+</ul>
+</li>
 <li><a href="#niord-geojson-model">3. Niord GeoJSON Model</a></li>
 </ul>
 </div>
@@ -544,6 +550,27 @@ table.CodeRay td.code>pre{padding:0}
 <h2 id="niord-message-model"><a class="anchor" href="#niord-message-model"></a><a class="link" href="#niord-message-model">2. Niord Message Model</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
+<p>The Niord Message Model is the combined model used to represent Navigational Warnings (NW) and Notices to Mariners (NM).</p>
+</div>
+<div class="paragraph">
+<p>The model is used as an interchange format when communicating NW and NM messages with the Niord Editing System
+and compatible systems.</p>
+</div>
+<div class="paragraph">
+<p>A public API for fetching Niord Message data from a test system can be found at the
+<a href="https://niord.e-navigation.net/api.html#/messages">Niord alpha server</a>.</p>
+</div>
+<div class="sect2">
+<h3 id="history"><a class="anchor" href="#history"></a><a class="link" href="#history">2.1. History</a></h3>
+<div class="paragraph">
+<p>The Niord Message Model is based on a combined NW-NM model devised and tested in the ACCSEAS European Union project.
+It has subsequently been updated according to the progress of the S-124 specification, an effort by IHO to
+create an S-100 specification for Navigational Warnings (and possibly Notices to Mariners T&amp;P).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="message-model-uml"><a class="anchor" href="#message-model-uml"></a><a class="link" href="#message-model-uml">2.2. Message Model UML</a></h3>
+<div class="paragraph">
 <p>The UML diagram for the message model is given by;</p>
 </div>
 <div class="imageblock" style="text-align: center">
@@ -551,7 +578,48 @@ table.CodeRay td.code>pre{padding:0}
 <img src="images/Message-Class-Diagram.png" alt="Message UML Model" width="80%" height="80%">
 </div>
 </div>
+<div class="paragraph">
+<p>The diagram uses the following colour codes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Light-gray background: Used for enumerations.</p>
+</li>
+<li>
+<p>Light-yellow background: Used for localized description entities - see <em>Design Pattern</em> section below.</p>
+</li>
+<li>
+<p>Light-green background: The <em>GeoJSON</em> model is detailed in the next chapter.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Although the use of <em>aggregation</em> vs. <em>composition</em> relationship symbols (empty and filled diamonds respectively)
+is nonsensical in a data interchange format, they have been used here to signify the difference between
+entities whose lifecycle is tied to the message (composition) and entities that are modelled in their own right
+in the Niord System (aggregation).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="design-patterns"><a class="anchor" href="#design-patterns"></a><a class="link" href="#design-patterns">2.3. Design Patterns</a></h3>
+<div class="paragraph">
+<p>One of the main design patterns adopted in the Niord Message Model relates to localization.
+The model is able to include an arbitrary number of translations of the same message including all related
+entities.</p>
+</div>
+<div class="paragraph">
+<p>The pattern used in Niord is to associate each localizable entity, say, <em>Xyz</em>, with a list of
+entities, <em>XyzDesc</em>, which contains all localizable fields of the <em>Xyz</em> entity along with a "lang" field
+that denotes the ISO 639-1 language code of the translation.</p>
+</div>
+<div class="paragraph">
+<p>A client of the interchange format should either query data by language, to get a filtered translation of a message,
+or be prepared to extract the proper language variant for presentation, and possibly handle fall-back cases,
+such as using the English language variant when a client-selected language is not present.</p>
+</div>
 <div style="page-break-after: always;"></div>
+</div>
 </div>
 </div>
 <div class="sect1">
