@@ -1,6 +1,44 @@
 == Niord Message Model
+The Niord Message Model is the combined model used to represent Navigational Warnings (NW) and Notices to Mariners (NM).
 
+The model is used as an interchange format when communicating NW and NM messages with the Niord Editing System
+and compatible systems.
+
+A public API for fetching Niord Message data from a test system can be found at the
+https://niord.e-navigation.net/api.html#/messages[Niord alpha server].
+
+=== History
+The Niord Message Model is based on a combined NW-NM model devised and tested in the ACCSEAS European Union project.
+It has subsequently been updated according to the progress of the S-124 specification, an effort by IHO to
+create an S-100 specification for Navigational Warnings (and possibly Notices to Mariners T&P).
+
+=== Message Model UML
 The UML diagram for the message model is given by;
 
 image::Message-Class-Diagram.png[Message UML Model, 80%, 80%, align=center]
+
+The diagram uses the following colour codes:
+
+* Light-gray background: Used for enumerations.
+* Light-yellow background: Used for localized description entities - see _Design Pattern_ section below.
+* Light-green background: The _GeoJSON_ model is detailed in the next chapter.
+
+Although the use of _aggregation_ vs. _composition_ relationship symbols (empty and filled diamonds respectively)
+is nonsensical in a data interchange format, they have been used here to signify the difference between
+entities whose lifecycle is tied to the message (composition) and entities that are modelled in their own right
+in the Niord System (aggregation).
+
+=== Design Patterns
+One of the main design patterns adopted in the Niord Message Model relates to localization.
+The model is able to include an arbitrary number of translations of the same message including all related
+entities.
+
+The pattern used in Niord is to associate each localizable entity, say, _Xyz_, with a list of
+entities, _XyzDesc_, which contains all localizable fields of the _Xyz_ entity along with a "lang" field
+that denotes the ISO 639-1 language code of the translation.
+
+A client of the interchange format should either query data by language, to get a filtered translation of a message,
+or be prepared to extract the proper language variant for presentation, and possibly handle fall-back cases,
+such as using the English language variant when a client-selected language is not present.
+
 
