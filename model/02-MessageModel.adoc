@@ -1,0 +1,4 @@
+== Niord Message Model
+
+image::Message-Class-Diagram.png[Message UML Model, align=center]
+
