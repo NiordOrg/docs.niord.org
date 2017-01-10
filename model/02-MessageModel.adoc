@@ -1,4 +1,6 @@
 == Niord Message Model
 
+The UML diagram for the message model is given by;
+
 image::Message-Class-Diagram.png[Message UML Model, align=center]
 
