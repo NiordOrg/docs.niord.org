@@ -22,7 +22,7 @@
 :c: icon:file-text-o[role="blue"]
 :table-caption!:
 :example-caption!:
-:figure-caption!:
+:figure-caption:
 :imagesdir: images
 :includedir: _includes
 :underscore: _
@@ -30,6 +30,7 @@
 
 :releaseVersion: 0.1
 :version: 0.1
+:releaseDate: January 2017
 
 = Niord Message Model
 

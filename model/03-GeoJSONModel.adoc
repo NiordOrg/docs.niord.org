@@ -2,5 +2,7 @@
 
 The Niord GeoJSON Model is based on the http://geojson.org/geojson-spec.html[GeoJSON Specification].
 
-image::GeoJSON-Class-Diagram.png[GeoJSON UML Model, 60%, 60%, align=center]
+[[img-geojson-uml]]
+.GeoJSON UML Model
+image::GeoJSON-Class-Diagram.png[GeoJSON UML Model, 60%, 60%]
 

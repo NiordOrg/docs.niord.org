@@ -522,6 +522,7 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#background">2.1. Background</a></li>
 <li><a href="#message-model-uml">2.2. Message Model UML</a></li>
 <li><a href="#design-patterns">2.3. Design Patterns</a></li>
+<li><a href="#message-model-classes">2.4. Message Model Classes</a></li>
 </ul>
 </li>
 <li><a href="#niord-geojson-model">3. Niord GeoJSON Model</a></li>
@@ -538,7 +539,7 @@ table.CodeRay td.code>pre{padding:0}
 <h2 id="introduction"><a class="anchor" href="#introduction"></a><a class="link" href="#introduction">1. Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This document describes the data model that is defined by the <strong>Niord</strong> Nautical Information Directory project as of {releaseDate}.</p>
+<p>This document describes the data model that is defined by the <strong>Niord</strong> Nautical Information Directory project as of January 2017.</p>
 </div>
 <div class="paragraph">
 <p>The actual source for the data model is available at <a href="https://github.com/NiordOrg/niord/tree/master/niord-model">the Niord Model Github Repository</a></p>
@@ -559,6 +560,12 @@ and compatible systems.</p>
 <div class="paragraph">
 <p>A public API for fetching Niord Message data from a test system can be found at the
 <a href="https://niord.e-navigation.net/api.html#/messages">Niord alpha server</a>.</p>
+</div>
+<div id="img-sample-nm" class="imageblock">
+<div class="content">
+<img src="images/Sample-NM.png" alt="Sample NM" width="60%" height="60%">
+</div>
+<div class="title"> 1. Sample NM</div>
 </div>
 <div class="sect2">
 <h3 id="background"><a class="anchor" href="#background"></a><a class="link" href="#background">2.1. Background</a></h3>
@@ -602,10 +609,11 @@ create an S-100 specification for Navigational Warnings (and possibly Notices to
 <div class="paragraph">
 <p>The UML diagram for the message model is given by;</p>
 </div>
-<div class="imageblock" style="text-align: center">
+<div id="img-message-uml" class="imageblock">
 <div class="content">
 <img src="images/Message-Class-Diagram.png" alt="Message UML Model" width="80%" height="80%">
 </div>
+<div class="title"> 2. Message UML Model</div>
 </div>
 <div class="paragraph">
 <p>The diagram uses the following colour codes:</p>
@@ -664,7 +672,172 @@ of area and category levels, and with enumerated category values.</p>
 <div class="paragraph">
 <p>The remainder of the chapter will detail the individual classes.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="message-model-classes"><a class="anchor" href="#message-model-classes"></a><a class="link" href="#message-model-classes">2.4. Message Model Classes</a></h3>
+<div class="paragraph">
+<p>The remainder of the chapter will detail the individual classes.</p>
+</div>
+<div class="sect3">
+<h4 id="messageseries"><a class="anchor" href="#messageseries"></a><a class="link" href="#messageseries">2.4.1. MessageSeries</a></h4>
+<div class="paragraph">
+<p>According to IHO, NW and NM messages must be numbered. For NW, it is e.g. mandated that:</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+Navigational warnings in each series should be consecutively numbered throughout the calendar year,
+commencing with 1/YY at 0000 UTC on 1 January.
+</blockquote>
+</div>
+<div class="paragraph">
+<p>The numbering scheme does not guarantee uniqueness in a combined NW-NM model, let alone a system
+that may contain messages from multiple countries and authorities.
+Thus, message series have been introduced in the NW-NM data model to group messages as appropriate.
+A country may e.g. have separate message series for NW and NM. However, they may also introduce
+separate message series to allow, say, local harbour authorities to maintain their own message series
+for local NWs, or, as is the case with Canada, divide the country into five regions, each with their
+own message series.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Attribute Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">seriesId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The ID of the message series in the implementing system. Should be globally unique.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">mainType</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MainType</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Either NW or NM.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="chart"><a class="anchor" href="#chart"></a><a class="link" href="#chart">2.4.2. Chart</a></h4>
+<div class="paragraph">
+<p>A message can be assigned a list of charts. The charts are maintained administratively as base data
+in the producing system.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Attribute Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">chartNumber</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mandatory regional chart number (and identifier).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">internationalNumber</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional international chart number.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="area"><a class="anchor" href="#area"></a><a class="link" href="#area">2.4.3. Area</a></h4>
+<div class="paragraph">
+<p>Existing IHO standards for NW and NM both provide support for specifying multiple area levels (general area and locality for NW; general region, sub-region and specific location for NMs).
+However, in the NW-NM system, this has been generalized, and areas are administratively maintained in a hierarchical area tree (with each area having a localized name) of arbitrary depth. A message can be assigned a list of these areas, and by implication, the parent areas of the selected area.
+Additionally, a message can be assigned a localized textual vicinity description (part of the MessageDesc class – see 5.11), for detailed location information not defined in the area tree.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Attribute Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Int</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Internal system ID of the area</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">mrn</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optionally, an area may be assigned a globally unique MRN (maritime resource name).<br>
+Adopting MRNs for areas would make interchange of message data between two NW-NM systems more robust.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">parent</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Area</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Non-root areas will reference their parent areas, and thus allow clients to e.g. group and sort
+messages by areas<br>
+Example: Randers Havn &#8594; Kattegat &#8594; Danmark</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">descs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AreaDesc[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The list of localizable attributes for an area. See <a id=":AreaDesc"></a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="a-id-areadesc-a-areadesc"><a class="anchor" href="#a-id-areadesc-a-areadesc"></a><a class="link" href="#a-id-areadesc-a-areadesc">2.4.4. <a id="AreaDesc"></a>AreaDesc</a></h4>
+<div class="paragraph">
+<p>The AreaDesc class contains the list of localizable attributes for an area.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Attribute Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">lang</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The ISO-2 language code.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The localized name of an area.</p></td>
+</tr>
+</tbody>
+</table>
 <div style="page-break-after: always;"></div>
+</div>
 </div>
 </div>
 </div>
@@ -674,17 +847,18 @@ of area and category levels, and with enumerated category values.</p>
 <div class="paragraph">
 <p>The Niord GeoJSON Model is based on the <a href="http://geojson.org/geojson-spec.html">GeoJSON Specification</a>.</p>
 </div>
-<div class="imageblock" style="text-align: center">
+<div id="img-geojson-uml" class="imageblock">
 <div class="content">
 <img src="images/GeoJSON-Class-Diagram.png" alt="GeoJSON UML Model" width="60%" height="60%">
 </div>
+<div class="title"> 3. GeoJSON UML Model</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-01-10 10:51:09 CET
+Last updated 2017-01-10 14:19:14 CET
 </div>
 </div>
 <script type="text/x-mathjax-config">

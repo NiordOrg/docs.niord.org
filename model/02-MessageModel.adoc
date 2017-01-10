@@ -7,6 +7,10 @@ and compatible systems.
 A public API for fetching Niord Message data from a test system can be found at the
 https://niord.e-navigation.net/api.html#/messages[Niord alpha server].
 
+[[img-sample-nm]]
+.Sample NM
+image::Sample-NM.png[Sample NM, 60%, 60%]
+
 === Background
 The structured NW-NM data of the Niord Message Model needs to cater for the requirement set out by the
 specifications for MSI and NM T&P respectively, i.e. the relevant parts of:
@@ -26,7 +30,9 @@ create an S-100 specification for Navigational Warnings (and possibly Notices to
 === Message Model UML
 The UML diagram for the message model is given by;
 
-image::Message-Class-Diagram.png[Message UML Model, 80%, 80%, align=center]
+[[img-message-uml]]
+.Message UML Model
+image::Message-Class-Diagram.png[Message UML Model, 80%, 80%]
 
 The diagram uses the following colour codes:
 
@@ -58,4 +64,78 @@ such as charts, categories and areas. Previous proposals have opted for rigid so
 of area and category levels, and with enumerated category values.
 
 The remainder of the chapter will detail the individual classes.
+
+=== Message Model Classes
+The remainder of the chapter will detail the individual classes.
+
+==== MessageSeries
+According to IHO, NW and NM messages must be numbered. For NW, it is e.g. mandated that:
+
+[quote]
+Navigational warnings in each series should be consecutively numbered throughout the calendar year,
+commencing with 1/YY at 0000 UTC on 1 January.
+
+The numbering scheme does not guarantee uniqueness in a combined NW-NM model, let alone a system
+that may contain messages from multiple countries and authorities.
+Thus, message series have been introduced in the NW-NM data model to group messages as appropriate.
+A country may e.g. have separate message series for NW and NM. However, they may also introduce
+separate message series to allow, say, local harbour authorities to maintain their own message series
+for local NWs, or, as is the case with Canada, divide the country into five regions, each with their
+own message series.
+
+[cols="20,20,60",options="header"]
+|===
+|Attribute Name|Type|Description
+
+|seriesId|String|The ID of the message series in the implementing system. Should be globally unique.
+
+|mainType|MainType|Either NW or NM.
+|===
+
+==== Chart
+A message can be assigned a list of charts. The charts are maintained administratively as base data
+in the producing system.
+
+[cols="20,20,60",options="header"]
+|===
+|Attribute Name|Type|Description
+
+|chartNumber|String|Mandatory regional chart number (and identifier).
+
+|internationalNumber|String|Optional international chart number.
+|===
+
+==== Area
+Existing IHO standards for NW and NM both provide support for specifying multiple area levels (general area and locality for NW; general region, sub-region and specific location for NMs).
+However, in the NW-NM system, this has been generalized, and areas are administratively maintained in a hierarchical area tree (with each area having a localized name) of arbitrary depth. A message can be assigned a list of these areas, and by implication, the parent areas of the selected area.
+Additionally, a message can be assigned a localized textual vicinity description (part of the MessageDesc class – see 5.11), for detailed location information not defined in the area tree.
+
+[cols="20,20,60",options="header"]
+|===
+|Attribute Name|Type|Description
+
+|id|Int|Internal system ID of the area
+|mrn|String|Optionally, an area may be assigned a globally unique MRN (maritime resource name). +
+Adopting MRNs for areas would make interchange of message data between two NW-NM systems more robust.
+
+|parent|Area|Non-root areas will reference their parent areas, and thus allow clients to e.g. group and sort
+messages by areas +
+Example: Randers Havn -> Kattegat -> Danmark
+
+|descs|AreaDesc[]|The list of localizable attributes for an area. See anchor::AreaDesc[AreaDesc]
+|===
+
+
+==== [[AreaDesc]]AreaDesc
+The AreaDesc class contains the list of localizable attributes for an area.
+
+[cols="20,20,60",options="header"]
+|===
+|Attribute Name|Type|Description
+
+|lang|String|The ISO-2 language code.
+
+|name|String|The localized name of an area.
+|===
+
 
