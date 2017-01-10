@@ -7,8 +7,19 @@ and compatible systems.
 A public API for fetching Niord Message data from a test system can be found at the
 https://niord.e-navigation.net/api.html#/messages[Niord alpha server].
 
-=== History
-The Niord Message Model is based on a combined NW-NM model devised and tested in the ACCSEAS European Union project.
+=== Background
+The structured NW-NM data of the Niord Message Model needs to cater for the requirement set out by the
+specifications for MSI and NM T&P respectively, i.e. the relevant parts of:
+
+* Joint IHO-IMO-WMO S-53 standard on Maritime Safety Information.
+* IHO S-4 standard, which covers NM T&P.
+* Revised NAVTEX Manual MSC Circular.
+* IMO International SafetyNET manual.
+
+The data model has been a further development of the work conducted in the EU-funded _ACCSEAS_ project, documented in:
+
+* ACCSEAS WP6 MSI/NM (T&P) Service Description.
+
 It has subsequently been updated according to the progress of the S-124 specification, an effort by IHO to
 create an S-100 specification for Navigational Warnings (and possibly Notices to Mariners T&P).
 
@@ -23,22 +34,28 @@ The diagram uses the following colour codes:
 * Light-yellow background: Used for localized description entities - see _Design Pattern_ section below.
 * Light-green background: The _GeoJSON_ model is detailed in the next chapter.
 
-Although the use of _aggregation_ vs. _composition_ relationship symbols (empty and filled diamonds respectively)
-is nonsensical in a data interchange format, they have been used here to signify the difference between
-entities whose lifecycle is tied to the message (composition) and entities that are modelled in their own right
-in the Niord System (aggregation).
+The use of aggregation vs composition connectors above is mostly academic, since the UML is not a
+database model but merely an interchange format. However, the aggregation connector is used to signal
+that the associated entity represents base data in the producing system, and is not tied to the
+life cycle of the Message.
 
 === Design Patterns
-One of the main design patterns adopted in the Niord Message Model relates to localization.
-The model is able to include an arbitrary number of translations of the same message including all related
-entities.
+The overarching idea has been to generalize the constituent parts and fields of NW and NM T&P messages,
+and make the format both backwards compatible and future-proof by e.g. adding support for:
 
-The pattern used in Niord is to associate each localizable entity, say, _Xyz_, with a list of
-entities, _XyzDesc_, which contains all localizable fields of the _Xyz_ entity along with a "lang" field
-that denotes the ISO 639-1 language code of the translation.
+* *Multi-language support.* All messages must be localizable to any number of languages, including the base data
+they reference (e.g. areas). The pattern adopted to support this, is to let all classes with localizable
+attributes (such as Message) have an associated list of description entities (MessageDesc) which contains an
+ISO 639-1 language code and the localizable fields. The description entities are yellow in the UML diagram below.
+* *Rich text support.* NM’s in particular, can contain a rich layout containing features such as tables,
+links, embedded pictograms, etc. By supporting HTML descriptions this can be accommodated.
+* *New identifier format.* The S-4 and S-53 standards loosely specifies a numbering scheme for NWs and NMs.
+However, the numbering scheme does not guarantee uniqueness in a combined NW-NM model, let alone a system
+that may contain messages from multiple authorities. Thus, the NW-NM data model introduces the generalized
+concept of message series used to group messages by.
+* *Base data.* Part of a combined NW-NM model is to define a relationship between messages and base data
+such as charts, categories and areas. Previous proposals have opted for rigid solutions with a fixed number
+of area and category levels, and with enumerated category values.
 
-A client of the interchange format should either query data by language, to get a filtered translation of a message,
-or be prepared to extract the proper language variant for presentation, and possibly handle fall-back cases,
-such as using the English language variant when a client-selected language is not present.
-
+The remainder of the chapter will detail the individual classes.
 

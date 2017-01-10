@@ -519,7 +519,7 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#introduction">1. Introduction</a></li>
 <li><a href="#niord-message-model">2. Niord Message Model</a>
 <ul class="sectlevel2">
-<li><a href="#history">2.1. History</a></li>
+<li><a href="#background">2.1. Background</a></li>
 <li><a href="#message-model-uml">2.2. Message Model UML</a></li>
 <li><a href="#design-patterns">2.3. Design Patterns</a></li>
 </ul>
@@ -561,10 +561,39 @@ and compatible systems.</p>
 <a href="https://niord.e-navigation.net/api.html#/messages">Niord alpha server</a>.</p>
 </div>
 <div class="sect2">
-<h3 id="history"><a class="anchor" href="#history"></a><a class="link" href="#history">2.1. History</a></h3>
+<h3 id="background"><a class="anchor" href="#background"></a><a class="link" href="#background">2.1. Background</a></h3>
 <div class="paragraph">
-<p>The Niord Message Model is based on a combined NW-NM model devised and tested in the ACCSEAS European Union project.
-It has subsequently been updated according to the progress of the S-124 specification, an effort by IHO to
+<p>The structured NW-NM data of the Niord Message Model needs to cater for the requirement set out by the
+specifications for MSI and NM T&amp;P respectively, i.e. the relevant parts of:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Joint IHO-IMO-WMO S-53 standard on Maritime Safety Information.</p>
+</li>
+<li>
+<p>IHO S-4 standard, which covers NM T&amp;P.</p>
+</li>
+<li>
+<p>Revised NAVTEX Manual MSC Circular.</p>
+</li>
+<li>
+<p>IMO International SafetyNET manual.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The data model has been a further development of the work conducted in the EU-funded <em>ACCSEAS</em> project, documented in:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>ACCSEAS WP6 MSI/NM (T&amp;P) Service Description.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>It has subsequently been updated according to the progress of the S-124 specification, an effort by IHO to
 create an S-100 specification for Navigational Warnings (and possibly Notices to Mariners T&amp;P).</p>
 </div>
 </div>
@@ -595,28 +624,45 @@ create an S-100 specification for Navigational Warnings (and possibly Notices to
 </ul>
 </div>
 <div class="paragraph">
-<p>Although the use of <em>aggregation</em> vs. <em>composition</em> relationship symbols (empty and filled diamonds respectively)
-is nonsensical in a data interchange format, they have been used here to signify the difference between
-entities whose lifecycle is tied to the message (composition) and entities that are modelled in their own right
-in the Niord System (aggregation).</p>
+<p>The use of aggregation vs composition connectors above is mostly academic, since the UML is not a
+database model but merely an interchange format. However, the aggregation connector is used to signal
+that the associated entity represents base data in the producing system, and is not tied to the
+life cycle of the Message.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="design-patterns"><a class="anchor" href="#design-patterns"></a><a class="link" href="#design-patterns">2.3. Design Patterns</a></h3>
 <div class="paragraph">
-<p>One of the main design patterns adopted in the Niord Message Model relates to localization.
-The model is able to include an arbitrary number of translations of the same message including all related
-entities.</p>
+<p>The overarching idea has been to generalize the constituent parts and fields of NW and NM T&amp;P messages,
+and make the format both backwards compatible and future-proof by e.g. adding support for:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Multi-language support.</strong> All messages must be localizable to any number of languages, including the base data
+they reference (e.g. areas). The pattern adopted to support this, is to let all classes with localizable
+attributes (such as Message) have an associated list of description entities (MessageDesc) which contains an
+ISO 639-1 language code and the localizable fields. The description entities are yellow in the UML diagram below.</p>
+</li>
+<li>
+<p><strong>Rich text support.</strong> NM’s in particular, can contain a rich layout containing features such as tables,
+links, embedded pictograms, etc. By supporting HTML descriptions this can be accommodated.</p>
+</li>
+<li>
+<p><strong>New identifier format.</strong> The S-4 and S-53 standards loosely specifies a numbering scheme for NWs and NMs.
+However, the numbering scheme does not guarantee uniqueness in a combined NW-NM model, let alone a system
+that may contain messages from multiple authorities. Thus, the NW-NM data model introduces the generalized
+concept of message series used to group messages by.</p>
+</li>
+<li>
+<p><strong>Base data.</strong> Part of a combined NW-NM model is to define a relationship between messages and base data
+such as charts, categories and areas. Previous proposals have opted for rigid solutions with a fixed number
+of area and category levels, and with enumerated category values.</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>The pattern used in Niord is to associate each localizable entity, say, <em>Xyz</em>, with a list of
-entities, <em>XyzDesc</em>, which contains all localizable fields of the <em>Xyz</em> entity along with a "lang" field
-that denotes the ISO 639-1 language code of the translation.</p>
-</div>
-<div class="paragraph">
-<p>A client of the interchange format should either query data by language, to get a filtered translation of a message,
-or be prepared to extract the proper language variant for presentation, and possibly handle fall-back cases,
-such as using the English language variant when a client-selected language is not present.</p>
+<p>The remainder of the chapter will detail the individual classes.</p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
