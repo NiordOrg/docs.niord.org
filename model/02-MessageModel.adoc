@@ -32,7 +32,7 @@ The UML diagram for the message model is given by;
 
 [[img-message-uml]]
 .Message UML Model
-image::Message-Class-Diagram.png[Message UML Model, 80%, 80%]
+image::Message-Class-Diagram.png[Message UML Model, 80%, 80%, link="{imagesdir}/Message-Class-Diagram.png"]
 
 The diagram uses the following colour codes:
 
@@ -122,11 +122,11 @@ Adopting MRNs for areas would make interchange of message data between two NW-NM
 messages by areas +
 Example: Randers Havn -> Kattegat -> Danmark
 
-|descs|AreaDesc[]|The list of localizable attributes for an area. See anchor::AreaDesc[AreaDesc]
+|descs|AreaDesc[]|The list of localizable attributes for an area. See <<AreaDesc>>
 |===
 
 
-==== [[AreaDesc]]AreaDesc
+==== AreaDesc
 The AreaDesc class contains the list of localizable attributes for an area.
 
 [cols="20,20,60",options="header"]
