@@ -1,8 +1,53 @@
 == Niord GeoJSON Model
 
-The Niord GeoJSON Model is based on the http://geojson.org/geojson-spec.html[GeoJSON Specification].
+The Niord GeoJSON Model is an implementation of an external data model, as defined at
+http://geojson.org/geojson-spec.html[GeoJSON Specification].
+
+GeoJSON was picked as the representation of a message geometry, because it is widely adopted by client libraries, and, unlike e.g. WKT, the GeoJSON Feature class has associated properties that can be used to store various information, that may be used in the portrayal of the messages.
+
+=== GeoJSON Model UML
+The UML diagram for the GeoJSON model is given by:
 
 [[img-geojson-uml]]
 .GeoJSON UML Model
 image::GeoJSON-Class-Diagram.png[GeoJSON UML Model, 60%, 60%, link="{imagesdir}/GeoJSON-Class-Diagram.png"]
+
+The classes will not be detailed in this chapter, since the documentation can be found at the
+http://geojson.org/geojson-spec.html[GeoJSON Specification page].
+
+=== Niord GeoJSON Extensions
+A client should be able to display the GeoJSON-based geometry data associated with each message
+(actually, each message part of each message).
+
+On top of the GeoJSON standard, Niord has defined a set of GeoJSON Feature properties that a client
+may optionally support, in order to improve the portrayal and user experience. +
+The custom feature properties may e.g. enrich the geometry with feature and coordinate labels and restriction flags.
+
+[cols="30,70",options="header"]
+|===
+|Property Name|Description
+
+|name:lang|Contains a language-specific name that can be displayed for the geometry of the entire Feature.
+
+Example: name:en = Area of reduced depth.
+
+|name:x:lang|Contains a language-specific name that can be displayed for the x’th coordinate of the
+geometry of the Feature.
+
+Example: name:12:en = yellow spar buoy with topmark.
+
+|restriction|The _restriction_ flag may be used to adjust portrayal of a GeoJSON Feature, and whether
+or not to include the message in, say, route planning.
+
+Valid restriction values are "affected", "restricted", "speed-restricted", "prohibited" and "stopping-prohibited".
+
+|parentFeatureId +
+radius +
+radiusType
+|These properties are mostly used by the producing system to let one geometry be defined from another geometry.
+
+As an example, an affected area may be defined as a buffered geometry with a radius of 200 meters around,
+say, the position of a wreck (this being the parent geometry).
+|===
+
 

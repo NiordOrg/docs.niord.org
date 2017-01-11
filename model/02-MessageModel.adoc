@@ -28,7 +28,7 @@ It has subsequently been updated according to the progress of the S-124 specific
 create an S-100 specification for Navigational Warnings (and possibly Notices to Mariners T&P).
 
 === Message Model UML
-The UML diagram for the message model is given by;
+The UML diagram for the message model is given by:
 
 [[img-message-uml]]
 .Message UML Model

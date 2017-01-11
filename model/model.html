@@ -543,7 +543,12 @@ table.CodeRay td.code>pre{padding:0}
 </li>
 </ul>
 </li>
-<li><a href="#niord-geojson-model">3. Niord GeoJSON Model</a></li>
+<li><a href="#niord-geojson-model">3. Niord GeoJSON Model</a>
+<ul class="sectlevel2">
+<li><a href="#geojson-model-uml">3.1. GeoJSON Model UML</a></li>
+<li><a href="#niord-geojson-extensions">3.2. Niord GeoJSON Extensions</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -625,7 +630,7 @@ create an S-100 specification for Navigational Warnings (and possibly Notices to
 <div class="sect2">
 <h3 id="message-model-uml"><a class="anchor" href="#message-model-uml"></a><a class="link" href="#message-model-uml">2.2. Message Model UML</a></h3>
 <div class="paragraph">
-<p>The UML diagram for the message model is given by;</p>
+<p>The UML diagram for the message model is given by:</p>
 </div>
 <div id="img-message-uml" class="imageblock">
 <div class="content">
@@ -1512,13 +1517,78 @@ publications.</p></td>
 <h2 id="niord-geojson-model"><a class="anchor" href="#niord-geojson-model"></a><a class="link" href="#niord-geojson-model">3. Niord GeoJSON Model</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The Niord GeoJSON Model is based on the <a href="http://geojson.org/geojson-spec.html">GeoJSON Specification</a>.</p>
+<p>The Niord GeoJSON Model is an implementation of an external data model, as defined at
+<a href="http://geojson.org/geojson-spec.html">GeoJSON Specification</a>.</p>
+</div>
+<div class="paragraph">
+<p>GeoJSON was picked as the representation of a message geometry, because it is widely adopted by client libraries, and, unlike e.g. WKT, the GeoJSON Feature class has associated properties that can be used to store various information, that may be used in the portrayal of the messages.</p>
+</div>
+<div class="sect2">
+<h3 id="geojson-model-uml"><a class="anchor" href="#geojson-model-uml"></a><a class="link" href="#geojson-model-uml">3.1. GeoJSON Model UML</a></h3>
+<div class="paragraph">
+<p>The UML diagram for the GeoJSON model is given by:</p>
 </div>
 <div id="img-geojson-uml" class="imageblock">
 <div class="content">
 <a class="image" href="images/GeoJSON-Class-Diagram.png"><img src="images/GeoJSON-Class-Diagram.png" alt="GeoJSON UML Model" width="60%" height="60%"></a>
 </div>
 <div class="title"> 3. GeoJSON UML Model</div>
+</div>
+<div class="paragraph">
+<p>The classes will not be detailed in this chapter, since the documentation can be found at the
+<a href="http://geojson.org/geojson-spec.html">GeoJSON Specification page</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="niord-geojson-extensions"><a class="anchor" href="#niord-geojson-extensions"></a><a class="link" href="#niord-geojson-extensions">3.2. Niord GeoJSON Extensions</a></h3>
+<div class="paragraph">
+<p>A client should be able to display the GeoJSON-based geometry data associated with each message
+(actually, each message part of each message).</p>
+</div>
+<div class="paragraph">
+<p>On top of the GeoJSON standard, Niord has defined a set of GeoJSON Feature properties that a client
+may optionally support, in order to improve the portrayal and user experience.<br>
+The custom feature properties may e.g. enrich the geometry with feature and coordinate labels and restriction flags.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name:lang</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contains a language-specific name that can be displayed for the geometry of the entire Feature.
+</p><p class="tableblock">Example: name:en = Area of reduced depth.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name:x:lang</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contains a language-specific name that can be displayed for the x’th coordinate of the
+geometry of the Feature.
+</p><p class="tableblock">Example: name:12:en = yellow spar buoy with topmark.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">restriction</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <em>restriction</em> flag may be used to adjust portrayal of a GeoJSON Feature, and whether
+or not to include the message in, say, route planning.
+</p><p class="tableblock">Valid restriction values are "affected", "restricted", "speed-restricted", "prohibited" and "stopping-prohibited".</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">parentFeatureId<br>
+radius<br>
+radiusType</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">These properties are mostly used by the producing system to let one geometry be defined from another geometry.
+</p><p class="tableblock">As an example, an affected area may be defined as a buffered geometry with a radius of 200 meters around,
+say, the position of a wreck (this being the parent geometry).</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
