@@ -535,6 +535,10 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#attachment">2.4.9. Attachment</a></li>
 <li><a href="#attachmentdesc">2.4.10. AttachmentDesc</a></li>
 <li><a href="#dateinterval">2.4.11. DateInterval</a></li>
+<li><a href="#messagepart">2.4.12. MessagePart</a></li>
+<li><a href="#messagepartdesc">2.4.13. MessagePartDesc</a></li>
+<li><a href="#message">2.4.14. Message</a></li>
+<li><a href="#messagedesc">2.4.15. MessageDesc</a></li>
 </ul>
 </li>
 </ul>
@@ -785,7 +789,7 @@ A message can be assigned a list of these areas, and by implication, the parent 
 </div>
 <div class="paragraph">
 <p>Additionally, a message can be assigned a localized textual <em>vicinity</em> description
-(part of the <a href="#MessageDesc">[MessageDesc]</a> class), for detailed location information not defined in the area tree.</p>
+(part of the <a href="#messagedesc">MessageDesc</a> class), for detailed location information not defined in the area tree.</p>
 </div>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -862,7 +866,7 @@ reason to render the areas for the end user. The areas of a message will often b
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">lang</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The ISO-2 language code.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The ISO 639-1 language code.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
@@ -970,7 +974,7 @@ There is no reason to render the categories separately for the end user.
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">lang</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The ISO-2 language code.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The ISO 639-1 language code.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
@@ -1042,7 +1046,7 @@ However there are no requirements as to the format of the message ID.</p></td>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">lang</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The ISO-2 language code.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The ISO 639-1 language code.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">description</p></td>
@@ -1131,7 +1135,7 @@ unspecified, the attachment should be scaled proportionally.</p></td>
 <td class="content">
 If the client wish to work in offline mode, it should download all
 attachments locally, and rewrite attachment paths accordingly. Also, since attachments may be
-embedded as images or links in the HTML of the message part details field (see <a href="#MessagePartDesc">[MessagePartDesc]</a>),
+embedded as images or links in the HTML of the message part details field (see <a href="#messagepartdesc">MessagePartDesc</a>),
 this field should be rewritten as well.
 </td>
 </tr>
@@ -1160,7 +1164,7 @@ this field should be rewritten as well.
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">lang</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The ISO-2 language code.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The ISO 639-1 language code.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">caption</p></td>
@@ -1217,11 +1221,288 @@ without a time-part by the producing system.</p></td>
 <td class="content">
 Clients may use event dates for filtering messages (e.g. filter for relevance in route planning).
 However, the client should not render the event dates for the end user, since a textual representation
-of the dates should be included in the message part details (see <a href="#MessagePartDesc">[MessagePartDesc]</a>).
+of the dates should be included in the message part details (see <a href="#messagepartdesc">MessagePartDesc</a>).
 </td>
 </tr>
 </table>
 </div>
+</div>
+<div class="sect3">
+<h4 id="messagepart"><a class="anchor" href="#messagepart"></a><a class="link" href="#messagepart">2.4.12. MessagePart</a></h4>
+<div class="paragraph">
+<p>A message defines an ordered list of <em>message parts</em>, which can be thought of as sub-stories.
+Conceptually, each message part defines the time, positions, key subject and description of the hazard or event
+that the story pertains to.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Attribute Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">indexNo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Int</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specified the ascending index of the message part within the message</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MessagePartType</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">May be used by the client to tag the message tag details with a type. Valid types
+are "details", "time", "positions", "note", "prohibition" and "signals".</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">geometry</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GeoJSON</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The positions of the message part. The GeoJSON type is treated in details in the
+<a href="#niord-geojson-model">Niord GeoJSON Model</a> chapter.
+</p><p class="tableblock">In practice, Niord will always return a <em>FeatureCollection</em> GeoJSON entity.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">eventDates</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DateTime[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The list of event dates for which the message part hazard pertains. The list
+should not be rendered for the end user by the client, but may be used for computations.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">descs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MessagePartDesc[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The list of localizable attributes for a MessagePart. See <a href="#messagepartdesc">MessagePartDesc</a>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="messagepartdesc"><a class="anchor" href="#messagepartdesc"></a><a class="link" href="#messagepartdesc">2.4.13. MessagePartDesc</a></h4>
+<div class="paragraph">
+<p>The <em>MessagePartDesc</em> class contains the list of localizable attributes for a message part.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Attribute Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">lang</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The ISO 639-1 language code.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">subject</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The key subject of the hazard or event that the message part pertains to.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">details</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A detailed description of the hazard or event that the message part pertains to.
+</p><p class="tableblock">The type of the <em>details</em> field is mandated to be HTML, and thus allows for fairly advanced layout
+and typography, and may contain elements such as tables, links, images, etc.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="message"><a class="anchor" href="#message"></a><a class="link" href="#message">2.4.14. Message</a></h4>
+<div class="paragraph">
+<p>The <em>Message</em> class represents a complete <em>Navigational Warning</em> (NW) or <em>Notices to Mariners</em> (NM)
+nautical information message.</p>
+</div>
+<div class="paragraph">
+<p>It has been a deliberate choice to let NWs and NMs share the same <em>Message</em> class, rather than having
+a separate sub-class for each type.
+The main rationale for this is that NWs and NMs T&amp;P are expected to converge in the future, once promulgation
+is handled completely via electronic means.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Attribute Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Int</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Internal system ID of the message</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">created</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DateTime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The timestamp the message was created in the system.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">updated</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DateTime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The timestamp the message was last updated in the system.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">messageSeries</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MessageSeries</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The message series of the message. See <a href="#messageseries">MessageSeries</a> section.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Int</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The sequence number of a published message. See <a href="#messageseries">MessageSeries</a> section.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">shortId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The short-ID of a published message. See <a href="#messageseries">MessageSeries</a> section.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">mainType</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MainType</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The main type of the message, either NW or NM.
+</p><p class="tableblock">In reality this attribute is redundant, since the main type is also defined by the associated message series,
+and may be implied by the message type. It is included for convenience.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The sub-type of the message. One of "permanent_notice", "temporary_notice", "preliminary_notice",
+"miscellaneous_notice", "coastal_warning", "subarea_warning", "navarea_warning" or "local_warning".</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The status of the message. One of "draft", "verified", "published", "expired", "cancelled"
+or "deleted".</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">areas</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Area[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A list of the areas of a message. See <a href="#area">Area</a> section.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">categories</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Category[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A list of the categories of a message. See <a href="#category">Category</a> section.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">charts</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Chart[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A list of the charts of a message. See <a href="#chart">Chart</a> section.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">horizontalDatum</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The horizontal datum for the message. If unspecified, assume WGS-84.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">publishDateFrom</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DateTime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The timestamp for when the message was published – or should be published.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">publishDateTo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DateTime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The timestamp for when the message was cancelled – or should be expired.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">references</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reference[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A list of message references. See <a href="#reference">Reference</a> section.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">originalInformation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the message is based on original information or not.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">parts</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MessagePart[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The list of message parts of the message. See <a href="#messagepart">MessagePart</a> section.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">descs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MessageDesc[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The list of localizable attributes for a Message. See <a href="#messagedesc">MessageDesc</a> section.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">attachments</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Attachment[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The list of message attachments of the message. See <a href="#attachment">Attachment</a> section.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="messagedesc"><a class="anchor" href="#messagedesc"></a><a class="link" href="#messagedesc">2.4.15. MessageDesc</a></h4>
+<div class="paragraph">
+<p>The <em>MessageDesc</em> class contains the list of localizable attributes for a message.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Attribute Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">lang</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The ISO 639-1 language code.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">title</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A complete title line to show for a message. Typically composed by concatenating the
+area lineage, vicinity and subject of each message part.
+</p><p class="tableblock">Example: "Denmark. The North Sea. Hanstholm SW. AIS buoyage established."</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">vicinity</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">May be used for localized arbitrary area information not defined in the area tree.
+See <a href="#area">Area</a> section.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">publication</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A textual listing of all the publications relevant to the message.
+The format of the publication field is mandated to be HTML, as it may contain links to the actual
+publications.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">source</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A textual listing of all the sources and dates of the message hazard information.</p></td>
+</tr>
+</tbody>
+</table>
 <div style="page-break-after: always;"></div>
 </div>
 </div>

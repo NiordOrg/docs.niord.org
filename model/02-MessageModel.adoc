@@ -141,7 +141,7 @@ The AreaDesc class contains the list of localizable attributes for an area.
 |===
 |Attribute Name|Type|Description
 
-|lang|String|The ISO-2 language code.
+|lang|String|The ISO 639-1 language code.
 
 |name|String|The localized name of an area.
 |===
@@ -183,7 +183,7 @@ The _CategoryDesc_ class contains the list of localizable attributes for a categ
 |===
 |Attribute Name|Type|Description
 
-|lang|String|The ISO-2 language code.
+|lang|String|The ISO 639-1 language code.
 
 |name|String|The localized name of a category.
 |===
@@ -212,7 +212,7 @@ The _ReferenceDesc_ class contains the list of localizable attributes for a refe
 |===
 |Attribute Name|Type|Description
 
-|lang|String|The ISO-2 language code.
+|lang|String|The ISO 639-1 language code.
 
 |description|String|The localized description of a reference.
 |===
@@ -263,7 +263,7 @@ The _AttachmentDesc_ class contains the list of localizable attributes for an at
 |===
 |Attribute Name|Type|Description
 
-|lang|String|The ISO-2 language code.
+|lang|String|The ISO 639-1 language code.
 
 |caption|String|A localized caption to display for the attachment.
 |===
@@ -287,4 +287,129 @@ without a time-part by the producing system.
 TIP: Clients may use event dates for filtering messages (e.g. filter for relevance in route planning).
 However, the client should not render the event dates for the end user, since a textual representation
 of the dates should be included in the message part details (see <<MessagePartDesc>>).
+
+==== MessagePart
+A message defines an ordered list of _message parts_, which can be thought of as sub-stories.
+Conceptually, each message part defines the time, positions, key subject and description of the hazard or event
+that the story pertains to.
+
+[cols="20,20,60",options="header"]
+|===
+|Attribute Name|Type|Description
+
+|indexNo|Int|Specified the ascending index of the message part within the message
+
+|type|MessagePartType|May be used by the client to tag the message tag details with a type. Valid types
+are "details", "time", "positions", "note", "prohibition" and "signals".
+
+|geometry|GeoJSON|The positions of the message part. The GeoJSON type is treated in details in the
+<<Niord GeoJSON Model>> chapter.
+
+In practice, Niord will always return a _FeatureCollection_ GeoJSON entity.
+
+|eventDates|DateTime[]|The list of event dates for which the message part hazard pertains. The list
+should not be rendered for the end user by the client, but may be used for computations.
+
+|descs|MessagePartDesc[]|The list of localizable attributes for a MessagePart. See <<MessagePartDesc>>.
+|===
+
+==== MessagePartDesc
+The _MessagePartDesc_ class contains the list of localizable attributes for a message part.
+
+[cols="20,20,60",options="header"]
+|===
+|Attribute Name|Type|Description
+
+|lang|String|The ISO 639-1 language code.
+
+|subject|String|The key subject of the hazard or event that the message part pertains to.
+
+|details|String|A detailed description of the hazard or event that the message part pertains to.
+
+The type of the _details_ field is mandated to be HTML, and thus allows for fairly advanced layout
+and typography, and may contain elements such as tables, links, images, etc.
+|===
+
+==== Message
+The _Message_ class represents a complete _Navigational Warning_ (NW) or _Notices to Mariners_ (NM)
+nautical information message.
+
+It has been a deliberate choice to let NWs and NMs share the same _Message_ class, rather than having
+a separate sub-class for each type.
+The main rationale for this is that NWs and NMs T&P are expected to converge in the future, once promulgation
+is handled completely via electronic means.
+
+[cols="20,20,60",options="header"]
+|===
+|Attribute Name|Type|Description
+
+|id|Int|Internal system ID of the message
+
+|created|DateTime|The timestamp the message was created in the system.
+
+|updated|DateTime|The timestamp the message was last updated in the system.
+
+|messageSeries|MessageSeries|The message series of the message. See <<MessageSeries>> section.
+
+|number|Int|The sequence number of a published message. See <<MessageSeries>> section.
+
+|shortId|String|The short-ID of a published message. See <<MessageSeries>> section.
+
+|mainType|MainType|The main type of the message, either NW or NM.
+
+In reality this attribute is redundant, since the main type is also defined by the associated message series,
+and may be implied by the message type. It is included for convenience.
+
+|type|Type|The sub-type of the message. One of "permanent_notice", "temporary_notice", "preliminary_notice",
+"miscellaneous_notice", "coastal_warning", "subarea_warning", "navarea_warning" or "local_warning".
+
+|status|Status|The status of the message. One of "draft", "verified", "published", "expired", "cancelled"
+or "deleted".
+
+|areas|Area[]|A list of the areas of a message. See <<Area>> section.
+
+|categories|Category[]|A list of the categories of a message. See <<Category>> section.
+
+|charts|Chart[]|A list of the charts of a message. See <<Chart>> section.
+
+|horizontalDatum|String|The horizontal datum for the message. If unspecified, assume WGS-84.
+
+|publishDateFrom|DateTime|The timestamp for when the message was published – or should be published.
+
+|publishDateTo|DateTime|The timestamp for when the message was cancelled – or should be expired.
+
+|references|Reference[]|A list of message references. See <<Reference>> section.
+
+|originalInformation|Boolean|If the message is based on original information or not.
+
+|parts|MessagePart[]|The list of message parts of the message. See <<MessagePart>> section.
+
+|descs|MessageDesc[]|The list of localizable attributes for a Message. See <<MessageDesc>> section.
+
+|attachments|Attachment[]|The list of message attachments of the message. See <<Attachment>> section.
+|===
+
+==== MessageDesc
+The _MessageDesc_ class contains the list of localizable attributes for a message.
+
+[cols="20,20,60",options="header"]
+|===
+|Attribute Name|Type|Description
+
+|lang|String|The ISO 639-1 language code.
+
+|title|String|A complete title line to show for a message. Typically composed by concatenating the
+area lineage, vicinity and subject of each message part.
+
+Example: "Denmark. The North Sea. Hanstholm SW. AIS buoyage established."
+
+|vicinity|String|May be used for localized arbitrary area information not defined in the area tree.
+See <<Area>> section.
+
+|publication|String|A textual listing of all the publications relevant to the message.
+The format of the publication field is mandated to be HTML, as it may contain links to the actual
+publications.
+
+|source|String|A textual listing of all the sources and dates of the message hazard information.
+|===
 
