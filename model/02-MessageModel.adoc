@@ -106,9 +106,15 @@ in the producing system.
 |===
 
 ==== Area
-Existing IHO standards for NW and NM both provide support for specifying multiple area levels (general area and locality for NW; general region, sub-region and specific location for NMs).
-However, in the NW-NM system, this has been generalized, and areas are administratively maintained in a hierarchical area tree (with each area having a localized name) of arbitrary depth. A message can be assigned a list of these areas, and by implication, the parent areas of the selected area.
-Additionally, a message can be assigned a localized textual vicinity description (part of the MessageDesc class – see 5.11), for detailed location information not defined in the area tree.
+Existing IHO standards for NW and NM both provide support for specifying multiple area levels
+(_general area_ and _locality_ for NW; _general region_, _sub-region_ and _specific location_ for NMs).
+
+However, in the NW-NM system, this has been generalized, and areas are administratively maintained
+in a hierarchical area tree (with each area having a localized name) of arbitrary depth.
+A message can be assigned a list of these areas, and by implication, the parent areas of the selected area.
+
+Additionally, a message can be assigned a localized textual _vicinity_ description
+(part of the <<MessageDesc>> class), for detailed location information not defined in the area tree.
 
 [cols="20,20,60",options="header"]
 |===
@@ -125,6 +131,8 @@ Example: Randers Havn -> Kattegat -> Danmark
 |descs|AreaDesc[]|The list of localizable attributes for an area. See <<AreaDesc>>
 |===
 
+TIP: Whereas clients may use message areas for e.g. grouping or filtering messages, there is no
+reason to render the areas for the end user. The areas of a message will often be part of the message title already.
 
 ==== AreaDesc
 The AreaDesc class contains the list of localizable attributes for an area.
@@ -138,4 +146,145 @@ The AreaDesc class contains the list of localizable attributes for an area.
 |name|String|The localized name of an area.
 |===
 
+==== Category
+Categories are administratively maintained in a hierarchical category tree (with each category having
+a localized name) of arbitrary depth. A message can be assigned a list of these categories,
+and by implication, the parent categories of a selected category.
+
+At the top level, the categories will have entries such as _Aids to Navigation_, _Drifting Objects_,
+_Obstruction_, etc., which is the categorization used in the IHO standards. The sub-categories will
+represent the types of hazard relevant to the parent category. Examples of category lineages (top-down):
+
+* AtoN -> Floating AtoN -> Buoy -> Buoy Established
+* AtoN -> Light -> Light Unlit
+* Obstruction -> Diving Operation
+
+[cols="20,20,60",options="header"]
+|===
+|Attribute Name|Type|Description
+
+|id|Int|Internal system ID of the category
+
+|mrn|String|Optionally, a category may be assigned a globally unique MRN (maritime resource name).
+Adopting MRNs for categories would make interchange of message data between two NW-NM systems more robust.
+
+|parent|Category|Non-root category will reference their parent categories.
+
+|descs|CategoryDesc[]|The list of localizable attributes for a category. See <<CategoryDesc>>.
+|===
+
+TIP: The main purpose of categories is to allow for client filter and customized portrayal.
+There is no reason to render the categories separately for the end user.
+
+==== CategoryDesc
+The _CategoryDesc_ class contains the list of localizable attributes for a category.
+
+[cols="20,20,60",options="header"]
+|===
+|Attribute Name|Type|Description
+
+|lang|String|The ISO-2 language code.
+
+|name|String|The localized name of a category.
+|===
+
+==== Reference
+The Reference class provides a typed, weak reference to another message.
+
+[cols="20,20,60",options="header"]
+|===
+|Attribute Name|Type|Description
+
+|messageId|String|An identifier of the referenced message. If the messageId is recognized to be a
+_short-ID_ of another message, it can e.g. be used to hyperlink to that message.
+However there are no requirements as to the format of the message ID.
+
+|type|ReferenceType|The type of the reference. One of the values "reference", "repetition",
+"repetition_new_time", "cancellation" or "update".
+
+|descs|ReferenceDesc[]|The list of localizable attributes for a Reference. See <<ReferenceDesc>>.
+|===
+
+==== ReferenceDesc
+The _ReferenceDesc_ class contains the list of localizable attributes for a reference.
+
+[cols="20,20,60",options="header"]
+|===
+|Attribute Name|Type|Description
+
+|lang|String|The ISO-2 language code.
+
+|description|String|The localized description of a reference.
+|===
+
+==== Attachment
+Messages can be associated with a list of attachments, such as images, PDF-files, etc. The physical
+attachment files will reside in a public repository on the producing system.
+
+[cols="20,20,60",options="header"]
+|===
+|Attribute Name|Type|Description
+
+|type|String|The content type of the attachment file, such as "image/png".
+
+|path|String|The URL path to the attachment file in the producing system.
+
+|fileName|String|The file name of the attachment
+
+|fileSize|Long|The size of the attachment in bytes
+
+|display|AttachmentDisplayType|If defined, this flag can be used to signal how the editor intended
+for the (image or video) attachment to be displayed when rendering the message for the end user.
+
+"above" and "below" signals that the attachment should be displayed above, respectively below,
+the message details. "separate_page" signals that the attachment should be displayed on a separate page
+if rendered in paged media, such as a PDF file.
+
+|width|String|The width to use when displaying the (image or video) attachment. The width must include
+the type (i.e. _em, px, %, cm, mm, in, pt_ or _pc_). If the _height_ attribute is left
+unspecified, the attachment should be scaled proportionally.
+
+|height|String|The height to use when displaying the (image or video) attachment. The height must include
+the type (i.e. _em, px, %, cm, mm, in, pt_ or _pc_). If the _width_ attribute is left
+unspecified, the attachment should be scaled proportionally.
+
+|descs|AttachmentDesc[]|The list of localizable attributes for an Attachment. See <<AttachmentDesc>>.
+|===
+
+TIP: If the client wish to work in offline mode, it should download all
+attachments locally, and rewrite attachment paths accordingly. Also, since attachments may be
+embedded as images or links in the HTML of the message part details field (see <<MessagePartDesc>>),
+this field should be rewritten as well.
+
+==== AttachmentDesc
+The _AttachmentDesc_ class contains the list of localizable attributes for an attachment.
+
+[cols="20,20,60",options="header"]
+|===
+|Attribute Name|Type|Description
+
+|lang|String|The ISO-2 language code.
+
+|caption|String|A localized caption to display for the attachment.
+|===
+
+==== DateInterval
+A message part will have an associated list of (possibly open-ended) event date intervals.
+This defines the period of time for which the hazard described by the message part applies.
+
+[cols="20,20,60",options="header"]
+|===
+|Attribute Name|Type|Description
+
+|allDay|Boolean|If the _allDay_ flag is set, the fromDate/toDate attributes should be treated as dates
+without a time-part by the producing system.
+
+|fromDate|DateTime|The start date-time of a date interval.
+
+|toDate|DateTime|An optional end date-time of a date interval.
+|===
+
+TIP: Clients may use event dates for filtering messages (e.g. filter for relevance in route planning).
+However, the client should not render the event dates for the end user, since a textual representation
+of the dates should be included in the message part details (see <<MessagePartDesc>>).
 

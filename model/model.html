@@ -522,7 +522,21 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#background">2.1. Background</a></li>
 <li><a href="#message-model-uml">2.2. Message Model UML</a></li>
 <li><a href="#design-patterns">2.3. Design Patterns</a></li>
-<li><a href="#message-model-classes">2.4. Message Model Classes</a></li>
+<li><a href="#message-model-classes">2.4. Message Model Classes</a>
+<ul class="sectlevel3">
+<li><a href="#messageseries">2.4.1. MessageSeries</a></li>
+<li><a href="#chart">2.4.2. Chart</a></li>
+<li><a href="#area">2.4.3. Area</a></li>
+<li><a href="#areadesc">2.4.4. AreaDesc</a></li>
+<li><a href="#category">2.4.5. Category</a></li>
+<li><a href="#categorydesc">2.4.6. CategoryDesc</a></li>
+<li><a href="#reference">2.4.7. Reference</a></li>
+<li><a href="#referencedesc">2.4.8. ReferenceDesc</a></li>
+<li><a href="#attachment">2.4.9. Attachment</a></li>
+<li><a href="#attachmentdesc">2.4.10. AttachmentDesc</a></li>
+<li><a href="#dateinterval">2.4.11. DateInterval</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#niord-geojson-model">3. Niord GeoJSON Model</a></li>
@@ -761,9 +775,17 @@ in the producing system.</p>
 <div class="sect3">
 <h4 id="area"><a class="anchor" href="#area"></a><a class="link" href="#area">2.4.3. Area</a></h4>
 <div class="paragraph">
-<p>Existing IHO standards for NW and NM both provide support for specifying multiple area levels (general area and locality for NW; general region, sub-region and specific location for NMs).
-However, in the NW-NM system, this has been generalized, and areas are administratively maintained in a hierarchical area tree (with each area having a localized name) of arbitrary depth. A message can be assigned a list of these areas, and by implication, the parent areas of the selected area.
-Additionally, a message can be assigned a localized textual vicinity description (part of the MessageDesc class – see 5.11), for detailed location information not defined in the area tree.</p>
+<p>Existing IHO standards for NW and NM both provide support for specifying multiple area levels
+(<em>general area</em> and <em>locality</em> for NW; <em>general region</em>, <em>sub-region</em> and <em>specific location</em> for NMs).</p>
+</div>
+<div class="paragraph">
+<p>However, in the NW-NM system, this has been generalized, and areas are administratively maintained
+in a hierarchical area tree (with each area having a localized name) of arbitrary depth.
+A message can be assigned a list of these areas, and by implication, the parent areas of the selected area.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, a message can be assigned a localized textual <em>vicinity</em> description
+(part of the <a href="#MessageDesc">[MessageDesc]</a> class), for detailed location information not defined in the area tree.</p>
 </div>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -804,6 +826,19 @@ Example: Randers Havn &#8594; Kattegat &#8594; Danmark</p></td>
 </tr>
 </tbody>
 </table>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Whereas clients may use message areas for e.g. grouping or filtering messages, there is no
+reason to render the areas for the end user. The areas of a message will often be part of the message title already.
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect3">
 <h4 id="areadesc"><a class="anchor" href="#areadesc"></a><a class="link" href="#areadesc">2.4.4. AreaDesc</a></h4>
@@ -836,6 +871,357 @@ Example: Randers Havn &#8594; Kattegat &#8594; Danmark</p></td>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="sect3">
+<h4 id="category"><a class="anchor" href="#category"></a><a class="link" href="#category">2.4.5. Category</a></h4>
+<div class="paragraph">
+<p>Categories are administratively maintained in a hierarchical category tree (with each category having
+a localized name) of arbitrary depth. A message can be assigned a list of these categories,
+and by implication, the parent categories of a selected category.</p>
+</div>
+<div class="paragraph">
+<p>At the top level, the categories will have entries such as <em>Aids to Navigation</em>, <em>Drifting Objects</em>,
+<em>Obstruction</em>, etc., which is the categorization used in the IHO standards. The sub-categories will
+represent the types of hazard relevant to the parent category. Examples of category lineages (top-down):</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>AtoN &#8594; Floating AtoN &#8594; Buoy &#8594; Buoy Established</p>
+</li>
+<li>
+<p>AtoN &#8594; Light &#8594; Light Unlit</p>
+</li>
+<li>
+<p>Obstruction &#8594; Diving Operation</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Attribute Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Int</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Internal system ID of the category</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">mrn</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optionally, a category may be assigned a globally unique MRN (maritime resource name).
+Adopting MRNs for categories would make interchange of message data between two NW-NM systems more robust.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">parent</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Category</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Non-root category will reference their parent categories.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">descs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CategoryDesc[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The list of localizable attributes for a category. See <a href="#categorydesc">CategoryDesc</a>.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The main purpose of categories is to allow for client filter and customized portrayal.
+There is no reason to render the categories separately for the end user.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="categorydesc"><a class="anchor" href="#categorydesc"></a><a class="link" href="#categorydesc">2.4.6. CategoryDesc</a></h4>
+<div class="paragraph">
+<p>The <em>CategoryDesc</em> class contains the list of localizable attributes for a category.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Attribute Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">lang</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The ISO-2 language code.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The localized name of a category.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="reference"><a class="anchor" href="#reference"></a><a class="link" href="#reference">2.4.7. Reference</a></h4>
+<div class="paragraph">
+<p>The Reference class provides a typed, weak reference to another message.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Attribute Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">messageId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An identifier of the referenced message. If the messageId is recognized to be a
+<em>short-ID</em> of another message, it can e.g. be used to hyperlink to that message.
+However there are no requirements as to the format of the message ID.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ReferenceType</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The type of the reference. One of the values "reference", "repetition",
+"repetition_new_time", "cancellation" or "update".</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">descs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ReferenceDesc[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The list of localizable attributes for a Reference. See <a href="#referencedesc">ReferenceDesc</a>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="referencedesc"><a class="anchor" href="#referencedesc"></a><a class="link" href="#referencedesc">2.4.8. ReferenceDesc</a></h4>
+<div class="paragraph">
+<p>The <em>ReferenceDesc</em> class contains the list of localizable attributes for a reference.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Attribute Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">lang</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The ISO-2 language code.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">description</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The localized description of a reference.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="attachment"><a class="anchor" href="#attachment"></a><a class="link" href="#attachment">2.4.9. Attachment</a></h4>
+<div class="paragraph">
+<p>Messages can be associated with a list of attachments, such as images, PDF-files, etc. The physical
+attachment files will reside in a public repository on the producing system.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Attribute Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The content type of the attachment file, such as "image/png".</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">path</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The URL path to the attachment file in the producing system.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fileName</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The file name of the attachment</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fileSize</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The size of the attachment in bytes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">display</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AttachmentDisplayType</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If defined, this flag can be used to signal how the editor intended
+for the (image or video) attachment to be displayed when rendering the message for the end user.
+</p><p class="tableblock">"above" and "below" signals that the attachment should be displayed above, respectively below,
+the message details. "separate_page" signals that the attachment should be displayed on a separate page
+if rendered in paged media, such as a PDF file.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">width</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The width to use when displaying the (image or video) attachment. The width must include
+the type (i.e. <em>em, px, %, cm, mm, in, pt</em> or <em>pc</em>). If the <em>height</em> attribute is left
+unspecified, the attachment should be scaled proportionally.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">height</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The height to use when displaying the (image or video) attachment. The height must include
+the type (i.e. <em>em, px, %, cm, mm, in, pt</em> or <em>pc</em>). If the <em>width</em> attribute is left
+unspecified, the attachment should be scaled proportionally.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">descs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AttachmentDesc[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The list of localizable attributes for an Attachment. See <a href="#attachmentdesc">AttachmentDesc</a>.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If the client wish to work in offline mode, it should download all
+attachments locally, and rewrite attachment paths accordingly. Also, since attachments may be
+embedded as images or links in the HTML of the message part details field (see <a href="#MessagePartDesc">[MessagePartDesc]</a>),
+this field should be rewritten as well.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="attachmentdesc"><a class="anchor" href="#attachmentdesc"></a><a class="link" href="#attachmentdesc">2.4.10. AttachmentDesc</a></h4>
+<div class="paragraph">
+<p>The <em>AttachmentDesc</em> class contains the list of localizable attributes for an attachment.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Attribute Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">lang</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The ISO-2 language code.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">caption</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A localized caption to display for the attachment.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="dateinterval"><a class="anchor" href="#dateinterval"></a><a class="link" href="#dateinterval">2.4.11. DateInterval</a></h4>
+<div class="paragraph">
+<p>A message part will have an associated list of (possibly open-ended) event date intervals.
+This defines the period of time for which the hazard described by the message part applies.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Attribute Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">allDay</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the <em>allDay</em> flag is set, the fromDate/toDate attributes should be treated as dates
+without a time-part by the producing system.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fromDate</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DateTime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The start date-time of a date interval.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">toDate</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DateTime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An optional end date-time of a date interval.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Clients may use event dates for filtering messages (e.g. filter for relevance in route planning).
+However, the client should not render the event dates for the end user, since a textual representation
+of the dates should be included in the message part details (see <a href="#MessagePartDesc">[MessagePartDesc]</a>).
+</td>
+</tr>
+</table>
+</div>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -858,7 +1244,7 @@ Example: Randers Havn &#8594; Kattegat &#8594; Danmark</p></td>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-01-10 14:19:14 CET
+Last updated 2017-01-11 07:03:32 CET
 </div>
 </div>
 <script type="text/x-mathjax-config">

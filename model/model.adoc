@@ -3,7 +3,7 @@
 :compat-mode:
 :page-layout!:
 :toc: left
-:toclevels: 2
+:toclevels: 3
 :sectanchors:
 :sectlinks:
 :sectnums:
