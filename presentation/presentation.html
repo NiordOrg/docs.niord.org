@@ -721,7 +721,7 @@ the message details, please adhere to the following CSS classes of the
 table.position-table</em>.</p>
 </div>
 <div class="paragraph">
-<p>The resulting message list may look something along the lines of:</p>
+<p>The resulting message details may look something along the lines of:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -731,7 +731,56 @@ table.position-table</em>.</p>
 </div>
 <div class="sect2">
 <h3 id="message-geometry"><a class="anchor" href="#message-geometry"></a><a class="link" href="#message-geometry">2.4. Message Geometry</a></h3>
+<div class="paragraph">
+<p>The client may want to display the messages on a map, either as an overview map for a list of messages
+or when presenting the details of a single message.</p>
+</div>
+<div class="paragraph">
+<p>Since Niord relies on GeoJSON for message geometries, you are likely to be able to visualize the
+message with very little work in your mapping library of choice, since most of these libraries supports
+GeoJSON out of the box.</p>
+</div>
+<div class="paragraph">
+<p>As described in the <a href="../model/model.html" target="_blank">Niord Message Model</a> document, Niord actually extends
+the model, by specifying how e.g. localized feature and coordinate labels may be encoded in the GeoJSON
+<em>Feature</em> properties.</p>
+</div>
+<div class="paragraph">
+<p>Assuming that a message, msg, is to be rendered in OpenLayers, the simplified pseudo-code
+may look something like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="asciidoc">geoJsonFormat = new ol.format.GeoJSON()
+olLayer = ...
 
+/** Generate features for all geometry fields of all message parts **/
+for part in msg.parts
+  /** The part.geometry is always of GeoJSON type: FeatureCollection **/
+  if part.geometry &amp;&amp; part.geometry.type == 'FeatureCollection'
+      for feature in part.geometry.features
+        olFeature = geoJsonFormat.readFeature(feature, {
+                    dataProjection: 'EPSG:4326',
+                    featureProjection: 'EPSG:3857'
+                })
+        olFeature.set('message', message);
+        olLayer.getSource().addFeature(olFeature)
+      end-for
+  end-if
+end-for</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Naturally, the client should also be able to handle messages with no associated geometry.</p>
+</div>
+<div class="paragraph">
+<p>The resulting message details including geometry may look something along the lines of:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/MessageGeometry.png" alt="Message Details" width="60%" height="60%">
+</div>
+</div>
 </div>
 </div>
 </div>

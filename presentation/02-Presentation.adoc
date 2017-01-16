@@ -143,9 +143,48 @@ https://github.com/NiordOrg/niord-proxy/blob/master/src/main/webapp/css/message.
 _message-description, table.no-border, table.condensed, tr.underline, table.positions, ul.positions,
 table.position-table_.
 
-The resulting message list may look something along the lines of:
+The resulting message details may look something along the lines of:
 
 image::MessageDetails.png[Message Details, 60%, 60%]
 
 === Message Geometry
+The client may want to display the messages on a map, either as an overview map for a list of messages
+or when presenting the details of a single message.
 
+Since Niord relies on GeoJSON for message geometries, you are likely to be able to visualize the
+message with very little work in your mapping library of choice, since most of these libraries supports
+GeoJSON out of the box.
+
+As described in the link:../model/model.html[Niord Message Model^] document, Niord actually extends
+the model, by specifying how e.g. localized feature and coordinate labels may be encoded in the GeoJSON
+_Feature_ properties.
+
+Assuming that a message, msg, is to be rendered in OpenLayers, the simplified pseudo-code
+may look something like:
+
+[source]
+----
+geoJsonFormat = new ol.format.GeoJSON()
+olLayer = ...
+
+/** Generate features for all geometry fields of all message parts **/
+for part in msg.parts
+  /** The part.geometry is always of GeoJSON type: FeatureCollection **/
+  if part.geometry && part.geometry.type == 'FeatureCollection'
+      for feature in part.geometry.features
+        olFeature = geoJsonFormat.readFeature(feature, {
+                    dataProjection: 'EPSG:4326',
+                    featureProjection: 'EPSG:3857'
+                })
+        olFeature.set('message', message);
+        olLayer.getSource().addFeature(olFeature)
+      end-for
+  end-if
+end-for
+----
+
+Naturally, the client should also be able to handle messages with no associated geometry.
+
+The resulting message details including geometry may look something along the lines of:
+
+image::MessageGeometry.png[Message Details, 60%, 60%]
