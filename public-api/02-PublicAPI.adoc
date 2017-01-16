@@ -59,9 +59,7 @@ The REST endpoints area detailed in the remainder of this section.
 
 ==== /rest/public/v1/message/{messageId}
 This REST endpoint is used for fetching individual public (published, cancelled or expired) Niord messages
-by their ID.
-
-Parameters:
+by their ID. Parameters:
 
 [cols="10,10,10,60",options="header"]
 |===
@@ -78,6 +76,72 @@ Parameters:
 |Two-letter ISO 639-1 language code. +
 If defined, the returned message data will be filtered to only include the give language variant. +
 If un-specified, all language variants are returned.
+
+|externalize
+|boolean
+|true
+|Whether to rewrite all embedded links and paths to be absolute URL's. +
+Default value is _true_.
+
+|dateFormat
+|String
+|UNIX_EPOCH
+|The date format to use for JSON date-time encoding. Either 'UNIX_EPOCH' (default) or 'ISO_8601'.
+|===
+
+==== /rest/public/v1/messages
+This REST endpoint is used for searching lists of public (published, cancelled or expired) Niord messages
+by various parameters:
+
+[cols="10,10,10,60",options="header"]
+|===
+|Parameter |Type| Example| Description
+
+|lang
+|String
+|en
+|Two-letter ISO 639-1 language code. +
+If defined, the returned message data will be filtered to only include the give language variant. +
+If un-specified, all language variants are returned.
+
+|domain
+|String[]
+|niord-nm
+|List of domain ID's. +
+Each Niord system organizes messages into domains, e.g. for Navigational Warnings, Notices to Mariners,
+Firing Exercises, Almanacs, etc.
+
+|messageSeries
+|String[]
+|dma-nm
+|List of message series ID's. +
+Each message is associated with a message series, as defined by the producing Niord system. +
+As an example, there may be separate messages series for local navigational warnings and
+other navigational warnings.
+
+|publication
+|String[]
+|642fda24-1b38-46b8-9003-8b79be079b1c
+|Some messages may have been published in _publications_, such as a weekly NtM.
+The _publication_ parameter can be used to filter by specific publications.
+
+|areaId
+|String[]
+|urn:mrn:iho:country:dk
+|Messages may be associated with one or more area, as defined by the producing Niord System. +
+The _areaId_ parameter can be used to filter messages by areas using either the internal ID or the MRN
+of the areas.
+
+|mainType
+|String[]
+|NM
+|Used to filter messages by their main type, i.e. "NM" or "NW".
+
+|wkt
+|String
+|+++POLYGON((7 54, 7 57, 13 56, 13 57, 7 54))+++
+|Used to filter messages by their geographical extent. +
+The geometry must be specified in the https://en.wikipedia.org/wiki/Well-known_text[Well-known text^] format.
 
 |externalize
 |boolean

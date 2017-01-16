@@ -528,6 +528,7 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#rest-api">2.3. REST API</a>
 <ul class="sectlevel3">
 <li><a href="#rest-public-v1-message-messageid">2.3.1. /rest/public/v1/message/{messageId}</a></li>
+<li><a href="#rest-public-v1-messages">2.3.2. /rest/public/v1/messages</a></li>
 </ul>
 </li>
 </ul>
@@ -671,10 +672,7 @@ Navigational Warnings and Notices to Mariners.</p>
 <h4 id="rest-public-v1-message-messageid"><a class="anchor" href="#rest-public-v1-message-messageid"></a><a class="link" href="#rest-public-v1-message-messageid">2.3.1. /rest/public/v1/message/{messageId}</a></h4>
 <div class="paragraph">
 <p>This REST endpoint is used for fetching individual public (published, cancelled or expired) Niord messages
-by their ID.</p>
-</div>
-<div class="paragraph">
-<p>Parameters:</p>
+by their ID. Parameters:</p>
 </div>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -705,6 +703,97 @@ by their ID.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Two-letter ISO 639-1 language code.<br>
 If defined, the returned message data will be filtered to only include the give language variant.<br>
 If un-specified, all language variants are returned.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">externalize</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to rewrite all embedded links and paths to be absolute URL&#8217;s.<br>
+Default value is <em>true</em>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dateFormat</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UNIX_EPOCH</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The date format to use for JSON date-time encoding. Either <em>UNIX_EPOCH</em> (default) or <em>ISO_8601</em>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="rest-public-v1-messages"><a class="anchor" href="#rest-public-v1-messages"></a><a class="link" href="#rest-public-v1-messages">2.3.2. /rest/public/v1/messages</a></h4>
+<div class="paragraph">
+<p>This REST endpoint is used for searching lists of public (published, cancelled or expired) Niord messages
+by various parameters:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Example</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">lang</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">en</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Two-letter ISO 639-1 language code.<br>
+If defined, the returned message data will be filtered to only include the give language variant.<br>
+If un-specified, all language variants are returned.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">domain</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">niord-nm</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List of domain ID&#8217;s.<br>
+Each Niord system organizes messages into domains, e.g. for Navigational Warnings, Notices to Mariners,
+Firing Exercises, Almanacs, etc.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">messageSeries</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dma-nm</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List of message series ID&#8217;s.<br>
+Each message is associated with a message series, as defined by the producing Niord system.<br>
+As an example, there may be separate messages series for local navigational warnings and
+other navigational warnings.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">publication</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">642fda24-1b38-46b8-9003-8b79be079b1c</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Some messages may have been published in <em>publications</em>, such as a weekly NtM.
+The <em>publication</em> parameter can be used to filter by specific publications.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">areaId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">urn:mrn:iho:country:dk</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Messages may be associated with one or more area, as defined by the producing Niord System.<br>
+The <em>areaId</em> parameter can be used to filter messages by areas using either the internal ID or the MRN
+of the areas.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">mainType</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NM</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used to filter messages by their main type, i.e. "NM" or "NW".</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">wkt</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POLYGON((7 54, 7 57, 13 56, 13 57, 7 54))</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used to filter messages by their geographical extent.<br>
+The geometry must be specified in the <a href="https://en.wikipedia.org/wiki/Well-known_text" target="_blank">Well-known text</a> format.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">externalize</p></td>
