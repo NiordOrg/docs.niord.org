@@ -1,3 +1,151 @@
 == Presentation
 
-bla bla bla
+The Niord Message Model is fairly rich, and, depending on the situation, only parts of the model
+should be presented to the end user.
+
+_Message.areas_ is an example of a message attribute that will typically not be rendered directly,
+but may be used to group or filter messages.
+
+_Message.categories_ is an example of a message attribute that will typically not be rendered directly,
+but may be used to drive portrayal (e.g. display a special icon for firing exercises).
+
+=== Translations
+As described in the link:../model/model.html[Niord Message Model^] document, all localizable
+components of the message has an associated list of description entities with all the localizable
+attributes.
+
+For instance, a _Message_, has an associated _MessageDesc_ list, as defined in JSON:
+
+[source,json]
+----
+{
+  "descs": [
+    {
+      "lang": "en",
+      "title": "Denmark. The Baltic Sea. Gedser S. Rødsand Rende. Buoyage missing.",
+      ...
+    },
+    {
+      "lang": "da",
+      "title": "Danmark. Østersøen. Gedser S. Rødsand Rende. Afmærkning forsvundet.",
+      ...
+    },
+  ],
+  ...
+}
+----
+
+If no _language_ parameter was specified, when querying the public REST API, all translations will be
+returned (see example above). When the client renders the message, it must iterate the "descs" list to
+find the preferred language variant.
+
+If, however, a language parameter was specified, say "da", only that description entity is returned.
+Thus, when the client renders the message, it can pick the first (and only) description entity (descs[0]). +
+If a message does not have the requested translation, it will return another variant (typically "en"), and
+the client may choose to signal this to the end user (e.g. by displaying a flag).
+
+=== Message Lists
+When lists of messages are displayed in the client, typically it is sufficient to display the
+_short ID_ and the _title_ of a message.
+
+In simplified pseudo-code, and assuming the client is a web application, this would amount to:
+
+[source]
+----
+for msg in message-list
+  emit-title-line(msg)
+end-for
+
+procedure emit-title-line(msg)
+  emit "<div>"
+
+  /** Emit the short ID **/
+  if msg.shortId defined
+    emit "<span>" + msg.shortId + "</span>"
+  end-if
+
+  /** For NM T&P messages, emit (T) or (P) **/
+  if msg.type == 'PRELIMINARY_NOTICE'
+    emit " (P)"
+  else if msg.type == 'TEMPORARY_NOTICE'
+    emit " (T)"
+  end-if
+
+  /** Emit the message title **/
+  emit " <span>" + msg.descs[0].title + "</span>"
+
+  emit "</div>"
+end-procedure
+----
+
+The resulting message list may look something along the lines of:
+
+image::MessageList.png[Message List, 60%, 60%]
+
+
+=== Message Details
+When the details of a message, _msg_, is displayed in the client, several more message fields are
+of interest.
+
+In simplified pseudo-code, and assuming the client is a web application, this would amount to:
+
+[source]
+----
+/** Emit asterisk "*" when the message is based on original information **/
+if msg.originalInformation == true
+  emit "<div>*</div>"
+end-if
+
+/** Emit the title line as described in the "Message Lists" section **/
+emit-title-line(msg)
+
+/** Emit references **/
+for ref in msg.references
+  emit "<div>Reference: " + ref.messageId + " (" + ref.type + ") "
+       + ref.descs[0].description + "</div>"
+end-for
+
+/** Emit the subject and details of the message parts **/
+for part in msg.parts
+  emit "<div>Details: <strong>" + part.descs[0].subject + "</strong></div>"
+  emit "<div class='message-description'>" + part.descs[0].details + "</div>"
+end-for
+
+/** Emit attachments **/
+for att in msg.attachments
+  emit "<div>Attachment: <a href='" + att.path + "'>" + att.fileName + "</a> "
+       + att.descs[0].caption + "</div>"
+end-for
+
+/** Emit charts **/
+for chart in msg.charts
+  emit "<div>Charts: " + chart.chartNumber
+  if chart.internationalNumber
+    emit " (INT " + chart.internationalNumber + ")"
+  end-if
+  emit "</div>"
+end-for
+
+/** Emit publication **/
+emit "<div>Publication: " + msg.descs[0].publication + "</div>"
+
+/** Emit source **/
+emit "<div style='text-align:right'>(" + msg.descs[0].source + ")</div>"
+----
+
+It is important that the client is able to display the HTML of the _part.descs[0].details_
+and _msg.descs[0].publication_ fields. If the client does not have the capacity to do this, it should
+convert HTML to plain text first.
+
+The message part details (HTML) may contains stylesheet classes. To improve the rendering of
+the message details, please adhere to the following CSS classes of the
+https://github.com/NiordOrg/niord-proxy/blob/master/src/main/webapp/css/message.css[message.css^] stylesheet:
+_message-description, table.no-border, table.condensed, tr.underline, table.positions, ul.positions,
+table.position-table_.
+
+The resulting message list may look something along the lines of:
+
+image::MessageDetails.png[Message Details, 60%, 60%]
+
+=== Message Geometry
+

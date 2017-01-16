@@ -517,7 +517,14 @@ table.CodeRay td.code>pre{padding:0}
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#introduction">1. Introduction</a></li>
-<li><a href="#presentation">2. Presentation</a></li>
+<li><a href="#presentation">2. Presentation</a>
+<ul class="sectlevel2">
+<li><a href="#translations">2.1. Translations</a></li>
+<li><a href="#message-lists">2.2. Message Lists</a></li>
+<li><a href="#message-details">2.3. Message Details</a></li>
+<li><a href="#message-geometry">2.4. Message Geometry</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -550,7 +557,181 @@ with these documents first.</p>
 <h2 id="presentation"><a class="anchor" href="#presentation"></a><a class="link" href="#presentation">2. Presentation</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>bla bla bla</p>
+<p>The Niord Message Model is fairly rich, and, depending on the situation, only parts of the model
+should be presented to the end user.</p>
+</div>
+<div class="paragraph">
+<p><em>Message.areas</em> is an example of a message attribute that will typically not be rendered directly,
+but may be used to group or filter messages.</p>
+</div>
+<div class="paragraph">
+<p><em>Message.categories</em> is an example of a message attribute that will typically not be rendered directly,
+but may be used to drive portrayal (e.g. display a special icon for firing exercises).</p>
+</div>
+<div class="sect2">
+<h3 id="translations"><a class="anchor" href="#translations"></a><a class="link" href="#translations">2.1. Translations</a></h3>
+<div class="paragraph">
+<p>As described in the <a href="../model/model.html" target="_blank">Niord Message Model</a> document, all localizable
+components of the message has an associated list of description entities with all the localizable
+attributes.</p>
+</div>
+<div class="paragraph">
+<p>For instance, a <em>Message</em>, has an associated <em>MessageDesc</em> list, as defined in JSON:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="json">{
+  <span class="key"><span class="delimiter">&quot;</span><span class="content">descs</span><span class="delimiter">&quot;</span></span>: [
+    {
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">lang</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">en</span><span class="delimiter">&quot;</span></span>,
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Denmark. The Baltic Sea. Gedser S. Rødsand Rende. Buoyage missing.</span><span class="delimiter">&quot;</span></span>,
+      <span class="error">.</span><span class="error">.</span><span class="error">.</span>
+    },
+    {
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">lang</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">da</span><span class="delimiter">&quot;</span></span>,
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Danmark. Østersøen. Gedser S. Rødsand Rende. Afmærkning forsvundet.</span><span class="delimiter">&quot;</span></span>,
+      <span class="error">.</span><span class="error">.</span><span class="error">.</span>
+    },
+  ],
+  <span class="error">.</span><span class="error">.</span><span class="error">.</span>
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If no <em>language</em> parameter was specified, when querying the public REST API, all translations will be
+returned (see example above). When the client renders the message, it must iterate the "descs" list to
+find the preferred language variant.</p>
+</div>
+<div class="paragraph">
+<p>If, however, a language parameter was specified, say "da", only that description entity is returned.
+Thus, when the client renders the message, it can pick the first (and only) description entity (descs[0]).<br>
+If a message does not have the requested translation, it will return another variant (typically "en"), and
+the client may choose to signal this to the end user (e.g. by displaying a flag).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="message-lists"><a class="anchor" href="#message-lists"></a><a class="link" href="#message-lists">2.2. Message Lists</a></h3>
+<div class="paragraph">
+<p>When lists of messages are displayed in the client, typically it is sufficient to display the
+<em>short ID</em> and the <em>title</em> of a message.</p>
+</div>
+<div class="paragraph">
+<p>In simplified pseudo-code, and assuming the client is a web application, this would amount to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="asciidoc">for msg in message-list
+  emit-title-line(msg)
+end-for
+
+procedure emit-title-line(msg)
+  emit &quot;&lt;div&gt;&quot;
+
+  /** Emit the short ID **/
+  if msg.shortId defined
+    emit &quot;&lt;span&gt;&quot; + msg.shortId + &quot;&lt;/span&gt;&quot;
+  end-if
+
+  /** For NM T&amp;P messages, emit (T) or (P) **/
+  if msg.type == 'PRELIMINARY_NOTICE'
+    emit &quot; (P)&quot;
+  else if msg.type == 'TEMPORARY_NOTICE'
+    emit &quot; (T)&quot;
+  end-if
+
+  /** Emit the message title **/
+  emit &quot; &lt;span&gt;&quot; + msg.descs[0].title + &quot;&lt;/span&gt;&quot;
+
+  emit &quot;&lt;/div&gt;&quot;
+end-procedure</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The resulting message list may look something along the lines of:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/MessageList.png" alt="Message List" width="60%" height="60%">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="message-details"><a class="anchor" href="#message-details"></a><a class="link" href="#message-details">2.3. Message Details</a></h3>
+<div class="paragraph">
+<p>When the details of a message, <em>msg</em>, is displayed in the client, several more message fields are
+of interest.</p>
+</div>
+<div class="paragraph">
+<p>In simplified pseudo-code, and assuming the client is a web application, this would amount to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="asciidoc">/** Emit asterisk &quot;*&quot; when the message is based on original information **/
+if msg.originalInformation == true
+  emit &quot;&lt;div&gt;*&lt;/div&gt;&quot;
+end-if
+
+/** Emit the title line as described in the &quot;Message Lists&quot; section **/
+emit-title-line(msg)
+
+/** Emit references **/
+for ref in msg.references
+  emit &quot;&lt;div&gt;Reference: &quot; + ref.messageId + &quot; (&quot; + ref.type + &quot;) &quot;
+       + ref.descs[0].description + &quot;&lt;/div&gt;&quot;
+end-for
+
+/** Emit the subject and details of the message parts **/
+for part in msg.parts
+  emit &quot;&lt;div&gt;Details: &lt;strong&gt;&quot; + part.descs[0].subject + &quot;&lt;/strong&gt;&lt;/div&gt;&quot;
+  emit &quot;&lt;div class='message-description'&gt;&quot; + part.descs[0].details + &quot;&lt;/div&gt;&quot;
+end-for
+
+/** Emit attachments **/
+for att in msg.attachments
+  emit &quot;&lt;div&gt;Attachment: &lt;a href='&quot; + att.path + &quot;'&gt;&quot; + att.fileName + &quot;&lt;/a&gt; &quot;
+       + att.descs[0].caption + &quot;&lt;/div&gt;&quot;
+end-for
+
+/** Emit charts **/
+for chart in msg.charts
+  emit &quot;&lt;div&gt;Charts: &quot; + chart.chartNumber
+  if chart.internationalNumber
+    emit &quot; (INT &quot; + chart.internationalNumber + &quot;)&quot;
+  end-if
+  emit &quot;&lt;/div&gt;&quot;
+end-for
+
+/** Emit publication **/
+emit &quot;&lt;div&gt;Publication: &quot; + msg.descs[0].publication + &quot;&lt;/div&gt;&quot;
+
+/** Emit source **/
+emit &quot;&lt;div style='text-align:right'&gt;(&quot; + msg.descs[0].source + &quot;)&lt;/div&gt;&quot;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It is important that the client is able to display the HTML of the <em>part.descs[0].details</em>
+and <em>msg.descs[0].publication</em> fields. If the client does not have the capacity to do this, it should
+convert HTML to plain text first.</p>
+</div>
+<div class="paragraph">
+<p>The message part details (HTML) may contains stylesheet classes. To improve the rendering of
+the message details, please adhere to the following CSS classes of the
+<a href="https://github.com/NiordOrg/niord-proxy/blob/master/src/main/webapp/css/message.css" target="_blank">message.css</a> stylesheet:
+<em>message-description, table.no-border, table.condensed, tr.underline, table.positions, ul.positions,
+table.position-table</em>.</p>
+</div>
+<div class="paragraph">
+<p>The resulting message list may look something along the lines of:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/MessageDetails.png" alt="Message Details" width="60%" height="60%">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="message-geometry"><a class="anchor" href="#message-geometry"></a><a class="link" href="#message-geometry">2.4. Message Geometry</a></h3>
+
 </div>
 </div>
 </div>
