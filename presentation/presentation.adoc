@@ -1,0 +1,44 @@
+
+:doctype: book
+:compat-mode:
+:page-layout!:
+:toc: left
+:toclevels: 3
+:sectanchors:
+:sectlinks:
+:sectnums:
+:linkattrs:
+:icons: font
+:source-highlighter: coderay
+:source-language: asciidoc
+:experimental:
+:stem:
+:idprefix:
+:idseparator: -
+:ast: &ast;
+:dagger: pass:normal[^&dagger;^]
+:y: icon:check[role="green"]
+:n: icon:times[role="red"]
+:c: icon:file-text-o[role="blue"]
+:table-caption!:
+:example-caption!:
+:figure-caption:
+:imagesdir: images
+:includedir: _includes
+:underscore: _
+:icons: font
+
+:releaseVersion: 0.1
+:version: 0.1
+:releaseDate: January 2017
+
+= Niord Message Presentation
+
+<<<
+
+include::01-Introduction.adoc[]
+
+<<<
+
+include::02-Presentation.adoc[]
+

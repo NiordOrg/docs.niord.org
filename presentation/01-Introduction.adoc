@@ -1,0 +1,11 @@
+== Introduction
+
+This document will give a couple of guidelines as to how a client (say, an ECDIS, a website or an app)
+might render Navigational Warnings (NW) and Notices to Mariners (NM) for the end-user.
+
+The messages are assumed to be in the link:../model/model.html[Niord Message Model^] format
+as returned by the link:../public-api/api.html[Niord Public API^]. Please acquaint yourself
+with these documents first.
+
+An example client website rendering messages fetched via the Niord Public API can be found at
+https://nautiskinformation.soefartsstyrelsen.dk/#/messages/map[nautiskinformation.soefartsstyrelsen.dk^]

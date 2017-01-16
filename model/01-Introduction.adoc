@@ -1,6 +1,8 @@
 == Introduction
 
-This document describes the data model that is defined by the *Niord* Nautical Information Directory project as of {releaseDate}.
+This document describes the data model that is defined by the *Niord* Nautical Information Directory
+project as of {releaseDate}.
 
-The actual source for the data model is available at https://github.com/NiordOrg/niord/tree/master/niord-model[the Niord Model Github Repository]
+The actual source for the data model is available at
+https://github.com/NiordOrg/niord/tree/master/niord-model[the Niord Model Github Repository]
 

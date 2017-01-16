@@ -9,6 +9,9 @@ A public API for fetching Niord Message data from a test system can be found at 
 https://niord.e-navigation.net/api.html#/messages[Niord alpha server^]. +
 The API is documented in the link:../public-api/api.html[Niord Public API] document.
 
+Please also find link:../presentation/presentation.html[Guidelines^] as to how a client should
+render Niord model messages.
+
 [[img-sample-nm]]
 .Sample NM
 image::Sample-NM.png[Sample NM, 60%, 60%]
