@@ -157,7 +157,7 @@ Default value is _true_.
 
 === Examples
 
-The DMA Niord production system currently use the following domains:
+The DMA Niord production system currently use the following domains (among others):
 
 [cols="20,80",options="header"]
 |===
