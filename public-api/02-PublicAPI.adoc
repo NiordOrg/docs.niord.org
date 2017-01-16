@@ -55,7 +55,7 @@ There are two main REST endpoints for fetching Niord messages:
 |Used for searching lists of public (published, cancelled or expired) Niord messages by various parameters.
 |===
 
-The REST endpoints area detailed in the remainder of this section.
+The REST endpoints are detailed in the remainder of this section.
 
 ==== /rest/public/v1/message/{messageId}
 This REST endpoint is used for fetching individual public (published, cancelled or expired) Niord messages
