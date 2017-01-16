@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOCUMENT=model.adoc
+DOCUMENT=api.adoc
 
 if [ "$1" = "pdf" ]; then
    asciidoctor-pdf $DOCUMENT -D . -a imagesdir=images/
