@@ -5,7 +5,7 @@ project as of {releaseDate}.
 
 The API detailed on this site does _not_ cover the extensive REST API used internally by the Niord web application,
 but rather, describes the simple public REST interface that may be used by third-party applications
-(websites, apps, etc.) for fetching in-force navigational warnings and notices to mariners.
+(websites, apps, etc.) for fetching in-force navigational warnings (NW) and notices to mariners (NM).
 
 An example client website using the Niord Public API can be found at
 https://nautiskinformation.soefartsstyrelsen.dk/#/messages/map[nautiskinformation.soefartsstyrelsen.dk]

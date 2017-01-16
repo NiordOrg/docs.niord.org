@@ -1,3 +1,14 @@
 == Niord Public API
 
-bla bla bla
+The Niord Public API is a simple public REST API for fetching nautical information, i.e.
+ Navigational Warnings (NW) and Notices to Mariners (NM), from a Niord System.
+
+=== Niord Message Data Model
+The Niord Message Model is the combined model used to represent Navigational Warnings and Notices to Mariners.
+
+The model is used as an interchange format when communicating NW and NM messages with the Niord Editing System
+and compatible systems.
+
+The data model for the NW and NM messages is detailed in the link:../model/model.html[Niord Message Model]
+document.
+
