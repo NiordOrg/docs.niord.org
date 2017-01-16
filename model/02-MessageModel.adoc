@@ -6,7 +6,7 @@ The model is used as an interchange format when communicating NW and NM messages
 and compatible systems.
 
 A public API for fetching Niord Message data from a test system can be found at the
-https://niord.e-navigation.net/api.html#/messages[Niord alpha server]. +
+https://niord.e-navigation.net/api.html#/messages[Niord alpha server^]. +
 The API is documented in the link:../public-api/api.html[Niord Public API] document.
 
 [[img-sample-nm]]

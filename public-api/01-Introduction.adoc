@@ -8,8 +8,8 @@ but rather, describes the simple public REST interface that may be used by third
 (websites, apps, etc.) for fetching in-force navigational warnings (NW) and notices to mariners (NM).
 
 An example client website using the Niord Public API can be found at
-https://nautiskinformation.soefartsstyrelsen.dk/#/messages/map[nautiskinformation.soefartsstyrelsen.dk]
+https://nautiskinformation.soefartsstyrelsen.dk/#/messages/map[nautiskinformation.soefartsstyrelsen.dk^]
 
 The actual source for the API is available at
-https://github.com/NiordOrg/niord/tree/master/niord-web[the Niord Web Github Repository]
+https://github.com/NiordOrg/niord/tree/master/niord-web[the Niord Web Github Repository^]
 

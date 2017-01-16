@@ -519,7 +519,17 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#introduction">1. Introduction</a></li>
 <li><a href="#niord-public-api">2. Niord Public API</a>
 <ul class="sectlevel2">
-<li><a href="#niord-message-data-model">2.1. Niord Message Data Model</a></li>
+<li><a href="#niord-systems">2.1. Niord Systems</a>
+<ul class="sectlevel3">
+<li><a href="#swagger-integration">2.1.1. Swagger Integration</a></li>
+</ul>
+</li>
+<li><a href="#niord-message-model">2.2. Niord Message Model</a></li>
+<li><a href="#rest-api">2.3. REST API</a>
+<ul class="sectlevel3">
+<li><a href="#rest-public-v1-message-messageid">2.3.1. /rest/public/v1/message/{messageId}</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -545,11 +555,11 @@ but rather, describes the simple public REST interface that may be used by third
 </div>
 <div class="paragraph">
 <p>An example client website using the Niord Public API can be found at
-<a href="https://nautiskinformation.soefartsstyrelsen.dk/#/messages/map">nautiskinformation.soefartsstyrelsen.dk</a></p>
+<a href="https://nautiskinformation.soefartsstyrelsen.dk/#/messages/map" target="_blank">nautiskinformation.soefartsstyrelsen.dk</a></p>
 </div>
 <div class="paragraph">
 <p>The actual source for the API is available at
-<a href="https://github.com/NiordOrg/niord/tree/master/niord-web">the Niord Web Github Repository</a></p>
+<a href="https://github.com/NiordOrg/niord/tree/master/niord-web" target="_blank">the Niord Web Github Repository</a></p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -559,20 +569,158 @@ but rather, describes the simple public REST interface that may be used by third
 <div class="sectionbody">
 <div class="paragraph">
 <p>The Niord Public API is a simple public REST API for fetching nautical information, i.e.
- Navigational Warnings (NW) and Notices to Mariners (NM), from a Niord System.</p>
+Navigational Warnings (NW) and Notices to Mariners (NM), from a Niord System.</p>
+</div>
+<div class="paragraph">
+<p>The API requires no authentication or authorization, as it will only ever return <em>public messages</em>, that is,
+messages that are currently - or has been - published (in-force).<br></p>
 </div>
 <div class="sect2">
-<h3 id="niord-message-data-model"><a class="anchor" href="#niord-message-data-model"></a><a class="link" href="#niord-message-data-model">2.1. Niord Message Data Model</a></h3>
+<h3 id="niord-systems"><a class="anchor" href="#niord-systems"></a><a class="link" href="#niord-systems">2.1. Niord Systems</a></h3>
 <div class="paragraph">
-<p>The Niord Message Model is the combined model used to represent Navigational Warnings and Notices to Mariners.</p>
+<p>Currently, there are three live Niord systems that may be used for accessing the public REST API.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 30%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">System</th>
+<th class="tableblock halign-left valign-top">Base URL</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DMA Alpha Site</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://niord.e-navigation.net" target="_blank">niord.e-navigation.net</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used for alpha testing the Niord system. Contains junk data as well as production data
+from the Danish Maritime Authority.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DMA Beta Site</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://niord-beta.e-navigation.net" target="_blank">niord-beta.e-navigation.net</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used for beta testing the Niord system. Updated each night with production data
+from the Danish Maritime Authority.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DMA Alpha Site</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://niord-dma.e-navigation.net" target="_blank">niord-dma.e-navigation.net</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used in production by the the Danish Maritime Authority.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="swagger-integration"><a class="anchor" href="#swagger-integration"></a><a class="link" href="#swagger-integration">2.1.1. Swagger Integration</a></h4>
+<div class="paragraph">
+<p>The Niord Public REST API is integrated with <a href="http://swagger.io">Swagger</a>, which provides a web-based UI
+for inspecting and testing the REST API on a live system.</p>
 </div>
 <div class="paragraph">
-<p>The model is used as an interchange format when communicating NW and NM messages with the Niord Editing System
-and compatible systems.</p>
+<p>The Swagger API is available at <strong>/api.html</strong>.</p>
 </div>
 <div class="paragraph">
-<p>The data model for the NW and NM messages is detailed in the <a href="../model/model.html">Niord Message Model</a>
-document.</p>
+<p>Example: <a href="https://niord.e-navigation.net/api.html#!/messages/" target="_blank">DMA Alpha Site Swagger Page</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="niord-message-model"><a class="anchor" href="#niord-message-model"></a><a class="link" href="#niord-message-model">2.2. Niord Message Model</a></h3>
+<div class="paragraph">
+<p>The Niord Message Model, returned by the public REST API, is the combined model used to represent
+Navigational Warnings and Notices to Mariners.</p>
+</div>
+<div class="paragraph">
+<p>The data model is detailed in the <a href="../model/model.html">Niord Message Model</a> document.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="rest-api"><a class="anchor" href="#rest-api"></a><a class="link" href="#rest-api">2.3. REST API</a></h3>
+<div class="paragraph">
+<p>There are two main REST endpoints for fetching Niord messages:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 40%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Endpoint</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/rest/public/v1/message/{messageId}</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used for fetching individual public (published, cancelled or expired) Niord messages by their ID.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/rest/public/v1/messages</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used for searching lists of public (published, cancelled or expired) Niord messages by various parameters.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The REST endpoints area detailed in the remainder of this section.</p>
+</div>
+<div class="sect3">
+<h4 id="rest-public-v1-message-messageid"><a class="anchor" href="#rest-public-v1-message-messageid"></a><a class="link" href="#rest-public-v1-message-messageid">2.3.1. /rest/public/v1/message/{messageId}</a></h4>
+<div class="paragraph">
+<p>This REST endpoint is used for fetching individual public (published, cancelled or expired) Niord messages
+by their ID.</p>
+</div>
+<div class="paragraph">
+<p>Parameters:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Example</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">messageId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NM-03-17</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The message UID or short ID.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">lang</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">en</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Two-letter ISO 639-1 language code.<br>
+If defined, the returned message data will be filtered to only include the give language variant.<br>
+If un-specified, all language variants are returned.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">externalize</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to rewrite all embedded links and paths to be absolute URL&#8217;s.<br>
+Default value is <em>true</em>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dateFormat</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UNIX_EPOCH</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The date format to use for JSON date-time encoding. Either <em>UNIX_EPOCH</em> (default) or <em>ISO_8601</em>.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>

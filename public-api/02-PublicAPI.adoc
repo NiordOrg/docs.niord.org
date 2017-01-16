@@ -1,14 +1,93 @@
 == Niord Public API
-
 The Niord Public API is a simple public REST API for fetching nautical information, i.e.
- Navigational Warnings (NW) and Notices to Mariners (NM), from a Niord System.
+Navigational Warnings (NW) and Notices to Mariners (NM), from a Niord System.
 
-=== Niord Message Data Model
-The Niord Message Model is the combined model used to represent Navigational Warnings and Notices to Mariners.
+The API requires no authentication or authorization, as it will only ever return _public messages_, that is,
+messages that are currently - or has been - published (in-force). +
 
-The model is used as an interchange format when communicating NW and NM messages with the Niord Editing System
-and compatible systems.
+=== Niord Systems
+Currently, there are three live Niord systems that may be used for accessing the public REST API.
 
-The data model for the NW and NM messages is detailed in the link:../model/model.html[Niord Message Model]
-document.
+[cols="20,30,50",options="header"]
+|===
+|System |Base URL |Description
+
+|DMA Alpha Site
+|https://niord.e-navigation.net[niord.e-navigation.net^]
+|Used for alpha testing the Niord system. Contains junk data as well as production data
+from the Danish Maritime Authority.
+
+|DMA Beta Site
+|https://niord-beta.e-navigation.net[niord-beta.e-navigation.net^]
+|Used for beta testing the Niord system. Updated each night with production data
+from the Danish Maritime Authority.
+
+|DMA Alpha Site
+|https://niord-dma.e-navigation.net[niord-dma.e-navigation.net^]
+|Used in production by the the Danish Maritime Authority.
+|===
+
+==== Swagger Integration
+The Niord Public REST API is integrated with http://swagger.io[Swagger], which provides a web-based UI
+for inspecting and testing the REST API on a live system.
+
+The Swagger API is available at */api.html*.
+
+Example: https://niord.e-navigation.net/api.html#!/messages/[DMA Alpha Site Swagger Page^].
+
+=== Niord Message Model
+The Niord Message Model, returned by the public REST API, is the combined model used to represent
+Navigational Warnings and Notices to Mariners.
+
+The data model is detailed in the link:../model/model.html[Niord Message Model] document.
+
+=== REST API
+There are two main REST endpoints for fetching Niord messages:
+
+[cols="40,60",options="header"]
+|===
+|Endpoint |Description
+
+|/rest/public/v1/message/{messageId}
+|Used for fetching individual public (published, cancelled or expired) Niord messages by their ID.
+
+|/rest/public/v1/messages
+|Used for searching lists of public (published, cancelled or expired) Niord messages by various parameters.
+|===
+
+The REST endpoints area detailed in the remainder of this section.
+
+==== /rest/public/v1/message/{messageId}
+This REST endpoint is used for fetching individual public (published, cancelled or expired) Niord messages
+by their ID.
+
+Parameters:
+
+[cols="10,10,10,60",options="header"]
+|===
+|Parameter |Type| Example| Description
+
+|messageId
+|String
+|NM-03-17
+|The message UID or short ID.
+
+|lang
+|String
+|en
+|Two-letter ISO 639-1 language code. +
+If defined, the returned message data will be filtered to only include the give language variant. +
+If un-specified, all language variants are returned.
+
+|externalize
+|boolean
+|true
+|Whether to rewrite all embedded links and paths to be absolute URL's. +
+Default value is _true_.
+
+|dateFormat
+|String
+|UNIX_EPOCH
+|The date format to use for JSON date-time encoding. Either 'UNIX_EPOCH' (default) or 'ISO_8601'.
+|===
 
