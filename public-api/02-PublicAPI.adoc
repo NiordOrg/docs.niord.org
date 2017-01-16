@@ -22,7 +22,7 @@ from the Danish Maritime Authority.
 |Used for beta testing the Niord system. Updated each night with production data
 from the Danish Maritime Authority.
 
-|DMA Alpha Site
+|DMA Prod Site
 |https://niord-dma.e-navigation.net[niord-dma.e-navigation.net^]
 |Used in production by the the Danish Maritime Authority.
 |===
@@ -155,3 +155,41 @@ Default value is _true_.
 |The date format to use for JSON date-time encoding. Either 'UNIX_EPOCH' (default) or 'ISO_8601'.
 |===
 
+=== Examples
+
+The DMA Niord production system currently use the following domains:
+
+[cols="20,80",options="header"]
+|===
+|Domain ID | Description
+
+|niord-legacy-nw
+|Currently Danish NW's are imported to, but not created in, the DMA Niord production system. +
+They are imported in the "niord-legacy-nw" domain.
+
+|niord-nm
+|All Danish Notices to Mariners area now produced in the "niord-nm" domain.
+
+|niord-fa
+|All Danish firing areas area defined as miscellaneous Notices to Mariners in the "niord-fa" domain.
+
+|niord-fe
+|The actual firing exercises are maintained as local navigational warnings in the "niord-fe" domain.
+|===
+
+
+Fetch all in-force Danish NM's - only return English translation:
+
+[source,bash]
+----
+curl -X GET --header 'Accept: application/json' \
+   'https://niord-dma.e-navigation.net/rest/public/v1/messages?lang=en&domain=niord-nm'
+----
+
+Fetch all in-force Danish NW's, including firing exercises. Return all translations of the messages:
+
+[source,bash]
+----
+curl -X GET --header 'Accept: application/json' \
+   'https://niord-dma.e-navigation.net/rest/public/v1/messages?domain=niord-nm&domain=niord-fe'
+----
