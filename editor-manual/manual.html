@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.5">
-<title>Niord Message Presentation</title>
+<title>Niord System User Manual for Editors</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -512,17 +512,17 @@ table.CodeRay td.code>pre{padding:0}
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
-<h1>Niord Message Presentation</h1>
+<h1>Niord System User Manual for Editors</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#introduction">1. Introduction</a></li>
-<li><a href="#presentation">2. Presentation</a>
+<li><a href="#editors-manual">2. Editors Manual</a></li>
+<li><a href="#home">3. Home</a>
 <ul class="sectlevel2">
-<li><a href="#translations">2.1. Translations</a></li>
-<li><a href="#message-lists">2.2. Message Lists</a></li>
-<li><a href="#message-details">2.3. Message Details</a></li>
-<li><a href="#message-geometry">2.4. Message Geometry</a></li>
+<li><a href="#login">3.1. Login</a></li>
+<li><a href="#domain-selection">3.2. Domain Selection</a></li>
+<li><a href="#language-selection">3.3. Language Selection</a></li>
 </ul>
 </li>
 </ul>
@@ -538,248 +538,204 @@ table.CodeRay td.code>pre{padding:0}
 <h2 id="introduction"><a class="anchor" href="#introduction"></a><a class="link" href="#introduction">1. Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This document will give a couple of guidelines as to how a client (say, an ECDIS, a website or an app)
-might render Navigational Warnings (NW) and Notices to Mariners (NM) for the end-user.</p>
+<p>Niord (Nautical Information Directory) is a system for producing and publishing
+Navigational Warnings (<em>NW</em>) and Notices to Mariners T&amp;P (<em>NM</em>).</p>
 </div>
 <div class="paragraph">
-<p>The messages are assumed to be in the <a href="../model/model.html" target="_blank">Niord Message Model</a> format
-as returned by the <a href="../public-api/api.html" target="_blank">Niord Public API</a>. Please acquaint yourself
-with these documents first.</p>
+<p>It was originally developed as part of the <a href="http://efficiensea2.org">EfficienSea2</a> EU project
+and subsequently implemented as a production system for the
+<a href="http://www.dma.dk/">Danish Maritime Authority</a>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/EfficienSea2.png" alt="EfficienSea2" width="200">
+</div>
 </div>
 <div class="paragraph">
-<p>An example client website rendering messages fetched via the Niord Public API can be found at
-<a href="https://nautiskinformation.soefartsstyrelsen.dk/#/messages/map" target="_blank">nautiskinformation.soefartsstyrelsen.dk</a></p>
+<p>Some of the main features of Niord area:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Niord provides an advanced and highly customizable production system for NW and NM T&amp;P.</p>
+</li>
+<li>
+<p>It includes a plug-in architecture for NW and NM message promulgation via e.g. mailing lists
+and Twitter.</p>
+</li>
+<li>
+<p>Niord also integrates with the <a href="http://maritimecloud.net">Maritime Cloud</a> by defining a
+Maritime Cloud Service Specification and making NW &amp; NM messages accessible via a
+<a href="../public-api/api.html">Public REST API</a></p>
+</li>
+<li>
+<p>The <a href="../public-model/model.html">combined NW &amp; NM message model</a> adopted by Niord has
+been devised to make data future-compatible with the upcoming IHO S-124 specification.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="editors-manual"><a class="anchor" href="#editors-manual"></a><a class="link" href="#editors-manual">2. Editors Manual</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A user in Niord always works in the context of a <em>current domain</em>.
+Domains are used to separate NW &amp; NM messages into more manageable chunks of data -
+you could e.g. have a domain for NW messages, a domain for NM messages, a domain
+for firing exercises (also NWs), or indeed domains for separate regions with
+separate time-zones, etc.</p>
+</div>
+<div class="paragraph">
+<p>The user has separate roles in each domain. The available roles are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><em>User</em>: The <em>user</em> role can be assigned to e.g. case officers that should have access
+to see, proof-read and comment on un-published NW and NM messages.</p>
+</li>
+<li>
+<p><em>Editor</em>: Editors compose and manage the life cycle of an NW or NM message.</p>
+</li>
+<li>
+<p><em>Admin</em>: An administrator of a domain will have additional access to e.g. manage the base data
+(e.g. sea charts and publications) of the Niord system.</p>
+</li>
+<li>
+<p><em>Sysadmin</em>: A very special role that should be held only by the person(s) actually setting
+up and managing the Niord system.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The roles listed above are hierarchical in the sense that a <em>sysadmin</em> can do anything an <em>admin</em>
+can do, who in turn can do anything an <em>editor</em> can do, and so forth.</p>
+</div>
+<div class="paragraph">
+<p>This document serves as a user manual for <em>editors</em> of a domain.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Please use a newish Chrome, Safari or Firefox browser when using Niord.
+</td>
+</tr>
+</table>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="presentation"><a class="anchor" href="#presentation"></a><a class="link" href="#presentation">2. Presentation</a></h2>
+<h2 id="home"><a class="anchor" href="#home"></a><a class="link" href="#home">3. Home</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The Niord Message Model is fairly rich, and, depending on the situation, only parts of the model
-should be presented to the end user.</p>
+<p>The <em>Home</em> page of Niord is little more than a splash screen that displays a map with
+the list of in-force NW and NM messages of the currently selected domain.</p>
 </div>
 <div class="paragraph">
-<p><em>Message.areas</em> is an example of a message attribute that will typically not be rendered directly,
-but may be used to group or filter messages.</p>
-</div>
-<div class="paragraph">
-<p><em>Message.categories</em> is an example of a message attribute that will typically not be rendered directly,
-but may be used to drive portrayal (e.g. display a special icon for firing exercises).</p>
-</div>
-<div class="sect2">
-<h3 id="translations"><a class="anchor" href="#translations"></a><a class="link" href="#translations">2.1. Translations</a></h3>
-<div class="paragraph">
-<p>As described in the <a href="../model/model.html" target="_blank">Niord Message Model</a> document, all localizable
-components of the message has an associated list of description entities with all the localizable
-attributes.</p>
-</div>
-<div class="paragraph">
-<p>For instance, a <em>Message</em>, has an associated <em>MessageDesc</em> list, as defined in JSON:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="json">{
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">descs</span><span class="delimiter">&quot;</span></span>: [
-    {
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">lang</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">en</span><span class="delimiter">&quot;</span></span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Denmark. The Baltic Sea. Gedser S. Rødsand Rende. Buoyage missing.</span><span class="delimiter">&quot;</span></span>,
-      <span class="error">.</span><span class="error">.</span><span class="error">.</span>
-    },
-    {
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">lang</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">da</span><span class="delimiter">&quot;</span></span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Danmark. Østersøen. Gedser S. Rødsand Rende. Afmærkning forsvundet.</span><span class="delimiter">&quot;</span></span>,
-      <span class="error">.</span><span class="error">.</span><span class="error">.</span>
-    },
-  ],
-  <span class="error">.</span><span class="error">.</span><span class="error">.</span>
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If no <em>language</em> parameter was specified, when querying the public REST API, all translations will be
-returned (see example above). When the client renders the message, it must iterate the "descs" list to
-find the preferred language variant.</p>
-</div>
-<div class="paragraph">
-<p>If, however, a language parameter was specified, say "da", only that description entity is returned.
-Thus, when the client renders the message, it can pick the first (and only) description entity (descs[0]).<br>
-If a message does not have the requested translation, it will return another variant (typically "en"), and
-the client may choose to signal this to the end user (e.g. by displaying a flag).</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="message-lists"><a class="anchor" href="#message-lists"></a><a class="link" href="#message-lists">2.2. Message Lists</a></h3>
-<div class="paragraph">
-<p>When lists of messages are displayed in the client, typically it is sufficient to display the
-<em>short ID</em> and the <em>title</em> of a message.</p>
-</div>
-<div class="paragraph">
-<p>In simplified pseudo-code, and assuming the client is a web application, this would amount to:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="asciidoc">for msg in message-list
-  emit-title-line(msg)
-end-for
-
-procedure emit-title-line(msg)
-  emit &quot;&lt;div&gt;&quot;
-
-  /** Emit the short ID **/
-  if msg.shortId defined
-    emit &quot;&lt;span&gt;&quot; + msg.shortId + &quot;&lt;/span&gt;&quot;
-  end-if
-
-  /** For NM T&amp;P messages, emit (T) or (P) **/
-  if msg.type == 'PRELIMINARY_NOTICE'
-    emit &quot; (P)&quot;
-  else if msg.type == 'TEMPORARY_NOTICE'
-    emit &quot; (T)&quot;
-  end-if
-
-  /** Emit the message title **/
-  emit &quot; &lt;span&gt;&quot; + msg.descs[0].title + &quot;&lt;/span&gt;&quot;
-
-  emit &quot;&lt;/div&gt;&quot;
-end-procedure</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The resulting message list may look something along the lines of:</p>
+<p>The page shares its main menu (top) with all other pages.
+This chapter details the common functionality of the Niord system, such as log-in,
+domain and language selection; all accessible via the main menu.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/MessageList.png" alt="Message List" width="60%" height="60%">
+<img src="images/Home.png" alt="Home" width="600">
+</div>
+</div>
+<div class="sect2">
+<h3 id="login"><a class="anchor" href="#login"></a><a class="link" href="#login">3.1. Login</a></h3>
+<div class="paragraph">
+<p>Prior to logging in to Niord, the user should contact a Niord administrator to ensure
+that she is a registered user and has the proper roles assigned for the respective domains.</p>
+</div>
+<div class="paragraph">
+<p>In order to log in, click the <em>Login</em> link of the main menu, or the <em>Login</em> button of the
+Home page.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Log-In.png" alt="Login" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>The actual login mechanism is configured by a Niord system administrator. The set-up used
+by the Danish Maritime Authority (DMA) is as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>When the user is an employee working within the DMA network (either <em>in situ</em> or via VPN),
+she can click the "DMA" button on the login page.
+Since Niord is integrated with the DMA ADFS, the user
+may then use the usual DMA work place credentials for authentication.</p>
+</li>
+<li>
+<p>Outside the DMA network, or indeed for Niord users that are not DMA employees, the user
+can log in using a pre-assigned username and password.
+For added security, the user will subsequently be asked for a <em>one-time code</em>
+as provided by the <em>Google Authenticator</em> App on their mobile phone.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Once the user has successfully logged in, the main menu <em>Login</em> link will be replaced with
+a user menu, containing the options to log out and edit the user profile - including setting
+a new password.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ProfileMenu.png" alt="Profile Menu" width="200">
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="message-details"><a class="anchor" href="#message-details"></a><a class="link" href="#message-details">2.3. Message Details</a></h3>
+<h3 id="domain-selection"><a class="anchor" href="#domain-selection"></a><a class="link" href="#domain-selection">3.2. Domain Selection</a></h3>
 <div class="paragraph">
-<p>When the details of a message, <em>msg</em>, is displayed in the client, several more message fields are
-of interest.</p>
-</div>
-<div class="paragraph">
-<p>In simplified pseudo-code, and assuming the client is a web application, this would amount to:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="asciidoc">/** Emit asterisk &quot;*&quot; when the message is based on original information **/
-if msg.originalInformation == true
-  emit &quot;&lt;div&gt;*&lt;/div&gt;&quot;
-end-if
-
-/** Emit the title line as described in the &quot;Message Lists&quot; section **/
-emit-title-line(msg)
-
-/** Emit references **/
-for ref in msg.references
-  emit &quot;&lt;div&gt;Reference: &quot; + ref.messageId + &quot; (&quot; + ref.type + &quot;) &quot;
-       + ref.descs[0].description + &quot;&lt;/div&gt;&quot;
-end-for
-
-/** Emit the subject and details of the message parts **/
-for part in msg.parts
-  emit &quot;&lt;div&gt;Details: &lt;strong&gt;&quot; + part.descs[0].subject + &quot;&lt;/strong&gt;&lt;/div&gt;&quot;
-  emit &quot;&lt;div class='message-description'&gt;&quot; + part.descs[0].details + &quot;&lt;/div&gt;&quot;
-end-for
-
-/** Emit attachments **/
-for att in msg.attachments
-  emit &quot;&lt;div&gt;Attachment: &lt;a href='&quot; + att.path + &quot;'&gt;&quot; + att.fileName + &quot;&lt;/a&gt; &quot;
-       + att.descs[0].caption + &quot;&lt;/div&gt;&quot;
-end-for
-
-/** Emit charts **/
-for chart in msg.charts
-  emit &quot;&lt;div&gt;Charts: &quot; + chart.chartNumber
-  if chart.internationalNumber
-    emit &quot; (INT &quot; + chart.internationalNumber + &quot;)&quot;
-  end-if
-  emit &quot;&lt;/div&gt;&quot;
-end-for
-
-/** Emit publication **/
-emit &quot;&lt;div&gt;Publication: &quot; + msg.descs[0].publication + &quot;&lt;/div&gt;&quot;
-
-/** Emit source **/
-emit &quot;&lt;div style='text-align:right'&gt;(&quot; + msg.descs[0].source + &quot;)&lt;/div&gt;&quot;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>It is important that the client is able to display the HTML of the <em>part.descs[0].details</em>
-and <em>msg.descs[0].publication</em> fields. If the client does not have the capacity to do this, it should
-convert HTML to plain text first.</p>
-</div>
-<div class="paragraph">
-<p>The message part details (HTML) may contains stylesheet classes. To improve the rendering of
-the message details, please adhere to the following CSS classes of the
-<a href="https://github.com/NiordOrg/niord-proxy/blob/master/src/main/webapp/css/message.css" target="_blank">message.css</a> stylesheet:
-<em>message-description, table.no-border, table.condensed, tr.underline, table.positions, ul.positions,
-table.position-table</em>.</p>
-</div>
-<div class="paragraph">
-<p>The resulting message details may look something along the lines of:</p>
+<p>As described in the <a href="#editors-manual">Editors Manual</a> section, you always work within a current <em>domain</em> in Niord.
+The current domain is selected from the domain menu:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/MessageDetails.png" alt="Message Details" width="60%" height="60%">
+<img src="images/DomainMenu.png" alt="Domain Menu" width="200">
 </div>
+</div>
+<div class="paragraph">
+<p>Next to each domain name, there is a symbol that indicates if the user can edit messages of that
+domain (pencil symbol), or only view published messages (eye symbol).</p>
+</div>
+<div class="paragraph">
+<p>The current domain selection is stored in a cookie in the web-browser, and so, will also be
+the selected domain next time the user access Niord.</p>
+</div>
+<div class="paragraph">
+<p>To make the current domain selection more visible to the user, each domain is assigned a colour
+that is displayed in the main menu (green for NM in this example).</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="message-geometry"><a class="anchor" href="#message-geometry"></a><a class="link" href="#message-geometry">2.4. Message Geometry</a></h3>
+<h3 id="language-selection"><a class="anchor" href="#language-selection"></a><a class="link" href="#language-selection">3.3. Language Selection</a></h3>
 <div class="paragraph">
-<p>The client may want to display the messages on a map, either as an overview map for a list of messages
-or when presenting the details of a single message.</p>
-</div>
-<div class="paragraph">
-<p>Since Niord relies on GeoJSON for message geometries, you are likely to be able to visualize the
-message with very little work in your mapping library of choice, since most of these libraries supports
-GeoJSON out of the box.</p>
+<p>Niord can be configured to support any number of website languages (i.e. the language used for
+menus, text and labels in the Niord website) and any number of NW-NM message
+model languages (i.e. the languages that the produced NW and NM messages include).
+Typically, however, a Niord system supports two languages; the local language and English.</p>
 </div>
 <div class="paragraph">
-<p>As described in the <a href="../model/model.html" target="_blank">Niord Message Model</a> document, Niord actually extends
-the model, by specifying how e.g. localized feature and coordinate labels may be encoded in the GeoJSON
-<em>Feature</em> properties.</p>
-</div>
-<div class="paragraph">
-<p>Assuming that a message, msg, is to be rendered in OpenLayers, the simplified pseudo-code
-may look something like:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="asciidoc">geoJsonFormat = new ol.format.GeoJSON()
-olLayer = ...
-
-/** Generate features for all geometry fields of all message parts **/
-for part in msg.parts
-  /** The part.geometry is always of GeoJSON type: FeatureCollection **/
-  if part.geometry &amp;&amp; part.geometry.type == 'FeatureCollection'
-      for feature in part.geometry.features
-        olFeature = geoJsonFormat.readFeature(feature, {
-                    dataProjection: 'EPSG:4326',
-                    featureProjection: 'EPSG:3857'
-                })
-        olFeature.set('message', message);
-        olLayer.getSource().addFeature(olFeature)
-      end-for
-  end-if
-end-for</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Naturally, the client should also be able to handle messages with no associated geometry.</p>
-</div>
-<div class="paragraph">
-<p>The resulting message details including geometry may look something along the lines of:</p>
+<p>The currently selected website language is selected from the Language menu:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/MessageGeometry.png" alt="Message Details" width="60%" height="60%">
+<img src="images/LanguageMenu.png" alt="Language Menu" width="200">
 </div>
+</div>
+<div class="paragraph">
+<p>As with the current domain selection, the current language selection is stored in a cookie
+in the web-browser, and so, will also be the selected language next time the user access Niord.</p>
 </div>
 </div>
 </div>
@@ -787,7 +743,7 @@ end-for</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-05-12 13:01:06 CEST
+Last updated 2017-05-13 11:16:55 CEST
 </div>
 </div>
 <script type="text/x-mathjax-config">

@@ -1,0 +1,73 @@
+
+:imagesdir: images
+
+== Home
+
+The _Home_ page of Niord is little more than a splash screen that displays a map with
+the list of in-force NW and NM messages of the currently selected domain.
+
+The page shares its main menu (top) with all other pages.
+This chapter details the common functionality of the Niord system, such as log-in,
+domain and language selection; all accessible via the main menu.
+
+image::Home.png[Home, 600]
+
+=== Login
+
+Prior to logging in to Niord, the user should contact a Niord administrator to ensure
+that she is a registered user and has the proper roles assigned for the respective domains.
+
+In order to log in, click the _Login_ link of the main menu, or the _Login_ button of the
+Home page.
+
+image::Log-In.png[Login, 400]
+
+The actual login mechanism is configured by a Niord system administrator. The set-up used
+by the Danish Maritime Authority (DMA) is as follows:
+
+* When the user is an employee working within the DMA network (either _in situ_ or via VPN),
+  she can click the "DMA" button on the login page.
+  Since Niord is integrated with the DMA ADFS, the user
+  may then use the usual DMA work place credentials for authentication.
+* Outside the DMA network, or indeed for Niord users that are not DMA employees, the user
+  can log in using a pre-assigned username and password.
+  For added security, the user will subsequently be asked for a _one-time code_
+  as provided by the _Google Authenticator_ App on their mobile phone.
+
+Once the user has successfully logged in, the main menu _Login_ link will be replaced with
+a user menu, containing the options to log out and edit the user profile - including setting
+a new password.
+
+image::ProfileMenu.png[Profile Menu, 200]
+
+=== Domain Selection
+
+As described in the <<Editors Manual>> section, you always work within a current _domain_ in Niord.
+The current domain is selected from the domain menu:
+
+image::DomainMenu.png[Domain Menu, 200]
+
+Next to each domain name, there is a symbol that indicates if the user can edit messages of that
+domain (pencil symbol), or only view published messages (eye symbol).
+
+The current domain selection is stored in a cookie in the web-browser, and so, will also be
+the selected domain next time the user access Niord.
+
+To make the current domain selection more visible to the user, each domain is assigned a colour
+that is displayed in the main menu (green for NM in this example).
+
+
+=== Language Selection
+
+Niord can be configured to support any number of website languages (i.e. the language used for
+menus, text and labels in the Niord website) and any number of NW-NM message
+model languages (i.e. the languages that the produced NW and NM messages include).
+Typically, however, a Niord system supports two languages; the local language and English.
+
+The currently selected website language is selected from the Language menu:
+
+image::LanguageMenu.png[Language Menu, 200]
+
+As with the current domain selection, the current language selection is stored in a cookie
+in the web-browser, and so, will also be the selected language next time the user access Niord.
+
