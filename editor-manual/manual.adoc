@@ -42,3 +42,7 @@ include::01-Introduction.adoc[]
 
 include::02-Home.adoc[]
 
+<<<
+
+include::03-Messages.adoc[]
+

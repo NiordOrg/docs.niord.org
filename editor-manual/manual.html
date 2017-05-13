@@ -525,6 +525,22 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#language-selection">3.3. Language Selection</a></li>
 </ul>
 </li>
+<li><a href="#messages">4. Messages</a>
+<ul class="sectlevel2">
+<li><a href="#view-modes">4.1. View Modes</a>
+<ul class="sectlevel3">
+<li><a href="#table-view-mode">4.1.1. Table View Mode</a></li>
+<li><a href="#grid-view-mode">4.1.2. Grid View Mode</a></li>
+<li><a href="#details-view-mode">4.1.3. Details View Mode</a></li>
+<li><a href="#map-view-mode">4.1.4. Map View Mode</a></li>
+</ul>
+</li>
+<li><a href="#message-selection">4.2. Message Selection</a></li>
+<li><a href="#message-filtering">4.3. Message Filtering</a></li>
+<li><a href="#message-actions">4.4. Message Actions</a></li>
+<li><a href="#message-details">4.5. Message Details</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -737,13 +753,115 @@ Typically, however, a Niord system supports two languages; the local language an
 <p>As with the current domain selection, the current language selection is stored in a cookie
 in the web-browser, and so, will also be the selected language next time the user access Niord.</p>
 </div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="messages"><a class="anchor" href="#messages"></a><a class="link" href="#messages">4. Messages</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <em>Messages</em> page of Niord is always accessible via the main menu. It lists the NW and NM
+messages of the system according to the selected filter criteria, sorting and view mode.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Messages.png" alt="Messages" width="600">
+</div>
+</div>
+<div class="sect2">
+<h3 id="view-modes"><a class="anchor" href="#view-modes"></a><a class="link" href="#view-modes">4.1. View Modes</a></h3>
+<div class="paragraph">
+<p>The current selection of messages can be displayed in four different view modes:
+<em>Table</em>, <em>Grid</em>, <em>Details</em> and <em>Map</em>, any of which may be selected in the
+Messages sub-menu.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ViewModes.png" alt="Messages" width="300">
+</div>
+</div>
+<div class="sect3">
+<h4 id="table-view-mode"><a class="anchor" href="#table-view-mode"></a><a class="link" href="#table-view-mode">4.1.1. Table View Mode</a></h4>
+<div class="paragraph">
+<p>The default view mode is the <em>Table</em> view mode, where the filtered list of messages is
+presented in a compact table-like list. See example above.</p>
+</div>
+<div class="paragraph">
+<p>The user can easily sort the message list by either message ID, date or area by clicking
+the respective column name in the header row. Click the same header name to toggle
+between ascending and descending sort order.</p>
+</div>
+<div class="paragraph">
+<p>The date column can either display the publish dates, the event dates or the follow-up dates
+of the messages. Click the ellipsis in the header menu to switch between the date types.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="grid-view-mode"><a class="anchor" href="#grid-view-mode"></a><a class="link" href="#grid-view-mode">4.1.2. Grid View Mode</a></h4>
+<div class="paragraph">
+<p>When selecting the <em>Grid</em> view mode, message are listed in a semi-compact fashion with an
+auto-generated thumbnail image for each message.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/GridViewMode.png" alt="Grid View Mode" width="600">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="details-view-mode"><a class="anchor" href="#details-view-mode"></a><a class="link" href="#details-view-mode">4.1.3. Details View Mode</a></h4>
+<div class="paragraph">
+<p>In the the <em>Details</em> view mode, each message is listed in detail, similarly to when a message is displayed
+in the <a href="#message-details">Message Details</a> dialog.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/DetailsViewMode.png" alt="Details View Mode" width="600">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="map-view-mode"><a class="anchor" href="#map-view-mode"></a><a class="link" href="#map-view-mode">4.1.4. Map View Mode</a></h4>
+<div class="paragraph">
+<p>In the <em>Map</em> view mode, all messages are displayed in a map. There list of messages will always be
+filtered according to the current bounding box of the map.</p>
+</div>
+<div class="paragraph">
+<p>There is a <em>Search Result</em> panel in the top-left part of the map which contains a compact textual listing
+of the current set of messages.
+By default, this panel is collapsed, but the user may click the toggle-expand/collapse button in the
+panel header to show/hide the message list.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/MapViewMode.png" alt="Map View Mode" width="600">
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="message-selection"><a class="anchor" href="#message-selection"></a><a class="link" href="#message-selection">4.2. Message Selection</a></h3>
+
+</div>
+<div class="sect2">
+<h3 id="message-filtering"><a class="anchor" href="#message-filtering"></a><a class="link" href="#message-filtering">4.3. Message Filtering</a></h3>
+
+</div>
+<div class="sect2">
+<h3 id="message-actions"><a class="anchor" href="#message-actions"></a><a class="link" href="#message-actions">4.4. Message Actions</a></h3>
+
+</div>
+<div class="sect2">
+<h3 id="message-details"><a class="anchor" href="#message-details"></a><a class="link" href="#message-details">4.5. Message Details</a></h3>
+
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-05-13 11:16:55 CEST
+Last updated 2017-05-13 14:22:48 CEST
 </div>
 </div>
 <script type="text/x-mathjax-config">

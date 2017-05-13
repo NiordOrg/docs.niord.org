@@ -1,0 +1,66 @@
+
+:imagesdir: images
+
+== Messages
+
+The _Messages_ page of Niord is always accessible via the main menu. It lists the NW and NM
+messages of the system according to the selected filter criteria, sorting and view mode.
+
+image::Messages.png[Messages, 600]
+
+=== View Modes
+
+The current selection of messages can be displayed in four different view modes:
+_Table_, _Grid_, _Details_ and _Map_, any of which may be selected in the
+Messages sub-menu.
+
+image::ViewModes.png[Messages, 300]
+
+
+==== Table View Mode
+
+The default view mode is the _Table_ view mode, where the filtered list of messages is
+presented in a compact table-like list. See example above.
+
+The user can easily sort the message list by either message ID, date or area by clicking
+the respective column name in the header row. Click the same header name to toggle
+between ascending and descending sort order.
+
+The date column can either display the publish dates, the event dates or the follow-up dates
+of the messages. Click the ellipsis in the header menu to switch between the date types.
+
+==== Grid View Mode
+
+When selecting the _Grid_ view mode, message are listed in a semi-compact fashion with an
+auto-generated thumbnail image for each message.
+
+image::GridViewMode.png[Grid View Mode, 600]
+
+==== Details View Mode
+
+In the the _Details_ view mode, each message is listed in detail, similarly to when a message is displayed
+in the <<Message Details>> dialog.
+
+image::DetailsViewMode.png[Details View Mode, 600]
+
+==== Map View Mode
+
+In the _Map_ view mode, all messages are displayed in a map. There list of messages will always be
+filtered according to the current bounding box of the map.
+
+There is a _Search Result_ panel in the top-left part of the map which contains a compact textual listing
+of the current set of messages.
+By default, this panel is collapsed, but the user may click the toggle-expand/collapse button in the
+panel header to show/hide the message list.
+
+image::MapViewMode.png[Map View Mode, 600]
+
+
+=== Message Selection
+
+=== Message Filtering
+
+=== Message Actions
+
+=== Message Details
+
