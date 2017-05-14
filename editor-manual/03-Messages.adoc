@@ -16,7 +16,6 @@ Messages sub-menu.
 
 image::ViewModes.png[Messages, 300]
 
-
 ==== Table View Mode
 
 The default view mode is the _Table_ view mode, where the filtered list of messages is
@@ -58,9 +57,240 @@ image::MapViewMode.png[Map View Mode, 600]
 
 === Message Selection
 
+Irrespective of the view mode, each message of a messages list can be _selected_ by clicking
+the image:SelectionButton.png[Selection, 20] selection icon. And de-selected by clicking the icon again.
+
+The current message selection is available at the _Selection_ sub-page:
+
+image::MessageSelection.png[Message Selection, 600]
+
+The selection list is persistent throughout the browser session, in the sense that you can
+perform multiple message searches, and thus build up the selection list as appropriate.
+
+The purpose of supporting message selection, is to be able to perform certain actions on a
+more specific set of messages than those matching the current filtering criteria.
+Actions that can be applied to a selected set of messages include printing PDF reports,
+sending e-mails with messages, assigning messages to (and removing from) message tags, etc.
+These actions are detailed in the <<Message Actions>> section.
+
 === Message Filtering
+
+When a user first enters the _Messages_ page, the default set of messages being displayed consists
+of all published (in-force) messages associated with the currently selected domain.
+
+The way to search for other types of messages is by applying a combination of message filters,
+available from the _Filter_ menu:
+
+image::MessageFiltering.png[Message Filtering, 600]
+
+Whenever a message filter is updated, the resulting list of messages will automatically be updated,
+and also, the address (URL) of the browser will be updated, so that you can in effect bookmark a specific
+message filter.
+
+The filters will be detailed individually below.
+
+==== Domain Filter ====
+
+image::MessageFilterDomain.png[Domain Filter, 240]
+
+The _Domain_ filter allows the user to search messages of a different domain without switching the current
+domain. This is very useful, if you e.g. wish to base a new Notice to Mariner on an existing
+Navigational Warning.
+
+As an important security constraint, when filtering on messages from a different domain is that only
+public messages will be included in the search result.
+Public messages are those whose status are either _Published_, _Cancelled_ or _Expired_.
+
+==== Message Series Filter ====
+
+image::MessageFilterSeries.png[Mesage Series, 400]
+
+The messages of a domain will always be associated with a _message series_ of that domain, which e.g.
+defines the message ID naming and numbering scheme, etc. As an example, an "NW" domain might
+have separate message series for local and coastal navigational warnings.
+
+When applying the _Message Series_ filter, the user gets to select which message series of the current
+domain to show messages for.
+
+If a domain filter has been applied, as described in the previous section, the user can filter by the
+message series of that domain instead.
+
+==== Text Filter ====
+
+image::MessageFilterText.png[Text, 400]
+
+The _Text_ allows the user to filter across all textual contents of a message, i.e. message title,
+details, areas, categories, charts, ID, etc.
+
+The text filter supports a Google-like syntax, as described below:
+
+[cols="30,70",options="header"]
+|===
+|Type|Description
+
+|"light buoy"|Use quotes to filter on exact sentence matches.
+
+|+light -buoy|Use + for terms that must be included and - for terms that must be excluded.
+
+|Københa*|Use * for partial term matches.
+|===
+
+==== Type Filter ====
+
+image::MessageFilterType.png[Type, 400]
+
+The _Type_ filter allows the user to filter on one or more message types.
+
+If the current domain supports Navigational Warnings, the types include _Local_, _Coastal_,
+_Subarea_ and _Navarea_. Depending on the system configuration of the domain, only a subset
+of these types may be available.
+
+If the current domain supports Notices to Mariners, the types include _Preliminary_, _Temporary_,
+_Permanent_ and _Miscellaneous_. Depending on the system configuration of the domain, only a subset
+of these types may be available.
+
+==== Status Filter ====
+
+image::MessageFilterStatus.png[Status, 400]
+
+By default, the _Messages_ page will display all published (in-force) messages of the current domain.
+The _Status_ filter allows the user to select any combination of statuses to filter on.
+
+As an important security constraint, only users with the _editor_ (or _admin_ or _sysadmin_) role
+can filter on all statuses.
+
+Users with a _User_ role, or indeed, users that have not logged in, can only filter on public statuses,
+defined as either _Published_, _Cancelled_ or _Expired_.
+
+==== Tag Filter ====
+
+image::MessageFilterTag.png[Tag, 400]
+
+_Message Tags_ plays an important role Niord, as they may be used to persistently group sets of messages.
+A more detailed description can be found in the <<Message Tags>> section.
+
+The _Tags_ filter can be used to filter the search result to messages belonging to on one or more message tags.
+Clicking the image:TagButton.png[Tag, 20] button will open the Message Tag dialog, for easy selection of
+message tags.
+
+==== Publication Filter ====
+
+image::MessageFilterPublication.png[Publication, 400]
+
+Niord allows administrators to define _publications_ such as weekly Notices to Mariners digests.
+These publications are based on lists of messages. The _Publication_ filter thus allows the user
+to filter on messages belonging to one or more publications.
+
+==== User Filter ====
+
+image::MessageFilterUser.png[User, 400]
+
+The _User_ filter allows the user to filter messages on any of the registered users in Niord, and
+whether the selected user originally created a message, has ever updated a message, or indeed, is the
+last person to edit the message.
+
+==== Comments Filter ====
+
+image::MessageFilterComments.png[Comments, 400]
+
+The process of composing a new NW or NM message often involves multiple users that writes up the message
+and proof reads it. To aid this process, users may submit new _comments_ to a message,
+and acknowledge existing comments.
+
+The _Comments_ filter allows the user to filter on messages with different types of comments, such as
+comments that the user has submitted, unacknowledged comments, and unacknowledged comments by the current user.
+
+==== Reference Filter ====
+
+image::MessageFilterReference.png[Reference, 400]
+
+A message may be associated with a list of _references_ to other messages. The references are typed to
+indicate if the message e.g. represents a "cancellation" of the referenced message, an "updated repetition",
+and so forth.
+
+The _Reference_ filter allows the user to search messages by reference hierarchies. The filter consists of
+a _message ID_ field and a numeric _Level_ field.
+
+The message specified by the message ID will be the base message of the filter. With a level set to "0"
+only that particular message will be in the search result.
+
+If the level is "1", all messages directly referencing the base message or directly referenced from the base
+message will be included.
+
+If the level is "2", all messages referencing any of the level "1" messages or referenced from any of
+the level "1" messages will be included.
+
+And so forth...
+
+==== Chart Filter ====
+
+image::MessageFilterChart.png[Chart, 400]
+
+The _Chart_ filter allows the user to filter on messages that are associated with any of a list
+of sea charts.
+
+==== Area Filter ====
+
+image::MessageFilterArea.png[Area, 400]
+
+Areas are defined in a hierarchical tree by administrators.
+
+The _Area_ filter allows the user to filter on messages that are associated with any of a list
+of areas including sub-areas of the selected areas.
+
+==== Category Filter ====
+
+image::MessageFilterCategory.png[Category, 400]
+
+Categories are defined in a hierarchical tree by administrators.
+
+The _Category_ filter allows the user to filter on messages that are associated with any of a list
+of categories including sub-categories of the selected categories.
+
+==== Date Filter ====
+
+image::MessageFilterDate.png[Date, 400]
+
+The _Date_ filter allows the user to filter on date ranges.
+The date type menu has the following options:
+
+[cols="30,70",options="header"]
+|===
+|Date Type|Description
+
+|Publish Date|The publish date interval of a message must overlap the specified date interval.
+
+|Publish From|The message must have been published within the specified date interval.
+
+|Event Dates|The event date intervals of a message must overlap the specified date interval.
+
+|Created Date|The message must have been created within the specified date interval.
+
+|Last Updated Date|The message must have been last updated within the specified date interval.
+
+|===
+
+==== Clear Filter ====
+
+The _Clear Filter_ function of the _Filter_ menu will clear any current filter.
+
+
+==== Save Filter ====
+
+The _Save Filter_ function of the _Filter_ menu will allow the user to save often-used filter
+combinations.
+
+These saved filters will appear at the top of the _Filter_ menu for easy access.
+
 
 === Message Actions
 
+TBD
+
 === Message Details
 
+TBD
+
+=== Message Tags
+
+TBD
