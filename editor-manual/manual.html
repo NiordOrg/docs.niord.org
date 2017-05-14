@@ -536,9 +536,29 @@ table.CodeRay td.code>pre{padding:0}
 </ul>
 </li>
 <li><a href="#message-selection">4.2. Message Selection</a></li>
-<li><a href="#message-filtering">4.3. Message Filtering</a></li>
+<li><a href="#message-filtering">4.3. Message Filtering</a>
+<ul class="sectlevel3">
+<li><a href="#domain-filter">4.3.1. Domain Filter</a></li>
+<li><a href="#message-series-filter">4.3.2. Message Series Filter</a></li>
+<li><a href="#text-filter">4.3.3. Text Filter</a></li>
+<li><a href="#type-filter">4.3.4. Type Filter</a></li>
+<li><a href="#status-filter">4.3.5. Status Filter</a></li>
+<li><a href="#tag-filter">4.3.6. Tag Filter</a></li>
+<li><a href="#publication-filter">4.3.7. Publication Filter</a></li>
+<li><a href="#user-filter">4.3.8. User Filter</a></li>
+<li><a href="#comments-filter">4.3.9. Comments Filter</a></li>
+<li><a href="#reference-filter">4.3.10. Reference Filter</a></li>
+<li><a href="#chart-filter">4.3.11. Chart Filter</a></li>
+<li><a href="#area-filter">4.3.12. Area Filter</a></li>
+<li><a href="#category-filter">4.3.13. Category Filter</a></li>
+<li><a href="#date-filter">4.3.14. Date Filter</a></li>
+<li><a href="#clear-filter">4.3.15. Clear Filter</a></li>
+<li><a href="#save-filter">4.3.16. Save Filter</a></li>
+</ul>
+</li>
 <li><a href="#message-actions">4.4. Message Actions</a></li>
 <li><a href="#message-details">4.5. Message Details</a></li>
+<li><a href="#message-tags">4.6. Message Tags</a></li>
 </ul>
 </li>
 </ul>
@@ -868,15 +888,362 @@ These actions are detailed in the <a href="#message-actions">Message Actions</a>
 </div>
 <div class="sect2">
 <h3 id="message-filtering"><a class="anchor" href="#message-filtering"></a><a class="link" href="#message-filtering">4.3. Message Filtering</a></h3>
-
+<div class="paragraph">
+<p>When a user first enters the <em>Messages</em> page, the default set of messages being displayed consists
+of all published (in-force) messages associated with the currently selected domain.</p>
+</div>
+<div class="paragraph">
+<p>The way to search for other types of messages is by applying a combination of message filters,
+available from the <em>Filter</em> menu:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/MessageFiltering.png" alt="Message Filtering" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Whenever a message filter is updated, the resulting list of messages will automatically be updated,
+and also, the address (URL) of the browser will be updated, so that you can in effect bookmark a specific
+message filter.</p>
+</div>
+<div class="paragraph">
+<p>The filters will be detailed individually below.</p>
+</div>
+<div class="sect3">
+<h4 id="domain-filter"><a class="anchor" href="#domain-filter"></a><a class="link" href="#domain-filter">4.3.1. Domain Filter</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/MessageFilterDomain.png" alt="Domain Filter" width="240">
+</div>
+</div>
+<div class="paragraph">
+<p>The <em>Domain</em> filter allows the user to search messages of a different domain without switching the current
+domain. This is very useful, if you e.g. wish to base a new Notice to Mariner on an existing
+Navigational Warning.</p>
+</div>
+<div class="paragraph">
+<p>As an important security constraint, when filtering on messages from a different domain is that only
+public messages will be included in the search result.
+Public messages are those whose status are either <em>Published</em>, <em>Cancelled</em> or <em>Expired</em>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="message-series-filter"><a class="anchor" href="#message-series-filter"></a><a class="link" href="#message-series-filter">4.3.2. Message Series Filter</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/MessageFilterSeries.png" alt="Mesage Series" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>The messages of a domain will always be associated with a <em>message series</em> of that domain, which e.g.
+defines the message ID naming and numbering scheme, etc. As an example, an "NW" domain might
+have separate message series for local and coastal navigational warnings.</p>
+</div>
+<div class="paragraph">
+<p>When applying the <em>Message Series</em> filter, the user gets to select which message series of the current
+domain to show messages for.</p>
+</div>
+<div class="paragraph">
+<p>If a domain filter has been applied, as described in the previous section, the user can filter by the
+message series of that domain instead.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="text-filter"><a class="anchor" href="#text-filter"></a><a class="link" href="#text-filter">4.3.3. Text Filter</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/MessageFilterText.png" alt="Text" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>The <em>Text</em> allows the user to filter across all textual contents of a message, i.e. message title,
+details, areas, categories, charts, ID, etc.</p>
+</div>
+<div class="paragraph">
+<p>The text filter supports a Google-like syntax, as described below:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"light buoy"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use quotes to filter on exact sentence matches.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">+light -buoy</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use + for terms that must be included and - for terms that must be excluded.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Københa*</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use * for partial term matches.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="type-filter"><a class="anchor" href="#type-filter"></a><a class="link" href="#type-filter">4.3.4. Type Filter</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/MessageFilterType.png" alt="Type" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>The <em>Type</em> filter allows the user to filter on one or more message types.</p>
+</div>
+<div class="paragraph">
+<p>If the current domain supports Navigational Warnings, the types include <em>Local</em>, <em>Coastal</em>,
+<em>Subarea</em> and <em>Navarea</em>. Depending on the system configuration of the domain, only a subset
+of these types may be available.</p>
+</div>
+<div class="paragraph">
+<p>If the current domain supports Notices to Mariners, the types include <em>Preliminary</em>, <em>Temporary</em>,
+<em>Permanent</em> and <em>Miscellaneous</em>. Depending on the system configuration of the domain, only a subset
+of these types may be available.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="status-filter"><a class="anchor" href="#status-filter"></a><a class="link" href="#status-filter">4.3.5. Status Filter</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/MessageFilterStatus.png" alt="Status" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>By default, the <em>Messages</em> page will display all published (in-force) messages of the current domain.
+The <em>Status</em> filter allows the user to select any combination of statuses to filter on.</p>
+</div>
+<div class="paragraph">
+<p>As an important security constraint, only users with the <em>editor</em> (or <em>admin</em> or <em>sysadmin</em>) role
+can filter on all statuses.</p>
+</div>
+<div class="paragraph">
+<p>Users with a <em>User</em> role, or indeed, users that have not logged in, can only filter on public statuses,
+defined as either <em>Published</em>, <em>Cancelled</em> or <em>Expired</em>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="tag-filter"><a class="anchor" href="#tag-filter"></a><a class="link" href="#tag-filter">4.3.6. Tag Filter</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/MessageFilterTag.png" alt="Tag" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Message Tags</em> plays an important role Niord, as they may be used to persistently group sets of messages.
+A more detailed description can be found in the <a href="#message-tags">Message Tags</a> section.</p>
+</div>
+<div class="paragraph">
+<p>The <em>Tags</em> filter can be used to filter the search result to messages belonging to on one or more message tags.
+Clicking the <span class="image"><img src="images/TagButton.png" alt="Tag" width="20"></span> button will open the Message Tag dialog, for easy selection of
+message tags.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="publication-filter"><a class="anchor" href="#publication-filter"></a><a class="link" href="#publication-filter">4.3.7. Publication Filter</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/MessageFilterPublication.png" alt="Publication" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>Niord allows administrators to define <em>publications</em> such as weekly Notices to Mariners digests.
+These publications are based on lists of messages. The <em>Publication</em> filter thus allows the user
+to filter on messages belonging to one or more publications.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="user-filter"><a class="anchor" href="#user-filter"></a><a class="link" href="#user-filter">4.3.8. User Filter</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/MessageFilterUser.png" alt="User" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>The <em>User</em> filter allows the user to filter messages on any of the registered users in Niord, and
+whether the selected user originally created a message, has ever updated a message, or indeed, is the
+last person to edit the message.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="comments-filter"><a class="anchor" href="#comments-filter"></a><a class="link" href="#comments-filter">4.3.9. Comments Filter</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/MessageFilterComments.png" alt="Comments" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>The process of composing a new NW or NM message often involves multiple users that writes up the message
+and proof reads it. To aid this process, users may submit new <em>comments</em> to a message,
+and acknowledge existing comments.</p>
+</div>
+<div class="paragraph">
+<p>The <em>Comments</em> filter allows the user to filter on messages with different types of comments, such as
+comments that the user has submitted, unacknowledged comments, and unacknowledged comments by the current user.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="reference-filter"><a class="anchor" href="#reference-filter"></a><a class="link" href="#reference-filter">4.3.10. Reference Filter</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/MessageFilterReference.png" alt="Reference" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>A message may be associated with a list of <em>references</em> to other messages. The references are typed to
+indicate if the message e.g. represents a "cancellation" of the referenced message, an "updated repetition",
+and so forth.</p>
+</div>
+<div class="paragraph">
+<p>The <em>Reference</em> filter allows the user to search messages by reference hierarchies. The filter consists of
+a <em>message ID</em> field and a numeric <em>Level</em> field.</p>
+</div>
+<div class="paragraph">
+<p>The message specified by the message ID will be the base message of the filter. With a level set to "0"
+only that particular message will be in the search result.</p>
+</div>
+<div class="paragraph">
+<p>If the level is "1", all messages directly referencing the base message or directly referenced from the base
+message will be included.</p>
+</div>
+<div class="paragraph">
+<p>If the level is "2", all messages referencing any of the level "1" messages or referenced from any of
+the level "1" messages will be included.</p>
+</div>
+<div class="paragraph">
+<p>And so forth&#8230;&#8203;</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="chart-filter"><a class="anchor" href="#chart-filter"></a><a class="link" href="#chart-filter">4.3.11. Chart Filter</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/MessageFilterChart.png" alt="Chart" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>The <em>Chart</em> filter allows the user to filter on messages that are associated with any of a list
+of sea charts.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="area-filter"><a class="anchor" href="#area-filter"></a><a class="link" href="#area-filter">4.3.12. Area Filter</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/MessageFilterArea.png" alt="Area" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>Areas are defined in a hierarchical tree by administrators.</p>
+</div>
+<div class="paragraph">
+<p>The <em>Area</em> filter allows the user to filter on messages that are associated with any of a list
+of areas including sub-areas of the selected areas.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="category-filter"><a class="anchor" href="#category-filter"></a><a class="link" href="#category-filter">4.3.13. Category Filter</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/MessageFilterCategory.png" alt="Category" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>Categories are defined in a hierarchical tree by administrators.</p>
+</div>
+<div class="paragraph">
+<p>The <em>Category</em> filter allows the user to filter on messages that are associated with any of a list
+of categories including sub-categories of the selected categories.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="date-filter"><a class="anchor" href="#date-filter"></a><a class="link" href="#date-filter">4.3.14. Date Filter</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/MessageFilterDate.png" alt="Date" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>The <em>Date</em> filter allows the user to filter on date ranges.
+The date type menu has the following options:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Date Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Publish Date</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The publish date interval of a message must overlap the specified date interval.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Publish From</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The message must have been published within the specified date interval.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Event Dates</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The event date intervals of a message must overlap the specified date interval.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Created Date</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The message must have been created within the specified date interval.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Last Updated Date</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The message must have been last updated within the specified date interval.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="clear-filter"><a class="anchor" href="#clear-filter"></a><a class="link" href="#clear-filter">4.3.15. Clear Filter</a></h4>
+<div class="paragraph">
+<p>The <em>Clear Filter</em> function of the <em>Filter</em> menu will clear any current filter.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="save-filter"><a class="anchor" href="#save-filter"></a><a class="link" href="#save-filter">4.3.16. Save Filter</a></h4>
+<div class="paragraph">
+<p>The <em>Save Filter</em> function of the <em>Filter</em> menu will allow the user to save often-used filter
+combinations.</p>
+</div>
+<div class="paragraph">
+<p>These saved filters will appear at the top of the <em>Filter</em> menu for easy access.</p>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="message-actions"><a class="anchor" href="#message-actions"></a><a class="link" href="#message-actions">4.4. Message Actions</a></h3>
-
+<div class="paragraph">
+<p>TBD</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="message-details"><a class="anchor" href="#message-details"></a><a class="link" href="#message-details">4.5. Message Details</a></h3>
-
+<div class="paragraph">
+<p>TBD</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="message-tags"><a class="anchor" href="#message-tags"></a><a class="link" href="#message-tags">4.6. Message Tags</a></h3>
+<div class="paragraph">
+<p>TBD</p>
+</div>
 </div>
 </div>
 </div>
