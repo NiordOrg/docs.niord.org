@@ -556,7 +556,24 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#save-filter">4.3.16. Save Filter</a></li>
 </ul>
 </li>
-<li><a href="#message-actions">4.4. Message Actions</a></li>
+<li><a href="#message-actions">4.4. Message Actions</a>
+<ul class="sectlevel3">
+<li><a href="#print-action">4.4.1. Print Action</a></li>
+<li><a href="#print-selection-action">4.4.2. Print Selection Action</a></li>
+<li><a href="#e-mail-selection-action">4.4.3. E-mail Selection Action</a></li>
+<li><a href="#add-selection-to-tag-action">4.4.4. Add Selection to Tag Action</a></li>
+<li><a href="#remove-selection-from-tag-action">4.4.5. Remove Selection from Tag Action</a></li>
+<li><a href="#select-all-action">4.4.6. Select All Action</a></li>
+<li><a href="#clear-selection-action">4.4.7. Clear Selection Action</a></li>
+<li><a href="#compare-action">4.4.8. Compare Action</a></li>
+<li><a href="#export-action">4.4.9. Export Action</a></li>
+<li><a href="#export-selection-action">4.4.10. Export Selection Action</a></li>
+<li><a href="#import-action">4.4.11. Import Action</a></li>
+<li><a href="#update-selection-status-action">4.4.12. Update Selection Status Action</a></li>
+<li><a href="#sort-area-action">4.4.13. Sort Area Action</a></li>
+<li><a href="#message-list-sort-selection">4.4.14. Message List Sort Selection</a></li>
+</ul>
+</li>
 <li><a href="#message-details">4.5. Message Details</a></li>
 <li><a href="#message-tags">4.6. Message Tags</a></li>
 </ul>
@@ -1230,7 +1247,318 @@ combinations.</p>
 <div class="sect2">
 <h3 id="message-actions"><a class="anchor" href="#message-actions"></a><a class="link" href="#message-actions">4.4. Message Actions</a></h3>
 <div class="paragraph">
-<p>TBD</p>
+<p>The <em>Action</em> menu lists the operations that can be performed on the current list of messages, or the
+current selection of messages.</p>
+</div>
+<div class="paragraph">
+<p>The number of actions present in the menu depends on whether any messages are currently selected, and
+whether the user is an editor or administrator.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/MessageActions.png" alt="Message Actions" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The actions will be detailed individually below.</p>
+</div>
+<div class="sect3">
+<h4 id="print-action"><a class="anchor" href="#print-action"></a><a class="link" href="#print-action">4.4.1. Print Action</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/PrintDialog.png" alt="Print Dialog" width="300">
+</div>
+</div>
+<div class="paragraph">
+<p>Enacting "Print&#8230;&#8203;" will print the current message list. The print dialog allows
+the user to adjust page size and direction.</p>
+</div>
+<div class="paragraph">
+<p>More importantly, it allows the user to select a print report from the <em>Report</em> menu.
+The set of available reports and their design is configured by a system administrator
+on a per-domain basis.</p>
+</div>
+<div class="paragraph">
+<p>All domains include a "Standard" and a "Draft" report. The "Standard" report will print all
+details of the messages. The "Draft" report will print all language variants of all
+messages including additional fields, that makes the report useful for e.g. proof
+reading messages.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, a domain for Notices to Mariners will typically include reports for
+printing the NM list as a weekly NM digest, and a report for printing the
+active T&amp;P messages.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="print-selection-action"><a class="anchor" href="#print-selection-action"></a><a class="link" href="#print-selection-action">4.4.2. Print Selection Action</a></h4>
+<div class="paragraph">
+<p>Similar to the <a href="#print-action">Print Action</a>, except that only the current selection of messages get printed.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="e-mail-selection-action"><a class="anchor" href="#e-mail-selection-action"></a><a class="link" href="#e-mail-selection-action">4.4.3. E-mail Selection Action</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/MailDialog.png" alt="Email Dialog" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>The <em>E-mail Selection</em> action is only available when one or more messages have been selected.
+A dialog will prompt the user to fill out the recipient, email subject and an optional message
+to the recipients.</p>
+</div>
+<div class="paragraph">
+<p>When clicking <em>Send Mail</em>, a mail is constructed and sent along, that contains the details
+of the currently selected messages.</p>
+</div>
+<div class="paragraph">
+<p>The function can be useful when e.g. following up on the work described in a Notice to Mariner.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="add-selection-to-tag-action"><a class="anchor" href="#add-selection-to-tag-action"></a><a class="link" href="#add-selection-to-tag-action">4.4.4. Add Selection to Tag Action</a></h4>
+<div class="paragraph">
+<p>The <em>Add Selection to Tag</em> action is only available when one or more messages have been selected.</p>
+</div>
+<div class="paragraph">
+<p>It will open the Message Tag Dialog and allow the user to select a message tag the
+currently selected messages should be added to.</p>
+</div>
+<div class="paragraph">
+<p>Message Tags are described in detail in the <a href="#message-tags">Message Tags</a> section.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="remove-selection-from-tag-action"><a class="anchor" href="#remove-selection-from-tag-action"></a><a class="link" href="#remove-selection-from-tag-action">4.4.5. Remove Selection from Tag Action</a></h4>
+<div class="paragraph">
+<p>The <em>Remove Selection from Tag</em> action is only available when one or more messages have been selected.</p>
+</div>
+<div class="paragraph">
+<p>It will open the Message Tag Dialog and allow the user to select a message tag the
+currently selected messages should be removed from.</p>
+</div>
+<div class="paragraph">
+<p>Message Tags are described in detail in the <a href="#message-tags">Message Tags</a> section.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="select-all-action"><a class="anchor" href="#select-all-action"></a><a class="link" href="#select-all-action">4.4.6. Select All Action</a></h4>
+<div class="paragraph">
+<p>Will select all messages in the message list. Please refer to the <a href="#message-selection">Message Selection</a> section.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="clear-selection-action"><a class="anchor" href="#clear-selection-action"></a><a class="link" href="#clear-selection-action">4.4.7. Clear Selection Action</a></h4>
+<div class="paragraph">
+<p>Will clear the current message selection. Please refer to the <a href="#message-selection">Message Selection</a> section.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="compare-action"><a class="anchor" href="#compare-action"></a><a class="link" href="#compare-action">4.4.8. Compare Action</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/ComparisonDialog.png" alt="Message Comparison Dialog" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The <em>Compare</em> action is only available when precisely two messages have been selected.</p>
+</div>
+<div class="paragraph">
+<p>The <em>Message 1</em> and <em>Message 2</em> fields allows the user to specify the ID of the two messages
+to compare. The ID may either be the <em>short ID</em> of the message (e.g. "NM-077-16") or
+the UID of the message (a system-specific UID that all messages have,
+even unpublished messages).</p>
+</div>
+<div class="paragraph">
+<p>Next, the user may toggle between which language variant to compare.</p>
+</div>
+<div class="paragraph">
+<p>By default, the details of the two selected messages are displayed side-by-side (see above).
+Alternatively, the user can choose to display the textual changes between the messages:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ComparisonDialogChanges.png" alt="Message Comparison Changes" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>Colour-coding is used to flag additions (green) a deletions (red) between the two messages.</p>
+</div>
+<div class="paragraph">
+<p>Lastly, the use can choose to inspect the changes of the underlying message data:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ComparisonDialogData.png" alt="Message Comparison Data" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>The data-comparison function is somewhat specialized, but also incredible useful, and
+targeted advanced users. Color coding is again applied to flag changed data (yellow),
+added data (green) and removed data (red) between the two messages.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="export-action"><a class="anchor" href="#export-action"></a><a class="link" href="#export-action">4.4.9. Export Action</a></h4>
+<div class="paragraph">
+<p>Enacting the <em>Export</em> action, will export the current message list as a zip-archive.
+The exported zip-archive has a format that is compatible with the <em>Import</em> function
+which is only available to administrators.</p>
+</div>
+<div class="paragraph">
+<p>The exported data will include any files attached to the messages (used primarily by
+Notices to Mariners).</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="export-selection-action"><a class="anchor" href="#export-selection-action"></a><a class="link" href="#export-selection-action">4.4.10. Export Selection Action</a></h4>
+<div class="paragraph">
+<p>The <em>Export Selection</em> action is analogous to the <a href="#export-action">Export Action</a> except that
+it only exports the currently selected list of messages.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="import-action"><a class="anchor" href="#import-action"></a><a class="link" href="#import-action">4.4.11. Import Action</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/ImportDialog.png" alt="Message Import Dialog" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>The <em>Import</em> action is only available to administrators, as it is quite advanced and disruptive.
+It imports a zip-archive, as generated by the <a href="#export-action">Export Action</a>.</p>
+</div>
+<div class="paragraph">
+<p>The Import dialog options allows the administrator to adjust the behaviour of the import.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Setting</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UID Handling</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Either choose to assign new UIDs to the imported messages or preserve the UID of
+the imported messages, but ignore messages that have UIDs that already exist in the system.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status Handling</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Either force all imported messages to have a <em>Draft</em> status, or preserve
+their exported status.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Base Data Handling</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the imported messages reference base data (e.g. areas, categories or
+sea charts) that does not exist in the system, either create the base data, or ignore it.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Message Series Handling</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Either choose to preserve the message series of an imported message
+(if it is valid for the current domain), or force imported messages to use the
+specified message series.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tag</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If a message tag is specified, all imported messages will be assigned to it.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="update-selection-status-action"><a class="anchor" href="#update-selection-status-action"></a><a class="link" href="#update-selection-status-action">4.4.12. Update Selection Status Action</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/StatusUpdateDialog.png" alt="Status Update Dialog" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The <em>Update Selection Status</em> action is only available to administrators, and only if one or more
+messages have been selected.</p>
+</div>
+<div class="paragraph">
+<p>The operation allows the administrator to perform bulk-updates of message statuses, that
+you can normally only perform message-by-message on the Editor Status page.</p>
+</div>
+<div class="paragraph">
+<p>For all the selected messages, there is a <em>New Status</em> menu where the administrator can select
+any of the valid status transitions.</p>
+</div>
+<div class="paragraph">
+<p>All status changes are applied when the "Save Changes" button is clicked.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="sort-area-action"><a class="anchor" href="#sort-area-action"></a><a class="link" href="#sort-area-action">4.4.13. Sort Area Action</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/SortMessagesDialog.png" alt="Sort Messages by Area Dialog" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The <em>Sort Area</em> action allows the user to sort perform fine-grained persistent sorting
+of the messages of a certain area.</p>
+</div>
+<div class="paragraph">
+<p>An alternative way of accessing the <em>Sort Area</em> dialog is by clicking the "Sort&#8230;&#8203;" link
+next to the area name in the message list (when the messages area sorted by area):</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SortAreaLink.png" alt="Sort Messages by Area Link" width="300">
+</div>
+</div>
+<div class="paragraph">
+<p>The sorting of messages by area is a fairly advanced topic. By default, messages adheres to
+the sorting of the area tree, as defined by an administrator:</p>
+</div>
+<div class="imageblock" style="float: left">
+<div class="content">
+<img src="images/AreaTree.png" alt="Sample Area Tree" width="200">
+</div>
+</div>
+<div class="paragraph">
+<p>In this example, "Denmark" is sorted before "Faroe Islands", and within "Denmark", "The Baltic Sea"
+is sorted before "The Sound", etc.</p>
+</div>
+<div class="paragraph">
+<p>However, it is possible to adjust this sorting administratively. So, for instance, all messages
+associated with "The Baltic Sea" or any of its sub-areas will be sorted clockwise around
+the position 54° 30&#8217;N - 012° 00&#8217;E starting at a bearing of 180°.</p>
+</div>
+<div class="paragraph">
+<p>Similarly, all messages associated with "The Sound" or any of its sub-areas will be
+sorted North-to-South.</p>
+</div>
+<div class="paragraph">
+<p>And so forth&#8230;&#8203;</p>
+</div>
+<div class="paragraph">
+<p>This default sorting of messages by area can then be overridden by using the <em>Sort Area</em> action.
+Once an area has been selected, all the messages of the area can be re-arranged by dragging a
+message to its proper position using the <span class="image"><img src="images/DragHandle.png" alt="Drag Handle" width="20"></span> drag handle.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="message-list-sort-selection"><a class="anchor" href="#message-list-sort-selection"></a><a class="link" href="#message-list-sort-selection">4.4.14. Message List Sort Selection</a></h4>
+<div class="paragraph">
+<p>The last four items of the <em>Action</em> menu let the user select which message field to sort by.
+This include: <em>Area</em>, <em>ID</em>, <em>Event Dates</em>, <em>Publish Date</em> and <em>Follow-up Date</em>.</p>
+</div>
+<div class="paragraph">
+<p>Choosing the same sort field multiple times, will toggle between ascending and descending order.</p>
+</div>
+<div class="paragraph">
+<p>A small arrow will indicate the current sort field and whether ascending or descending order
+is used.</p>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1250,7 +1578,7 @@ combinations.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-05-13 14:22:48 CEST
+Last updated 2017-05-15 07:29:10 CEST
 </div>
 </div>
 <script type="text/x-mathjax-config">

@@ -285,7 +285,209 @@ These saved filters will appear at the top of the _Filter_ menu for easy access.
 
 === Message Actions
 
-TBD
+The _Action_ menu lists the operations that can be performed on the current list of messages, or the
+current selection of messages.
+
+The number of actions present in the menu depends on whether any messages are currently selected, and
+whether the user is an editor or administrator.
+
+image::MessageActions.png[Message Actions, 600]
+
+The actions will be detailed individually below.
+
+
+==== Print Action ====
+
+image::PrintDialog.png[Print Dialog, 300]
+
+Enacting "Print..." will print the current message list. The print dialog allows
+the user to adjust page size and direction.
+
+More importantly, it allows the user to select a print report from the _Report_ menu.
+The set of available reports and their design is configured by a system administrator
+on a per-domain basis.
+
+All domains include a "Standard" and a "Draft" report. The "Standard" report will print all
+details of the messages. The "Draft" report will print all language variants of all
+messages including additional fields, that makes the report useful for e.g. proof
+reading messages.
+
+Additionally, a domain for Notices to Mariners will typically include reports for
+printing the NM list as a weekly NM digest, and a report for printing the
+active T&P messages.
+
+==== Print Selection Action ====
+
+Similar to the <<Print Action>>, except that only the current selection of messages get printed.
+
+==== E-mail Selection Action ====
+
+image::MailDialog.png[Email Dialog, 400]
+
+The _E-mail Selection_ action is only available when one or more messages have been selected.
+A dialog will prompt the user to fill out the recipient, email subject and an optional message
+to the recipients.
+
+When clicking _Send Mail_, a mail is constructed and sent along, that contains the details
+of the currently selected messages.
+
+The function can be useful when e.g. following up on the work described in a Notice to Mariner.
+
+==== Add Selection to Tag Action ====
+
+The _Add Selection to Tag_ action is only available when one or more messages have been selected.
+
+It will open the Message Tag Dialog and allow the user to select a message tag the
+currently selected messages should be added to.
+
+Message Tags are described in detail in the <<Message Tags>> section.
+
+==== Remove Selection from Tag Action ====
+
+The _Remove Selection from Tag_ action is only available when one or more messages have been selected.
+
+It will open the Message Tag Dialog and allow the user to select a message tag the
+currently selected messages should be removed from.
+
+Message Tags are described in detail in the <<Message Tags>> section.
+
+==== Select All Action ====
+
+Will select all messages in the message list. Please refer to the <<Message Selection>> section.
+
+==== Clear Selection Action ====
+
+Will clear the current message selection. Please refer to the <<Message Selection>> section.
+
+==== Compare Action ====
+
+image::ComparisonDialog.png[Message Comparison Dialog, 600]
+
+The _Compare_ action is only available when precisely two messages have been selected.
+
+The _Message 1_ and _Message 2_ fields allows the user to specify the ID of the two messages
+to compare. The ID may either be the _short ID_ of the message (e.g. "NM-077-16") or
+the UID of the message (a system-specific UID that all messages have,
+even unpublished messages).
+
+Next, the user may toggle between which language variant to compare.
+
+By default, the details of the two selected messages are displayed side-by-side (see above).
+Alternatively, the user can choose to display the textual changes between the messages:
+
+image::ComparisonDialogChanges.png[Message Comparison Changes, 500]
+
+Colour-coding is used to flag additions (green) a deletions (red) between the two messages.
+
+Lastly, the use can choose to inspect the changes of the underlying message data:
+
+image::ComparisonDialogData.png[Message Comparison Data, 500]
+
+The data-comparison function is somewhat specialized, but also incredible useful, and
+targeted advanced users. Color coding is again applied to flag changed data (yellow),
+added data (green) and removed data (red) between the two messages.
+
+==== Export Action ====
+
+Enacting the _Export_ action, will export the current message list as a zip-archive.
+The exported zip-archive has a format that is compatible with the _Import_ function
+which is only available to administrators.
+
+The exported data will include any files attached to the messages (used primarily by
+Notices to Mariners).
+
+==== Export Selection Action ====
+
+The _Export Selection_ action is analogous to the <<Export Action>> except that
+it only exports the currently selected list of messages.
+
+==== Import Action ====
+
+image::ImportDialog.png[Message Import Dialog, 400]
+
+The _Import_ action is only available to administrators, as it is quite advanced and disruptive.
+It imports a zip-archive, as generated by the <<Export Action>>.
+
+The Import dialog options allows the administrator to adjust the behaviour of the import.
+
+[cols="30,70",options="header"]
+|===
+|Setting|Description
+
+|UID Handling | Either choose to assign new UIDs to the imported messages or preserve the UID of
+the imported messages, but ignore messages that have UIDs that already exist in the system.
+
+|Status Handling | Either force all imported messages to have a _Draft_ status, or preserve
+their exported status.
+
+|Base Data Handling | If the imported messages reference base data (e.g. areas, categories or
+sea charts) that does not exist in the system, either create the base data, or ignore it.
+
+|Message Series Handling | Either choose to preserve the message series of an imported message
+(if it is valid for the current domain), or force imported messages to use the
+specified message series.
+
+|Tag | If a message tag is specified, all imported messages will be assigned to it.
+
+|===
+
+==== Update Selection Status Action ====
+
+image::StatusUpdateDialog.png[Status Update Dialog, 600]
+
+The _Update Selection Status_ action is only available to administrators, and only if one or more
+messages have been selected.
+
+The operation allows the administrator to perform bulk-updates of message statuses, that
+you can normally only perform message-by-message on the Editor Status page.
+
+For all the selected messages, there is a _New Status_ menu where the administrator can select
+any of the valid status transitions.
+
+All status changes are applied when the "Save Changes" button is clicked.
+
+==== Sort Area Action ====
+
+image::SortMessagesDialog.png[Sort Messages by Area Dialog, 600]
+
+The _Sort Area_ action allows the user to sort perform fine-grained persistent sorting
+of the messages of a certain area.
+
+An alternative way of accessing the _Sort Area_ dialog is by clicking the "Sort..." link
+next to the area name in the message list (when the messages area sorted by area):
+
+image::SortAreaLink.png[Sort Messages by Area Link, 300]
+
+The sorting of messages by area is a fairly advanced topic. By default, messages adheres to
+the sorting of the area tree, as defined by an administrator:
+
+image::AreaTree.png[Sample Area Tree, 200, float=left]
+
+In this example, "Denmark" is sorted before "Faroe Islands", and within "Denmark", "The Baltic Sea"
+is sorted before "The Sound", etc.
+
+However, it is possible to adjust this sorting administratively. So, for instance, all messages
+associated with "The Baltic Sea" or any of its sub-areas will be sorted clockwise around
+the position 54° 30'N - 012° 00'E starting at a bearing of 180°.
+
+Similarly, all messages associated with "The Sound" or any of its sub-areas will be
+sorted North-to-South.
+
+And so forth...
+
+This default sorting of messages by area can then be overridden by using the _Sort Area_ action.
+Once an area has been selected, all the messages of the area can be re-arranged by dragging a
+message to its proper position using the image:DragHandle.png[Drag Handle, 20] drag handle.
+
+==== Message List Sort Selection ====
+
+The last four items of the _Action_ menu let the user select which message field to sort by.
+This include: _Area_, _ID_, _Event Dates_, _Publish Date_ and _Follow-up Date_.
+
+Choosing the same sort field multiple times, will toggle between ascending and descending order.
+
+A small arrow will indicate the current sort field and whether ascending or descending order
+is used.
 
 === Message Details
 
