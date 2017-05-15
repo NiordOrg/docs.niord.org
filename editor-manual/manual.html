@@ -1055,13 +1055,13 @@ defined as either <em>Published</em>, <em>Cancelled</em> or <em>Expired</em>.</p
 </div>
 </div>
 <div class="paragraph">
-<p><em>Message Tags</em> plays an important role Niord, as they may be used to persistently group sets of messages.
-A more detailed description can be found in the <a href="#message-tags">Message Tags</a> section.</p>
+<p><em>Message Tags</em> plays an important role in Niord, as they may be used to persistently group
+sets of messages. A more detailed description can be found in the <a href="#message-tags">Message Tags</a> section.</p>
 </div>
 <div class="paragraph">
 <p>The <em>Tags</em> filter can be used to filter the search result to messages belonging to on one or more message tags.
-Clicking the <span class="image"><img src="images/TagButton.png" alt="Tag" width="20"></span> button will open the Message Tag dialog, for easy selection of
-message tags.</p>
+Clicking the <span class="image"><img src="images/TagButton.png" alt="Tag" width="20"></span> button will open the Message Tag dialog,
+for easy selection of message tags.</p>
 </div>
 </div>
 <div class="sect3">
@@ -1563,14 +1563,68 @@ is used.</p>
 </div>
 <div class="sect2">
 <h3 id="message-details"><a class="anchor" href="#message-details"></a><a class="link" href="#message-details">4.5. Message Details</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/MessageDetailsDialog.png" alt="Message Details Dialog" width="600">
+</div>
+</div>
 <div class="paragraph">
-<p>TBD</p>
+<p>Messages on the <em>Messages</em> page can be inspected in the <em>Message Details Dialog</em>.</p>
+</div>
+<div class="paragraph">
+<p>Depending on the current view mode, the user clicks the message title, the message thumbnail icon,
+or the message map symbol to open the details dialog.</p>
+</div>
+<div class="paragraph">
+<p>In the top of the details dialog, the user can inspect the message positions and areas on a map.
+Below that, the textual details of the message is presented.
+Bottommost, a row of buttons allows the user to navigate the previous/next message in the list,
+to select or de-select the message, and an action menu with message-specific actions.</p>
+</div>
+<div class="paragraph">
+<p>If the user clicks on a referenced message in the message details, the clicked message will be
+presented instead, and the previous/next navigation buttons will change to a "Back" history button.</p>
+</div>
+<div class="paragraph">
+<p>The <em>Action</em> menu will contain <em>Edit</em> and <em>Copy</em> actions, along with some of the actions detailed
+in the <em>Message Actions</em> section that are message specific.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="message-tags"><a class="anchor" href="#message-tags"></a><a class="link" href="#message-tags">4.6. Message Tags</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/MessageTagsDialog.png" alt="Message Tags Dialog" width="600">
+</div>
+</div>
 <div class="paragraph">
-<p>TBD</p>
+<p><em>Message Tags</em> plays an important role in Niord, as they may be used to persistently group
+and name sets of messages.</p>
+</div>
+<div class="paragraph">
+<p>The <em>Message Tags</em> are used many places, such as in the <a href="#tag-filter">Tag Filter</a>, the <a href="#import-action">Import Action</a> and
+the Publications maintained by administrators.
+Everywhere tags can be selected, the user may click the <span class="image"><img src="images/TagButton.png" alt="Tag" width="20"></span>
+button to open the Message Tag dialog.</p>
+</div>
+<div class="paragraph">
+<p>Message tags can be either <em>Private</em>, <em>Domain</em>-specific or <em>Public</em>. The <em>Private</em> tags
+can only be managed and used by the user that created them, the <em>Domain</em> tags can be
+maintained and used within the domain they belong to, and the <em>Public</em> tags are available
+to all domains.</p>
+</div>
+<div class="paragraph">
+<p>Tags can also be time-limited. When the user creates a new tag, she can specify an expiry
+date of the tag, after which, the tag (but not the associated messages) will be deleted
+automatically.</p>
+</div>
+<div class="paragraph">
+<p>Furthermore, a message tag can be locked or unlocked.
+As an example, the message tag used to group the NM messages of a weekly
+Notices to Mariners publications should not be modified once the the digest has been published.
+Hence, editors should not be allowed to add or remove messages to and from the message tag.
+And this will be prevented by locking the message tag.
+Only administrators can unlock a locked message tag.</p>
 </div>
 </div>
 </div>

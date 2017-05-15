@@ -166,12 +166,12 @@ defined as either _Published_, _Cancelled_ or _Expired_.
 
 image::MessageFilterTag.png[Tag, 400]
 
-_Message Tags_ plays an important role Niord, as they may be used to persistently group sets of messages.
-A more detailed description can be found in the <<Message Tags>> section.
+_Message Tags_ plays an important role in Niord, as they may be used to persistently group
+sets of messages. A more detailed description can be found in the <<Message Tags>> section.
 
 The _Tags_ filter can be used to filter the search result to messages belonging to on one or more message tags.
-Clicking the image:TagButton.png[Tag, 20] button will open the Message Tag dialog, for easy selection of
-message tags.
+Clicking the image:TagButton.png[Tag, 20] button will open the Message Tag dialog,
+for easy selection of message tags.
 
 ==== Publication Filter ====
 
@@ -489,10 +489,51 @@ Choosing the same sort field multiple times, will toggle between ascending and d
 A small arrow will indicate the current sort field and whether ascending or descending order
 is used.
 
-=== Message Details
+=== Message Details ===
 
-TBD
+image::MessageDetailsDialog.png[Message Details Dialog, 600]
 
-=== Message Tags
+Messages on the _Messages_ page can be inspected in the _Message Details Dialog_.
 
-TBD
+Depending on the current view mode, the user clicks the message title, the message thumbnail icon,
+or the message map symbol to open the details dialog.
+
+In the top of the details dialog, the user can inspect the message positions and areas on a map.
+Below that, the textual details of the message is presented.
+Bottommost, a row of buttons allows the user to navigate the previous/next message in the list,
+to select or de-select the message, and an action menu with message-specific actions.
+
+If the user clicks on a referenced message in the message details, the clicked message will be
+presented instead, and the previous/next navigation buttons will change to a "Back" history button.
+
+The _Action_ menu will contain _Edit_ and _Copy_ actions, along with some of the actions detailed
+in the _Message Actions_ section that are message specific.
+
+=== Message Tags ===
+
+image::MessageTagsDialog.png[Message Tags Dialog, 600]
+
+_Message Tags_ plays an important role in Niord, as they may be used to persistently group
+and name sets of messages.
+
+The _Message Tags_ are used many places, such as in the <<Tag Filter>>, the <<Import Action>> and
+the Publications maintained by administrators.
+Everywhere tags can be selected, the user may click the image:TagButton.png[Tag, 20]
+button to open the Message Tag dialog.
+
+Message tags can be either _Private_, _Domain_-specific or _Public_. The _Private_ tags
+can only be managed and used by the user that created them, the _Domain_ tags can be
+maintained and used within the domain they belong to, and the _Public_ tags are available
+to all domains.
+
+Tags can also be time-limited. When the user creates a new tag, she can specify an expiry
+date of the tag, after which, the tag (but not the associated messages) will be deleted
+automatically.
+
+Furthermore, a message tag can be locked or unlocked.
+As an example, the message tag used to group the NM messages of a weekly
+Notices to Mariners publications should not be modified once the the digest has been published.
+Hence, editors should not be allowed to add or remove messages to and from the message tag.
+And this will be prevented by locking the message tag.
+Only administrators can unlock a locked message tag.
+
