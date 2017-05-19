@@ -682,6 +682,11 @@ end-for
 
 /** Emit the subject and details of the message parts **/
 for part in msg.parts
+  /**
+   * The part.type field contains one of the values: &quot;DETAILS&quot;, &quot;TIME&quot;,
+   * &quot;POSITIONS&quot;, &quot;NOTE&quot;, &quot;PROHIBITION&quot; or &quot;SIGNALS&quot;, and may be used
+   * to give the message part a header.
+   */
   emit &quot;&lt;div&gt;Details: &lt;strong&gt;&quot; + part.descs[0].subject + &quot;&lt;/strong&gt;&lt;/div&gt;&quot;
   emit &quot;&lt;div class='message-description'&gt;&quot; + part.descs[0].details + &quot;&lt;/div&gt;&quot;
 end-for
@@ -787,7 +792,7 @@ end-for</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-05-12 13:01:06 CEST
+Last updated 2017-01-16 11:09:58 CET
 </div>
 </div>
 <script type="text/x-mathjax-config">

@@ -107,6 +107,11 @@ end-for
 
 /** Emit the subject and details of the message parts **/
 for part in msg.parts
+  /**
+   * The part.type field contains one of the values: "DETAILS", "TIME",
+   * "POSITIONS", "NOTE", "PROHIBITION" or "SIGNALS", and may be used
+   * to give the message part a header.
+   */
   emit "<div>Details: <strong>" + part.descs[0].subject + "</strong></div>"
   emit "<div class='message-description'>" + part.descs[0].details + "</div>"
 end-for
