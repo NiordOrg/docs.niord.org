@@ -77,11 +77,21 @@ arrow-down key to shift focus from field title to field title. Use arrow-right t
 editor field currently selected, and arrow-left to collapse the field.
 Use tab, respectively shift-tab, to shift focus between the input fields of a field editor.
 
-The remained of this section will describe the individual editor fields one-by-one.
+The remainder of this section will describe the individual editor fields one by one.
+
+==== Orig. Information Editor Field ====
+
+image::EditorFieldOrigInfo.png[Orig. Information Editor Field Expanded, 600]
+
+The _Orig. Information_ editor field is typically only present when editing a Notice to Mariners.
+The editor field contains a toggle-button that can be used to flag if the message is based on
+original information or not.
+
+
 
 === Status Editor Page ===
 
-
+TBD
 
 === Comments Editor Page ===
 
