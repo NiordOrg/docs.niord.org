@@ -8,7 +8,71 @@ The _Editor_ page of Niord is accessible for logged in editors via the main menu
 It contains sub-pages for creating and editing NW and NM messages, for managing the lifecycle
 of the messages and for submitting comments to a message.
 
-image::Editor.png[Editor, 600]
+image::Editor.png[Editor, 800]
 
 
+=== Blank Editor Page ===
 
+If the user enters the _Editor_ page directly (as opposed to clicking _Edit_ on a message),
+the _Edit_ page looks similar to this:
+
+image::BlankEditorPage.png[Blank Editor Page, 600]
+
+If the current domain supports Navigational Warnings, there will be a prominent "New NW" button
+for creating a new blank NW message.
+
+Similarly, if the current domain supports Notices to Mariners, there will be a prominent
+"New NM" button for creating a new blank NM message.
+
+Depending on how the current domain has been set up administratively, there may also be a
+_template execution field_. Navigational Warnings in particular often follow a very strict
+template for how to write the messages so that they adhere to the standards for MSI, NAVTEX, etc.
+The field thus allows the user to select and execute a template, such as "Light Unlit".
+Message Templates is an extensive topic, covered in greater detail in the
+<<Message Template Execution>> section.
+
+Lastly, the blank editor page will list the draft messages that the current user has
+recently edited.
+
+=== Edit Editor Page ===
+
+When the user has created a new NW or NM message, as described in the previous section, or if
+the user clicks _Edit_ on an existing message, the user will enter the _Edit_ editor sub-page,
+which is the main page for actually editing the fields of a message.
+See image in the beginning of the <<Editor>> chapter.
+
+==== General Edit Page Controls ====
+
+If the user enters the _Edit_ editor page by clicking _Edit_ on a message in the messages list,
+there will be a "Back to list" button that will return the user to the _Messages_ page with
+the same message filter applied as when entering the _Edit_ page.
+
+The "Clear" button will cancel all changes and return the user to the <<Blank Editor Page>>.
+
+If the currently edited message has any unsaved changes, there will be a red _Save_ icon
+next to the "Editor" title:
+
+image::EditorDirty.png[Dirty Editor Symbol, 100]
+
+At the bottom of the page, there is a "Save Message" button and a "Reload Message" button, which
+will respectively save any changes to the message and reload the message whilst discarding any changes.
+
+=== Status Editor Page ===
+
+TBD
+
+=== Comments Editor Page ===
+
+TBD
+
+=== History Editor Page ===
+
+TBD
+
+=== Editor Actions ===
+
+TBD
+
+=== Message Template Execution ===
+
+TBD

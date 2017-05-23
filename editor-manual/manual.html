@@ -535,7 +535,17 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#message-tags">4.6. Message Tags</a></li>
 </ul>
 </li>
-<li><a href="#editor">5. Editor</a></li>
+<li><a href="#editor">5. Editor</a>
+<ul class="sectlevel2">
+<li><a href="#blank-editor-page">5.1. Blank Editor Page</a></li>
+<li><a href="#edit-editor-page">5.2. Edit Editor Page</a></li>
+<li><a href="#status-editor-page">5.3. Status Editor Page</a></li>
+<li><a href="#comments-editor-page">5.4. Comments Editor Page</a></li>
+<li><a href="#history-editor-page">5.5. History Editor Page</a></li>
+<li><a href="#editor-actions">5.6. Editor Actions</a></li>
+<li><a href="#message-template-execution">5.7. Message Template Execution</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -1601,7 +1611,102 @@ of the messages and for submitting comments to a message.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/Editor.png" alt="Editor" width="600">
+<img src="images/Editor.png" alt="Editor" width="800">
+</div>
+</div>
+<div class="sect2">
+<h3 id="blank-editor-page"><a class="anchor" href="#blank-editor-page"></a><a class="link" href="#blank-editor-page">5.1. Blank Editor Page</a></h3>
+<div class="paragraph">
+<p>If the user enters the <em>Editor</em> page directly (as opposed to clicking <em>Edit</em> on a message),
+the <em>Edit</em> page looks similar to this:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/BlankEditorPage.png" alt="Blank Editor Page" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>If the current domain supports Navigational Warnings, there will be a prominent "New NW" button
+for creating a new blank NW message.</p>
+</div>
+<div class="paragraph">
+<p>Similarly, if the current domain supports Notices to Mariners, there will be a prominent
+"New NM" button for creating a new blank NM message.</p>
+</div>
+<div class="paragraph">
+<p>Depending on how the current domain has been set up administratively, there may also be a
+<em>template execution field</em>. Navigational Warnings in particular often follow a very strict
+template for how to write the messages so that they adhere to the standards for MSI, NAVTEX, etc.
+The field thus allows the user to select and execute a template, such as "Light Unlit".
+Message Templates is an extensive topic, covered in greater detail in the
+<a href="#message-template-execution">Message Template Execution</a> section.</p>
+</div>
+<div class="paragraph">
+<p>Lastly, the blank editor page will list the draft messages that the current user has
+recently edited.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="edit-editor-page"><a class="anchor" href="#edit-editor-page"></a><a class="link" href="#edit-editor-page">5.2. Edit Editor Page</a></h3>
+<div class="paragraph">
+<p>When the user has created a new NW or NM message, as described in the previous section, or if
+the user clicks <em>Edit</em> on an existing message, the user will enter the <em>Edit</em> editor sub-page,
+which is the main page for actually editing the fields of a message.
+See image in the beginning of the <a href="#editor">Editor</a> chapter.</p>
+</div>
+<div class="sect3">
+<h4 id="general-edit-page-controls"><a class="anchor" href="#general-edit-page-controls"></a><a class="link" href="#general-edit-page-controls">5.2.1. General Edit Page Controls</a></h4>
+<div class="paragraph">
+<p>If the user enters the <em>Edit</em> editor page by clicking <em>Edit</em> on a message in the messages list,
+there will be a "Back to list" button that will return the user to the <em>Messages</em> page with
+the same message filter applied as when entering the <em>Edit</em> page.</p>
+</div>
+<div class="paragraph">
+<p>The "Clear" button will cancel all changes and return the user to the <a href="#blank-editor-page">Blank Editor Page</a>.</p>
+</div>
+<div class="paragraph">
+<p>If the currently edited message has any unsaved changes, there will be a red <em>Save</em> icon
+next to the "Editor" title:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/EditorDirty.png" alt="Dirty Editor Symbol" width="100">
+</div>
+</div>
+<div class="paragraph">
+<p>At the bottom of the page, there is a "Save Message" button and a "Reload Message" button, which
+will respectively save any changes to the message and reload the message whilst discarding any changes.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="status-editor-page"><a class="anchor" href="#status-editor-page"></a><a class="link" href="#status-editor-page">5.3. Status Editor Page</a></h3>
+<div class="paragraph">
+<p>TBD</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="comments-editor-page"><a class="anchor" href="#comments-editor-page"></a><a class="link" href="#comments-editor-page">5.4. Comments Editor Page</a></h3>
+<div class="paragraph">
+<p>TBD</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="history-editor-page"><a class="anchor" href="#history-editor-page"></a><a class="link" href="#history-editor-page">5.5. History Editor Page</a></h3>
+<div class="paragraph">
+<p>TBD</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="editor-actions"><a class="anchor" href="#editor-actions"></a><a class="link" href="#editor-actions">5.6. Editor Actions</a></h3>
+<div class="paragraph">
+<p>TBD</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="message-template-execution"><a class="anchor" href="#message-template-execution"></a><a class="link" href="#message-template-execution">5.7. Message Template Execution</a></h3>
+<div class="paragraph">
+<p>TBD</p>
 </div>
 </div>
 </div>
