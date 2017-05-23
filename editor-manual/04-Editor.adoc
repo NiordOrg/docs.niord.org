@@ -57,9 +57,31 @@ image::EditorDirty.png[Dirty Editor Symbol, 100]
 At the bottom of the page, there is a "Save Message" button and a "Reload Message" button, which
 will respectively save any changes to the message and reload the message whilst discarding any changes.
 
+The rest of the _Edit_ page is dedicated to the list of field editors for all the fields
+that make the message being edited.
+
+The list of fields is configured administratively per domain and message type. As an example,
+Notices to Mariners will support fields such as "original information", whereas Navigational Warnings
+may have a field for editing its NAVTEX promulgation.
+
+In order to conserve space, all editor fields are "collapsed" by default, showing a read-only
+version of the field value in the currently selected language.
+However, clicking at the field title will expand the field and display the field editor in full.
+See example below withe the _Areas_ editor field in collapsed and expanded mode:
+
+image::EditorFieldAreasCollapsed.png[Areas Editor Field Collapsed, 180]
+image::EditorFieldAreas.png[Areas Editor Field Expanded, 600]
+
+The editor has extensive support for keyboard navigation. The user can use the arrow-up and
+arrow-down key to shift focus from field title to field title. Use arrow-right to expand the
+editor field currently selected, and arrow-left to collapse the field.
+Use tab, respectively shift-tab, to shift focus between the input fields of a field editor.
+
+The remained of this section will describe the individual editor fields one-by-one.
+
 === Status Editor Page ===
 
-TBD
+
 
 === Comments Editor Page ===
 
