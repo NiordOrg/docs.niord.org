@@ -27,18 +27,18 @@ Some of the main features of Niord area:
 == Editors Manual
 
 A user in Niord always works in the context of a _current domain_.
-Domains are used to separate NW & NM messages into more manageable chunks of data -
+Domains are used to separate NW & NM messages into more manageable lists -
 you could e.g. have a domain for NW messages, a domain for NM messages, a domain
 for firing exercises (also NWs), or indeed domains for separate regions with
 separate time-zones, etc.
 
-The user has separate roles in each domain. The available roles are:
+A user has separate roles in each domain. The available roles are:
 
 * _User_: The _user_ role can be assigned to e.g. case officers that should have access
   to see, proof-read and comment on un-published NW and NM messages.
 * _Editor_: Editors compose and manage the life cycle of an NW or NM message.
 * _Admin_: An administrator of a domain will have additional access to e.g. manage the base data
-  (e.g. sea charts and publications) of the Niord system.
+  (sea charts, publications, etc.) of the Niord system.
 * _Sysadmin_: A very special role that should be held only by the person(s) actually setting
   up and managing the Niord system.
 

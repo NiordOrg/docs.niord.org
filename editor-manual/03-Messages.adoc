@@ -30,21 +30,21 @@ of the messages. Click the ellipsis in the header menu to switch between the dat
 
 ==== Grid View Mode
 
-When selecting the _Grid_ view mode, message are listed in a semi-compact fashion with an
+When selecting the _Grid_ view mode, messages are listed in a semi-compact fashion with an
 auto-generated thumbnail image for each message.
 
 image::GridViewMode.png[Grid View Mode, 600]
 
 ==== Details View Mode
 
-In the the _Details_ view mode, each message is listed in detail, similarly to when a message is displayed
-in the <<Message Details>> dialog.
+In the the _Details_ view mode, each message is listed in detail, similarly to when
+a message is displayed in the <<Message Details>> dialog.
 
 image::DetailsViewMode.png[Details View Mode, 600]
 
 ==== Map View Mode
 
-In the _Map_ view mode, all messages are displayed in a map. There list of messages will always be
+In the _Map_ view mode, all messages are displayed in a map. The list of messages will always be
 filtered according to the current bounding box of the map.
 
 There is a _Search Result_ panel in the top-left part of the map which contains a compact textual listing
@@ -93,11 +93,11 @@ The filters will be detailed individually below.
 
 image::MessageFilterDomain.png[Domain Filter, 240]
 
-The _Domain_ filter allows the user to search messages of a different domain without switching the current
-domain. This is very useful, if you e.g. wish to base a new Notice to Mariner on an existing
-Navigational Warning.
+The _Domain_ filter allows the user to search messages of another domain without switching the current
+domain selection. This is very useful, if you e.g. wish to base a new Notice to Mariner on a copy of
+an existing Navigational Warning.
 
-As an important security constraint, when filtering on messages from a different domain is that only
+As an important security constraint, when filtering on messages from a different domain only
 public messages will be included in the search result.
 Public messages are those whose status are either _Published_, _Cancelled_ or _Expired_.
 
@@ -193,8 +193,8 @@ last person to edit the message.
 
 image::MessageFilterComments.png[Comments, 400]
 
-The process of composing a new NW or NM message often involves multiple users that writes up the message
-and proof reads it. To aid this process, users may submit new _comments_ to a message,
+The process of composing a new NW or NM message often involves multiple users that write up the message
+and proof-read it. To aid this process, users may submit new _comments_ to a message,
 and acknowledge existing comments.
 
 The _Comments_ filter allows the user to filter on messages with different types of comments, such as
@@ -450,7 +450,7 @@ All status changes are applied when the "Save Changes" button is clicked.
 
 image::SortMessagesDialog.png[Sort Messages by Area Dialog, 600]
 
-The _Sort Area_ action allows the user to sort perform fine-grained persistent sorting
+The _Sort Area_ action allows the user to perform fine-grained persistent sorting
 of the messages of a certain area.
 
 An alternative way of accessing the _Sort Area_ dialog is by clicking the "Sort..." link
@@ -475,7 +475,8 @@ sorted North-to-South.
 
 And so forth...
 
-This default sorting of messages by area can then be overridden by using the _Sort Area_ action.
+This automated sorting of messages by area can then be overridden manually by using
+the _Sort Area_ action.
 Once an area has been selected, all the messages of the area can be re-arranged by dragging a
 message to its proper position using the image:DragHandle.png[Drag Handle, 20] drag handle.
 
@@ -532,7 +533,7 @@ automatically.
 
 Furthermore, a message tag can be locked or unlocked.
 As an example, the message tag used to group the NM messages of a weekly
-Notices to Mariners publications should not be modified once the the digest has been published.
+Notices to Mariners publication, should not be modified once the the digest has been published.
 Hence, editors should not be allowed to add or remove messages to and from the message tag.
 And this will be prevented by locking the message tag.
 Only administrators can unlock a locked message tag.

@@ -634,13 +634,13 @@ been devised to make data future-compatible with the upcoming IHO S-124 specific
 <div class="sectionbody">
 <div class="paragraph">
 <p>A user in Niord always works in the context of a <em>current domain</em>.
-Domains are used to separate NW &amp; NM messages into more manageable chunks of data -
+Domains are used to separate NW &amp; NM messages into more manageable lists -
 you could e.g. have a domain for NW messages, a domain for NM messages, a domain
 for firing exercises (also NWs), or indeed domains for separate regions with
 separate time-zones, etc.</p>
 </div>
 <div class="paragraph">
-<p>The user has separate roles in each domain. The available roles are:</p>
+<p>A user has separate roles in each domain. The available roles are:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -653,7 +653,7 @@ to see, proof-read and comment on un-published NW and NM messages.</p>
 </li>
 <li>
 <p><em>Admin</em>: An administrator of a domain will have additional access to e.g. manage the base data
-(e.g. sea charts and publications) of the Niord system.</p>
+(sea charts, publications, etc.) of the Niord system.</p>
 </li>
 <li>
 <p><em>Sysadmin</em>: A very special role that should be held only by the person(s) actually setting
@@ -759,7 +759,7 @@ The current domain is selected from the domain menu:</p>
 </div>
 <div class="paragraph">
 <p>Next to each domain name, there is a symbol that indicates if the user can edit messages of that
-domain (pencil symbol), or only view published messages (eye symbol).</p>
+domain (pencil symbol), or only view public messages (eye symbol).</p>
 </div>
 <div class="paragraph">
 <p>The current domain selection is stored in a cookie in the web-browser, and so, will also be
@@ -837,7 +837,7 @@ of the messages. Click the ellipsis in the header menu to switch between the dat
 <div class="sect3">
 <h4 id="grid-view-mode"><a class="anchor" href="#grid-view-mode"></a><a class="link" href="#grid-view-mode">4.1.2. Grid View Mode</a></h4>
 <div class="paragraph">
-<p>When selecting the <em>Grid</em> view mode, message are listed in a semi-compact fashion with an
+<p>When selecting the <em>Grid</em> view mode, messages are listed in a semi-compact fashion with an
 auto-generated thumbnail image for each message.</p>
 </div>
 <div class="imageblock">
@@ -849,8 +849,8 @@ auto-generated thumbnail image for each message.</p>
 <div class="sect3">
 <h4 id="details-view-mode"><a class="anchor" href="#details-view-mode"></a><a class="link" href="#details-view-mode">4.1.3. Details View Mode</a></h4>
 <div class="paragraph">
-<p>In the the <em>Details</em> view mode, each message is listed in detail, similarly to when a message is displayed
-in the <a href="#message-details">Message Details</a> dialog.</p>
+<p>In the the <em>Details</em> view mode, each message is listed in detail, similarly to when
+a message is displayed in the <a href="#message-details">Message Details</a> dialog.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -861,7 +861,7 @@ in the <a href="#message-details">Message Details</a> dialog.</p>
 <div class="sect3">
 <h4 id="map-view-mode"><a class="anchor" href="#map-view-mode"></a><a class="link" href="#map-view-mode">4.1.4. Map View Mode</a></h4>
 <div class="paragraph">
-<p>In the <em>Map</em> view mode, all messages are displayed in a map. There list of messages will always be
+<p>In the <em>Map</em> view mode, all messages are displayed in a map. The list of messages will always be
 filtered according to the current bounding box of the map.</p>
 </div>
 <div class="paragraph">
@@ -934,12 +934,12 @@ message filter.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The <em>Domain</em> filter allows the user to search messages of a different domain without switching the current
-domain. This is very useful, if you e.g. wish to base a new Notice to Mariner on an existing
-Navigational Warning.</p>
+<p>The <em>Domain</em> filter allows the user to search messages of another domain without switching the current
+domain selection. This is very useful, if you e.g. wish to base a new Notice to Mariner on a copy of
+an existing Navigational Warning.</p>
 </div>
 <div class="paragraph">
-<p>As an important security constraint, when filtering on messages from a different domain is that only
+<p>As an important security constraint, when filtering on messages from a different domain only
 public messages will be included in the search result.
 Public messages are those whose status are either <em>Published</em>, <em>Cancelled</em> or <em>Expired</em>.</p>
 </div>
@@ -1098,8 +1098,8 @@ last person to edit the message.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The process of composing a new NW or NM message often involves multiple users that writes up the message
-and proof reads it. To aid this process, users may submit new <em>comments</em> to a message,
+<p>The process of composing a new NW or NM message often involves multiple users that write up the message
+and proof-read it. To aid this process, users may submit new <em>comments</em> to a message,
 and acknowledge existing comments.</p>
 </div>
 <div class="paragraph">
@@ -1503,7 +1503,7 @@ any of the valid status transitions.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The <em>Sort Area</em> action allows the user to sort perform fine-grained persistent sorting
+<p>The <em>Sort Area</em> action allows the user to perform fine-grained persistent sorting
 of the messages of a certain area.</p>
 </div>
 <div class="paragraph">
@@ -1541,7 +1541,8 @@ sorted North-to-South.</p>
 <p>And so forth&#8230;&#8203;</p>
 </div>
 <div class="paragraph">
-<p>This default sorting of messages by area can then be overridden by using the <em>Sort Area</em> action.
+<p>This automated sorting of messages by area can then be overridden manually by using
+the <em>Sort Area</em> action.
 Once an area has been selected, all the messages of the area can be re-arranged by dragging a
 message to its proper position using the <span class="image"><img src="images/DragHandle.png" alt="Drag Handle" width="20"></span> drag handle.</p>
 </div>
@@ -1621,7 +1622,7 @@ automatically.</p>
 <div class="paragraph">
 <p>Furthermore, a message tag can be locked or unlocked.
 As an example, the message tag used to group the NM messages of a weekly
-Notices to Mariners publications should not be modified once the the digest has been published.
+Notices to Mariners publication, should not be modified once the the digest has been published.
 Hence, editors should not be allowed to add or remove messages to and from the message tag.
 And this will be prevented by locking the message tag.
 Only administrators can unlock a locked message tag.</p>

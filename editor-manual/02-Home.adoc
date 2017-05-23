@@ -48,7 +48,7 @@ The current domain is selected from the domain menu:
 image::DomainMenu.png[Domain Menu, 200]
 
 Next to each domain name, there is a symbol that indicates if the user can edit messages of that
-domain (pencil symbol), or only view published messages (eye symbol).
+domain (pencil symbol), or only view public messages (eye symbol).
 
 The current domain selection is stored in a cookie in the web-browser, and so, will also be
 the selected domain next time the user access Niord.
