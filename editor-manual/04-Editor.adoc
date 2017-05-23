@@ -1,0 +1,14 @@
+
+:imagesdir: images
+
+== Editor
+
+The _Editor_ page of Niord is accessible for logged in editors via the main menu.
+
+It contains sub-pages for creating and editing NW and NM messages, for managing the lifecycle
+of the messages and for submitting comments to a message.
+
+image::Editor.png[Editor, 600]
+
+
+
