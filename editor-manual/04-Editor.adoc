@@ -228,10 +228,10 @@ Message Templates is an extensive topic, covered in greater detail in the
 A message consists of a set of common _preamble_ fields and a list of _Message Parts_,
 where each message part conceptually defines the time, place and description of a hazard.
 
-The option for one message to describe multiple message parts is mostly used by Notices to Mariners,
-not so much Navigational Warnings, which typically only define a single message part each.
+The option for one message to describe multiple message parts is mostly used for Notices to Mariners,
+not so much for Navigational Warnings, which typically only define a single message part.
 
-Each message part is enclosed by a message part header panel:
+Each message part is headed by a _message part header panel_:
 
 image::MessagePartType.png[Message Part Type, 600]
 
@@ -243,8 +243,8 @@ parts.
 Lastly, the message part header panel allows for the selection of a _message part type_, such as
 "Details", "Time", "Positions" or "Note".
 The only effect of selecting a message part type, is to hide some of the message part fields.
-Also, the type field can also be used to improve the end-user display of a message by providing
-custom headers for each message part. See the example below where the first message part is labelled
+The type field can also be used to improve the end-user display of a message by providing
+custom titles for each message part. See the example below where the first message part is labelled
 "Details" and the second one is labelled "Note".
 
 image::SampleNM.png[Multi-Message Part NM, 600]
@@ -256,13 +256,12 @@ image::EditorFieldEventDates.png[Event Dates Editor Field, 600]
 Depending on the message part type, each message part can be assigned a list of event dates via
 the _Event Dates_ editor field.
 
-Whereas the publication date interval, as specified via the <<Publish Date Editor Field>>,
-determines when a message is in-force, the event dates pertains to the underlying hazard, such
-as a future firing exercise.
+Whereas the publication date interval determines when a message is in-force,
+the event dates pertain to the underlying hazard, such as a future firing exercise.
 
 For navigational warnings, though, the event dates are typically identical to the publication date.
-Hence, by default, the _Event Dates_ editor field is not displayed for NWs. However, the editor field
-can be enabled from the _Action_ menu.
+Hence, by default, the _Event Dates_ editor field is not displayed for NWs. If needed, the editor
+field can be enabled from the _Action_ menu.
 
 If no event dates are specified when a message is published, an event date interval is automatically
 added to the first Details message part, thereby synchronizing the event date interval with the
@@ -270,6 +269,9 @@ publication date interval. This interval is updated when the message is subseque
 or expires.
 
 The main purpose of event dates, is for clients to be able to use it in route planning, and so forth.
+
+The event date intervals has an _all-day_ flag that can be used to switch between specifying
+date-and-time or date only.
 
 === Status Editor Page ===
 
