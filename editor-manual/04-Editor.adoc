@@ -81,13 +81,92 @@ The remainder of this section will describe the individual editor fields one by 
 
 ==== Orig. Information Editor Field ====
 
-image::EditorFieldOrigInfo.png[Orig. Information Editor Field Expanded, 600]
+image::EditorFieldOrigInfo.png[Orig. Information Editor Field, 600]
 
 The _Orig. Information_ editor field is typically only present when editing a Notice to Mariners.
 The editor field contains a toggle-button that can be used to flag if the message is based on
 original information or not.
 
+==== Type Editor Field ====
 
+image::EditorFieldType.png[Type Editor Field, 600]
+
+The _Type_ editor field allows the user specify the sub-type of the message.
+
+For Navigational Warnings, the types include _Local_, _Coastal_,
+_Subarea_ and _Navarea_. Depending on the system configuration of the domain, only a subset
+of these types may be available.
+
+For Notices to Mariners, the types include _Preliminary_, _Temporary_,
+_Permanent_ and _Miscellaneous_. Depending on the system configuration of the domain, only a subset
+of these types may be available.
+
+==== ID Editor Field ====
+
+image::EditorFieldId.png[ID Editor Field, 600]
+
+All messages must be associated with a _message series_, which are defined administratively for
+each domain.
+The message series are used to group messages and define traits such as the format of the message
+_short ID_, and the numbering scheme. There are four possible types of numbering schemes:
+
+[cols="30,70",options="header"]
+|===
+|Numbering Scheme|Description
+
+|yearly|Every message will automatically be assigned a number when they are published.
+The number sequence starts at 1 every 1st of january.
+
+|continuous|Every message will automatically be assigned a number when they are published.
+The number sequence is never reset.
+
+|manual|The user manually assigns a number in the _ID_ editor field.
+
+|none|The message will not be assigned a number.
+
+|===
+
+
+The _ID_ editor field lets lets the user select any of the available message series for the
+current domain and message type. Often there will only be one to select from, in which case,
+it will be pre-selected.
+
+If the numbering scheme of the selected message series is _manual_, the _ID_ editor field
+will also have an input field for the user to fill out the message number.
+
+Lastly, all messages will automatically be assigned a unique system ID, or _UID_, upon creation,
+which can also be found in the _ID_ editor field.
+Although the UID is not very end-user friendly, it can be used to uniquely identify messages even
+before they are published.
+
+==== Title Editor Field ====
+
+image::EditorFieldTitle.png[Title Editor Field, 600]
+
+The _Title_ editor field allows the user to specify the main title of the message in all supported
+languages.
+
+By default, the "Auto generate" option is checked, in which case the title fields are disabled
+and computed automatically, by concatenating the currently selected _areas_, _vicinity_ and
+the _subject_ fields of each message parts.
+
+==== References Editor Field ====
+
+image::EditorFieldReferences.png[References Editor Field, 600]
+
+The _References_ editor field allows the user to manage a list of typed references from the edited
+message to other messages.
+
+Each reference must specify a _message ID_ which may either be the _short ID_ or the _UID_ of the
+referenced message.
+
+The reference type is one of _reference_, _repetition_, _repetition_with_new_time_,
+_updated_repetition_, _cancelled_, and signals the nature of the relationship between the
+messages.
+
+Additionally, the user may add a reference description in all supported languages.
+
+In end-user applications, references can e.g. be used to hyperlink between messages.
 
 === Status Editor Page ===
 

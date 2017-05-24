@@ -1716,13 +1716,139 @@ Use tab, respectively shift-tab, to shift focus between the input fields of a fi
 <h4 id="orig-information-editor-field"><a class="anchor" href="#orig-information-editor-field"></a><a class="link" href="#orig-information-editor-field">5.2.2. Orig. Information Editor Field</a></h4>
 <div class="imageblock">
 <div class="content">
-<img src="images/EditorFieldOrigInfo.png" alt="Orig. Information Editor Field Expanded" width="600">
+<img src="images/EditorFieldOrigInfo.png" alt="Orig. Information Editor Field" width="600">
 </div>
 </div>
 <div class="paragraph">
 <p>The <em>Orig. Information</em> editor field is typically only present when editing a Notice to Mariners.
 The editor field contains a toggle-button that can be used to flag if the message is based on
 original information or not.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="type-editor-field"><a class="anchor" href="#type-editor-field"></a><a class="link" href="#type-editor-field">5.2.3. Type Editor Field</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/EditorFieldType.png" alt="Type Editor Field" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The <em>Type</em> editor field allows the user specify the sub-type of the message.</p>
+</div>
+<div class="paragraph">
+<p>For Navigational Warnings, the types include <em>Local</em>, <em>Coastal</em>,
+<em>Subarea</em> and <em>Navarea</em>. Depending on the system configuration of the domain, only a subset
+of these types may be available.</p>
+</div>
+<div class="paragraph">
+<p>For Notices to Mariners, the types include <em>Preliminary</em>, <em>Temporary</em>,
+<em>Permanent</em> and <em>Miscellaneous</em>. Depending on the system configuration of the domain, only a subset
+of these types may be available.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="id-editor-field"><a class="anchor" href="#id-editor-field"></a><a class="link" href="#id-editor-field">5.2.4. ID Editor Field</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/EditorFieldId.png" alt="ID Editor Field" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>All messages must be associated with a <em>message series</em>, which are defined administratively for
+each domain.
+The message series are used to group messages and define traits such as the format of the message
+<em>short ID</em>, and the numbering scheme. There are four possible types of numbering schemes:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Numbering Scheme</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">yearly</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Every message will automatically be assigned a number when they are published.
+The number sequence starts at 1 every 1st of january.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">continuous</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Every message will automatically be assigned a number when they are published.
+The number sequence is never reset.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">manual</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The user manually assigns a number in the <em>ID</em> editor field.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">none</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The message will not be assigned a number.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The <em>ID</em> editor field lets lets the user select any of the available message series for the
+current domain and message type. Often there will only be one to select from, in which case,
+it will be pre-selected.</p>
+</div>
+<div class="paragraph">
+<p>If the numbering scheme of the selected message series is <em>manual</em>, the <em>ID</em> editor field
+will also have an input field for the user to fill out the message number.</p>
+</div>
+<div class="paragraph">
+<p>Lastly, all messages will automatically be assigned a unique system ID, or <em>UID</em>, upon creation,
+which can also be found in the <em>ID</em> editor field.
+Although the UID is not very end-user friendly, it can be used to uniquely identify messages even
+before they are published.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="title-editor-field"><a class="anchor" href="#title-editor-field"></a><a class="link" href="#title-editor-field">5.2.5. Title Editor Field</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/EditorFieldTitle.png" alt="Title Editor Field" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The <em>Title</em> editor field allows the user to specify the main title of the message in all supported
+languages.</p>
+</div>
+<div class="paragraph">
+<p>By default, the "Auto generate" option is checked, in which case the title fields are disabled
+and computed automatically, by concatenating the currently selected <em>areas</em>, <em>vicinity</em> and
+the <em>subject</em> fields of each message parts.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="references-editor-field"><a class="anchor" href="#references-editor-field"></a><a class="link" href="#references-editor-field">5.2.6. References Editor Field</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/EditorFieldReferences.png" alt="References Editor Field" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The <em>References</em> editor field allows the user to manage a list of typed references from the edited
+message to other messages.</p>
+</div>
+<div class="paragraph">
+<p>Each reference must specify a <em>message ID</em> which may either be the <em>short ID</em> or the <em>UID</em> of the
+referenced message.</p>
+</div>
+<div class="paragraph">
+<p>The reference type is one of <em>reference</em>, <em>repetition</em>, <em>repetition_with_new_time</em>,
+<em>updated_repetition</em>, <em>cancelled</em>, and signals the nature of the relationship between the
+messages.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, the user may add a reference description in all supported languages.</p>
+</div>
+<div class="paragraph">
+<p>In end-user applications, references can e.g. be used to hyperlink between messages.</p>
 </div>
 </div>
 </div>
