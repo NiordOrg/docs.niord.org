@@ -1949,9 +1949,53 @@ not so much Navigational Warnings, which typically only define a single message 
 </div>
 <div class="paragraph">
 <p>Clicking the plus sign will add a new message part below, and clicking the minus sign will delete
-the given message part. If more than one message parts are present, there will also be arrow-up and
-arrow-down buttons in the message part header panel, which may be used to re-organize the message
+the given message part. If more than one message part are present, there will also be an arrow-up and
+an arrow-down button in the message part header panel, which may be used to re-arrange the message
 parts.</p>
+</div>
+<div class="paragraph">
+<p>Lastly, the message part header panel allows for the selection of a <em>message part type</em>, such as
+"Details", "Time", "Positions" or "Note".
+The only effect of selecting a message part type, is to hide some of the message part fields.
+Also, the type field can also be used to improve the end-user display of a message by providing
+custom headers for each message part. See the example below where the first message part is labelled
+"Details" and the second one is labelled "Note".</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SampleNM.png" alt="Multi-Message Part NM" width="600">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="event-dates-editor-field"><a class="anchor" href="#event-dates-editor-field"></a><a class="link" href="#event-dates-editor-field">5.2.11. Event Dates Editor Field</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/EditorFieldEventDates.png" alt="Event Dates Editor Field" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Depending on the message part type, each message part can be assigned a list of event dates via
+the <em>Event Dates</em> editor field.</p>
+</div>
+<div class="paragraph">
+<p>Whereas the publication date interval, as specified via the <a href="#publish-date-editor-field">Publish Date Editor Field</a>,
+determines when a message is in-force, the event dates pertains to the underlying hazard, such
+as a future firing exercise.</p>
+</div>
+<div class="paragraph">
+<p>For navigational warnings, though, the event dates are typically identical to the publication date.
+Hence, by default, the <em>Event Dates</em> editor field is not displayed for NWs. However, the editor field
+can be enabled from the <em>Action</em> menu.</p>
+</div>
+<div class="paragraph">
+<p>If no event dates are specified when a message is published, an event date interval is automatically
+added to the first Details message part, thereby synchronizing the event date interval with the
+publication date interval. This interval is updated when the message is subsequently cancelled
+or expires.</p>
+</div>
+<div class="paragraph">
+<p>The main purpose of event dates, is for clients to be able to use it in route planning, and so forth.</p>
 </div>
 </div>
 </div>

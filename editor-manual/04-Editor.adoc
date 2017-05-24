@@ -236,10 +236,40 @@ Each message part is enclosed by a message part header panel:
 image::MessagePartType.png[Message Part Type, 600]
 
 Clicking the plus sign will add a new message part below, and clicking the minus sign will delete
-the given message part. If more than one message parts are present, there will also be arrow-up and
-arrow-down buttons in the message part header panel, which may be used to re-organize the message
+the given message part. If more than one message part are present, there will also be an arrow-up and
+an arrow-down button in the message part header panel, which may be used to re-arrange the message
 parts.
 
+Lastly, the message part header panel allows for the selection of a _message part type_, such as
+"Details", "Time", "Positions" or "Note".
+The only effect of selecting a message part type, is to hide some of the message part fields.
+Also, the type field can also be used to improve the end-user display of a message by providing
+custom headers for each message part. See the example below where the first message part is labelled
+"Details" and the second one is labelled "Note".
+
+image::SampleNM.png[Multi-Message Part NM, 600]
+
+==== Event Dates Editor Field ====
+
+image::EditorFieldEventDates.png[Event Dates Editor Field, 600]
+
+Depending on the message part type, each message part can be assigned a list of event dates via
+the _Event Dates_ editor field.
+
+Whereas the publication date interval, as specified via the <<Publish Date Editor Field>>,
+determines when a message is in-force, the event dates pertains to the underlying hazard, such
+as a future firing exercise.
+
+For navigational warnings, though, the event dates are typically identical to the publication date.
+Hence, by default, the _Event Dates_ editor field is not displayed for NWs. However, the editor field
+can be enabled from the _Action_ menu.
+
+If no event dates are specified when a message is published, an event date interval is automatically
+added to the first Details message part, thereby synchronizing the event date interval with the
+publication date interval. This interval is updated when the message is subsequently cancelled
+or expires.
+
+The main purpose of event dates, is for clients to be able to use it in route planning, and so forth.
 
 === Status Editor Page ===
 
