@@ -1131,7 +1131,7 @@ of sea charts.</p>
 </div>
 <div class="paragraph">
 <p>The <em>Area</em> filter allows the user to filter on messages that are associated with any of a list
-of areas including sub-areas of the selected areas.</p>
+of areas including s-areas of the selected areas.</p>
 </div>
 </div>
 <div class="sect3">
@@ -1833,7 +1833,8 @@ the <em>subject</em> fields of each message parts.</p>
 </div>
 <div class="paragraph">
 <p>The <em>References</em> editor field allows the user to manage a list of typed references from the edited
-message to other messages.</p>
+message to other messages. It is mainly used for Notices to Mariners, but could also e.g. be used
+for cancellation references in navigational warnings.</p>
 </div>
 <div class="paragraph">
 <p>Each reference must specify a <em>message ID</em> which may either be the <em>short ID</em> or the <em>UID</em> of the
@@ -1849,6 +1850,83 @@ messages.</p>
 </div>
 <div class="paragraph">
 <p>In end-user applications, references can e.g. be used to hyperlink between messages.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="publish-date-editor-field"><a class="anchor" href="#publish-date-editor-field"></a><a class="link" href="#publish-date-editor-field">5.2.7. Publish Date Editor Field</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/EditorFieldPublishDate.png" alt="Publish Date Editor Field" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Messages can either be scheduled for publication, or published and cancelled manually
+via the <a href="#status-editor-page">Status Editor Page</a>.</p>
+</div>
+<div class="paragraph">
+<p>The <em>Publish Date</em> editor field can be used for assigning a <em>publish from</em> and/or a
+<em>publish to</em> date.
+If a message has the <em>Verified</em> status, the system will automatically publish the message when the
+<em>publish from</em> date is reached. Similarly, if the <em>publish to</em> date is specified for a published
+message, the system will automatically expire the message when that date is reached.</p>
+</div>
+<div class="paragraph">
+<p>The user can also specify a <em>follow-up date</em> in the <em>Publish Date</em> editor field. The <em>follow up</em> date
+can be displayed and sorted by on the <a href="#messages">Messages</a> page.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="areas-editor-field"><a class="anchor" href="#areas-editor-field"></a><a class="link" href="#areas-editor-field">5.2.8. Areas Editor Field</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/EditorFieldAreas.png" alt="Areas Editor Field" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The <em>Areas</em> editor field can be used to assign one or more areas to a message. The areas to select
+from are created and managed by administrators in a hierarchical structure.
+So, as an example, the firing area "EK D 371 Marstal Bugt" is a sub-area of "The Baltic Sea", which
+is in turn a sub-area of "Denmark".</p>
+</div>
+<div class="paragraph">
+<p>Selecting an area in the <em>Areas</em> editor field will also implicitly select all parent areas.</p>
+</div>
+<div class="paragraph">
+<p>In addition to the main area input field, the user can also specify a <em>vicinity</em> in all supported
+languages. This is used for the specific location of the hazard (such as a harbour name).</p>
+</div>
+<div class="paragraph">
+<p>If the selected area has an associated geometry, the "Copy Locations" button will copy that
+geometry into the <a href="#Positions Editor Field">[Positions Editor Field]</a> of the message.</p>
+</div>
+<div class="paragraph">
+<p>Alternatively, if no area has been selected but a geometry has been defined for the message, then
+clicking the "Compute from Locations" will attempt to deduce the area from the geometry.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="categories-editor-field"><a class="anchor" href="#categories-editor-field"></a><a class="link" href="#categories-editor-field">5.2.9. Categories Editor Field</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/EditorFieldCategories.png" alt="Categories Editor Field" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The <em>Categories</em> editor field can be used to assign one or more categories to a message.
+The categories to select from are created and managed by system administrators in a
+hierarchical structure.</p>
+</div>
+<div class="paragraph">
+<p>Some categories have been defined as executable <em>message templates</em>. If one or more of these
+categories have been selected, the <span class="image"><img src="images/ExecuteTemplateBtn.png" alt="Tag" width="16"></span> will be enabled and
+allow for execution.</p>
+</div>
+<div class="paragraph">
+<p>Navigational Warnings in particular often follow a very strict
+template for how to write the messages so that they adhere to the standards for MSI, NAVTEX, etc.
+The field thus allows the user to select and execute a template, such as "Light Unlit".
+Message Templates is an extensive topic, covered in greater detail in the
+<a href="#message-template-execution">Message Template Execution</a> section.</p>
 </div>
 </div>
 </div>

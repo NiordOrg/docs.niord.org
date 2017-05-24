@@ -236,7 +236,7 @@ image::MessageFilterArea.png[Area, 400]
 Areas are defined in a hierarchical tree by administrators.
 
 The _Area_ filter allows the user to filter on messages that are associated with any of a list
-of areas including sub-areas of the selected areas.
+of areas including s-areas of the selected areas.
 
 ==== Category Filter ====
 

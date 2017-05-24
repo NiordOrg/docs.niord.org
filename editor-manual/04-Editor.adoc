@@ -155,7 +155,8 @@ the _subject_ fields of each message parts.
 image::EditorFieldReferences.png[References Editor Field, 600]
 
 The _References_ editor field allows the user to manage a list of typed references from the edited
-message to other messages.
+message to other messages. It is mainly used for Notices to Mariners, but could also e.g. be used
+for cancellation references in navigational warnings.
 
 Each reference must specify a _message ID_ which may either be the _short ID_ or the _UID_ of the
 referenced message.
@@ -167,6 +168,60 @@ messages.
 Additionally, the user may add a reference description in all supported languages.
 
 In end-user applications, references can e.g. be used to hyperlink between messages.
+
+==== Publish Date Editor Field ====
+
+image::EditorFieldPublishDate.png[Publish Date Editor Field, 600]
+
+Messages can either be scheduled for publication, or published and cancelled manually
+via the <<Status Editor Page>>.
+
+The _Publish Date_ editor field can be used for assigning a _publish from_ and/or a
+_publish to_ date.
+If a message has the _Verified_ status, the system will automatically publish the message when the
+_publish from_ date is reached. Similarly, if the _publish to_ date is specified for a published
+message, the system will automatically expire the message when that date is reached.
+
+The user can also specify a _follow-up date_ in the _Publish Date_ editor field. The _follow up_ date
+can be displayed and sorted by on the <<Messages>> page.
+
+==== Areas Editor Field ====
+
+image::EditorFieldAreas.png[Areas Editor Field, 600]
+
+The _Areas_ editor field can be used to assign one or more areas to a message. The areas to select
+from are created and managed by administrators in a hierarchical structure.
+So, as an example, the firing area "EK D 371 Marstal Bugt" is a sub-area of "The Baltic Sea", which
+is in turn a sub-area of "Denmark".
+
+Selecting an area in the _Areas_ editor field will also implicitly select all parent areas.
+
+In addition to the main area input field, the user can also specify a _vicinity_ in all supported
+languages. This is used for the specific location of the hazard (such as a harbour name).
+
+If the selected area has an associated geometry, the "Copy Locations" button will copy that
+geometry into the <<Positions Editor Field>> of the message.
+
+Alternatively, if no area has been selected but a geometry has been defined for the message, then
+clicking the "Compute from Locations" will attempt to deduce the area from the geometry.
+
+==== Categories Editor Field ====
+
+image::EditorFieldCategories.png[Categories Editor Field, 600]
+
+The _Categories_ editor field can be used to assign one or more categories to a message.
+The categories to select from are created and managed by system administrators in a
+hierarchical structure.
+
+Some categories have been defined as executable _message templates_. If one or more of these
+categories have been selected, the image:ExecuteTemplateBtn.png[Tag, 16] will be enabled and
+allow for execution.
+
+Navigational Warnings in particular often follow a very strict
+template for how to write the messages so that they adhere to the standards for MSI, NAVTEX, etc.
+The field thus allows the user to select and execute a template, such as "Light Unlit".
+Message Templates is an extensive topic, covered in greater detail in the
+<<Message Template Execution>> section.
 
 === Status Editor Page ===
 
