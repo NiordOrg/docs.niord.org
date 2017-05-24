@@ -223,6 +223,24 @@ The field thus allows the user to select and execute a template, such as "Light 
 Message Templates is an extensive topic, covered in greater detail in the
 <<Message Template Execution>> section.
 
+==== Message Parts ====
+
+A message consists of a set of common _preamble_ fields and a list of _Message Parts_,
+where each message part conceptually defines the time, place and description of a hazard.
+
+The option for one message to describe multiple message parts is mostly used by Notices to Mariners,
+not so much Navigational Warnings, which typically only define a single message part each.
+
+Each message part is enclosed by a message part header panel:
+
+image::MessagePartType.png[Message Part Type, 600]
+
+Clicking the plus sign will add a new message part below, and clicking the minus sign will delete
+the given message part. If more than one message parts are present, there will also be arrow-up and
+arrow-down buttons in the message part header panel, which may be used to re-organize the message
+parts.
+
+
 === Status Editor Page ===
 
 TBD
