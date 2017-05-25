@@ -760,7 +760,56 @@ deleted has never been assigned to a message.</p>
 </div>
 <div class="sect2">
 <h3 id="importing-and-exporting-charts"><a class="anchor" href="#importing-and-exporting-charts"></a><a class="link" href="#importing-and-exporting-charts">4.3. Importing and Exporting Charts</a></h3>
-
+<div class="paragraph">
+<p>The administrator can export and import charts from the charts action menu:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ChartsActionMenu.png" alt="Charts Action Menu" width="120">
+</div>
+</div>
+<div class="paragraph">
+<p>The export/import file format is based on a JSON representation of the
+<a href="https://github.com/NiordOrg/niord/blob/master/niord-core/src/main/java/org/niord/core/chart/vo/SystemChartVo.java">SystemChartVo</a>
+class.</p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="json">[
+  {
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">chartNumber</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">198</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">active</span><span class="delimiter">&quot;</span></span>: <span class="value">true</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">scale</span><span class="delimiter">&quot;</span></span>: <span class="integer">75000</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Østersøen, Fakse Bugt og Hjelm Bugt</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">geometry</span><span class="delimiter">&quot;</span></span>: {
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Polygon</span><span class="delimiter">&quot;</span></span>,
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">coordinates</span><span class="delimiter">&quot;</span></span>: [
+        [
+          [ <span class="float">12.0</span>, <span class="float">54.74166667</span> ],
+          [ <span class="float">12.76666667</span>, <span class="float">54.74166667</span> ],
+          [ <span class="float">12.76666667</span>, <span class="float">55.38333333</span> ],
+          [ <span class="float">12.0</span>, <span class="float">55.38333333</span> ],
+          [ <span class="float">12.0</span>, <span class="float">54.74166667</span> ]
+        ]
+      ]
+    },
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">horizontalDatum</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">WGS84</span><span class="delimiter">&quot;</span></span>
+  },
+  <span class="error">.</span><span class="error">.</span><span class="error">.</span>
+]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Importing a chart JSON file will trigger the <em>chart-import</em> batch job.
+Batch jobs can be monitored and managed by system administrators.</p>
+</div>
+<div class="paragraph">
+<p>As an alternative to manually uploading a chart import JSON file on the <em>Charts</em> admin page,
+the file can be copied to the <em>$NIORD_HOME/batch-jobs/chart-import/in</em> folder.</p>
+</div>
 </div>
 </div>
 </div>

@@ -68,4 +68,43 @@ If a chart has indeed been assigned to a message, the user should deactivate the
 
 === Importing and Exporting Charts
 
+The administrator can export and import charts from the charts action menu:
 
+image::ChartsActionMenu.png[Charts Action Menu, 120]
+
+The export/import file format is based on a JSON representation of the
+https://github.com/NiordOrg/niord/blob/master/niord-core/src/main/java/org/niord/core/chart/vo/SystemChartVo.java[SystemChartVo]
+class.
+
+Example:
+[source,json]
+----
+[
+  {
+    "chartNumber": "198",
+    "active": true,
+    "scale": 75000,
+    "name": "Østersøen, Fakse Bugt og Hjelm Bugt",
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [ 12.0, 54.74166667 ],
+          [ 12.76666667, 54.74166667 ],
+          [ 12.76666667, 55.38333333 ],
+          [ 12.0, 55.38333333 ],
+          [ 12.0, 54.74166667 ]
+        ]
+      ]
+    },
+    "horizontalDatum": "WGS84"
+  },
+  ...
+]
+----
+
+Importing a chart JSON file will trigger the _chart-import_ batch job.
+Batch jobs can be monitored and managed by system administrators.
+
+As an alternative to manually uploading a chart import JSON file on the _Charts_ admin page,
+the file can be copied to the _$NIORD_HOME/batch-jobs/chart-import/in_ folder.
