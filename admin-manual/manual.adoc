@@ -42,4 +42,8 @@ include::01-Introduction.adoc[]
 
 include::02-Admin.adoc[]
 
+<<<
+
+include::03-Charts.adoc[]
+
 

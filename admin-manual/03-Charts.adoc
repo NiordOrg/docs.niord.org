@@ -1,0 +1,71 @@
+
+:imagesdir: images
+
+== Charts
+
+The _Charts_ page allows an administrator to manage the list of nautical charts that may be associated with
+notices to mariners and navigational warnings, and can be used for filtering message search results.
+
+image::ChartsPage.png[Charts, 600]
+
+The list of charts is divided into pages of 10 charts, and may be navigated using the pagination control below
+the chart list.
+Alternatively, the user may filter the list of charts by typing a term into the _Filter_ input field above the
+chart list. The term is matched against the name and number of the charts.
+
+The map at the right side of the page depicts the extents of the charts currently displayed.
+
+=== Adding or Editing a Chart
+
+The user can add a new nautical chart by clicking the "New Chart" button, or edit a chart by clicking
+the pencil symbol next to the chart.
+
+This will open the _Chart Edit Page_:
+
+image::ChartsEditPage.png[Chart Edito Page, 600]
+
+Most chart attributes are pretty straight forward:
+
+[ cols="30,70", options="header" ]
+|===
+| Chart Attribute
+| Description
+
+| Active
+| Only an active chart can be assigned to a messages.
+
+| Chart Number
+| The chart number is the national number of the chart. It must be unique.
+
+| Int. Number
+| The international number of the charts. Only some charts have international numbers.
+
+| Name
+| The national name of the chart.
+
+| Scale
+| The scale of the chart. Can be used for sorting the charts assigned to a messages.
+
+| Horizontal Datum
+| The horizontal datum of the chart. Typically WGS84. This attribute is currently not used in Niord.
+
+|===
+
+The geographical extent of a chart can be edited by clicking the "Edit" button at the map. This will open
+a graphical editor and allow the user to define the extent by one or more polygons (rectangles)
+
+image::ChartsEditExtentPage.png[Chart Extent Editor, 600]
+
+The functionality of the graphical editor is described in more detail in the
+http://docs.niord.org/editor-manual/manual.html[User Manual for Editors].
+
+=== Deleting a Chart
+
+Charts can be deleted by clicking the trash icon next to them. However, this only works if the chart being
+deleted has never been assigned to a message.
+
+If a chart has indeed been assigned to a message, the user should deactivate the chart instead.
+
+=== Importing and Exporting Charts
+
+

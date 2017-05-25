@@ -5,13 +5,13 @@
 
 The _Admin_ page of Niord only become available if you log in as an administrator or system administrator.
 
-image::AdminPage.png[Admin, 600]
+image::AdminPage.png[Admin, 800]
 
 The _Admin_ page allows administrative users to manage base data such as charts, areas, publications, users, etc.
 
 There are some quirks to be aware of when assigning users to become administrators.
 A user can in theory be an administrator in one domain, e.g. "NW", and only an editor in another domain, e.g. "NM".
-Since some base data, such as charts and areas, is shared between domains, this means that the user can manage
+Since some base data, such as charts and areas, are shared between domains, this means that the user can manage
 the charts when in the "NW" domain, but not when in the "NM" domain.
 
 In reality this is hardly a problem, since the typical modus would be for an administrator of one domain to be

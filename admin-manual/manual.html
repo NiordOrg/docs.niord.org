@@ -519,6 +519,13 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#introduction">1. Introduction</a></li>
 <li><a href="#administrators-manual">2. Administrators Manual</a></li>
 <li><a href="#admin-page">3. Admin Page</a></li>
+<li><a href="#charts">4. Charts</a>
+<ul class="sectlevel2">
+<li><a href="#adding-or-editing-a-chart">4.1. Adding or Editing a Chart</a></li>
+<li><a href="#deleting-a-chart">4.2. Deleting a Chart</a></li>
+<li><a href="#importing-and-exporting-charts">4.3. Importing and Exporting Charts</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -632,7 +639,7 @@ Please use a newish Chrome, Safari or Firefox browser when using Niord.
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/AdminPage.png" alt="Admin" width="600">
+<img src="images/AdminPage.png" alt="Admin" width="800">
 </div>
 </div>
 <div class="paragraph">
@@ -641,19 +648,126 @@ Please use a newish Chrome, Safari or Firefox browser when using Niord.
 <div class="paragraph">
 <p>There are some quirks to be aware of when assigning users to become administrators.
 A user can in theory be an administrator in one domain, e.g. "NW", and only an editor in another domain, e.g. "NM".
-Since some base data, such as charts and areas, is shared between domains, this means that the user can manage
+Since some base data, such as charts and areas, are shared between domains, this means that the user can manage
 the charts when in the "NW" domain, but not when in the "NM" domain.</p>
 </div>
 <div class="paragraph">
 <p>In reality this is hardly a problem, since the typical modus would be for an administrator of one domain to be
 administrator of all domains. However, it is something to be aware of&#8230;&#8203;</p>
 </div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="charts"><a class="anchor" href="#charts"></a><a class="link" href="#charts">4. Charts</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <em>Charts</em> page allows an administrator to manage the list of nautical charts that may be associated with
+notices to mariners and navigational warnings, and can be used for filtering message search results.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ChartsPage.png" alt="Charts" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The list of charts is divided into pages of 10 charts, and may be navigated using the pagination control below
+the chart list.
+Alternatively, the user may filter the list of charts by typing a term into the <em>Filter</em> input field above the
+chart list. The term is matched against the name and number of the charts.</p>
+</div>
+<div class="paragraph">
+<p>The map at the right side of the page depicts the extents of the charts currently displayed.</p>
+</div>
+<div class="sect2">
+<h3 id="adding-or-editing-a-chart"><a class="anchor" href="#adding-or-editing-a-chart"></a><a class="link" href="#adding-or-editing-a-chart">4.1. Adding or Editing a Chart</a></h3>
+<div class="paragraph">
+<p>The user can add a new nautical chart by clicking the "New Chart" button, or edit a chart by clicking
+the pencil symbol next to the chart.</p>
+</div>
+<div class="paragraph">
+<p>This will open the <em>Chart Edit Page</em>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ChartsEditPage.png" alt="Chart Edito Page" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Most chart attributes are pretty straight forward:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Chart Attribute</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Active</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Only an active chart can be assigned to a messages.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Chart Number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The chart number is the national number of the chart. It must be unique.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Int. Number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The international number of the charts. Only some charts have international numbers.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The national name of the chart.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Scale</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The scale of the chart. Can be used for sorting the charts assigned to a messages.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Horizontal Datum</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The horizontal datum of the chart. Typically WGS84. This attribute is currently not used in Niord.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The geographical extent of a chart can be edited by clicking the "Edit" button at the map. This will open
+a graphical editor and allow the user to define the extent by one or more polygons (rectangles)</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ChartsEditExtentPage.png" alt="Chart Extent Editor" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The functionality of the graphical editor is described in more detail in the
+<a href="http://docs.niord.org/editor-manual/manual.html">User Manual for Editors</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-chart"><a class="anchor" href="#deleting-a-chart"></a><a class="link" href="#deleting-a-chart">4.2. Deleting a Chart</a></h3>
+<div class="paragraph">
+<p>Charts can be deleted by clicking the trash icon next to them. However, this only works if the chart being
+deleted has never been assigned to a message.</p>
+</div>
+<div class="paragraph">
+<p>If a chart has indeed been assigned to a message, the user should deactivate the chart instead.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="importing-and-exporting-charts"><a class="anchor" href="#importing-and-exporting-charts"></a><a class="link" href="#importing-and-exporting-charts">4.3. Importing and Exporting Charts</a></h3>
+
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-05-25 09:23:19 CEST
+Last updated 2017-05-25 09:43:40 CEST
 </div>
 </div>
 <script type="text/x-mathjax-config">
