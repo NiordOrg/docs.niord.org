@@ -46,4 +46,8 @@ include::02-Admin.adoc[]
 
 include::03-Charts.adoc[]
 
+<<<
+
+include::04-Areas.adoc[]
+
 

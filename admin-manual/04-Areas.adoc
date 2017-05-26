@@ -1,0 +1,176 @@
+
+:imagesdir: images
+
+== Areas
+
+The _Areas_ page allows an administrator to manage the hierarchical tree of areas that may be associated with
+notices to mariners and navigational warnings, and can be used for filtering message search results.
+
+image::AreasPage.png[Areas, 600]
+
+The area tree is navigated like a file system directory.
+Additionally, the user may filter the areas by typing a term into the _Filter Areas_ input field above the
+area tree. The term is matched against the name of the areas.
+
+=== Adding or Editing an Area
+
+The user can add a new area by clicking the "Add" button, or edit an area by selecting it in the area tree.
+
+When adding a new area, it will be a child-area of the currently selected area in the area tree. If no area
+is selected, the new area will become a new root area.
+
+The details of the new or edited area will be present in the _Area Editor Panel_ next to the area tree
+(see screenshot above).
+
+The simple editable attributes of an area area listed below:
+
+[ cols="30,70", options="header" ]
+|===
+| Area Attribute
+| Description
+
+| Active
+| Only an active area can be assigned to a message.
+
+| Name
+| The name of the area in all supported model languages.
+
+| MRN
+| Optionally, specify a _Maritime Resource Name_ (a unique URN) for the area. Defining MRNs for areas will facilitate
+  better integration between Niord systems of different countries.
+
+| Type
+| Optionally, specify the area type. Currently, "Country" and "Firing Area" are the only supported types.
+
+| Additional Editor Fields
+| Can be used to enable extra fields in the message editor when the area is assigned to the message.
+  As an example, if a firing practice area is assigned to a navigational warning, it might make sense to show
+  the "Signals" editor field, not normally enabled for navigational warnings, in the message editor.
+
+|===
+
+==== Message Sorting Editor Field
+
+The _Message Sorting_ editor field determines how to sort messages, when the message list is
+sorted by area. The valid options are:
+
+[ cols="30,70", options="header" ]
+|===
+| Message Sorting
+| Description
+
+| Area order
+| This is the default behaviour. The order of messages assigned to an area, or any of its sub-areas,
+  is determined by the area order.
+  So, in the example above, "Denmark" is e.g. sorted before "Faroe Islands", and within "Denmark", "The Baltic Sea"
+  is sorted before "The Sound", etc.
+
+| North-South
+| Messages associated with an area sorted "North-South", or any of its sub-areas, will be sorted
+  North-to-South by the latitude of their geometrical center.
+
+| South-North
+| Reverse order of "North-South".
+
+| East-West
+| Messages associated with an area sorted "East-West", or any of its sub-areas, will be sorted
+  East-to-West by the longitude of their geometrical center.
+
+| West-East
+| Reverse order of "East-West".
+
+| Clockwise
+| If an area is flagged as sorting "Clockwise", then messages associated with the area, or any of its subareas,
+  will be sorted in clockwise order around the given position, starting at the given bearing.
+
+| Counter-Clockwise
+| Reverse order of "Clockwise".
+
+|===
+
+This automated sorting of messages by area can subsequently be overridden manually, as described in the
+http://docs.niord.org/editor-manual/manual.html#sort-area-action[Sort Area Action] chapter.
+
+==== Extent Editor Field
+
+The geographical extent of an area can be edited by clicking the "Edit" button at the _Extent_ editor field map.
+This will open a graphical editor and allow the user to define the geographical extent.
+
+image::AreasEditExtentPage.png[Chart Extent Editor, 600]
+
+The functionality of the graphical editor is described in more detail in the
+http://docs.niord.org/editor-manual/manual.html[User Manual for Editors].
+
+=== Reorganizing Areas
+
+The hierarchical order of the areas are updated in two ways:
+
+* To move an area to a different parent area, use drag-and-drop.
+* To move an area to another position under the same parent area, use the up- and down-arrow buttons above
+  the area tree.
+
+=== Deleting an Area
+
+An area, including all its sub-areas, can be deleted by selecting it and then click the "Delete" button
+above the area tree.
+However, this only works if neither the selected area, nor any of its sub-areas, have ever been assigned
+to a message.
+
+If the area has indeed been assigned to a message, the user should instead deactivate the area.
+
+=== Importing and Exporting Areas
+
+The administrator can export and import areas from the area action menu:
+
+image::AreasActionMenu.png[Area Action Menu, 120]
+
+The export/import file format is based on a JSON representation of the
+https://github.com/NiordOrg/niord/blob/master/niord-core/src/main/java/org/niord/core/area/vo/SystemAreaVo.java[SystemAreaVo]
+class.
+The data file should define root areas at the top level, and the recursively define sub-areas in the _children_
+field of the parent area.
+
+The imported data is merged into the existing area tree. If an MRN is defined for an imported area, this is used
+to search for existing areas in the area tree. Alternatively, the name of the area (in all supported languages)
+is used to search for existing matches.
+
+Example:
+[source,json]
+----
+[
+  {
+    "mrn": "urn:mrn:iho:country:dk",
+    "active": true,
+    "descs": [ { "name": "Danmark",  "lang": "da" }, { "name": "Denmark", "lang": "en" }
+    ],
+    "type": "COUNTRY",
+    "geometry": {
+      "type": "MultiPolygon",
+      "coordinates": [ ... ]
+    },
+    "children": [
+      {
+        "active": true,
+        "descs": [ { "name": "Østersøen", "lang": "da" }, { "name": "The Baltic Sea", "lang": "en" } ],
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [ ... ]
+        },
+        "children": [ ... ],
+        "messageSorting": "CW",
+        "originLatitude": 54.5,
+        "originLongitude": 12.0,
+        "originAngle": 180
+      },
+      ...
+    ]
+  },
+  ...
+]
+----
+
+Importing an area JSON file will trigger the _area-import_ batch job.
+Batch jobs can be monitored and managed by system administrators.
+
+As an alternative to manually uploading an area import JSON file on the _Areas_ admin page,
+the file can be copied to the _$NIORD_HOME/batch-jobs/area-import/in_ folder.

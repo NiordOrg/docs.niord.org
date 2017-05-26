@@ -32,7 +32,7 @@ Most chart attributes are pretty straight forward:
 | Description
 
 | Active
-| Only an active chart can be assigned to a messages.
+| Only an active chart can be assigned to a message.
 
 | Chart Number
 | The chart number is the national number of the chart. It must be unique.

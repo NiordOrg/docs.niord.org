@@ -526,6 +526,14 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#importing-and-exporting-charts">4.3. Importing and Exporting Charts</a></li>
 </ul>
 </li>
+<li><a href="#areas">5. Areas</a>
+<ul class="sectlevel2">
+<li><a href="#adding-or-editing-an-area">5.1. Adding or Editing an Area</a></li>
+<li><a href="#reorganizing-areas">5.2. Reorganizing Areas</a></li>
+<li><a href="#deleting-an-area">5.3. Deleting an Area</a></li>
+<li><a href="#importing-and-exporting-areas">5.4. Importing and Exporting Areas</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -710,7 +718,7 @@ the pencil symbol next to the chart.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Active</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Only an active chart can be assigned to a messages.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Only an active chart can be assigned to a message.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Chart Number</p></td>
@@ -810,13 +818,259 @@ Batch jobs can be monitored and managed by system administrators.</p>
 <p>As an alternative to manually uploading a chart import JSON file on the <em>Charts</em> admin page,
 the file can be copied to the <em>$NIORD_HOME/batch-jobs/chart-import/in</em> folder.</p>
 </div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="areas"><a class="anchor" href="#areas"></a><a class="link" href="#areas">5. Areas</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <em>Areas</em> page allows an administrator to manage the hierarchical tree of areas that may be associated with
+notices to mariners and navigational warnings, and can be used for filtering message search results.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AreasPage.png" alt="Areas" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The area tree is navigated like a file system directory.
+Additionally, the user may filter the areas by typing a term into the <em>Filter Areas</em> input field above the
+area tree. The term is matched against the name of the areas.</p>
+</div>
+<div class="sect2">
+<h3 id="adding-or-editing-an-area"><a class="anchor" href="#adding-or-editing-an-area"></a><a class="link" href="#adding-or-editing-an-area">5.1. Adding or Editing an Area</a></h3>
+<div class="paragraph">
+<p>The user can add a new area by clicking the "Add" button, or edit an area by selecting it in the area tree.</p>
+</div>
+<div class="paragraph">
+<p>When adding a new area, it will be a child-area of the currently selected area in the area tree. If no area
+is selected, the new area will become a new root area.</p>
+</div>
+<div class="paragraph">
+<p>The details of the new or edited area will be present in the <em>Area Editor Panel</em> next to the area tree
+(see screenshot above).</p>
+</div>
+<div class="paragraph">
+<p>The simple editable attributes of an area area listed below:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Area Attribute</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Active</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Only an active area can be assigned to a message.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the area in all supported model languages.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MRN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optionally, specify a <em>Maritime Resource Name</em> (a unique URN) for the area. Defining MRNs for areas will facilitate
+  better integration between Niord systems of different countries.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optionally, specify the area type. Currently, "Country" and "Firing Area" are the only supported types.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Additional Editor Fields</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Can be used to enable extra fields in the message editor when the area is assigned to the message.
+  As an example, if a firing practice area is assigned to a navigational warning, it might make sense to show
+  the "Signals" editor field, not normally enabled for navigational warnings, in the message editor.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="message-sorting-editor-field"><a class="anchor" href="#message-sorting-editor-field"></a><a class="link" href="#message-sorting-editor-field">5.1.1. Message Sorting Editor Field</a></h4>
+<div class="paragraph">
+<p>The <em>Message Sorting</em> editor field determines how to sort messages, when the message list is
+sorted by area. The valid options are:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Message Sorting</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Area order</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This is the default behaviour. The order of messages assigned to an area, or any of its sub-areas,
+  is determined by the area order.
+  So, in the example above, "Denmark" is e.g. sorted before "Faroe Islands", and within "Denmark", "The Baltic Sea"
+  is sorted before "The Sound", etc.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">North-South</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Messages associated with an area sorted "North-South", or any of its sub-areas, will be sorted
+  North-to-South by the latitude of their geometrical center.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">South-North</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reverse order of "North-South".</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">East-West</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Messages associated with an area sorted "East-West", or any of its sub-areas, will be sorted
+  East-to-West by the longitude of their geometrical center.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">West-East</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reverse order of "East-West".</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clockwise</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If an area is flagged as sorting "Clockwise", then messages associated with the area, or any of its subareas,
+  will be sorted in clockwise order around the given position, starting at the given bearing.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Counter-Clockwise</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reverse order of "Clockwise".</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>This automated sorting of messages by area can subsequently be overridden manually, as described in the
+<a href="http://docs.niord.org/editor-manual/manual.html#sort-area-action">Sort Area Action</a> chapter.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="extent-editor-field"><a class="anchor" href="#extent-editor-field"></a><a class="link" href="#extent-editor-field">5.1.2. Extent Editor Field</a></h4>
+<div class="paragraph">
+<p>The geographical extent of an area can be edited by clicking the "Edit" button at the <em>Extent</em> editor field map.
+This will open a graphical editor and allow the user to define the geographical extent.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AreasEditExtentPage.png" alt="Chart Extent Editor" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The functionality of the graphical editor is described in more detail in the
+<a href="http://docs.niord.org/editor-manual/manual.html">User Manual for Editors</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="reorganizing-areas"><a class="anchor" href="#reorganizing-areas"></a><a class="link" href="#reorganizing-areas">5.2. Reorganizing Areas</a></h3>
+<div class="paragraph">
+<p>The hierarchical order of the areas are updated in two ways:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>To move an area to a different parent area, use drag-and-drop.</p>
+</li>
+<li>
+<p>To move an area to another position under the same parent area, use the up- and down-arrow buttons above
+the area tree.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-an-area"><a class="anchor" href="#deleting-an-area"></a><a class="link" href="#deleting-an-area">5.3. Deleting an Area</a></h3>
+<div class="paragraph">
+<p>An area, including all its sub-areas, can be deleted by selecting it and then click the "Delete" button
+above the area tree.
+However, this only works if neither the selected area, nor any of its sub-areas, have ever been assigned
+to a message.</p>
+</div>
+<div class="paragraph">
+<p>If the area has indeed been assigned to a message, the user should instead deactivate the area.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="importing-and-exporting-areas"><a class="anchor" href="#importing-and-exporting-areas"></a><a class="link" href="#importing-and-exporting-areas">5.4. Importing and Exporting Areas</a></h3>
+<div class="paragraph">
+<p>The administrator can export and import areas from the area action menu:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AreasActionMenu.png" alt="Area Action Menu" width="120">
+</div>
+</div>
+<div class="paragraph">
+<p>The export/import file format is based on a JSON representation of the
+<a href="https://github.com/NiordOrg/niord/blob/master/niord-core/src/main/java/org/niord/core/area/vo/SystemAreaVo.java">SystemAreaVo</a>
+class.
+The data file should define root areas at the top level, and the recursively define sub-areas in the <em>children</em>
+field of the parent area.</p>
+</div>
+<div class="paragraph">
+<p>The imported data is merged into the existing area tree. If an MRN is defined for an imported area, this is used
+to search for existing areas in the area tree. Alternatively, the name of the area (in all supported languages)
+is used to search for existing matches.</p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="json">[
+  {
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">mrn</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">urn:mrn:iho:country:dk</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">active</span><span class="delimiter">&quot;</span></span>: <span class="value">true</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">descs</span><span class="delimiter">&quot;</span></span>: [ { <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Danmark</span><span class="delimiter">&quot;</span></span>,  <span class="key"><span class="delimiter">&quot;</span><span class="content">lang</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">da</span><span class="delimiter">&quot;</span></span> }, { <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Denmark</span><span class="delimiter">&quot;</span></span>, <span class="key"><span class="delimiter">&quot;</span><span class="content">lang</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">en</span><span class="delimiter">&quot;</span></span> }
+    ],
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">COUNTRY</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">geometry</span><span class="delimiter">&quot;</span></span>: {
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">MultiPolygon</span><span class="delimiter">&quot;</span></span>,
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">coordinates</span><span class="delimiter">&quot;</span></span>: [ <span class="error">.</span><span class="error">.</span><span class="error">.</span> ]
+    },
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">children</span><span class="delimiter">&quot;</span></span>: [
+      {
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">active</span><span class="delimiter">&quot;</span></span>: <span class="value">true</span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">descs</span><span class="delimiter">&quot;</span></span>: [ { <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Østersøen</span><span class="delimiter">&quot;</span></span>, <span class="key"><span class="delimiter">&quot;</span><span class="content">lang</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">da</span><span class="delimiter">&quot;</span></span> }, { <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">The Baltic Sea</span><span class="delimiter">&quot;</span></span>, <span class="key"><span class="delimiter">&quot;</span><span class="content">lang</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">en</span><span class="delimiter">&quot;</span></span> } ],
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">geometry</span><span class="delimiter">&quot;</span></span>: {
+          <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">MultiPolygon</span><span class="delimiter">&quot;</span></span>,
+          <span class="key"><span class="delimiter">&quot;</span><span class="content">coordinates</span><span class="delimiter">&quot;</span></span>: [ <span class="error">.</span><span class="error">.</span><span class="error">.</span> ]
+        },
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">children</span><span class="delimiter">&quot;</span></span>: [ <span class="error">.</span><span class="error">.</span><span class="error">.</span> ],
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">messageSorting</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">CW</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">originLatitude</span><span class="delimiter">&quot;</span></span>: <span class="float">54.5</span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">originLongitude</span><span class="delimiter">&quot;</span></span>: <span class="float">12.0</span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">originAngle</span><span class="delimiter">&quot;</span></span>: <span class="integer">180</span>
+      },
+      <span class="error">.</span><span class="error">.</span><span class="error">.</span>
+    ]
+  },
+  <span class="error">.</span><span class="error">.</span><span class="error">.</span>
+]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Importing an area JSON file will trigger the <em>area-import</em> batch job.
+Batch jobs can be monitored and managed by system administrators.</p>
+</div>
+<div class="paragraph">
+<p>As an alternative to manually uploading an area import JSON file on the <em>Areas</em> admin page,
+the file can be copied to the <em>$NIORD_HOME/batch-jobs/area-import/in</em> folder.</p>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-05-25 09:43:40 CEST
+Last updated 2017-05-26 08:00:17 CEST
 </div>
 </div>
 <script type="text/x-mathjax-config">
