@@ -534,6 +534,13 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#importing-and-exporting-areas">5.4. Importing and Exporting Areas</a></li>
 </ul>
 </li>
+<li><a href="#publications">6. Publications</a>
+<ul class="sectlevel2">
+<li><a href="#publication-categories">6.1. Publication Categories</a></li>
+<li><a href="#adding-or-editing-publication-categories">6.2. Adding or Editing Publication Categories</a></li>
+<li><a href="#importing-and-exporting-publication-categories">6.3. Importing and Exporting Publication Categories</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -853,7 +860,7 @@ is selected, the new area will become a new root area.</p>
 (see screenshot above).</p>
 </div>
 <div class="paragraph">
-<p>The simple editable attributes of an area area listed below:</p>
+<p>The simple editable attributes of an area are listed below:</p>
 </div>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -959,7 +966,7 @@ This will open a graphical editor and allow the user to define the geographical 
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/AreasEditExtentPage.png" alt="Chart Extent Editor" width="600">
+<img src="images/AreasEditExtentPage.png" alt="Area Extent Editor" width="600">
 </div>
 </div>
 <div class="paragraph">
@@ -1064,13 +1071,153 @@ Batch jobs can be monitored and managed by system administrators.</p>
 <p>As an alternative to manually uploading an area import JSON file on the <em>Areas</em> admin page,
 the file can be copied to the <em>$NIORD_HOME/batch-jobs/area-import/in</em> folder.</p>
 </div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="publications"><a class="anchor" href="#publications"></a><a class="link" href="#publications">6. Publications</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <em>Publications</em> page allows an administrator to manage the list of publications produced by Niord or
+referenced by navigational warnings and notices to mariners in Niord.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/PublicationsPage.png" alt="Publications" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The <em>Publications</em> page is actually divided into three different sub-pages: <em>Publications</em>,
+<em>Publication Templates</em> and <em>Publication Categories</em>, detailed below in reverse order.</p>
+</div>
+<div class="sect2">
+<h3 id="publication-categories"><a class="anchor" href="#publication-categories"></a><a class="link" href="#publication-categories">6.1. Publication Categories</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/PublicationCategoriesTab.png" alt="Publication Categories" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>All publications must be assigned a <em>publication category</em>.
+Publication categories are thus used to group publications in an prioritized order, and will determine
+which publications are published to end-user facing websites.</p>
+</div>
+<div class="paragraph">
+<p>In the example above, the three publication categories flagged as published, is reflected in the
+end-user facing <em>Niord-Proxy</em> website, <a href="https://nautiskinformation.soefartsstyrelsen.dk" class="bare">https://nautiskinformation.soefartsstyrelsen.dk</a>, displaying
+publications grouped accordingly:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/NiordProxyDownloads.png" alt="Niord-Proxy Publications" width="600">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-or-editing-publication-categories"><a class="anchor" href="#adding-or-editing-publication-categories"></a><a class="link" href="#adding-or-editing-publication-categories">6.2. Adding or Editing Publication Categories</a></h3>
+<div class="paragraph">
+<p>The user may add a new publication category by clicking the "New Publication Category" button above
+the categories list, or edit an existing publication category by clicking the pencil icon next to it.</p>
+</div>
+<div class="paragraph">
+<p>This will open the <em>Publication Category Editor Panel</em>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/PublicationCategoriesEditTab.png" alt="EditingPublication Categories" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The editable attributes of a publication category are listed below:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Category Attribute</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All publication categories must be assigned a unique ID.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the publication category in all supported model languages.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optionally, a more detailed description of the publication category in all supported model languages.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Publish</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If checked, all publications of the publication category will be published via a public REST API available to
+  external clients, such as an end-user facing Niord-Proxy website.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Priority</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The priority of the publication category. May be e.g. used by end-user facing websites displaying Niord
+  publications.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="importing-and-exporting-publication-categories"><a class="anchor" href="#importing-and-exporting-publication-categories"></a><a class="link" href="#importing-and-exporting-publication-categories">6.3. Importing and Exporting Publication Categories</a></h3>
+<div class="paragraph">
+<p>The administrator can export and import publication categories from the action menu above the categories list.</p>
+</div>
+<div class="paragraph">
+<p>The export/import file format is based on a JSON representation of the
+<a href="https://github.com/NiordOrg/niord/blob/master/niord-model/src/main/java/org/niord/model/publication/PublicationCategoryVo.java">PublicationCategoryVo</a>
+class.</p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="json">[
+  {
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">categoryId</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">dk-dma-weekly-nm-publications</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">priority</span><span class="delimiter">&quot;</span></span>: <span class="integer">10</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">publish</span><span class="delimiter">&quot;</span></span>: <span class="value">true</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">descs</span><span class="delimiter">&quot;</span></span>: [
+      {
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Efterretninger for Søfarende</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">lang</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">da</span><span class="delimiter">&quot;</span></span>
+      },
+      {
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Notices to Mariners</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">lang</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">en</span><span class="delimiter">&quot;</span></span>
+      }
+    ]
+  },
+  <span class="error">.</span><span class="error">.</span><span class="error">.</span>
+]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Importing a publication categories JSON file will trigger the <em>publication-category-import</em> batch job.
+Batch jobs can be monitored and managed by system administrators.</p>
+</div>
+<div class="paragraph">
+<p>As an alternative to manually uploading a publication categories JSON file on the <em>Publication Categories</em> tab,
+the file can be copied to the <em>$NIORD_HOME/batch-jobs/publication-category-import/in</em> folder.</p>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-05-26 08:00:17 CEST
+Last updated 2017-05-26 09:52:27 CEST
 </div>
 </div>
 <script type="text/x-mathjax-config">

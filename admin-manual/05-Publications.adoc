@@ -1,0 +1,101 @@
+
+:imagesdir: images
+
+== Publications
+
+The _Publications_ page allows an administrator to manage the list of publications produced by Niord or
+referenced by navigational warnings and notices to mariners in Niord.
+
+image::PublicationsPage.png[Publications, 600]
+
+The _Publications_ page is actually divided into three different sub-pages: _Publications_,
+_Publication Templates_ and _Publication Categories_, detailed below in reverse order.
+
+=== Publication Categories ===
+
+image::PublicationCategoriesTab.png[Publication Categories, 600]
+
+All publications must be assigned a _publication category_.
+Publication categories are thus used to group publications in an prioritized order, and will determine
+which publications are published to end-user facing websites.
+
+In the example above, the three publication categories flagged as published, is reflected in the
+end-user facing _Niord-Proxy_ website, https://nautiskinformation.soefartsstyrelsen.dk, displaying
+publications grouped accordingly:
+
+image::NiordProxyDownloads.png[Niord-Proxy Publications, 600]
+
+=== Adding or Editing Publication Categories ===
+
+The user may add a new publication category by clicking the "New Publication Category" button above
+the categories list, or edit an existing publication category by clicking the pencil icon next to it.
+
+This will open the _Publication Category Editor Panel_:
+
+image::PublicationCategoriesEditTab.png[EditingPublication Categories, 600]
+
+The editable attributes of a publication category are listed below:
+
+[ cols="30,70", options="header" ]
+|===
+| Category Attribute
+| Description
+
+| ID
+| All publication categories must be assigned a unique ID.
+
+| Name
+| The name of the publication category in all supported model languages.
+
+| Description
+| Optionally, a more detailed description of the publication category in all supported model languages.
+
+| Publish
+| If checked, all publications of the publication category will be published via a public REST API available to
+  external clients, such as an end-user facing Niord-Proxy website.
+
+| Priority
+| The priority of the publication category. May be e.g. used by end-user facing websites displaying Niord
+  publications.
+
+|===
+
+=== Importing and Exporting Publication Categories ===
+
+The administrator can export and import publication categories from the action menu above the categories list.
+
+The export/import file format is based on a JSON representation of the
+https://github.com/NiordOrg/niord/blob/master/niord-model/src/main/java/org/niord/model/publication/PublicationCategoryVo.java[PublicationCategoryVo]
+class.
+
+Example:
+[source,json]
+----
+[
+  {
+    "categoryId": "dk-dma-weekly-nm-publications",
+    "priority": 10,
+    "publish": true,
+    "descs": [
+      {
+        "name": "Efterretninger for Søfarende",
+        "lang": "da"
+      },
+      {
+        "name": "Notices to Mariners",
+        "lang": "en"
+      }
+    ]
+  },
+  ...
+]
+----
+
+Importing a publication categories JSON file will trigger the _publication-category-import_ batch job.
+Batch jobs can be monitored and managed by system administrators.
+
+As an alternative to manually uploading a publication categories JSON file on the _Publication Categories_ tab,
+the file can be copied to the _$NIORD_HOME/batch-jobs/publication-category-import/in_ folder.
+
+
+

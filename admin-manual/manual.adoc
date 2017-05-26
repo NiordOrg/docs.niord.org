@@ -50,4 +50,8 @@ include::03-Charts.adoc[]
 
 include::04-Areas.adoc[]
 
+<<<
+
+include::05-Publications.adoc[]
+
 

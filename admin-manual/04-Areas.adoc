@@ -22,7 +22,7 @@ is selected, the new area will become a new root area.
 The details of the new or edited area will be present in the _Area Editor Panel_ next to the area tree
 (see screenshot above).
 
-The simple editable attributes of an area area listed below:
+The simple editable attributes of an area are listed below:
 
 [ cols="30,70", options="header" ]
 |===
@@ -96,7 +96,7 @@ http://docs.niord.org/editor-manual/manual.html#sort-area-action[Sort Area Actio
 The geographical extent of an area can be edited by clicking the "Edit" button at the _Extent_ editor field map.
 This will open a graphical editor and allow the user to define the geographical extent.
 
-image::AreasEditExtentPage.png[Chart Extent Editor, 600]
+image::AreasEditExtentPage.png[Area Extent Editor, 600]
 
 The functionality of the graphical editor is described in more detail in the
 http://docs.niord.org/editor-manual/manual.html[User Manual for Editors].
