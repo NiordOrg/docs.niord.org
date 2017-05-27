@@ -536,9 +536,9 @@ table.CodeRay td.code>pre{padding:0}
 </li>
 <li><a href="#publications">6. Publications</a>
 <ul class="sectlevel2">
-<li><a href="#publication-categories">6.1. Publication Categories</a></li>
-<li><a href="#adding-or-editing-publication-categories">6.2. Adding or Editing Publication Categories</a></li>
-<li><a href="#importing-and-exporting-publication-categories">6.3. Importing and Exporting Publication Categories</a></li>
+<li><a href="#publication-categories-tab">6.1. Publication Categories Tab</a></li>
+<li><a href="#publication-templates-tab">6.2. Publication Templates Tab</a></li>
+<li><a href="#publications-tab">6.3. Publications Tab</a></li>
 </ul>
 </li>
 </ul>
@@ -1079,8 +1079,26 @@ the file can be copied to the <em>$NIORD_HOME/batch-jobs/area-import/in</em> fol
 <h2 id="publications"><a class="anchor" href="#publications"></a><a class="link" href="#publications">6. Publications</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The <em>Publications</em> page allows an administrator to manage the list of publications produced by Niord or
-referenced by navigational warnings and notices to mariners in Niord.</p>
+<p>The <em>Publications</em> page allows an administrator to manage a list of publications.
+<em>Publications</em> represents a very extensive topic, because they are used for many different purposes,
+and in many different forms.</p>
+</div>
+<div class="paragraph">
+<p>Two of the main purposes are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>All navigational warnings and notices to mariners in Niord maintain a list of publications
+relevant to the message. Or rather, two lists; one for internal publications such as the journal
+number or Aids to Navigation numbers relevant to the message; and a list of external publications,
+such as the List of Wrecks, or List of Lights, referenced by the message.</p>
+</li>
+<li>
+<p>Publications that are produced by Niord, such as the weekly Notices to Mariners. These are
+publicly available via a public REST API.</p>
+</li>
+</ul>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1092,7 +1110,7 @@ referenced by navigational warnings and notices to mariners in Niord.</p>
 <em>Publication Templates</em> and <em>Publication Categories</em>, detailed below in reverse order.</p>
 </div>
 <div class="sect2">
-<h3 id="publication-categories"><a class="anchor" href="#publication-categories"></a><a class="link" href="#publication-categories">6.1. Publication Categories</a></h3>
+<h3 id="publication-categories-tab"><a class="anchor" href="#publication-categories-tab"></a><a class="link" href="#publication-categories-tab">6.1. Publication Categories Tab</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/PublicationCategoriesTab.png" alt="Publication Categories" width="600">
@@ -1100,8 +1118,8 @@ referenced by navigational warnings and notices to mariners in Niord.</p>
 </div>
 <div class="paragraph">
 <p>All publications must be assigned a <em>publication category</em>.
-Publication categories are thus used to group publications in an prioritized order, and will determine
-which publications are published to end-user facing websites.</p>
+Publication categories are thus used to group publications in a prioritized order, and will determine
+which publications are published to end-user facing websites via a public REST API.</p>
 </div>
 <div class="paragraph">
 <p>In the example above, the three publication categories flagged as published, is reflected in the
@@ -1113,9 +1131,8 @@ publications grouped accordingly:</p>
 <img src="images/NiordProxyDownloads.png" alt="Niord-Proxy Publications" width="600">
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="adding-or-editing-publication-categories"><a class="anchor" href="#adding-or-editing-publication-categories"></a><a class="link" href="#adding-or-editing-publication-categories">6.2. Adding or Editing Publication Categories</a></h3>
+<div class="sect3">
+<h4 id="adding-or-editing-publication-categories"><a class="anchor" href="#adding-or-editing-publication-categories"></a><a class="link" href="#adding-or-editing-publication-categories">6.1.1. Adding or Editing Publication Categories</a></h4>
 <div class="paragraph">
 <p>The user may add a new publication category by clicking the "New Publication Category" button above
 the categories list, or edit an existing publication category by clicking the pencil icon next to it.</p>
@@ -1125,7 +1142,7 @@ the categories list, or edit an existing publication category by clicking the pe
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/PublicationCategoriesEditTab.png" alt="EditingPublication Categories" width="600">
+<img src="images/PublicationCategoriesEditTab.png" alt="Editing Publication Categories" width="600">
 </div>
 </div>
 <div class="paragraph">
@@ -1168,8 +1185,8 @@ the categories list, or edit an existing publication category by clicking the pe
 </tbody>
 </table>
 </div>
-<div class="sect2">
-<h3 id="importing-and-exporting-publication-categories"><a class="anchor" href="#importing-and-exporting-publication-categories"></a><a class="link" href="#importing-and-exporting-publication-categories">6.3. Importing and Exporting Publication Categories</a></h3>
+<div class="sect3">
+<h4 id="importing-and-exporting-publication-categories"><a class="anchor" href="#importing-and-exporting-publication-categories"></a><a class="link" href="#importing-and-exporting-publication-categories">6.1.2. Importing and Exporting Publication Categories</a></h4>
 <div class="paragraph">
 <p>The administrator can export and import publication categories from the action menu above the categories list.</p>
 </div>
@@ -1210,6 +1227,413 @@ Batch jobs can be monitored and managed by system administrators.</p>
 <div class="paragraph">
 <p>As an alternative to manually uploading a publication categories JSON file on the <em>Publication Categories</em> tab,
 the file can be copied to the <em>$NIORD_HOME/batch-jobs/publication-category-import/in</em> folder.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="publication-templates-tab"><a class="anchor" href="#publication-templates-tab"></a><a class="link" href="#publication-templates-tab">6.2. Publication Templates Tab</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/PublicationTemplatesTab.png" alt="Publication Templates" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Publication Templates</em> are essentially identical to <em>Publications</em>, give or take a few attributes.
+Configuration of a publication can be quite extensive, in particular for tasks
+such as producing a weekly Notices to Mariners digest. However, when basing a publication on a
+publication template, only a few fields, such as publication dates need to be filled out.</p>
+</div>
+<div class="paragraph">
+<p>The list of publication templates can be filtered using a "Title" text input field, or by filtering
+on the status, file type and publication category of the publication templates.</p>
+</div>
+<div class="sect3">
+<h4 id="adding-or-editing-publication-templates"><a class="anchor" href="#adding-or-editing-publication-templates"></a><a class="link" href="#adding-or-editing-publication-templates">6.2.1. Adding or Editing Publication Templates</a></h4>
+<div class="paragraph">
+<p>The user may add a new publication template by clicking the "New Publication" button above
+the template list, or copy or edit an existing publication template by clicking the copy or
+pencil icon next to it.</p>
+</div>
+<div class="paragraph">
+<p>This will open the <em>Publication Template Editor Panel</em>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/PublicationTemplatesEditTab.png" alt="Editing Publication Templates" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Publication templates can make use of <em>replacement tokens</em> in the textual fields.
+This is typically used to inject the year or calendar week into the titles of publications
+that are based on the template. Available <em>replacement tokens</em>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>"${year}" : The full year, e.g. "2017".</p>
+</li>
+<li>
+<p>"${year-2-digits}" : The last two digits of the year, e.g. "17".</p>
+</li>
+<li>
+<p>"${week}" : The calendar week, e.g. "8".</p>
+</li>
+<li>
+<p>"${week-2-digits}" : A two-digit version of the calendar week, e.g. "08".</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The date used for expanding the <em>replacement tokens</em> is the <em>publish start date</em> of the
+publication that is based on the publication template.</p>
+</div>
+<div class="paragraph">
+<p>The common editable attributes of a publication template are listed below:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Template Attribute</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A publication template can be in a <em>Draft</em>, <em>Active</em> or <em>Inactive</em> status. Only <em>Active</em> templates
+  can be used for new publications. Allowed status transitions are from <em>Draft</em> to <em>Active</em> and from
+  <em>Active</em> to <em>Inactive</em>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Category</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All publication templates must be assigned a publication category.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Title</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The title of the publication template in all supported model languages.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Title Format</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The format used for generating the titles of the publications based on this publication
+  template in all supported model languages.
+  This typically involves <em>replacement tokens</em>, such as in "NtM Week ${week} - ${year}"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Periodical Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Some publications are periodicals. This make it even easier to create a new publication, say, the
+  next weekly NtM, by copying an old version and adding one week to the publish date interval.
+  Available values are <em>Daily</em>, <em>Weekly</em>, <em>Monthly</em> and <em>Yearly</em>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">File Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The file type attribute of publication defines the actual type of the publication. This is treated
+  in more detail in the next sub-sections.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Language Specific</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the <em>Language Specific</em> option is checked, it will signal that the actual publication
+  file is language specific, and a separate link or file (depending on the <em>File Type</em>) is defined
+  for each model language. If the <em>Language Specific</em> option is not checked, only a single
+  link or file is defined.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Message Publication</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <em>Message Publication</em> option is used to define if the publication is selectable in the
+  <em>Publications</em> editor field of the message editor, and whether the publication is selectable
+  for internal or external message publications.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect4">
+<h5 id="none-file-type"><a class="anchor" href="#none-file-type"></a><a class="link" href="#none-file-type">"None" File Type</a></h5>
+<div class="paragraph">
+<p>When the "None" file type is selected for a publication template, no actual link of file will be
+associated with the publications based on the template.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="link-file-type"><a class="anchor" href="#link-file-type"></a><a class="link" href="#link-file-type">"Link" File Type</a></h5>
+<div class="imageblock">
+<div class="content">
+<img src="images/PublicationFileTypeLink.png" alt="Publication File Type Link" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>When the "Link" file type is selected for a publication template, a URL link, possible to an external
+publication, need be specified for publications based on the template.
+Depending on the <em>Language Specific</em> setting, there will be a single link or a link per model
+language.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="uploaded-file-file-type"><a class="anchor" href="#uploaded-file-file-type"></a><a class="link" href="#uploaded-file-file-type">"Uploaded File" File Type</a></h5>
+<div class="imageblock">
+<div class="content">
+<img src="images/PublicationFileTypeUploadedFile.png" alt="Publication File Type Uploaded File" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>When the "Uploaded File" file type is selected for a publication template, an actual publication
+file (e.g. a PDF) must be uploaded for publications based on the template.
+Depending on the <em>Language Specific</em> setting, only a single file should be uploaded, or a file
+per model language.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="message-file-type"><a class="anchor" href="#message-file-type"></a><a class="link" href="#message-file-type">"Message" File Type</a></h5>
+<div class="imageblock">
+<div class="content">
+<img src="images/PublicationFileTypeMessage.png" alt="Publication File Type Message" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>By far, the most complex and powerful publication file type option is "Message". The overarching
+idea is to associate publications of this file type with a <em>message tag</em> - please refer to the
+<a href="http://docs.niord.org/editor-manual/manual.html#message-tags">Message Tags topic</a>.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, a message report, such as the "NM T&amp;P report" above, must be specified
+along with the file name of the generated report files.
+Depending on the  <em>Language Specific</em> setting, a single PDF file will be generated,
+or one per model language.</p>
+</div>
+<div class="paragraph">
+<p>Messages can be associated with the message tag in two ways.
+Either the user can manually assign the messages to the message tag, or the publication
+can be in a "Recording" status, where messages matching the <em>Message Tag Filter</em> will automatically
+be added to the message tag. Conversely, if a message does not match the filter, it will be
+removed from the message tag.</p>
+</div>
+<div class="paragraph">
+<p>At first, when the user starts recording, all currently published messages of the domain for which
+the publication is defined, will be subjected to the <em>Message Tag Filter</em>.
+The messages that matches the filter will automatically be added to the message tag.
+Subsequently, for as long as the publication is in the recording status, all messages of the publication
+domain that change status will be subjected to the <em>Message Tag Filter</em>, and added or removed
+from the message tag accordingly.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example 1</strong>: The following filter will assign all T&amp;P messages to the message tag that are already
+published when the user starts recording og gets published whilst recording. If a message is
+cancelled or expires whilst recording, it is removed from the message tag.
+This is very useful for e.g. a weekly NM T&amp;P in-force publication.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>(msg.type == Type.TEMPORARY_NOTICE || msg.type == Type.PRELIMINARY_NOTICE) &amp;&amp; msg.status == Status.PUBLISHED</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Example 2</strong>: The following filter is the default message tag filter, i.e. the filter used if none is
+specified. It ignores all published messages when the user starts recording. Subsequently, when
+a message changes status to published, it is added to the message tag. However, it is not removed
+again if it was already in the message tag.
+This is very useful for e.g. a weekly NM publication, where you wish to include all NMs produced
+throughout the week, even if they have already been cancelled.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>data.phase == 'msg-status-change' &amp;&amp; (msg.status == Status.PUBLISHED || data.isIncluded)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="publications-tab"><a class="anchor" href="#publications-tab"></a><a class="link" href="#publications-tab">6.3. Publications Tab</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/PublicationTab.png" alt="Publications" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Publication</em> are essentially identical to <em>Publications Templates</em>, give or take a few attributes.
+Configuration of a publication can be quite extensive, in particular for tasks
+such as producing a weekly Notices to Mariners digest. However, when basing a publication on a
+publication template, only a few fields, such as publication dates need to be filled out.</p>
+</div>
+<div class="paragraph">
+<p>When reading this section, it is assumed that you have already read the <a href="#publication-templates-tab">Publication Templates Tab</a>
+section, and overlapping documentation is left out.</p>
+</div>
+<div class="paragraph">
+<p>The list of publication can be filtered using a "Title" text input field, or by filtering
+on the status, file type and publication category of the publication templates.
+Since there may be lots of publications in the system, the resulting publication list is paged
+and can be navigated using the pagination control below the list.</p>
+</div>
+<div class="sect3">
+<h4 id="adding-or-editing-publication"><a class="anchor" href="#adding-or-editing-publication"></a><a class="link" href="#adding-or-editing-publication">6.3.1. Adding or Editing Publication</a></h4>
+<div class="paragraph">
+<p>The user may add a new publication template by clicking the "New Publication" button above
+the publication list, or copy or edit an existing publication by clicking the copy or
+pencil icon next to it.</p>
+</div>
+<div class="paragraph">
+<p>This will open the <em>Publication Editor Panel</em>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/PublicationEditTab.png" alt="Editing Publications" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>This publication is based on the "Weekly NtM" publication template, and thus, only a few
+fields are left to fill out.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Publication Attribute</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A publication can be in a <em>Draft</em>, <em>Recording</em>, <em>Active</em> or <em>Inactive</em> status. Only <em>Active</em>
+  publications withing the specified <em>Publish Date</em> interval will be selectable in the message
+  editor or published to external clients via the public REST API.
+  Allowed status transitions are from <em>Draft</em> to <em>Recording</em> or <em>Active</em>. From <em>Recording</em> back to
+  <em>Draft</em>, and from <em>Active</em> to <em>Inactive</em>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Publish Date</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The date interval where an <em>Active</em> publication is selectable in the message
+  editor or published to external clients via the public REST API.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Publication Edition</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A publication can be released in multiple editions. For instance, a yearly "Firing Practice Areas"
+  publication may have to be updated if the firing areas are changed mid-year. In that case,
+  copy the old publication, adjust the end publish date of the old publication, and the start
+  publish date of the new publication to be the cut-over date. Also, increase the edition of the
+  new publication, and re-generate or upload updated repository files as appropriate.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Repository File</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">These fields are present when the template has file type "Message" (see previous section).
+  Here, you can preview and generate the actual repository files associated with the publication.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="releasing-publications"><a class="anchor" href="#releasing-publications"></a><a class="link" href="#releasing-publications">6.3.2. Releasing Publications</a></h4>
+<div class="paragraph">
+<p>A special "Release Publication&#8230;&#8203;" option is available to message reports-based publications that
+are in the <em>Recording</em> status.</p>
+</div>
+<div class="paragraph">
+<p>Enacting the function will perform multiple steps at once:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Stop recording.</p>
+</li>
+<li>
+<p>Generated repository files for all supported languages.</p>
+</li>
+<li>
+<p>Make the publication active.</p>
+</li>
+<li>
+<p>Generate next issue of the publication.</p>
+</li>
+<li>
+<p>Start recording for the next issue publication.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="importing-and-exporting-publications"><a class="anchor" href="#importing-and-exporting-publications"></a><a class="link" href="#importing-and-exporting-publications">6.3.3. Importing and Exporting Publications</a></h4>
+<div class="paragraph">
+<p>The administrator can export and import publications including publication templates from
+the action menu above the publication list.</p>
+</div>
+<div class="paragraph">
+<p>The export/import file format is based on a JSON representation of the
+<a href="https://github.com/NiordOrg/niord/blob/master/niord-core/src/main/java/org/niord/core/publication/vo/SystemPublicationVo.java">SystemPublicationVo</a>
+class.</p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="json">[
+  {
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">category</span><span class="delimiter">&quot;</span></span>: {
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">categoryId</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">dk-dma-weekly-nm-publications</span><span class="delimiter">&quot;</span></span>
+    },
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">MESSAGE_REPORT</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">publishDateFrom</span><span class="delimiter">&quot;</span></span>: <span class="integer">1496401200000</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">publishDateTo</span><span class="delimiter">&quot;</span></span>: <span class="integer">1497006000000</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">descs</span><span class="delimiter">&quot;</span></span>: [
+      {
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">EfS uge 22 - 2017</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">fileName</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">EfS-Uge-22-2017.pdf</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">lang</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">da</span><span class="delimiter">&quot;</span></span>
+      },
+      {
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">NtM Week 22 - 2017</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">fileName</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">NtM-Week-22-2017.pdf</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">lang</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">en</span><span class="delimiter">&quot;</span></span>
+      }
+    ],
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">revision</span><span class="delimiter">&quot;</span></span>: <span class="integer">1</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">mainType</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">PUBLICATION</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">status</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">RECORDING</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">template</span><span class="delimiter">&quot;</span></span>: {
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">publicationId</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">a8e661ee-49b8-45ea-a176-952e99253fec</span><span class="delimiter">&quot;</span></span>
+    },
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">domain</span><span class="delimiter">&quot;</span></span>: {
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">domainId</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">niord-nm</span><span class="delimiter">&quot;</span></span>
+    },
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">periodicalType</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">WEEKLY</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">edition</span><span class="delimiter">&quot;</span></span>: <span class="integer">1</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">messageTagFormat</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">nm-w22-2017</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">messageTag</span><span class="delimiter">&quot;</span></span>: {
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">tagId</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">73a50a0a-0d65-4a6f-8a17-1af9b3e8fbf9</span><span class="delimiter">&quot;</span></span>
+    },
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">messagePublication</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">NONE</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">languageSpecific</span><span class="delimiter">&quot;</span></span>: <span class="value">true</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">printSettings</span><span class="delimiter">&quot;</span></span>: {
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">report</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">nm-report</span><span class="delimiter">&quot;</span></span>,
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">pageSize</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">A4</span><span class="delimiter">&quot;</span></span>,
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">pageOrientation</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">portrait</span><span class="delimiter">&quot;</span></span>,
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">mapThumbnails</span><span class="delimiter">&quot;</span></span>: <span class="value">false</span>
+    },
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">reportParams</span><span class="delimiter">&quot;</span></span>: {
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">year</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">2017</span><span class="delimiter">&quot;</span></span>,
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">week</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">22</span><span class="delimiter">&quot;</span></span>
+    },
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">publicationId</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">0128ff8f-910f-4204-a1ce-13c48d3d5ffb</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">created</span><span class="delimiter">&quot;</span></span>: <span class="integer">1483269014000</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">updated</span><span class="delimiter">&quot;</span></span>: <span class="integer">1495792436000</span>
+  },
+  <span class="error">.</span><span class="error">.</span><span class="error">.</span>
+]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Importing a publications JSON file will trigger the <em>publication-import</em> batch job.
+Batch jobs can be monitored and managed by system administrators.</p>
+</div>
+<div class="paragraph">
+<p>As an alternative to manually uploading a publications JSON file on the <em>Publications</em> tab,
+the file can be copied to the <em>$NIORD_HOME/batch-jobs/publication-import/in</em> folder.</p>
+</div>
 </div>
 </div>
 </div>

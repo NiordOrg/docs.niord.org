@@ -3,21 +3,31 @@
 
 == Publications
 
-The _Publications_ page allows an administrator to manage the list of publications produced by Niord or
-referenced by navigational warnings and notices to mariners in Niord.
+The _Publications_ page allows an administrator to manage a list of publications.
+_Publications_ represents a very extensive topic, because they are used for many different purposes,
+and in many different forms.
+
+Two of the main purposes are:
+
+* All navigational warnings and notices to mariners in Niord maintain a list of publications
+  relevant to the message. Or rather, two lists; one for internal publications such as the journal
+  number or Aids to Navigation numbers relevant to the message; and a list of external publications,
+  such as the List of Wrecks, or List of Lights, referenced by the message.
+* Publications that are produced by Niord, such as the weekly Notices to Mariners. These are
+  publicly available via a public REST API.
 
 image::PublicationsPage.png[Publications, 600]
 
 The _Publications_ page is actually divided into three different sub-pages: _Publications_,
 _Publication Templates_ and _Publication Categories_, detailed below in reverse order.
 
-=== Publication Categories ===
+=== Publication Categories Tab
 
 image::PublicationCategoriesTab.png[Publication Categories, 600]
 
 All publications must be assigned a _publication category_.
-Publication categories are thus used to group publications in an prioritized order, and will determine
-which publications are published to end-user facing websites.
+Publication categories are thus used to group publications in a prioritized order, and will determine
+which publications are published to end-user facing websites via a public REST API.
 
 In the example above, the three publication categories flagged as published, is reflected in the
 end-user facing _Niord-Proxy_ website, https://nautiskinformation.soefartsstyrelsen.dk, displaying
@@ -25,14 +35,14 @@ publications grouped accordingly:
 
 image::NiordProxyDownloads.png[Niord-Proxy Publications, 600]
 
-=== Adding or Editing Publication Categories ===
+==== Adding or Editing Publication Categories
 
 The user may add a new publication category by clicking the "New Publication Category" button above
 the categories list, or edit an existing publication category by clicking the pencil icon next to it.
 
 This will open the _Publication Category Editor Panel_:
 
-image::PublicationCategoriesEditTab.png[EditingPublication Categories, 600]
+image::PublicationCategoriesEditTab.png[Editing Publication Categories, 600]
 
 The editable attributes of a publication category are listed below:
 
@@ -60,7 +70,7 @@ The editable attributes of a publication category are listed below:
 
 |===
 
-=== Importing and Exporting Publication Categories ===
+==== Importing and Exporting Publication Categories
 
 The administrator can export and import publication categories from the action menu above the categories list.
 
@@ -98,4 +108,295 @@ As an alternative to manually uploading a publication categories JSON file on th
 the file can be copied to the _$NIORD_HOME/batch-jobs/publication-category-import/in_ folder.
 
 
+=== Publication Templates Tab
+
+image::PublicationTemplatesTab.png[Publication Templates, 600]
+
+_Publication Templates_ are essentially identical to _Publications_, give or take a few attributes.
+Configuration of a publication can be quite extensive, in particular for tasks
+such as producing a weekly Notices to Mariners digest. However, when basing a publication on a
+publication template, only a few fields, such as publication dates need to be filled out.
+
+The list of publication templates can be filtered using a "Title" text input field, or by filtering
+on the status, file type and publication category of the publication templates.
+
+==== Adding or Editing Publication Templates
+
+The user may add a new publication template by clicking the "New Publication" button above
+the template list, or copy or edit an existing publication template by clicking the copy or
+pencil icon next to it.
+
+This will open the _Publication Template Editor Panel_:
+
+image::PublicationTemplatesEditTab.png[Editing Publication Templates, 600]
+
+Publication templates can make use of _replacement tokens_ in the textual fields.
+This is typically used to inject the year or calendar week into the titles of publications
+that are based on the template. Available _replacement tokens_:
+
+* "${year}" : The full year, e.g. "2017".
+* "${year-2-digits}" : The last two digits of the year, e.g. "17".
+* "${week}" : The calendar week, e.g. "8".
+* "${week-2-digits}" : A two-digit version of the calendar week, e.g. "08".
+
+The date used for expanding the _replacement tokens_ is the _publish start date_ of the
+publication that is based on the publication template.
+
+The common editable attributes of a publication template are listed below:
+
+[ cols="30,70", options="header" ]
+|===
+| Template Attribute
+| Description
+
+| Status
+| A publication template can be in a _Draft_, _Active_ or _Inactive_ status. Only _Active_ templates
+  can be used for new publications. Allowed status transitions are from _Draft_ to _Active_ and from
+  _Active_ to _Inactive_.
+
+| Category
+| All publication templates must be assigned a publication category.
+
+| Title
+| The title of the publication template in all supported model languages.
+
+| Title Format
+| The format used for generating the titles of the publications based on this publication
+  template in all supported model languages.
+  This typically involves _replacement tokens_, such as in "NtM Week ${week} - ${year}"
+
+| Periodical Type
+| Some publications are periodicals. This make it even easier to create a new publication, say, the
+  next weekly NtM, by copying an old version and adding one week to the publish date interval.
+  Available values are _Daily_, _Weekly_, _Monthly_ and _Yearly_.
+
+| File Type
+| The file type attribute of publication defines the actual type of the publication. This is treated
+  in more detail in the next sub-sections.
+
+| Language Specific
+| If the _Language Specific_ option is checked, it will signal that the actual publication
+  file is language specific, and a separate link or file (depending on the _File Type_) is defined
+  for each model language. If the _Language Specific_ option is not checked, only a single
+  link or file is defined.
+
+| Message Publication
+| The _Message Publication_ option is used to define if the publication is selectable in the
+  _Publications_ editor field of the message editor, and whether the publication is selectable
+  for internal or external message publications.
+
+|===
+
+===== "None" File Type
+
+When the "None" file type is selected for a publication template, no actual link of file will be
+associated with the publications based on the template.
+
+===== "Link" File Type
+
+image::PublicationFileTypeLink.png[Publication File Type Link, 600]
+
+When the "Link" file type is selected for a publication template, a URL link, possible to an external
+publication, need be specified for publications based on the template.
+Depending on the _Language Specific_ setting, there will be a single link or a link per model
+language.
+
+===== "Uploaded File" File Type
+
+image::PublicationFileTypeUploadedFile.png[Publication File Type Uploaded File, 600]
+
+When the "Uploaded File" file type is selected for a publication template, an actual publication
+file (e.g. a PDF) must be uploaded for publications based on the template.
+Depending on the _Language Specific_ setting, only a single file should be uploaded, or a file
+per model language.
+
+===== "Message" File Type
+
+image::PublicationFileTypeMessage.png[Publication File Type Message, 600]
+
+By far, the most complex and powerful publication file type option is "Message". The overarching
+idea is to associate publications of this file type with a _message tag_ - please refer to the
+http://docs.niord.org/editor-manual/manual.html#message-tags[Message Tags topic].
+
+Additionally, a message report, such as the "NM T&P report" above, must be specified
+along with the file name of the generated report files.
+Depending on the  _Language Specific_ setting, a single PDF file will be generated,
+or one per model language.
+
+Messages can be associated with the message tag in two ways.
+Either the user can manually assign the messages to the message tag, or the publication
+can be in a "Recording" status, where messages matching the _Message Tag Filter_ will automatically
+be added to the message tag. Conversely, if a message does not match the filter, it will be
+removed from the message tag.
+
+At first, when the user starts recording, all currently published messages of the domain for which
+the publication is defined, will be subjected to the _Message Tag Filter_.
+The messages that matches the filter will automatically be added to the message tag.
+Subsequently, for as long as the publication is in the recording status, all messages of the publication
+domain that change status will be subjected to the _Message Tag Filter_, and added or removed
+from the message tag accordingly.
+
+*Example 1*: The following filter will assign all T&P messages to the message tag that are already
+published when the user starts recording og gets published whilst recording. If a message is
+cancelled or expires whilst recording, it is removed from the message tag.
+This is very useful for e.g. a weekly NM T&P in-force publication.
+
+    (msg.type == Type.TEMPORARY_NOTICE || msg.type == Type.PRELIMINARY_NOTICE) && msg.status == Status.PUBLISHED
+
+
+*Example 2*: The following filter is the default message tag filter, i.e. the filter used if none is
+specified. It ignores all published messages when the user starts recording. Subsequently, when
+a message changes status to published, it is added to the message tag. However, it is not removed
+again if it was already in the message tag.
+This is very useful for e.g. a weekly NM publication, where you wish to include all NMs produced
+throughout the week, even if they have already been cancelled.
+
+    data.phase == 'msg-status-change' && (msg.status == Status.PUBLISHED || data.isIncluded)
+
+
+=== Publications Tab
+
+image::PublicationTab.png[Publications, 600]
+
+_Publication_ are essentially identical to _Publications Templates_, give or take a few attributes.
+Configuration of a publication can be quite extensive, in particular for tasks
+such as producing a weekly Notices to Mariners digest. However, when basing a publication on a
+publication template, only a few fields, such as publication dates need to be filled out.
+
+When reading this section, it is assumed that you have already read the <<Publication Templates Tab>>
+section, and overlapping documentation is left out.
+
+The list of publication can be filtered using a "Title" text input field, or by filtering
+on the status, file type and publication category of the publication templates.
+Since there may be lots of publications in the system, the resulting publication list is paged
+and can be navigated using the pagination control below the list.
+
+==== Adding or Editing Publication
+
+The user may add a new publication template by clicking the "New Publication" button above
+the publication list, or copy or edit an existing publication by clicking the copy or
+pencil icon next to it.
+
+This will open the _Publication Editor Panel_:
+
+image::PublicationEditTab.png[Editing Publications, 600]
+
+This publication is based on the "Weekly NtM" publication template, and thus, only a few
+fields are left to fill out.
+
+[ cols="30,70", options="header" ]
+|===
+| Publication Attribute
+| Description
+
+| Status
+| A publication can be in a _Draft_, _Recording_, _Active_ or _Inactive_ status. Only _Active_
+  publications withing the specified _Publish Date_ interval will be selectable in the message
+  editor or published to external clients via the public REST API.
+  Allowed status transitions are from _Draft_ to _Recording_ or _Active_. From _Recording_ back to
+  _Draft_, and from _Active_ to _Inactive_.
+
+| Publish Date
+| The date interval where an _Active_ publication is selectable in the message
+  editor or published to external clients via the public REST API.
+
+
+| Publication Edition
+| A publication can be released in multiple editions. For instance, a yearly "Firing Practice Areas"
+  publication may have to be updated if the firing areas are changed mid-year. In that case,
+  copy the old publication, adjust the end publish date of the old publication, and the start
+  publish date of the new publication to be the cut-over date. Also, increase the edition of the
+  new publication, and re-generate or upload updated repository files as appropriate.
+
+| Repository File
+| These fields are present when the template has file type "Message" (see previous section).
+  Here, you can preview and generate the actual repository files associated with the publication.
+
+|===
+
+==== Releasing Publications
+
+A special "Release Publication..." option is available to message reports-based publications that
+are in the _Recording_ status.
+
+Enacting the function will perform multiple steps at once:
+
+* Stop recording.
+* Generated repository files for all supported languages.
+* Make the publication active.
+* Generate next issue of the publication.
+* Start recording for the next issue publication.
+
+==== Importing and Exporting Publications
+
+The administrator can export and import publications including publication templates from
+the action menu above the publication list.
+
+The export/import file format is based on a JSON representation of the
+https://github.com/NiordOrg/niord/blob/master/niord-core/src/main/java/org/niord/core/publication/vo/SystemPublicationVo.java[SystemPublicationVo]
+class.
+
+Example:
+[source,json]
+----
+[
+  {
+    "category": {
+      "categoryId": "dk-dma-weekly-nm-publications"
+    },
+    "type": "MESSAGE_REPORT",
+    "publishDateFrom": 1496401200000,
+    "publishDateTo": 1497006000000,
+    "descs": [
+      {
+        "title": "EfS uge 22 - 2017",
+        "fileName": "EfS-Uge-22-2017.pdf",
+        "lang": "da"
+      },
+      {
+        "title": "NtM Week 22 - 2017",
+        "fileName": "NtM-Week-22-2017.pdf",
+        "lang": "en"
+      }
+    ],
+    "revision": 1,
+    "mainType": "PUBLICATION",
+    "status": "RECORDING",
+    "template": {
+      "publicationId": "a8e661ee-49b8-45ea-a176-952e99253fec"
+    },
+    "domain": {
+      "domainId": "niord-nm"
+    },
+    "periodicalType": "WEEKLY",
+    "edition": 1,
+    "messageTagFormat": "nm-w22-2017",
+    "messageTag": {
+      "tagId": "73a50a0a-0d65-4a6f-8a17-1af9b3e8fbf9"
+    },
+    "messagePublication": "NONE",
+    "languageSpecific": true,
+    "printSettings": {
+      "report": "nm-report",
+      "pageSize": "A4",
+      "pageOrientation": "portrait",
+      "mapThumbnails": false
+    },
+    "reportParams": {
+      "year": "2017",
+      "week": "22"
+    },
+    "publicationId": "0128ff8f-910f-4204-a1ce-13c48d3d5ffb",
+    "created": 1483269014000,
+    "updated": 1495792436000
+  },
+  ...
+]
+----
+
+Importing a publications JSON file will trigger the _publication-import_ batch job.
+Batch jobs can be monitored and managed by system administrators.
+
+As an alternative to manually uploading a publications JSON file on the _Publications_ tab,
+the file can be copied to the _$NIORD_HOME/batch-jobs/publication-import/in_ folder.
 
