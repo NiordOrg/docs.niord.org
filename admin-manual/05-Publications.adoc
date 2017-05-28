@@ -183,7 +183,7 @@ The common editable attributes of a publication template are listed below:
 | Message Publication
 | The _Message Publication_ option is used to define if the publication is selectable in the
   _Publications_ editor field of the message editor, and whether the publication is selectable
-  for internal or external message publications.
+  for internal or external message publications. This is treated in more detail below.
 
 |===
 
@@ -253,6 +253,26 @@ throughout the week, even if they have already been cancelled.
 
     data.phase == 'msg-status-change' && (msg.status == Status.PUBLISHED || data.isIncluded)
 
+==== Message Publication
+
+image::MessagePublicationField.png[Message Publication Field, 600]
+
+As previously mentioned, the _Message Publication_ option is used to define if the publication is
+selectable in the _Publications_ editor field of the message editor, and whether the publication
+is selectable for internal or external message publications.
+
+Only the external publications of a message will be displayed to end-users, whereas
+internal publications will be viewable to registered users of Niord as well.
+
+When the "Internal" or "External" _Message Publication_ option is selected, text fields
+allows the user to define the actual text inserted into the localized message publication
+fields in the message editor.
+In the example above, "Danish List of Lights (Dansk Fyrliste) no ${parameters}" is used for the
+English-language message publication format. The "${parameters}" _replacement token_ allows the
+user to input parametrized values, such as light numbers, into the _Publications_ field of the
+message editor, as exemplified below:
+
+image::MessagePublications.png[Message Publications, 600]
 
 === Publications Tab
 

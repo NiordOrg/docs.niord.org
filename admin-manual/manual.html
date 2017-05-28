@@ -1325,7 +1325,7 @@ publication that is based on the publication template.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Message Publication</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The <em>Message Publication</em> option is used to define if the publication is selectable in the
   <em>Publications</em> editor field of the message editor, and whether the publication is selectable
-  for internal or external message publications.</p></td>
+  for internal or external message publications. This is treated in more detail below.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1420,6 +1420,37 @@ throughout the week, even if they have already been cancelled.</p>
 <div class="content">
 <pre>data.phase == 'msg-status-change' &amp;&amp; (msg.status == Status.PUBLISHED || data.isIncluded)</pre>
 </div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="message-publication"><a class="anchor" href="#message-publication"></a><a class="link" href="#message-publication">6.2.2. Message Publication</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/MessagePublicationField.png" alt="Message Publication Field" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>As previously mentioned, the <em>Message Publication</em> option is used to define if the publication is
+selectable in the <em>Publications</em> editor field of the message editor, and whether the publication
+is selectable for internal or external message publications.</p>
+</div>
+<div class="paragraph">
+<p>Only the external publications of a message will be displayed to end-users, whereas
+internal publications will be viewable to registered users of Niord as well.</p>
+</div>
+<div class="paragraph">
+<p>When the "Internal" or "External" <em>Message Publication</em> option is selected, text fields
+allows the user to define the actual text inserted into the localized message publication
+fields in the message editor.
+In the example above, "Danish List of Lights (Dansk Fyrliste) no ${parameters}" is used for the
+English-language message publication format. The "${parameters}" <em>replacement token</em> allows the
+user to input parametrized values, such as light numbers, into the <em>Publications</em> field of the
+message editor, as exemplified below:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/MessagePublications.png" alt="Message Publications" width="600">
 </div>
 </div>
 </div>
