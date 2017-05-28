@@ -1,0 +1,93 @@
+
+:imagesdir: images
+
+== Sources
+
+The _Sources_ page allows an administrator to manage a list of sources, so that they can
+be assigned to messages in the message editor in a consistent and localized manner, using
+the proper abbreviations.
+
+image::SourcesPage.png[Sources, 600]
+
+The list of sources is divided into pages of 20 sources, and may be navigated using the
+pagination control below the source list.
+Alternatively, the user may filter the list of sources by typing a term into the _Filter_ input field
+above the list. The term is matched against the name and abbreviation of the source.
+
+==== Adding or Editing Sources
+
+The user may add a new source by clicking the "New Source" button above
+the sources list, or edit an existing source by clicking the pencil icon next to it.
+
+This will open the _Source Editor Page_:
+
+image::SourcesEditPage.png[Sources Edit Page, 600]
+
+The editable attributes of a source are listed below:
+
+[ cols="30,70", options="header" ]
+|===
+| Source Attribute
+| Description
+
+| Active
+| Only active source may be assigned to a message in the message editor.
+
+| Name
+| The name of the source in all supported model languages.
+
+| Abbreviation
+| The official abbreviation of the source in all supported model languages.
+
+|===
+
+==== Deleting a Source
+
+A source can be deleted by clicking the trash icon next to it.
+
+==== Message Editor Source Field
+
+In the message editor, source abbreviations can be added to a message in the _Sources_ editor field
+by clicking the "Add sources" button.
+
+image::MessageSourcesField.png[Message Editor Sources Field, 600]
+
+This will open a dialog and allow the user to search and select the sources to add along with the
+date of the source interaction.
+
+==== Importing and Exporting Sources
+
+The administrator can export and import sources from the action menu above the sources list.
+
+The export/import file format is based on a JSON representation of the
+https://github.com/NiordOrg/niord/blob/master/niord-core/src/main/java/org/niord/core/source/vo/SourceVo.java[SourceVo]
+class.
+
+Example:
+[source,json]
+----
+[
+  {
+    "active": true,
+    "descs": [
+      {
+        "lang": "da",
+        "name": "Arktisk Kommando",
+        "abbreviation": "AKO"
+      },
+      {
+        "lang": "en",
+        "name": "Joint Arctic Command",
+        "abbreviation": "JACMD "
+      }
+    ]
+  },
+  ...
+]
+----
+
+Importing a source JSON file will trigger the _source-import_ batch job.
+Batch jobs can be monitored and managed by system administrators.
+
+As an alternative to manually uploading a source JSON file on the _Sources_ page,
+the file can be copied to the _$NIORD_HOME/batch-jobs/sources-import/in_ folder.

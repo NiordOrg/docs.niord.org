@@ -522,6 +522,7 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#charts">4. Charts</a></li>
 <li><a href="#areas">5. Areas</a></li>
 <li><a href="#publications">6. Publications</a></li>
+<li><a href="#sources">7. Sources</a></li>
 </ul>
 </div>
 </div>
@@ -1646,6 +1647,138 @@ Batch jobs can be monitored and managed by system administrators.</p>
 <p>As an alternative to manually uploading a publications JSON file on the <em>Publications</em> tab,
 the file can be copied to the <em>$NIORD_HOME/batch-jobs/publication-import/in</em> folder.</p>
 </div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sources"><a class="anchor" href="#sources"></a><a class="link" href="#sources">7. Sources</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <em>Sources</em> page allows an administrator to manage a list of sources, so that they can
+be assigned to messages in the message editor in a consistent and localized manner, using
+the proper abbreviations.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SourcesPage.png" alt="Sources" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The list of sources is divided into pages of 20 sources, and may be navigated using the
+pagination control below the source list.
+Alternatively, the user may filter the list of sources by typing a term into the <em>Filter</em> input field
+above the list. The term is matched against the name and abbreviation of the source.</p>
+</div>
+<div class="sect3">
+<h4 id="adding-or-editing-sources"><a class="anchor" href="#adding-or-editing-sources"></a><a class="link" href="#adding-or-editing-sources">7.1. Adding or Editing Sources</a></h4>
+<div class="paragraph">
+<p>The user may add a new source by clicking the "New Source" button above
+the sources list, or edit an existing source by clicking the pencil icon next to it.</p>
+</div>
+<div class="paragraph">
+<p>This will open the <em>Source Editor Page</em>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SourcesEditPage.png" alt="Sources Edit Page" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The editable attributes of a source are listed below:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Source Attribute</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Active</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Only active source may be assigned to a message in the message editor.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the source in all supported model languages.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Abbreviation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The official abbreviation of the source in all supported model languages.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="deleting-a-source"><a class="anchor" href="#deleting-a-source"></a><a class="link" href="#deleting-a-source">7.2. Deleting a Source</a></h4>
+<div class="paragraph">
+<p>A source can be deleted by clicking the trash icon next to it.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="message-editor-source-field"><a class="anchor" href="#message-editor-source-field"></a><a class="link" href="#message-editor-source-field">7.3. Message Editor Source Field</a></h4>
+<div class="paragraph">
+<p>In the message editor, source abbreviations can be added to a message in the <em>Sources</em> editor field
+by clicking the "Add sources" button.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/MessageSourcesField.png" alt="Message Editor Sources Field" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>This will open a dialog and allow the user to search and select the sources to add along with the
+date of the source interaction.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="importing-and-exporting-sources"><a class="anchor" href="#importing-and-exporting-sources"></a><a class="link" href="#importing-and-exporting-sources">7.4. Importing and Exporting Sources</a></h4>
+<div class="paragraph">
+<p>The administrator can export and import sources from the action menu above the sources list.</p>
+</div>
+<div class="paragraph">
+<p>The export/import file format is based on a JSON representation of the
+<a href="https://github.com/NiordOrg/niord/blob/master/niord-core/src/main/java/org/niord/core/source/vo/SourceVo.java">SourceVo</a>
+class.</p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="json">[
+  {
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">active</span><span class="delimiter">&quot;</span></span>: <span class="value">true</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">descs</span><span class="delimiter">&quot;</span></span>: [
+      {
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">lang</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">da</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Arktisk Kommando</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">abbreviation</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">AKO</span><span class="delimiter">&quot;</span></span>
+      },
+      {
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">lang</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">en</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Joint Arctic Command</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">abbreviation</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">JACMD </span><span class="delimiter">&quot;</span></span>
+      }
+    ]
+  },
+  <span class="error">.</span><span class="error">.</span><span class="error">.</span>
+]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Importing a source JSON file will trigger the <em>source-import</em> batch job.
+Batch jobs can be monitored and managed by system administrators.</p>
+</div>
+<div class="paragraph">
+<p>As an alternative to manually uploading a source JSON file on the <em>Sources</em> page,
+the file can be copied to the <em>$NIORD_HOME/batch-jobs/sources-import/in</em> folder.</p>
 </div>
 </div>
 </div>
@@ -1653,7 +1786,7 @@ the file can be copied to the <em>$NIORD_HOME/batch-jobs/publication-import/in</
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-05-27 17:50:05 CEST
+Last updated 2017-05-28 11:24:01 CEST
 </div>
 </div>
 <script type="text/x-mathjax-config">

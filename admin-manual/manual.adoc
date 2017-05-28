@@ -54,4 +54,8 @@ include::04-Areas.adoc[]
 
 include::05-Publications.adoc[]
 
+<<<
+
+include::06-Sources.adoc[]
+
 
