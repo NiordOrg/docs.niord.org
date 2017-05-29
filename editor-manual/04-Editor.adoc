@@ -34,6 +34,7 @@ Message Templates is an extensive topic, covered in greater detail in the
 Lastly, the blank editor page will list the draft messages that the current user has
 recently edited.
 
+'''
 === Edit Editor Page ===
 
 When the user has created a new NW or NM message, as described in the previous section, or if
@@ -536,26 +537,34 @@ If this option is checked, the message will be forced to start on a new page whe
 list as PDF.
 This is particularly useful for long Notices to Mariners messages.
 
+'''
 === Status Editor Page ===
 
-TBD
+image::EditorStatusPage.png[Editor Status Page, 800]
 
+
+
+'''
 === Comments Editor Page ===
 
 TBD
 
+'''
 === History Editor Page ===
 
 TBD
 
+'''
 === Editor Actions ===
 
 TBD
 
+'''
 === Position Editor ===
 
 TBD
 
+'''
 === Message Template Execution ===
 
 TBD

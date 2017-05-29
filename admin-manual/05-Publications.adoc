@@ -1,6 +1,7 @@
 
 :imagesdir: images
 
+'''
 == Publications
 
 The _Publications_ page allows an administrator to manage a list of publications.

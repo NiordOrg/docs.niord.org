@@ -1,6 +1,7 @@
 
 :imagesdir: images
 
+'''
 == Sources
 
 The _Sources_ page allows an administrator to manage a list of sources, so that they can
@@ -14,7 +15,7 @@ pagination control below the source list.
 Alternatively, the user may filter the list of sources by typing a term into the _Filter_ input field
 above the list. The term is matched against the name and abbreviation of the source.
 
-==== Adding or Editing Sources
+=== Adding or Editing Sources
 
 The user may add a new source by clicking the "New Source" button above
 the sources list, or edit an existing source by clicking the pencil icon next to it.
@@ -41,11 +42,11 @@ The editable attributes of a source are listed below:
 
 |===
 
-==== Deleting a Source
+=== Deleting a Source
 
 A source can be deleted by clicking the trash icon next to it.
 
-==== Message Editor Source Field
+=== Message Editor Source Field
 
 In the message editor, source abbreviations can be added to a message in the _Sources_ editor field
 by clicking the "Add sources" button.
@@ -55,7 +56,7 @@ image::MessageSourcesField.png[Message Editor Sources Field, 600]
 This will open a dialog and allow the user to search and select the sources to add along with the
 date of the source interaction.
 
-==== Importing and Exporting Sources
+=== Importing and Exporting Sources
 
 The administrator can export and import sources from the action menu above the sources list.
 

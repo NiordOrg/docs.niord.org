@@ -1,6 +1,7 @@
 
 :imagesdir: images
 
+'''
 == Charts
 
 The _Charts_ page allows an administrator to manage the list of nautical charts that may be associated with

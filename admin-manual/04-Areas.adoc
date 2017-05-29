@@ -1,6 +1,7 @@
 
 :imagesdir: images
 
+'''
 == Areas
 
 The _Areas_ page allows an administrator to manage the hierarchical tree of areas that may be associated with
