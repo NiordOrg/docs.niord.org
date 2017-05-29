@@ -273,6 +273,122 @@ The main purpose of event dates, is for clients to be able to use it in route pl
 The event date intervals has an _all-day_ flag that can be used to switch between specifying
 date-and-time or date only.
 
+==== Positions Editor Field ====
+
+image::EditorFieldPositions.png[Positions Editor Field, 600]
+
+Depending on the message part type, each message part can be assigned a geometrical extent
+in via the _Positions_ editor field.
+
+The positions can either be entered as text of via a graphical editor. This is detailed
+further in the <<Position Editor>> chapter.
+
+==== Subject Editor Field ====
+
+image::EditorFieldSubject.png[Subject Editor Field, 600]
+
+Depending on the message part type, each message part can be assigned a subject, i.e. a short
+title for the message part in all supported model languages, via the _Subject_ editor field.
+
+When the full message title is auto-computed, as detailed in the <<Title Editor Field>> section,
+it will be assembled by concatenating the message area, vicinity and the subjects of all message parts.
+
+The _Hide Subject_ checkbox is used to indicate if the subject should be displayed as a heading for
+each message part, when rendering the message details.
+Since the subject of a message part is already likely to be part of the message title, there is often
+no reason to repeat the subject in the message body.
+However, if the message contains multiple message parts, it may improve the legibility, if each message
+part is headed by its subject. See example below:
+
+image::SampleNM2.png[Displaying Subjects, 600]
+
+==== Description Editor Field ====
+
+image::EditorFieldDescription.png[Description Editor Field, 600]
+
+Depending on the message part type, each message part can be assigned a rich-text description
+in all supported model languages, via the _Description_ editor field.
+
+Most of the editor tools are standard text editor tools for controlling e.g. the text style and
+color, alignment, bullet and numbered lists, etc.
+
+However, some of the editor tools will be detailed further below.
+
+===== image:TextEditorToolFullScreen.png[Insert Image, 18] Fullscreen =====
+
+Probably the single most important tool, is the _Full-Screen_ tool. It will toggle between showing
+the editor in full-screen mode.
+
+For marginally complex message descriptions, editing in the standard layout is plainly too cramped.
+
+===== image:TextEditorToolLinks.png[Insert Links, 18] Insert/edit Link and image:TextEditorToolImage.png[Insert Image, 18] Insert/edit Image =====
+
+Adding links and images to the rich-text description, ties in with the attachments added to the message
+via the <<Attachments Editor Field>>. If e.g. the user uploads a PDF or a photo as an attachment to the
+message, the user can subsequently add links to the file in the rich-text description, or indeed, insert
+the image directly in the text.
+
+image::TextEditorToolImageDialog.png[Insert Image dialog, 300]
+
+In the example above, the _Insert/edit image_ tool was enacted, opening the image dialog.
+Click the image:TextEditorToolImageAttachment.png[Insert Image, 18] _Source_ field button
+to select the attached image to insert or edit.
+
+The same procedure applies when inserting links to attachments.
+
+===== image:TextEditorToolTable.png[Table Tool, 18] Table =====
+
+The _Table_ tool is fairly advanced, with lots of context-dependent functions.
+When the cursor is within a table many of these will be available via a table toolbar above the table.
+Even more options are available in the context menu, when right-clicking in a table. Of special
+interest are the _Class_ options, which can be used to control the appearance of the table, rows and cells:
+
+* _Table Properties_: Select between the classes "None", "No border", "condensed", "No border + condensed",
+  "Positions" and "Position table", to change the layout of the entire table.
+* _Row Properties_: You find the _Row Properties_ in the right-click context menu. Select between the classes
+  "None" and "Underline" to change the layout of the current or the selected rows.
+* _Cell Properties_: You find the _Cell Properties_ in the right-click context menu. Select between the classes
+  "None", "Underline", "Position" and "Pos. Index" to change the layout of the current or the selected cells.
+
+
+===== image:TextEditorToolLocations.png[Insert Locations Tool, 18] Insert Locations =====
+
+The _Insert Locations_ tool is a very useful tool that may be used to format and insert
+the positions defined in the <<Positions Editor Field>> in the rich text description.
+The generated text will adhere to the language of the description field.
+
+Clicking the _Insert Locations_ tool will open the _Format Message Locations_ dialog:
+
+image::TextEditorToolLocationDialog.png[Format Message Locations Dialog, 600]
+
+The _Features_ panel allows the user to select which geographical feature to insert. Message positions
+are defined via geometrical features such as points, polygons, line-strings, etc, each of which will
+define a list of positions. The position list only contain the positions that makes sense in a textual
+description. So for instance, if the geometrical feature is a polygon with holes in, only the
+positions of the exterior ring is included.
+
+The _Layout_ panel is used to select a layout template used for rendering the positions, that is, if the
+list of positions should be rendered in a table, a bullet list or as text.
+The user may also select the position format, such as "NAVTEX", "Seconds" or various "Decimal" formats.
+
+The _Result_ panel will preview the result.
+
+===== image:TextEditorToolTime.png[Insert Time Tool, 18] Insert Time =====
+
+The _Insert Time_ tool may be used to format and insert the event time intervals defined in
+the <<Event Dates Editor Field>> in the rich text description. The generated text will adhere to the
+language of the description field.
+
+Clicking the _Insert Time_ tool will open the _Format Message Time_ dialog:
+
+image::TextEditorToolTimeDialog.png[Format Message Time Dialog, 400]
+
+The _Time Intervals_ panel allows the user to select which of the event date intervals to format and insert.
+
+The _Layout_ panel let the user select whether or not to include the time-zone in the formatted text.
+
+The _Result_ panel will preview the result.
+
 === Status Editor Page ===
 
 TBD
@@ -286,6 +402,10 @@ TBD
 TBD
 
 === Editor Actions ===
+
+TBD
+
+=== Position Editor ===
 
 TBD
 

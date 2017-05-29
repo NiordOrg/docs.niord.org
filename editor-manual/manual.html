@@ -543,7 +543,8 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#comments-editor-page">5.4. Comments Editor Page</a></li>
 <li><a href="#history-editor-page">5.5. History Editor Page</a></li>
 <li><a href="#editor-actions">5.6. Editor Actions</a></li>
-<li><a href="#message-template-execution">5.7. Message Template Execution</a></li>
+<li><a href="#position-editor">5.7. Position Editor</a></li>
+<li><a href="#message-template-execution">5.8. Message Template Execution</a></li>
 </ul>
 </li>
 </ul>
@@ -1897,7 +1898,7 @@ languages. This is used for the specific location of the hazard (such as a harbo
 </div>
 <div class="paragraph">
 <p>If the selected area has an associated geometry, the "Copy Locations" button will copy that
-geometry into the <a href="#Positions Editor Field">[Positions Editor Field]</a> of the message.</p>
+geometry into the <a href="#positions-editor-field">Positions Editor Field</a> of the message.</p>
 </div>
 <div class="paragraph">
 <p>Alternatively, if no area has been selected but a geometry has been defined for the message, then
@@ -2001,6 +2002,183 @@ or expires.</p>
 date-and-time or date only.</p>
 </div>
 </div>
+<div class="sect3">
+<h4 id="positions-editor-field"><a class="anchor" href="#positions-editor-field"></a><a class="link" href="#positions-editor-field">5.2.12. Positions Editor Field</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/EditorFieldPositions.png" alt="Positions Editor Field" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Depending on the message part type, each message part can be assigned a geometrical extent
+in via the <em>Positions</em> editor field.</p>
+</div>
+<div class="paragraph">
+<p>The positions can either be entered as text of via a graphical editor. This is detailed
+further in the <a href="#position-editor">Position Editor</a> chapter.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="subject-editor-field"><a class="anchor" href="#subject-editor-field"></a><a class="link" href="#subject-editor-field">5.2.13. Subject Editor Field</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/EditorFieldSubject.png" alt="Subject Editor Field" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Depending on the message part type, each message part can be assigned a subject, i.e. a short
+title for the message part in all supported model languages, via the <em>Subject</em> editor field.</p>
+</div>
+<div class="paragraph">
+<p>When the full message title is auto-computed, as detailed in the <a href="#title-editor-field">Title Editor Field</a> section,
+it will be assembled by concatenating the message area, vicinity and the subjects of all message parts.</p>
+</div>
+<div class="paragraph">
+<p>The <em>Hide Subject</em> checkbox is used to indicate if the subject should be displayed as a heading for
+each message part, when rendering the message details.
+Since the subject of a message part is already likely to be part of the message title, there is often
+no reason to repeat the subject in the message body.
+However, if the message contains multiple message parts, it may improve the legibility, if each message
+part is headed by its subject. See example below:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SampleNM2.png" alt="Displaying Subjects" width="600">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="description-editor-field"><a class="anchor" href="#description-editor-field"></a><a class="link" href="#description-editor-field">5.2.14. Description Editor Field</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/EditorFieldDescription.png" alt="Description Editor Field" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Depending on the message part type, each message part can be assigned a rich-text description
+in all supported model languages, via the <em>Description</em> editor field.</p>
+</div>
+<div class="paragraph">
+<p>Most of the editor tools are standard text editor tools for controlling e.g. the text style and
+color, alignment, bullet and numbered lists, etc.</p>
+</div>
+<div class="paragraph">
+<p>However, some of the editor tools will be detailed further below.</p>
+</div>
+<div class="sect4">
+<h5 id="span-class-image-img-src-images-texteditortoolfullscreen-png-alt-insert-image-width-18-span-fullscreen"><a class="anchor" href="#span-class-image-img-src-images-texteditortoolfullscreen-png-alt-insert-image-width-18-span-fullscreen"></a><a class="link" href="#span-class-image-img-src-images-texteditortoolfullscreen-png-alt-insert-image-width-18-span-fullscreen"><span class="image"><img src="images/TextEditorToolFullScreen.png" alt="Insert Image" width="18"></span> Fullscreen</a></h5>
+<div class="paragraph">
+<p>Probably the single most important tool, is the <em>Full-Screen</em> tool. It will toggle between showing
+the editor in full-screen mode.</p>
+</div>
+<div class="paragraph">
+<p>For marginally complex message descriptions, editing in the standard layout is plainly too cramped.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="span-class-image-img-src-images-texteditortoollinks-png-alt-insert-links-width-18-span-insert-edit-link-and-span-class-image-img-src-images-texteditortoolimage-png-alt-insert-image-width-18-span-insert-edit-image"><a class="anchor" href="#span-class-image-img-src-images-texteditortoollinks-png-alt-insert-links-width-18-span-insert-edit-link-and-span-class-image-img-src-images-texteditortoolimage-png-alt-insert-image-width-18-span-insert-edit-image"></a><a class="link" href="#span-class-image-img-src-images-texteditortoollinks-png-alt-insert-links-width-18-span-insert-edit-link-and-span-class-image-img-src-images-texteditortoolimage-png-alt-insert-image-width-18-span-insert-edit-image"><span class="image"><img src="images/TextEditorToolLinks.png" alt="Insert Links" width="18"></span> Insert/edit Link and <span class="image"><img src="images/TextEditorToolImage.png" alt="Insert Image" width="18"></span> Insert/edit Image</a></h5>
+<div class="paragraph">
+<p>Adding links and images to the rich-text description, ties in with the attachments added to the message
+via the <a href="#Attachments Editor Field">[Attachments Editor Field]</a>. If e.g. the user uploads a PDF or a photo as an attachment to the
+message, the user can subsequently add links to the file in the rich-text description, or indeed, insert
+the image directly in the text.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/TextEditorToolImageDialog.png" alt="Insert Image dialog" width="300">
+</div>
+</div>
+<div class="paragraph">
+<p>In the example above, the <em>Insert/edit image</em> tool was enacted, opening the image dialog.
+Click the <span class="image"><img src="images/TextEditorToolImageAttachment.png" alt="Insert Image" width="18"></span> <em>Source</em> field button
+to select the attached image to insert or edit.</p>
+</div>
+<div class="paragraph">
+<p>The same procedure applies when inserting links to attachments.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="span-class-image-img-src-images-texteditortooltable-png-alt-table-tool-width-18-span-table"><a class="anchor" href="#span-class-image-img-src-images-texteditortooltable-png-alt-table-tool-width-18-span-table"></a><a class="link" href="#span-class-image-img-src-images-texteditortooltable-png-alt-table-tool-width-18-span-table"><span class="image"><img src="images/TextEditorToolTable.png" alt="Table Tool" width="18"></span> Table</a></h5>
+<div class="paragraph">
+<p>The <em>Table</em> tool is fairly advanced, with lots of context-dependent functions.
+When the cursor is within a table many of these will be available via a table toolbar above the table.
+Even more options are available in the context menu, when right-clicking in a table. Of special
+interest are the <em>Class</em> options, which can be used to control the appearance of the table, rows and cells:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><em>Table Properties</em>: Select between the classes "None", "No border", "condensed", "No border + condensed",
+"Positions" and "Position table", to change the layout of the entire table.</p>
+</li>
+<li>
+<p><em>Row Properties</em>: You find the <em>Row Properties</em> in the right-click context menu. Select between the classes
+"None" and "Underline" to change the layout of the current or the selected rows.</p>
+</li>
+<li>
+<p><em>Cell Properties</em>: You find the <em>Cell Properties</em> in the right-click context menu. Select between the classes
+"None", "Underline", "Position" and "Pos. Index" to change the layout of the current or the selected cells.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="span-class-image-img-src-images-texteditortoollocations-png-alt-insert-locations-tool-width-18-span-insert-locations"><a class="anchor" href="#span-class-image-img-src-images-texteditortoollocations-png-alt-insert-locations-tool-width-18-span-insert-locations"></a><a class="link" href="#span-class-image-img-src-images-texteditortoollocations-png-alt-insert-locations-tool-width-18-span-insert-locations"><span class="image"><img src="images/TextEditorToolLocations.png" alt="Insert Locations Tool" width="18"></span> Insert Locations</a></h5>
+<div class="paragraph">
+<p>The <em>Insert Locations</em> tool is a very useful tool that may be used to format and insert
+the positions defined in the <a href="#positions-editor-field">Positions Editor Field</a> in the rich text description.
+The generated text will adhere to the language of the description field.</p>
+</div>
+<div class="paragraph">
+<p>Clicking the <em>Insert Locations</em> tool will open the <em>Format Message Locations</em> dialog:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/TextEditorToolLocationDialog.png" alt="Format Message Locations Dialog" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The <em>Features</em> panel allows the user to select which geographical feature to insert. Message positions
+are defined via geometrical features such as points, polygons, line-strings, etc, each of which will
+define a list of positions. The position list only contain the positions that makes sense in a textual
+description. So for instance, if the geometrical feature is a polygon with holes in, only the
+positions of the exterior ring is included.</p>
+</div>
+<div class="paragraph">
+<p>The <em>Layout</em> panel is used to select a layout template used for rendering the positions, that is, if the
+list of positions should be rendered in a table, a bullet list or as text.
+The user may also select the position format, such as "NAVTEX", "Seconds" or various "Decimal" formats.</p>
+</div>
+<div class="paragraph">
+<p>The <em>Result</em> panel will preview the result.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="span-class-image-img-src-images-texteditortooltime-png-alt-insert-time-tool-width-18-span-insert-time"><a class="anchor" href="#span-class-image-img-src-images-texteditortooltime-png-alt-insert-time-tool-width-18-span-insert-time"></a><a class="link" href="#span-class-image-img-src-images-texteditortooltime-png-alt-insert-time-tool-width-18-span-insert-time"><span class="image"><img src="images/TextEditorToolTime.png" alt="Insert Time Tool" width="18"></span> Insert Time</a></h5>
+<div class="paragraph">
+<p>The <em>Insert Time</em> tool may be used to format and insert the event time intervals defined in
+the <a href="#event-dates-editor-field">Event Dates Editor Field</a> in the rich text description. The generated text will adhere to the
+language of the description field.</p>
+</div>
+<div class="paragraph">
+<p>Clicking the <em>Insert Time</em> tool will open the <em>Format Message Time</em> dialog:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/TextEditorToolTimeDialog.png" alt="Format Message Time Dialog" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>The <em>Time Intervals</em> panel allows the user to select which of the event date intervals to format and insert.</p>
+</div>
+<div class="paragraph">
+<p>The <em>Layout</em> panel let the user select whether or not to include the time-zone in the formatted text.</p>
+</div>
+<div class="paragraph">
+<p>The <em>Result</em> panel will preview the result.</p>
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="status-editor-page"><a class="anchor" href="#status-editor-page"></a><a class="link" href="#status-editor-page">5.3. Status Editor Page</a></h3>
@@ -2027,7 +2205,13 @@ date-and-time or date only.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="message-template-execution"><a class="anchor" href="#message-template-execution"></a><a class="link" href="#message-template-execution">5.7. Message Template Execution</a></h3>
+<h3 id="position-editor"><a class="anchor" href="#position-editor"></a><a class="link" href="#position-editor">5.7. Position Editor</a></h3>
+<div class="paragraph">
+<p>TBD</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="message-template-execution"><a class="anchor" href="#message-template-execution"></a><a class="link" href="#message-template-execution">5.8. Message Template Execution</a></h3>
 <div class="paragraph">
 <p>TBD</p>
 </div>
