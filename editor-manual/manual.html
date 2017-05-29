@@ -2273,8 +2273,9 @@ The charts to select from are created and managed by administrators - please ref
 <p>If the "Sort" button is clicked, the current selection of charts will be sorted according to their scale.</p>
 </div>
 <div class="paragraph">
-<p>If the "Compute from Locations" button is clicked, the sorted list of all nautical charts, whose
-geographical extent overlaps with the positions defined for the message will be included.
+<p>If the "Compute from Locations" button is clicked, the charts field will be instantiated with the
+sorted list of all nautical charts whose geographical extent overlaps with the positions defined
+for the message will be included.
 This list should subsequently be verified by the user, since some of the charts may not actually
 contain the feature (say, a light) referenced by the message.</p>
 </div>
@@ -2298,7 +2299,8 @@ management system, etc.</p>
 <div class="paragraph">
 <p>The publications are maintained in rich-text editor fields, mainly to facilitate hyperlinks to the
 referenced publications.
-There is one set of <em>internal</em> and <em>external</em> publication fields for each supported model language.
+There is one set of <em>internal publication</em> and one set of <em>external publication</em> fields for each
+supported model language.
 Only the external publications will be displayed to end-users, whereas internal publications
 will be viewable to registered users of Niord as well.</p>
 </div>
@@ -2309,8 +2311,12 @@ one of the publications created and managed by administrators in Niord - please 
 </div>
 <div class="paragraph">
 <p>When the <em>Insert Publication</em> tool is clicked, a dialog pops up that allows the user to add or edit
-a publication:
-image::MessagePublications.png[Message Publications, 600]</p>
+a pre-defined publication:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/MessagePublications.png" alt="Message Publications" width="600">
+</div>
 </div>
 <div class="paragraph">
 <p>Some publications will display a parameter input field, where the user can specify additional parameters.
@@ -2318,7 +2324,7 @@ This is typically used to e.g. specify relevant light numbers for the List of Li
 </div>
 <div class="paragraph">
 <p>The user can choose to update only the publication field where the <em>Insert Publication</em> tool was clicked,
-or update all language fields.</p>
+or update all language versions.</p>
 </div>
 </div>
 </div>
