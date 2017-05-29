@@ -321,6 +321,7 @@ the editor in full-screen mode.
 
 For marginally complex message descriptions, editing in the standard layout is plainly too cramped.
 
+[id=insert-link-and-image]
 ===== image:TextEditorToolLinks.png[Insert Links, 18] Insert/edit Link and image:TextEditorToolImage.png[Insert Image, 18] Insert/edit Image =====
 
 Adding links and images to the rich-text description, ties in with the attachments added to the message
@@ -390,6 +391,54 @@ The _Time Intervals_ panel allows the user to select which of the event date int
 The _Layout_ panel let the user select whether or not to include the time-zone in the formatted text.
 
 The _Result_ panel will preview the result.
+
+==== Attachments Editor Field ====
+
+image::EditorFieldAttachments.png[Attachments Editor Field, 600]
+
+The _Attachments Editor Field_ can be used to associate files, such as PDFs and photos, with a message.
+
+If a message has an associated list of attachments, the attachments can be viewed and downloaded
+by end-users when viewing the message details. See example below:
+
+image::SampleNM3.png[Message Attachments, 600]
+
+Attachments can also be linked or inserted directly in the rich-text description field of a message part,
+as described in the <<insert-link-and-image>> sub-section.
+
+A new file is attached to a message by clicking the "Browse..." button and selecting the file, or by
+dragging the file into the dotted-line panel surrounding the "Browse..." button.
+
+An existing attachment can be deleted by clicking the trash icon next to the attachment.
+
+An additional caption can also be specified for attachments in all supported model languages.
+
+For embeddable attachments, such as images and videos, an extra _Display_ option will be available:
+
+[cols="30,70",options="header"]
+|===
+|Display Value|Description
+
+| Above Message
+| If the _Above Message_ option is selected, the attachment (i.e. image or video) will be displayed
+  above the message when rendering the message details, or generating a print report.
+
+| Below Message
+| If the _Below Message_ option is selected, the attachment (i.e. image or video) will be displayed
+  below the message when rendering the message details, or generating a print report.
+
+| Separate Page
+| If the _Separate Page_ option is selected, the attachment (i.e. image or video) will be displayed
+  on a separate page when generating a print report.
+
+|===
+
+If either of the display options above is selected, the size of the embedded attachment can be
+specified in the _Width_ and _Height_ field. If only one of these fields is filled out, the
+embedded attachment will be scaled proportionally.
+
+As part of the _Width_ or _Height_ values, the user must also specify the unit, which must be one of
+"em", "px", "%", "cm", "mm", "in", "pt" or "pc".
 
 === Status Editor Page ===
 
