@@ -374,6 +374,7 @@ The user may also select the position format, such as "NAVTEX", "Seconds" or var
 
 The _Result_ panel will preview the result.
 
+[id=insert-time]
 ===== image:TextEditorToolTime.png[Insert Time Tool, 18] Insert Time =====
 
 The _Insert Time_ tool may be used to format and insert the event time intervals defined in
