@@ -1885,8 +1885,11 @@ can be displayed and sorted by on the <a href="#messages">Messages</a> page.</p>
 </div>
 <div class="paragraph">
 <p>The <em>Areas</em> editor field can be used to assign one or more areas to a message. The areas to select
-from are created and managed by administrators in a hierarchical structure.
-So, as an example, the firing area "EK D 371 Marstal Bugt" is a sub-area of "The Baltic Sea", which
+from are created and managed by administrators in a hierarchical structure - please refer to the
+<a href="http://docs.niord.org/admin-manual/manual.html#areas">Areas</a> admin chapter.</p>
+</div>
+<div class="paragraph">
+<p>So, as an example, the firing area "EK D 371 Marstal Bugt" is a sub-area of "The Baltic Sea", which
 is in turn a sub-area of "Denmark".</p>
 </div>
 <div class="paragraph">
@@ -2199,18 +2202,18 @@ by end-users when viewing the message details. See example below:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Attachments can also be linked or inserted directly in the rich-text description field, as described
-in the <a href="#insert-link-and-image"><span class="image"><img src="images/TextEditorToolLinks.png" alt="Insert Links" width="18"></span> Insert/edit Link and <span class="image"><img src="images/TextEditorToolImage.png" alt="Insert Image" width="18"></span> Insert/edit Image</a> sub-section.</p>
+<p>Attachments can also be linked or inserted directly in the rich-text description field of a message part,
+as described in the <a href="#insert-link-and-image"><span class="image"><img src="images/TextEditorToolLinks.png" alt="Insert Links" width="18"></span> Insert/edit Link and <span class="image"><img src="images/TextEditorToolImage.png" alt="Insert Image" width="18"></span> Insert/edit Image</a> sub-section.</p>
 </div>
 <div class="paragraph">
 <p>A new file is attached to a message by clicking the "Browse&#8230;&#8203;" button and selecting the file, or by
 dragging the file into the dotted-line panel surrounding the "Browse&#8230;&#8203;" button.</p>
 </div>
 <div class="paragraph">
-<p>An attachment can be deleted again by clicking the trash icon next to the attachment.</p>
+<p>An existing attachment can be deleted by clicking the trash icon next to the attachment.</p>
 </div>
 <div class="paragraph">
-<p>A caption can also be specified for attachments in each supported model language.</p>
+<p>An additional caption can also be specified for attachments in all supported model languages.</p>
 </div>
 <div class="paragraph">
 <p>For embeddable attachments, such as images and videos, an extra <em>Display</em> option will be available:</p>
@@ -2250,8 +2253,72 @@ specified in the <em>Width</em> and <em>Height</em> field. If only one of these 
 embedded attachment will be scaled proportionally.</p>
 </div>
 <div class="paragraph">
-<p>As part of the <em>Width</em> or <em>Height</em>, the user must also specify the unit, which must be one of
+<p>As part of the <em>Width</em> or <em>Height</em> values, the user must also specify the unit, which must be one of
 "em", "px", "%", "cm", "mm", "in", "pt" or "pc".</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="charts-editor-field"><a class="anchor" href="#charts-editor-field"></a><a class="link" href="#charts-editor-field">5.2.16. Charts Editor Field</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/EditorFieldCharts.png" alt="Charts Editor Field" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The <em>Charts</em> editor field can be used to assign one or more nautical charts to a message.
+The charts to select from are created and managed by administrators - please refer to the
+<a href="http://docs.niord.org/admin-manual/manual.html#charts">Charts</a> admin chapter.</p>
+</div>
+<div class="paragraph">
+<p>If the "Sort" button is clicked, the current selection of charts will be sorted according to their scale.</p>
+</div>
+<div class="paragraph">
+<p>If the "Compute from Locations" button is clicked, the sorted list of all nautical charts, whose
+geographical extent overlaps with the positions defined for the message will be included.
+This list should subsequently be verified by the user, since some of the charts may not actually
+contain the feature (say, a light) referenced by the message.</p>
+</div>
+<div class="paragraph">
+<p>The <em>Horizontal Datum</em> field can be used to specify the horizontal datum, typically WGS84.
+The horizontal datum is not currently used anywhere in Niord.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="publication-editor-field"><a class="anchor" href="#publication-editor-field"></a><a class="link" href="#publication-editor-field">5.2.17. Publication Editor Field</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/EditorFieldPublication.png" alt="Publication Editor Field" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The <em>Publication</em> editor field is used to list the publications relevant to the message, such as
+the List of Lights, Aids to Navigation, the journal number for an associated case in a content
+management system, etc.</p>
+</div>
+<div class="paragraph">
+<p>The publications are maintained in rich-text editor fields, mainly to facilitate hyperlinks to the
+referenced publications.
+There is one set of <em>internal</em> and <em>external</em> publication fields for each supported model language.
+Only the external publications will be displayed to end-users, whereas internal publications
+will be viewable to registered users of Niord as well.</p>
+</div>
+<div class="paragraph">
+<p>The user can use the <span class="image"><img src="images/TextEditorToolPublication.png" alt="Insert Publication" width="18"></span> tool to insert
+one of the publications created and managed by administrators in Niord - please refer to the
+<a href="http://docs.niord.org/admin-manual/manual.html#publications">Publications</a> admin chapter.</p>
+</div>
+<div class="paragraph">
+<p>When the <em>Insert Publication</em> tool is clicked, a dialog pops up that allows the user to add or edit
+a publication:
+image::MessagePublications.png[Message Publications, 600]</p>
+</div>
+<div class="paragraph">
+<p>Some publications will display a parameter input field, where the user can specify additional parameters.
+This is typically used to e.g. specify relevant light numbers for the List of Light publication, etc.</p>
+</div>
+<div class="paragraph">
+<p>The user can choose to update only the publication field where the <em>Insert Publication</em> tool was clicked,
+or update all language fields.</p>
 </div>
 </div>
 </div>

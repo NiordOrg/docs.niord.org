@@ -460,6 +460,34 @@ contain the feature (say, a light) referenced by the message.
 The _Horizontal Datum_ field can be used to specify the horizontal datum, typically WGS84.
 The horizontal datum is not currently used anywhere in Niord.
 
+==== Publication Editor Field ====
+
+image::EditorFieldPublication.png[Publication Editor Field, 600]
+
+The _Publication_ editor field is used to list the publications relevant to the message, such as
+the List of Lights, Aids to Navigation, the journal number for an associated case in a content
+management system, etc.
+
+The publications are maintained in rich-text editor fields, mainly to facilitate hyperlinks to the
+referenced publications.
+There is one set of _internal_ and _external_ publication fields for each supported model language.
+Only the external publications will be displayed to end-users, whereas internal publications
+will be viewable to registered users of Niord as well.
+
+The user can use the image:TextEditorToolPublication.png[Insert Publication, 18] tool to insert
+one of the publications created and managed by administrators in Niord - please refer to the
+http://docs.niord.org/admin-manual/manual.html#publications[Publications] admin chapter.
+
+When the _Insert Publication_ tool is clicked, a dialog pops up that allows the user to add or edit
+a publication:
+image::MessagePublications.png[Message Publications, 600]
+
+Some publications will display a parameter input field, where the user can specify additional parameters.
+This is typically used to e.g. specify relevant light numbers for the List of Light publication, etc.
+
+The user can choose to update only the publication field where the _Insert Publication_ tool was clicked,
+or update all language fields.
+
 
 === Status Editor Page ===
 
