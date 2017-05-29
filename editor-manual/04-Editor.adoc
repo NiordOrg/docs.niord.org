@@ -351,6 +351,7 @@ interest are the _Class_ options, which can be used to control the appearance of
   "None", "Underline", "Position" and "Pos. Index" to change the layout of the current or the selected cells.
 
 
+[id=insert-locations]
 ===== image:TextEditorToolLocations.png[Insert Locations Tool, 18] Insert Locations =====
 
 The _Insert Locations_ tool is a very useful tool that may be used to format and insert
