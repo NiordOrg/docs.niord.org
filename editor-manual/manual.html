@@ -2405,14 +2405,14 @@ This is particularly useful for long Notices to Mariners messages.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The <em>Status</em> editor page is where the user manages the message status.</p>
+<p>The <em>Status</em> editor page is where the user manages the status of a message.</p>
 </div>
 <div class="paragraph">
 <p>At the left side of the page, the user may preview the message details in all supported
 model languages.</p>
 </div>
 <div class="paragraph">
-<p>At the right side, there is a status panel with the current status of the message, and buttons
+<p>At the right side, there is a status panel listing the current status of the message, and buttons
 for manually changing the message status.</p>
 </div>
 <div class="paragraph">
@@ -2421,9 +2421,9 @@ they are valid.</p>
 </div>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 50%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
 </colgroup>
 <thead>
 <tr>
@@ -2480,7 +2480,7 @@ the system upon reaching that date.</p></td>
 creating an unsaved copy of the message and opening the copy in the editor.</p>
 </div>
 <div class="paragraph">
-<p>When a verified draft is published by clicking the "Publish Message" button, and if the message contain
+<p>When a verified draft is published by clicking the "Publish Message" button, and if the message contains
 cancellation-references to another message that is still published, the user
 will be given an option to automatically cancel the referenced message.</p>
 </div>
@@ -2488,8 +2488,33 @@ will be given an option to automatically cancel the referenced message.</p>
 </div>
 <div class="sect2">
 <h3 id="comments-editor-page"><a class="anchor" href="#comments-editor-page"></a><a class="link" href="#comments-editor-page">5.4. Comments Editor Page</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/EditorCommentsPage.png" alt="Editor Comments Page" width="800">
+</div>
+</div>
 <div class="paragraph">
-<p>TBD</p>
+<p>The <em>Comments</em> editor page is where users can submit comments to a message. Users, such as case officers,
+that do not hold the <em>Editor</em> role, may submit comments even if they cannot modify the message.</p>
+</div>
+<div class="paragraph">
+<p>The <em>Comments</em> feature thus assists the process when a whole team of users are involved in writing and
+proof-reading messages.</p>
+</div>
+<div class="paragraph">
+<p>The left side of the <em>Comments</em> page will list all submitted comments. When clicking on a comment, or
+if the "New Comment" button is clicked, the comment editor panel will be displayed in the right side
+of the <em>Comments</em> page. See screen-shot above.</p>
+</div>
+<div class="paragraph">
+<p>When a comment is created or modified, if will be flagged as <em>unacknowledged</em>. The comment will stay
+in this state until the "Acknowledge" button is clicked.
+If there are any unacknowledged comments for a message, there will be a dark-red badge listing the number
+of unacknowledged comments next to the <em>Comments</em> link in the editor-page selection menu.</p>
+</div>
+<div class="paragraph">
+<p>Lastly, the user can type a list of e-mail addresses along with a comment. When the comment is saved,
+all the specified mail recipients will receive an e-mail with the comment and a link to the message.</p>
 </div>
 <hr>
 </div>

@@ -542,18 +542,18 @@ This is particularly useful for long Notices to Mariners messages.
 
 image::EditorStatusPage.png[Editor Status Page, 800]
 
-The _Status_ editor page is where the user manages the message status.
+The _Status_ editor page is where the user manages the status of a message.
 
 At the left side of the page, the user may preview the message details in all supported
 model languages.
 
-At the right side, there is a status panel with the current status of the message, and buttons
+At the right side, there is a status panel listing the current status of the message, and buttons
 for manually changing the message status.
 
 The valid status transitions are listed below. The state change buttons are only visible when
 they are valid.
 
-[cols="25,25,50",options="header"]
+[cols="20,20,60",options="header"]
 |===
 |From Status|To Status|Description
 
@@ -581,14 +581,32 @@ the system upon reaching that date.
 In addition to the state change buttons, there will always be "Copy Message" button, that may be used for
 creating an unsaved copy of the message and opening the copy in the editor.
 
-When a verified draft is published by clicking the "Publish Message" button, and if the message contain
+When a verified draft is published by clicking the "Publish Message" button, and if the message contains
 cancellation-references to another message that is still published, the user
 will be given an option to automatically cancel the referenced message.
 
 '''
 === Comments Editor Page ===
 
-TBD
+image::EditorCommentsPage.png[Editor Comments Page, 800]
+
+The _Comments_ editor page is where users can submit comments to a message. Users, such as case officers,
+that do not hold the _Editor_ role, may submit comments even if they cannot modify the message.
+
+The _Comments_ feature thus assists the process when a whole team of users are involved in writing and
+proof-reading messages.
+
+The left side of the _Comments_ page will list all submitted comments. When clicking on a comment, or
+if the "New Comment" button is clicked, the comment editor panel will be displayed in the right side
+of the _Comments_ page. See screen-shot above.
+
+When a comment is created or modified, if will be flagged as _unacknowledged_. The comment will stay
+in this state until the "Acknowledge" button is clicked.
+If there are any unacknowledged comments for a message, there will be a dark-red badge listing the number
+of unacknowledged comments next to the _Comments_ link in the editor-page selection menu.
+
+Lastly, the user can type a list of e-mail addresses along with a comment. When the comment is saved,
+all the specified mail recipients will receive an e-mail with the comment and a link to the message.
 
 '''
 === History Editor Page ===
