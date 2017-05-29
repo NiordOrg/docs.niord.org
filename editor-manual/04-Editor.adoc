@@ -492,6 +492,27 @@ The user can choose to update only the publication field where the _Insert Publi
 or update all language versions.
 
 
+==== Source Editor Field ====
+
+image::EditorFieldSource.png[Source Editor Field, 600]
+
+The _Source_ editor field is used to list the sources of the hazard described by the message, such as
+a harbour authority, a Government department, etc.
+If a standard abbreviation exists for a source, this should be used to keep the information short
+and concise. Along with the source, the date of contact should be listed.
+
+The user can click "Add source..." to insert one of the sources created and managed by administrators
+in Niord - please refer to the
+http://docs.niord.org/admin-manual/manual.html#sources[Sources] admin chapter.
+
+Upon clicking the "Add source" button, a dialog pops up that allows the user to select and add one
+or more of the pre-defined sources along with the date of contact:
+
+image::MessageSourcesField.png[Message Source Dialog, 600]
+
+The _Source_ field for all supported model languages will be updated with the selected sources.
+
+
 === Status Editor Page ===
 
 TBD
