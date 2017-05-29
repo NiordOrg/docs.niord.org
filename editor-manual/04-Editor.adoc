@@ -542,7 +542,48 @@ This is particularly useful for long Notices to Mariners messages.
 
 image::EditorStatusPage.png[Editor Status Page, 800]
 
+The _Status_ editor page is where the user manages the message status.
 
+At the left side of the page, the user may preview the message details in all supported
+model languages.
+
+At the right side, there is a status panel with the current status of the message, and buttons
+for manually changing the message status.
+
+The valid status transitions are listed below. The state change buttons are only visible when
+they are valid.
+
+[cols="25,25,50",options="header"]
+|===
+|From Status|To Status|Description
+
+| Draft | Deleted | A draft can be deleted clicking the "Delete Message" button.
+
+| Draft | Verified | After proof-reading a message, it can flagged as _Verified_ by clicking
+the "Verify Message" button, signalling that it is ready for publication.
+
+| Verified | Draft | If a verified message is altered, it will automatically be re-assigned the _Draft_ status.
+
+| Verified | Deleted | A verified message can be deleted clicking the "Delete Message" button.
+
+| Verified | Published | A verified message can be published manually be clicking the "Publish Message"
+button. If a verified message has a _publish from date_, it will automatically be published by the
+system upon reaching the publication date.
+
+| Published | Cancelled | A published message can be manually cancelled by clicking the "Cancel Message"
+button.
+
+| Published | Expired | A published message with a _publish to date_ will automatically be expired by
+the system upon reaching that date.
+
+|===
+
+In addition to the state change buttons, there will always be "Copy Message" button, that may be used for
+creating an unsaved copy of the message and opening the copy in the editor.
+
+When a verified draft is published by clicking the "Publish Message" button, and if the message contain
+cancellation-references to another message that is still published, the user
+will be given an option to automatically cancel the referenced message.
 
 '''
 === Comments Editor Page ===

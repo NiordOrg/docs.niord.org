@@ -2404,6 +2404,86 @@ This is particularly useful for long Notices to Mariners messages.</p>
 <img src="images/EditorStatusPage.png" alt="Editor Status Page" width="800">
 </div>
 </div>
+<div class="paragraph">
+<p>The <em>Status</em> editor page is where the user manages the message status.</p>
+</div>
+<div class="paragraph">
+<p>At the left side of the page, the user may preview the message details in all supported
+model languages.</p>
+</div>
+<div class="paragraph">
+<p>At the right side, there is a status panel with the current status of the message, and buttons
+for manually changing the message status.</p>
+</div>
+<div class="paragraph">
+<p>The valid status transitions are listed below. The state change buttons are only visible when
+they are valid.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">From Status</th>
+<th class="tableblock halign-left valign-top">To Status</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Draft</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deleted</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A draft can be deleted clicking the "Delete Message" button.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Draft</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Verified</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">After proof-reading a message, it can flagged as <em>Verified</em> by clicking
+the "Verify Message" button, signalling that it is ready for publication.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Verified</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Draft</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If a verified message is altered, it will automatically be re-assigned the <em>Draft</em> status.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Verified</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deleted</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A verified message can be deleted clicking the "Delete Message" button.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Verified</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Published</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A verified message can be published manually be clicking the "Publish Message"
+button. If a verified message has a <em>publish from date</em>, it will automatically be published by the
+system upon reaching the publication date.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Published</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cancelled</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A published message can be manually cancelled by clicking the "Cancel Message"
+button.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Published</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Expired</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A published message with a <em>publish to date</em> will automatically be expired by
+the system upon reaching that date.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>In addition to the state change buttons, there will always be "Copy Message" button, that may be used for
+creating an unsaved copy of the message and opening the copy in the editor.</p>
+</div>
+<div class="paragraph">
+<p>When a verified draft is published by clicking the "Publish Message" button, and if the message contain
+cancellation-references to another message that is still published, the user
+will be given an option to automatically cancel the referenced message.</p>
+</div>
 <hr>
 </div>
 <div class="sect2">
