@@ -526,7 +526,7 @@ user may specify a custom thumbnail image in the _Layout_ editor field.
 From the thumbnail menu, they can either chose to upload a thumbnail image, or generate one
 using the "Select thumbnail..." option. This will open the Thumbnail Selection Dialog:
 
-image::EditorFieldLayoutDialog.png[Thumbnail Selection Dialog, 600]
+image::EditorFieldLayoutDialog.png[Thumbnail Selection Dialog, 200]
 
 Here, the user can zoom and pan the map, and turn layers on and off, before taking a snapshot to be
 used as the message thumbnail.
