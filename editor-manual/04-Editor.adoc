@@ -190,7 +190,9 @@ can be displayed and sorted by on the <<Messages>> page.
 image::EditorFieldAreas.png[Areas Editor Field, 600]
 
 The _Areas_ editor field can be used to assign one or more areas to a message. The areas to select
-from are created and managed by administrators in a hierarchical structure.
+from are created and managed by administrators in a hierarchical structure - please refer to the
+http://docs.niord.org/admin-manual/manual.html#areas[Areas] admin chapter.
+
 So, as an example, the firing area "EK D 371 Marstal Bugt" is a sub-area of "The Baltic Sea", which
 is in turn a sub-area of "Denmark".
 
@@ -439,6 +441,25 @@ embedded attachment will be scaled proportionally.
 
 As part of the _Width_ or _Height_ values, the user must also specify the unit, which must be one of
 "em", "px", "%", "cm", "mm", "in", "pt" or "pc".
+
+==== Charts Editor Field ====
+
+image::EditorFieldCharts.png[Charts Editor Field, 600]
+
+The _Charts_ editor field can be used to assign one or more nautical charts to a message.
+The charts to select from are created and managed by administrators - please refer to the
+http://docs.niord.org/admin-manual/manual.html#charts[Charts] admin chapter.
+
+If the "Sort" button is clicked, the current selection of charts will be sorted according to their scale.
+
+If the "Compute from Locations" button is clicked, the sorted list of all nautical charts, whose
+geographical extent overlaps with the positions defined for the message will be included.
+This list should subsequently be verified by the user, since some of the charts may not actually
+contain the feature (say, a light) referenced by the message.
+
+The _Horizontal Datum_ field can be used to specify the horizontal datum, typically WGS84.
+The horizontal datum is not currently used anywhere in Niord.
+
 
 === Status Editor Page ===
 
