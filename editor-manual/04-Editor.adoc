@@ -520,7 +520,7 @@ The _Layout_ editor field is used for controlling the layout of message lists wi
 in print reports.
 
 When working with messages in <<Grid View Mode>> or <<Details View Mode>>, each message will
-show a thumbnail image. By default, the thumbnail is automatically generate, but the
+show a thumbnail image. By default, the thumbnail is automatically generated, but the
 user may specify a custom thumbnail image in the _Layout_ editor field.
 
 From the thumbnail menu, they can either chose to upload a thumbnail image, or generate one
