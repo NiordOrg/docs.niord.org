@@ -635,7 +635,7 @@ green for additions.
 
 image::EditorActionMenu.png[Editor Action Menu, 150]
 
-The _Action_ menu of the _Editor_ page contain the following actions:
+The _Action_ menu of the _Editor_ page contains the following actions:
 
 [#print-message]
 ==== Print Action ====
@@ -654,12 +654,12 @@ Please refer to the <<compare-messages>> action for message lists.
 
 The _Add to Tag Action_ will add the currently edited message to a message tag via the
 _Message Tag Dialog_.
-Please refer to the <<Add Selection to Tag Action>> action for message lists.
+Please refer to the <<Message Tags>> section.
 
 ==== Remove from "Tag Name" Actions ====
 
 For each message tag that the edited message is assigned to, there will be a _Remove from "Tag Name"_ action
-that will remove the message from the tag.
+that will remove the message from that tag.
 
 ==== Expand Fields Action ====
 
@@ -682,12 +682,3 @@ for Navigational Warnings.
 However, in the bottom part of the _Action_ menu, the user can choose to enable any of the editor fields
 not displayed by default.
 
-'''
-=== Position Editor ===
-
-TBD
-
-'''
-=== Message Template Execution ===
-
-TBD

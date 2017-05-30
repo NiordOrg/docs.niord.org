@@ -50,3 +50,10 @@ include::03-Messages.adoc[]
 
 include::04-Editor.adoc[]
 
+<<<
+
+include::05-PositionEditor.adoc[]
+
+<<<
+
+include::06-TemplateExecution.adoc[]
