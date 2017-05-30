@@ -633,7 +633,54 @@ green for additions.
 '''
 === Editor Actions ===
 
-TBD
+image::EditorActionMenu.png[Editor Action Menu, 150]
+
+The _Action_ menu of the _Editor_ page contain the following actions:
+
+[#print-message]
+==== Print Action ====
+
+The _Print_ action will print the currently saved version of the message being edited.
+Please refer to the <<print-messages>> action for message lists.
+
+[#compare-message]
+==== Compare Action ====
+
+The _Compare_ action will open the message comparison dialog with the currently edited message
+pre-selected.
+Please refer to the <<compare-messages>> action for message lists.
+
+==== Add to Tag Action ====
+
+The _Add to Tag Action_ will add the currently edited message to a message tag via the
+_Message Tag Dialog_.
+Please refer to the <<Add Selection to Tag Action>> action for message lists.
+
+==== Remove from "Tag Name" Actions ====
+
+For each message tag that the edited message is assigned to, there will be a _Remove from "Tag Name"_ action
+that will remove the message from the tag.
+
+==== Expand Fields Action ====
+
+The _Expand Fields_ action is a short hand function that will activate (expand) all field editors
+on the editor _Edit_ page.
+
+==== Collapse Fields Action ====
+
+The _Collapse Fields_ action is a short hand function that will deactivate (collapse) all field editors
+on the editor _Edit_ page.
+
+==== More Fields Actions ====
+
+As described in the <<General Edit Page Controls>> section, the set of editor fields displayed by default
+on the editor _Edit_ page depends on the message type, and may also depend on the selected area,
+category, etc.
+For instance, the "Orig. Information" editor field will only be displayed for Notices to Mariners, not
+for Navigational Warnings.
+
+However, in the bottom part of the _Action_ menu, the user can choose to enable any of the editor fields
+not displayed by default.
 
 '''
 === Position Editor ===

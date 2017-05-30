@@ -1232,7 +1232,7 @@ whether the user is an editor or administrator.</p>
 <p>The actions will be detailed individually below.</p>
 </div>
 <div class="sect3">
-<h4 id="print-action"><a class="anchor" href="#print-action"></a><a class="link" href="#print-action">4.4.1. Print Action</a></h4>
+<h4 id="print-messages"><a class="anchor" href="#print-messages"></a><a class="link" href="#print-messages">4.4.1. Print Action</a></h4>
 <div class="imageblock">
 <div class="content">
 <img src="images/PrintDialog.png" alt="Print Dialog" width="300">
@@ -1262,7 +1262,7 @@ active T&amp;P messages.</p>
 <div class="sect3">
 <h4 id="print-selection-action"><a class="anchor" href="#print-selection-action"></a><a class="link" href="#print-selection-action">4.4.2. Print Selection Action</a></h4>
 <div class="paragraph">
-<p>Similar to the <a href="#print-action">Print Action</a>, except that only the current selection of messages get printed.</p>
+<p>Similar to the <a href="#print-messages">Print Action</a>, except that only the current selection of messages get printed.</p>
 </div>
 </div>
 <div class="sect3">
@@ -1324,7 +1324,7 @@ currently selected messages should be removed from.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="compare-action"><a class="anchor" href="#compare-action"></a><a class="link" href="#compare-action">4.4.8. Compare Action</a></h4>
+<h4 id="compare-messages"><a class="anchor" href="#compare-messages"></a><a class="link" href="#compare-messages">4.4.8. Compare Action</a></h4>
 <div class="imageblock">
 <div class="content">
 <img src="images/ComparisonDialog.png" alt="Message Comparison Dialog" width="600">
@@ -2549,10 +2549,73 @@ green for additions.</p>
 </div>
 <div class="sect2">
 <h3 id="editor-actions"><a class="anchor" href="#editor-actions"></a><a class="link" href="#editor-actions">5.6. Editor Actions</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/EditorActionMenu.png" alt="Editor Action Menu" width="150">
+</div>
+</div>
 <div class="paragraph">
-<p>TBD</p>
+<p>The <em>Action</em> menu of the <em>Editor</em> page contain the following actions:</p>
+</div>
+<div class="sect3">
+<h4 id="print-message"><a class="anchor" href="#print-message"></a><a class="link" href="#print-message">5.6.1. Print Action</a></h4>
+<div class="paragraph">
+<p>The <em>Print</em> action will print the currently saved version of the message being edited.
+Please refer to the <a href="#print-messages">Print Action</a> action for message lists.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="compare-message"><a class="anchor" href="#compare-message"></a><a class="link" href="#compare-message">5.6.2. Compare Action</a></h4>
+<div class="paragraph">
+<p>The <em>Compare</em> action will open the message comparison dialog with the currently edited message
+pre-selected.
+Please refer to the <a href="#compare-messages">Compare Action</a> action for message lists.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="add-to-tag-action"><a class="anchor" href="#add-to-tag-action"></a><a class="link" href="#add-to-tag-action">5.6.3. Add to Tag Action</a></h4>
+<div class="paragraph">
+<p>The <em>Add to Tag Action</em> will add the currently edited message to a message tag via the
+<em>Message Tag Dialog</em>.
+Please refer to the <a href="#add-selection-to-tag-action">Add Selection to Tag Action</a> action for message lists.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="remove-from-tag-name-actions"><a class="anchor" href="#remove-from-tag-name-actions"></a><a class="link" href="#remove-from-tag-name-actions">5.6.4. Remove from "Tag Name" Actions</a></h4>
+<div class="paragraph">
+<p>For each message tag that the edited message is assigned to, there will be a <em>Remove from "Tag Name"</em> action
+that will remove the message from the tag.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="expand-fields-action"><a class="anchor" href="#expand-fields-action"></a><a class="link" href="#expand-fields-action">5.6.5. Expand Fields Action</a></h4>
+<div class="paragraph">
+<p>The <em>Expand Fields</em> action is a short hand function that will activate (expand) all field editors
+on the editor <em>Edit</em> page.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="collapse-fields-action"><a class="anchor" href="#collapse-fields-action"></a><a class="link" href="#collapse-fields-action">5.6.6. Collapse Fields Action</a></h4>
+<div class="paragraph">
+<p>The <em>Collapse Fields</em> action is a short hand function that will deactivate (collapse) all field editors
+on the editor <em>Edit</em> page.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="more-fields-actions"><a class="anchor" href="#more-fields-actions"></a><a class="link" href="#more-fields-actions">5.6.7. More Fields Actions</a></h4>
+<div class="paragraph">
+<p>As described in the <a href="#general-edit-page-controls">General Edit Page Controls</a> section, the set of editor fields displayed by default
+on the editor <em>Edit</em> page depends on the message type, and may also depend on the selected area,
+category, etc.
+For instance, the "Orig. Information" editor field will only be displayed for Notices to Mariners, not
+for Navigational Warnings.</p>
+</div>
+<div class="paragraph">
+<p>However, in the bottom part of the <em>Action</em> menu, the user can choose to enable any of the editor fields
+not displayed by default.</p>
 </div>
 <hr>
+</div>
 </div>
 <div class="sect2">
 <h3 id="position-editor"><a class="anchor" href="#position-editor"></a><a class="link" href="#position-editor">5.7. Position Editor</a></h3>

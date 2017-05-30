@@ -295,7 +295,7 @@ image::MessageActions.png[Message Actions, 600]
 
 The actions will be detailed individually below.
 
-
+[#print-messages]
 ==== Print Action ====
 
 image::PrintDialog.png[Print Dialog, 300]
@@ -318,7 +318,7 @@ active T&P messages.
 
 ==== Print Selection Action ====
 
-Similar to the <<Print Action>>, except that only the current selection of messages get printed.
+Similar to the <<print-messages>>, except that only the current selection of messages get printed.
 
 ==== E-mail Selection Action ====
 
@@ -359,6 +359,7 @@ Will select all messages in the message list. Please refer to the <<Message Sele
 
 Will clear the current message selection. Please refer to the <<Message Selection>> section.
 
+[#compare-messages]
 ==== Compare Action ====
 
 image::ComparisonDialog.png[Message Comparison Dialog, 600]
