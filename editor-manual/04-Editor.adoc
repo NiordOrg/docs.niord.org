@@ -611,7 +611,24 @@ all the specified mail recipients will receive an e-mail with the comment and a 
 '''
 === History Editor Page ===
 
-TBD
+image::EditorHistoryPage.png[Editor History Page, 800]
+
+The _History_ editor page lists the complete revision history of a message, and allows an advanced user
+to inspect the underlying data of a message for a particular revision, and indeed to compare revisions.
+
+The table in the left side of the page contains the actual revision list, along with information about
+when the revision was created, the user who created it, etc.
+
+There is also a checkbox next to each revision that allows the user to _select_ the revision.
+If a single revision is selected, the revision panel in the right side of the page will list
+the underlying structured data of the revision.
+If there are any attachments for the selected revision, these are displayed at the
+bottom of the revision panel.
+
+If two revisions are selected, the revision panel will again display the underlying data in the
+revision panel, and flag changes using color-coding: Yellow for changes, red for deletions and
+green for additions.
+
 
 '''
 === Editor Actions ===
