@@ -543,10 +543,16 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#comments-editor-page">5.4. Comments Editor Page</a></li>
 <li><a href="#history-editor-page">5.5. History Editor Page</a></li>
 <li><a href="#editor-actions">5.6. Editor Actions</a></li>
-<li><a href="#position-editor">5.7. Position Editor</a></li>
-<li><a href="#message-template-execution">5.8. Message Template Execution</a></li>
 </ul>
 </li>
+<li><a href="#position-editor">6. Position Editor</a>
+<ul class="sectlevel2">
+<li><a href="#geojson">6.1. GeoJSON</a></li>
+<li><a href="#text-editor">6.2. Text Editor</a></li>
+<li><a href="#graphical-editor">6.3. Graphical Editor</a></li>
+</ul>
+</li>
+<li><a href="#message-template-execution">7. Message Template Execution</a></li>
 </ul>
 </div>
 </div>
@@ -2618,8 +2624,11 @@ not displayed by default.</p>
 <hr>
 </div>
 </div>
-<div class="sect2">
-<h3 id="position-editor"><a class="anchor" href="#position-editor"></a><a class="link" href="#position-editor">5.7. Position Editor</a></h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="position-editor"><a class="anchor" href="#position-editor"></a><a class="link" href="#position-editor">6. Position Editor</a></h2>
+<div class="sectionbody">
 <div class="imageblock">
 <div class="content">
 <img src="images/PositionEditor.png" alt="Position Editor" width="800">
@@ -2635,8 +2644,8 @@ Most prominently, the <em>Position Editor</em> is used to define the geographica
 of e.g. charts and areas - please refer to the
 <a href="http://docs.niord.org/admin-manual/manual.html">User Manual for Admins</a>.</p>
 </div>
-<div class="sect3">
-<h4 id="geojson"><a class="anchor" href="#geojson"></a><a class="link" href="#geojson">5.7.1. GeoJSON</a></h4>
+<div class="sect2">
+<h3 id="geojson"><a class="anchor" href="#geojson"></a><a class="link" href="#geojson">6.1. GeoJSON</a></h3>
 <div class="paragraph">
 <p>Internally, Niord has adopted the GeoJSON format for position lists and geographical extents.
 Please refer to <a href="http://docs.niord.org/model/model.html#niord-geojson-model">use of GeoJSON in Niord</a>
@@ -2703,8 +2712,8 @@ for more information.</p>
 <em>Polygons</em>.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="text-editor"><a class="anchor" href="#text-editor"></a><a class="link" href="#text-editor">5.7.2. Text Editor</a></h4>
+<div class="sect2">
+<h3 id="text-editor"><a class="anchor" href="#text-editor"></a><a class="link" href="#text-editor">6.2. Text Editor</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/PositionTextEditor.png" alt="Position Text Editor" width="600">
@@ -2746,11 +2755,12 @@ be useful to display the buoy types that span the area on the map.
 The feature or coordinate names are defined by prefixing the name with a two-letter language code, e.g.
 "en: yellow spar bouy with topmark., da: gul stage med krydstopbetegnelse."</p>
 </div>
-<div class="sect4">
-<h5 id="examples"><a class="anchor" href="#examples"></a><a class="link" href="#examples">Examples</a></h5>
+<div class="sect3">
+<h4 id="examples"><a class="anchor" href="#examples"></a><a class="link" href="#examples">6.2.1. Examples</a></h4>
 <div class="paragraph">
 <p>Create a simple point by simply typing a latitude-longitude position on a separate line. When
-no geometry type is specified, and only a single position, then it is assumed to be a <em>Point</em>:</p>
+no geometry type is specified, and only a single position defined, then it is assumed to
+be a <em>Point</em>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2758,7 +2768,8 @@ no geometry type is specified, and only a single position, then it is assumed to
 </div>
 </div>
 <div class="paragraph">
-<p>Create a named polygon plus a line-string with named coordinates:</p>
+<p>Create a named polygon plus a line-string with named coordinates (the rather elaborate format
+of the positions in this example, is there to illustrate the flexibility of the text editor):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2776,17 +2787,366 @@ LineString
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="graphical-editor"><a class="anchor" href="#graphical-editor"></a><a class="link" href="#graphical-editor">6.3. Graphical Editor</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/PositionGraphicalEditor.png" alt="Position Graphical Editor" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>In order to create and manipulate more advanced geometries, than can feasibly be handled by the
+text editor described above, the user may use the <em>Graphical Position Editor</em>
+(by clicking the "Edit" button).</p>
+</div>
 <div class="sect3">
-<h4 id="graphical-editor"><a class="anchor" href="#graphical-editor"></a><a class="link" href="#graphical-editor">5.7.3. Graphical Editor</a></h4>
+<h4 id="graphical-editor-tools"><a class="anchor" href="#graphical-editor-tools"></a><a class="link" href="#graphical-editor-tools">6.3.1. Graphical Editor Tools</a></h4>
+<div class="paragraph">
+<p>The topmost row of tools are used for drawing and manipulating features directly on the map.
+The tools are detailed below.</p>
+</div>
+<div class="paragraph">
+<p>No matter which tool is selected, the user can always pan the map by clicking and dragging directly
+on the map.</p>
+</div>
+<div class="sect4">
+<h5 id="span-class-image-img-src-images-positioneditorpointtool-png-alt-point-tool-width-18-span-point-tool"><a class="anchor" href="#span-class-image-img-src-images-positioneditorpointtool-png-alt-point-tool-width-18-span-point-tool"></a><a class="link" href="#span-class-image-img-src-images-positioneditorpointtool-png-alt-point-tool-width-18-span-point-tool"><span class="image"><img src="images/PositionEditorPointTool.png" alt="Point Tool" width="18"></span> Point Tool</a></h5>
+<div class="paragraph">
+<p>When the <em>Point Tool</em> is selected, a new single-point position will be inserted every
+time the user clicks on the map.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="span-class-image-img-src-images-positioneditorpathtool-png-alt-path-tool-width-18-span-path-tool"><a class="anchor" href="#span-class-image-img-src-images-positioneditorpathtool-png-alt-path-tool-width-18-span-path-tool"></a><a class="link" href="#span-class-image-img-src-images-positioneditorpathtool-png-alt-path-tool-width-18-span-path-tool"><span class="image"><img src="images/PositionEditorPathTool.png" alt="Path Tool" width="18"></span> Path Tool</a></h5>
+<div class="paragraph">
+<p>When the <em>Path Tool</em> is selected, a new <em>LineString</em> path will be inserted when the
+user clicks the map. The first click will place the first position of the path. Subsequent
+clicks will add a new segment to the path.
+The user must double-click at the map to place the last segment of the path.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="span-class-image-img-src-images-positioneditorpolygontool-png-alt-polygon-tool-width-18-span-polygon-tool"><a class="anchor" href="#span-class-image-img-src-images-positioneditorpolygontool-png-alt-polygon-tool-width-18-span-polygon-tool"></a><a class="link" href="#span-class-image-img-src-images-positioneditorpolygontool-png-alt-polygon-tool-width-18-span-polygon-tool"><span class="image"><img src="images/PositionEditorPolygonTool.png" alt="Polygon Tool" width="18"></span> Polygon Tool</a></h5>
+<div class="paragraph">
+<p>When the <em>Polygon Tool</em> is selected, a new <em>Polygon</em> will be inserted when the
+user clicks the map. The first click will place the first position of the polygon. Subsequent
+clicks will add a new segment to the polygon.
+The user must double-click at the map to place the last vertex and complete the polygon.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="span-class-image-img-src-images-positioneditormodifytool-png-alt-modify-tool-width-18-span-modify-tool"><a class="anchor" href="#span-class-image-img-src-images-positioneditormodifytool-png-alt-modify-tool-width-18-span-modify-tool"></a><a class="link" href="#span-class-image-img-src-images-positioneditormodifytool-png-alt-modify-tool-width-18-span-modify-tool"><span class="image"><img src="images/PositionEditorModifyTool.png" alt="Modify Tool" width="18"></span> Modify Tool</a></h5>
+<div class="paragraph">
+<p>When the <em>Modify Tool</em> is selected, the user can select and manipulate existing features directly
+in the map.</p>
+</div>
+<div class="paragraph">
+<p>A single click directly on a feature will select the feature. If the shift key is pressed, the
+feature will be added to an existing selection.</p>
+</div>
+<div class="paragraph">
+<p>If the user keeps the shift key pressed and drags the mouse, all features within the bounding box will
+be selected.</p>
+</div>
+<div class="paragraph">
+<p>Otherwise, if the user clicks and drags the mouse on top of a feature, the feature will be moved.</p>
+</div>
+<div class="paragraph">
+<p>If the user clicks a segment of a selected LineString, or the border of a selected Polygon, a new
+point will be inserted at that position.</p>
+</div>
+<div class="paragraph">
+<p>If the user keeps the shift key pressed and clicks on a vertex of a selected LineString or Polygon,
+then that vertex will be removed from the feature.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="span-class-image-img-src-images-positioneditordeletetool-png-alt-delete-tool-width-18-span-delete-tool"><a class="anchor" href="#span-class-image-img-src-images-positioneditordeletetool-png-alt-delete-tool-width-18-span-delete-tool"></a><a class="link" href="#span-class-image-img-src-images-positioneditordeletetool-png-alt-delete-tool-width-18-span-delete-tool"><span class="image"><img src="images/PositionEditorDeleteTool.png" alt="Delete Tool" width="18"></span> Delete Tool</a></h5>
+<div class="paragraph">
+<p>When the <em>Delete Tool</em> is selected, the user can quickly delete all the features that the user
+clicks on in the map.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="action-button-panel"><a class="anchor" href="#action-button-panel"></a><a class="link" href="#action-button-panel">6.3.2. Action Button Panel</a></h4>
+<div class="paragraph">
+<p>The next row of buttons is for various actions. Clicking the "Cancel" button will cancel all
+changes and close the editor.</p>
+</div>
+<div class="paragraph">
+<p>Clicking "OK" will update the underlying graphical model and close the editor.</p>
+</div>
+<div class="paragraph">
+<p>Clicking the <span class="image"><img src="images/PositionEditorToggleFeatures.png" alt="Toggle Show Features" width="18"></span> Show/Hide Features
+toggle button will alternately show and hide the <em>Features Panel</em>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="action-menu"><a class="anchor" href="#action-menu"></a><a class="link" href="#action-menu">6.3.3. Action Menu</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/PositionEditorActionMenu.png" alt="Position Editor Action Menu" width="140">
+</div>
+</div>
+<div class="paragraph">
+<p>The <em>Action Menu</em> contains a multitude of functions for manipulating the features of the
+<em>Position Editor</em>.</p>
+</div>
+<div class="paragraph">
+<p>The actual list of functions in the menu depends on the current feature selection.</p>
+</div>
+<div class="sect4">
+<h5 id="clear-all-action"><a class="anchor" href="#clear-all-action"></a><a class="link" href="#clear-all-action">Clear All Action</a></h5>
+<div class="paragraph">
+<p>The <em>Clear All</em> action will clear the editor.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="zoom-to-extent-action"><a class="anchor" href="#zoom-to-extent-action"></a><a class="link" href="#zoom-to-extent-action">Zoom to Extent Action</a></h5>
+<div class="paragraph">
+<p>When enacting the <em>Zoom to Extent</em> action, the editor map will pan and zoom so as to include
+all the features of the geographical model.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="edit-as-text-action"><a class="anchor" href="#edit-as-text-action"></a><a class="link" href="#edit-as-text-action">Edit as Text Action</a></h5>
+<div class="paragraph">
+<p>The <em>Edit as Text</em> option is only available when the no geometry has been defined, or the
+geometry is sufficiently simple.</p>
+</div>
+<div class="paragraph">
+<p>The edited geometry will be opened in the <a href="#text-editor">Text Editor</a> described in a previous section.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="import-action-2"><a class="anchor" href="#import-action-2"></a><a class="link" href="#import-action-2">Import Action</a></h5>
+<div class="paragraph">
+<p>The <em>Import</em> action will open a dialog and allow the user to import any geometry defined for
+an existing area.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="add-affected-radius-action"><a class="anchor" href="#add-affected-radius-action"></a><a class="link" href="#add-affected-radius-action">Add Affected Radius Action</a></h5>
+<div class="paragraph">
+<p>If one or more features are selected, the user can enact the <em>Add affected radius</em> action to
+add an affected area with a certain radius around the selected feature(s).</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/PositionEditorAffectedRadius.png" alt="Position Editor Affected Radius" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>The affected radius feature is tied to the features it was created from (its <em>parent features</em>),
+so, if the user moves or modifies any of the parent features, the affected radius feature
+will be re-computed.</p>
+</div>
+<div class="paragraph">
+<p>The user can also update the radius distance of the affected radius feature, whereupon its
+geometry will be re-computed.</p>
+</div>
+<div class="paragraph">
+<p>Lastly, the user can select the type of restriction that applies to the affected area. By default
+the value is "Affected". However, the user can choose "Restricted", "Speed restricted", "Prohibited"
+and "Stopping prohibited" as well.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="add-affected-radius-action-2"><a class="anchor" href="#add-affected-radius-action-2"></a><a class="link" href="#add-affected-radius-action-2">Add Affected Radius Action</a></h5>
+<div class="paragraph">
+<p>If two or more <em>Point</em> features are selected, the user can enact the <em>Add affected path</em> action to
+add an affected path as defined by the points in the order they appear.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/PositionEditorAffectedPath.png" alt="Position Editor Affected Path" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>The affected path feature is tied to the points it was created from (its <em>parent features</em>),
+so, if the user moves any of the parent features, the affected path feature
+will be re-computed.</p>
+</div>
+<div class="paragraph">
+<p>The user can also select the type of restriction that applies to the affected path. By default
+the value is "Affected". However, the user can choose "Restricted", "Speed restricted", "Prohibited"
+and "Stopping prohibited" as well.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="add-affected-area-action"><a class="anchor" href="#add-affected-area-action"></a><a class="link" href="#add-affected-area-action">Add Affected Area Action</a></h5>
+<div class="paragraph">
+<p>If three or more <em>Point</em> features are selected, the user can enact the <em>Add affected area</em> action to
+add an affected area spanned by the points in the order they appear.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/PositionEditorAffectedArea.png" alt="Position Editor Affected Area" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>The affected area feature is tied to the points it was created from (its <em>parent features</em>),
+so, if the user moves any of the parent features, the affected area feature
+will be re-computed.</p>
+</div>
+<div class="paragraph">
+<p>The user can also select the type of restriction that applies to the affected area. By default
+the value is "Affected". However, the user can choose "Restricted", "Speed restricted", "Prohibited"
+and "Stopping prohibited" as well.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="merge-geometries-action"><a class="anchor" href="#merge-geometries-action"></a><a class="link" href="#merge-geometries-action">Merge Geometries Action</a></h5>
+<div class="paragraph">
+<p>If two or more features are selected, the user can enact the <em>Merge Geometries</em> action.</p>
+</div>
+<div class="paragraph">
+<p>The merge function will attempt to be intelligent, depending of the type of the selected features.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If all the selected features a of type <em>Point</em> or <em>MultiPoint</em> the resulting feature will be of
+type <em>MultiPoint</em>.</p>
+</li>
+<li>
+<p>If all the selected features a of type <em>LineString</em> or <em>MultiLineString</em> the resulting feature
+will be of type <em>MultiLineString</em>.</p>
+</li>
+<li>
+<p>If all the selected features a of type <em>Polygon</em> or <em>MultiPolygon</em> the resulting feature
+will be of type <em>MultiPolygon</em>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If none of these criteria applies, the resulting feature will be of type <em>GeometryCollection</em>.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="split-geometries-action"><a class="anchor" href="#split-geometries-action"></a><a class="link" href="#split-geometries-action">Split Geometries Action</a></h5>
+<div class="paragraph">
+<p>If one or more features are selected, the user can enact the <em>Split Geometries</em> action.</p>
+</div>
+<div class="paragraph">
+<p>The split function will attempt to be intelligent, depending of the type of the selected features.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A <em>MultiPoint</em> feature will be split into separate <em>Point</em> features.</p>
+</li>
+<li>
+<p>A <em>MultiLineString</em> feature will be split into separate <em>LineString</em> features.</p>
+</li>
+<li>
+<p>A <em>MultiPolygon</em> feature will be split into separate <em>Polygon</em> features.</p>
+</li>
+<li>
+<p>A <em>GeometryCollection</em> feature will be split into its individual geometries.</p>
+</li>
+<li>
+<p>A <em>LineString</em> feature will be split into separate <em>Point</em> features.</p>
+</li>
+<li>
+<p>A <em>Polygon</em> feature will be split into separate <em>Point</em> features.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="subtract-geometries-action"><a class="anchor" href="#subtract-geometries-action"></a><a class="link" href="#subtract-geometries-action">Subtract Geometries Action</a></h5>
+<div class="paragraph">
+<p>If two or more <em>Polygon</em> features are selected, the user can enact the <em>Subtract Geometries</em> action.
+The resulting polygon will be identical to the first selected polygon, but with all other
+polygons subtracted (i.e. leaving holes).</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="convert-to-linestring-action"><a class="anchor" href="#convert-to-linestring-action"></a><a class="link" href="#convert-to-linestring-action">Convert to LineString Action</a></h5>
+<div class="paragraph">
+<p>If a <em>MultiPoint</em> or a <em>Polygon</em> feature is selected, the user can enact the
+<em>Convert to LineString</em> action.
+The resulting <em>LineString</em> feature will form a path between all involved coordinates.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="convert-to-polygon-action"><a class="anchor" href="#convert-to-polygon-action"></a><a class="link" href="#convert-to-polygon-action">Convert to Polygon Action</a></h5>
+<div class="paragraph">
+<p>If a <em>MultiPoint</em> or a <em>LineString</em> feature is selected, the user can enact the
+<em>Convert to Polygon</em> action.
+The resulting <em>Polygon</em> feature will form a polygon spanned by all involved coordinates.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="convert-to-multipoint-action"><a class="anchor" href="#convert-to-multipoint-action"></a><a class="link" href="#convert-to-multipoint-action">Convert to MultiPoint Action</a></h5>
+<div class="paragraph">
+<p>If a <em>Polygon</em> or a <em>LineString</em> feature is selected, the user can enact the
+<em>Convert to MultiPoint</em> action.
+The resulting <em>MultiPoint</em> feature will contain all involved coordinates.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="features-panel"><a class="anchor" href="#features-panel"></a><a class="link" href="#features-panel">6.3.4. Features Panel</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/PositionEditorFeaturePanel.png" alt="Position Editor Feature Panel" width="200">
+</div>
+</div>
+<div class="paragraph">
+<p>When the <em>Features Panel</em> is visible, it will list a <em>Feature Panel</em> for all defined
+features.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The feature selection checkbox will toggle the selection state of the feature.</p>
+</li>
+<li>
+<p>The zoom-to-extent arrow will pan and zoom the map to the extent of the given feature.</p>
+</li>
+<li>
+<p>The trash icon will delete the feature, and the drag-handle icon can be used to re-arrange
+the features in the <em>Features Panel</em>.</p>
+</li>
+<li>
+<p>When the <em>Name</em> toggle-button is pressed, there will be <em>feature name</em> input fields for all
+supported model languages. A client (e.g. an ECDIS-client) may chose to display the label
+at the center of the feature.</p>
+</li>
+<li>
+<p>When the <em>Restriction</em> toggle-button is pressed, there will be a <em>restriction</em> menu for selecting
+a restriction that applies to the feature.
+Possible values are "Affected",  "Restricted", "Speed restricted", "Prohibited"
+and "Stopping prohibited".
+A client (e.g. an ECDIS-client) may chose to use the restriction flag to drive portrayal or have
+an effect in route computations, etc.</p>
+</li>
+<li>
+<p>The geometry tree will allow a user to inspect and modify the coordinates and coordinate names
+of the actual feature geometry. The geometry tree can be navigated using the mouse or keyboard
+keys such as arrow-up, arrow-down, arrow-left (collapse node), arrow-right (expand node), F2 or enter
+(start editing coordinates or coordinate names) and enter to submit changes.
+The coordinate names, nested below each coordinate, and available in all supported model languages,
+may be displayed by a client (e.g. an ECDIS-client) next to the actual position on a map.
+To a certain extent, the user can also add or remove coordinates by clicking the plus or minus sign
+displayed next to a selected coordinate.</p>
+</li>
+</ol>
+</div>
 <div style="page-break-after: always;"></div>
 <hr>
 </div>
 </div>
-<div class="sect2">
-<h3 id="message-template-execution"><a class="anchor" href="#message-template-execution"></a><a class="link" href="#message-template-execution">5.8. Message Template Execution</a></h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="message-template-execution"><a class="anchor" href="#message-template-execution"></a><a class="link" href="#message-template-execution">7. Message Template Execution</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>TBD</p>
-</div>
 </div>
 </div>
 </div>

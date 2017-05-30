@@ -2,7 +2,7 @@
 :imagesdir: images
 
 '''
-=== Position Editor ===
+== Position Editor ==
 
 image::PositionEditor.png[Position Editor, 800]
 
@@ -14,7 +14,7 @@ However, the position editor is also used by administrative users to define the 
 of e.g. charts and areas - please refer to the
 http://docs.niord.org/admin-manual/manual.html[User Manual for Admins].
 
-==== GeoJSON ====
+=== GeoJSON ===
 
 Internally, Niord has adopted the GeoJSON format for position lists and geographical extents.
 Please refer to http://docs.niord.org/model/model.html#niord-geojson-model[use of GeoJSON in Niord]
@@ -61,7 +61,7 @@ The following geometry types are supported in the Niord _Position Editor_
 Of all these geometry types, the user will usually only deal with _Points_, _LineStrings_ and
 _Polygons_.
 
-==== Text Editor ====
+=== Text Editor ===
 
 image::PositionTextEditor.png[Position Text Editor, 600]
 
@@ -97,10 +97,11 @@ be useful to display the buoy types that span the area on the map.
 The feature or coordinate names are defined by prefixing the name with a two-letter language code, e.g.
 "en: yellow spar bouy with topmark., da: gul stage med krydstopbetegnelse."
 
-===== Examples
+==== Examples
 
 Create a simple point by simply typing a latitude-longitude position on a separate line. When
-no geometry type is specified, and only a single position, then it is assumed to be a _Point_:
+no geometry type is specified, and only a single position defined, then it is assumed to
+be a _Point_:
 
 [source,text]
 ----
@@ -108,7 +109,8 @@ no geometry type is specified, and only a single position, then it is assumed to
 ----
 
 
-Create a named polygon plus a line-string with named coordinates:
+Create a named polygon plus a line-string with named coordinates (the rather elaborate format
+of the positions in this example, is there to illustrate the flexibility of the text editor):
 
 [source,text]
 ----
@@ -124,8 +126,230 @@ LineString
 2) 54° 53.982'N 009° 52.170'E, da: kyst, en: coast
 ----
 
+=== Graphical Editor ===
 
-==== Graphical Editor ====
+image::PositionGraphicalEditor.png[Position Graphical Editor, 600]
 
+In order to create and manipulate more advanced geometries, than can feasibly be handled by the
+text editor described above, the user may use the _Graphical Position Editor_
+(by clicking the "Edit" button).
 
+==== Graphical Editor Tools ====
 
+The topmost row of tools are used for drawing and manipulating features directly on the map.
+The tools are detailed below.
+
+No matter which tool is selected, the user can always pan the map by clicking and dragging directly
+on the map.
+
+===== image:PositionEditorPointTool.png[Point Tool, 18] Point Tool
+
+When the _Point Tool_ is selected, a new single-point position will be inserted every
+time the user clicks on the map.
+
+===== image:PositionEditorPathTool.png[Path Tool, 18] Path Tool
+
+When the _Path Tool_ is selected, a new _LineString_ path will be inserted when the
+user clicks the map. The first click will place the first position of the path. Subsequent
+clicks will add a new segment to the path.
+The user must double-click at the map to place the last segment of the path.
+
+===== image:PositionEditorPolygonTool.png[Polygon Tool, 18] Polygon Tool
+
+When the _Polygon Tool_ is selected, a new _Polygon_ will be inserted when the
+user clicks the map. The first click will place the first position of the polygon. Subsequent
+clicks will add a new segment to the polygon.
+The user must double-click at the map to place the last vertex and complete the polygon.
+
+===== image:PositionEditorModifyTool.png[Modify Tool, 18] Modify Tool
+
+When the _Modify Tool_ is selected, the user can select and manipulate existing features directly
+in the map.
+
+A single click directly on a feature will select the feature. If the shift key is pressed, the
+feature will be added to an existing selection.
+
+If the user keeps the shift key pressed and drags the mouse, all features within the bounding box will
+be selected.
+
+Otherwise, if the user clicks and drags the mouse on top of a feature, the feature will be moved.
+
+If the user clicks a segment of a selected LineString, or the border of a selected Polygon, a new
+point will be inserted at that position.
+
+If the user keeps the shift key pressed and clicks on a vertex of a selected LineString or Polygon,
+then that vertex will be removed from the feature.
+
+===== image:PositionEditorDeleteTool.png[Delete Tool, 18] Delete Tool
+
+When the _Delete Tool_ is selected, the user can quickly delete all the features that the user
+clicks on in the map.
+
+==== Action Button Panel ====
+
+The next row of buttons is for various actions. Clicking the "Cancel" button will cancel all
+changes and close the editor.
+
+Clicking "OK" will update the underlying graphical model and close the editor.
+
+Clicking the image:PositionEditorToggleFeatures.png[Toggle Show Features, 18] Show/Hide Features
+toggle button will alternately show and hide the _Features Panel_.
+
+==== Action Menu ====
+
+image::PositionEditorActionMenu.png[Position Editor Action Menu, 140]
+
+The _Action Menu_ contains a multitude of functions for manipulating the features of the
+_Position Editor_.
+
+The actual list of functions in the menu depends on the current feature selection.
+
+===== Clear All Action
+
+The _Clear All_ action will clear the editor.
+
+===== Zoom to Extent Action
+
+When enacting the _Zoom to Extent_ action, the editor map will pan and zoom so as to include
+all the features of the geographical model.
+
+===== Edit as Text Action
+
+The _Edit as Text_ option is only available when the no geometry has been defined, or the
+geometry is sufficiently simple.
+
+The edited geometry will be opened in the <<Text Editor>> described in a previous section.
+
+===== Import Action
+
+The _Import_ action will open a dialog and allow the user to import any geometry defined for
+an existing area.
+
+===== Add Affected Radius Action
+
+If one or more features are selected, the user can enact the _Add affected radius_ action to
+add an affected area with a certain radius around the selected feature(s).
+
+image::PositionEditorAffectedRadius.png[Position Editor Affected Radius, 400]
+
+The affected radius feature is tied to the features it was created from (its _parent features_),
+so, if the user moves or modifies any of the parent features, the affected radius feature
+will be re-computed.
+
+The user can also update the radius distance of the affected radius feature, whereupon its
+geometry will be re-computed.
+
+Lastly, the user can select the type of restriction that applies to the affected area. By default
+the value is "Affected". However, the user can choose "Restricted", "Speed restricted", "Prohibited"
+and "Stopping prohibited" as well.
+
+===== Add Affected Radius Action
+
+If two or more _Point_ features are selected, the user can enact the _Add affected path_ action to
+add an affected path as defined by the points in the order they appear.
+
+image::PositionEditorAffectedPath.png[Position Editor Affected Path, 400]
+
+The affected path feature is tied to the points it was created from (its _parent features_),
+so, if the user moves any of the parent features, the affected path feature
+will be re-computed.
+
+The user can also select the type of restriction that applies to the affected path. By default
+the value is "Affected". However, the user can choose "Restricted", "Speed restricted", "Prohibited"
+and "Stopping prohibited" as well.
+
+===== Add Affected Area Action
+
+If three or more _Point_ features are selected, the user can enact the _Add affected area_ action to
+add an affected area spanned by the points in the order they appear.
+
+image::PositionEditorAffectedArea.png[Position Editor Affected Area, 400]
+
+The affected area feature is tied to the points it was created from (its _parent features_),
+so, if the user moves any of the parent features, the affected area feature
+will be re-computed.
+
+The user can also select the type of restriction that applies to the affected area. By default
+the value is "Affected". However, the user can choose "Restricted", "Speed restricted", "Prohibited"
+and "Stopping prohibited" as well.
+
+===== Merge Geometries Action
+
+If two or more features are selected, the user can enact the _Merge Geometries_ action.
+
+The merge function will attempt to be intelligent, depending of the type of the selected features.
+
+* If all the selected features a of type _Point_ or _MultiPoint_ the resulting feature will be of
+  type _MultiPoint_.
+* If all the selected features a of type _LineString_ or _MultiLineString_ the resulting feature
+  will be of type _MultiLineString_.
+* If all the selected features a of type _Polygon_ or _MultiPolygon_ the resulting feature
+  will be of type _MultiPolygon_.
+
+If none of these criteria applies, the resulting feature will be of type _GeometryCollection_.
+
+===== Split Geometries Action
+
+If one or more features are selected, the user can enact the _Split Geometries_ action.
+
+The split function will attempt to be intelligent, depending of the type of the selected features.
+
+* A _MultiPoint_ feature will be split into separate _Point_ features.
+* A _MultiLineString_ feature will be split into separate _LineString_ features.
+* A _MultiPolygon_ feature will be split into separate _Polygon_ features.
+* A _GeometryCollection_ feature will be split into its individual geometries.
+* A _LineString_ feature will be split into separate _Point_ features.
+* A _Polygon_ feature will be split into separate _Point_ features.
+
+===== Subtract Geometries Action
+
+If two or more _Polygon_ features are selected, the user can enact the _Subtract Geometries_ action.
+The resulting polygon will be identical to the first selected polygon, but with all other
+polygons subtracted (i.e. leaving holes).
+
+===== Convert to LineString Action
+
+If a _MultiPoint_ or a _Polygon_ feature is selected, the user can enact the
+_Convert to LineString_ action.
+The resulting _LineString_ feature will form a path between all involved coordinates.
+
+===== Convert to Polygon Action
+
+If a _MultiPoint_ or a _LineString_ feature is selected, the user can enact the
+_Convert to Polygon_ action.
+The resulting _Polygon_ feature will form a polygon spanned by all involved coordinates.
+
+===== Convert to MultiPoint Action
+
+If a _Polygon_ or a _LineString_ feature is selected, the user can enact the
+_Convert to MultiPoint_ action.
+The resulting _MultiPoint_ feature will contain all involved coordinates.
+
+==== Features Panel ====
+
+image::PositionEditorFeaturePanel.png[Position Editor Feature Panel, 200]
+
+When the _Features Panel_ is visible, it will list a _Feature Panel_ for all defined
+features.
+
+. The feature selection checkbox will toggle the selection state of the feature.
+. The zoom-to-extent arrow will pan and zoom the map to the extent of the given feature.
+. The trash icon will delete the feature, and the drag-handle icon can be used to re-arrange
+  the features in the _Features Panel_.
+. When the _Name_ toggle-button is pressed, there will be _feature name_ input fields for all
+  supported model languages. A client (e.g. an ECDIS-client) may chose to display the label
+  at the center of the feature.
+. When the _Restriction_ toggle-button is pressed, there will be a _restriction_ menu for selecting
+  a restriction that applies to the feature.
+  Possible values are "Affected",  "Restricted", "Speed restricted", "Prohibited"
+  and "Stopping prohibited".
+  A client (e.g. an ECDIS-client) may chose to use the restriction flag to drive portrayal or have
+  an effect in route computations, etc.
+. The geometry tree will allow a user to inspect and modify the coordinates and coordinate names
+  of the actual feature geometry. The geometry tree can be navigated using the mouse or keyboard
+  keys such as arrow-up, arrow-down, arrow-left (collapse node), arrow-right (expand node), F2 or enter
+  (start editing coordinates or coordinate names) and enter to submit changes.
+  The coordinate names, nested below each coordinate, and available in all supported model languages,
+  may be displayed by a client (e.g. an ECDIS-client) next to the actual position on a map.
+  To a certain extent, the user can also add or remove coordinates by clicking the plus or minus sign
+  displayed next to a selected coordinate.
