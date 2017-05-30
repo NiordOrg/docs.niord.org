@@ -2628,27 +2628,27 @@ not displayed by default.</p>
 <div class="paragraph">
 <p>The <em>Position Editor</em> is used for editing the geographical extent of various entities in Niord.
 Most prominently, the <em>Position Editor</em> is used to define the geographical extent of message parts
-in the message editor - please refer to the <a href="#positions-editor-field">Positions Editor Field</a> section.</p>
+- please refer to the <a href="#positions-editor-field">Positions Editor Field</a> section.</p>
 </div>
 <div class="paragraph">
-<p>However, the position editor is also used by administrative users to defined the geographical extent
+<p>However, the position editor is also used by administrative users to define the geographical extent
 of e.g. charts and areas - please refer to the
 <a href="http://docs.niord.org/admin-manual/manual.html">User Manual for Admins</a>.</p>
 </div>
 <div class="sect3">
 <h4 id="geojson"><a class="anchor" href="#geojson"></a><a class="link" href="#geojson">5.7.1. GeoJSON</a></h4>
 <div class="paragraph">
-<p>Internally, Niord has adopted a GeoJSON representation for position lists and geographical extents.
+<p>Internally, Niord has adopted the GeoJSON format for position lists and geographical extents.
 Please refer to <a href="http://docs.niord.org/model/model.html#niord-geojson-model">use of GeoJSON in Niord</a>
 for more information.</p>
 </div>
 <div class="paragraph">
-<p>The following geometry types are supported in Niords <em>Position Editor</em></p>
+<p>The following geometry types are supported in the Niord <em>Position Editor</em></p>
 </div>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
-<col style="width: 30%;">
-<col style="width: 70%;">
+<col style="width: 20%;">
+<col style="width: 80%;">
 </colgroup>
 <thead>
 <tr>
@@ -2694,7 +2694,7 @@ for more information.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">FeatureCollection</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A list of Features. This is in fact the structure that all message parts are associated with.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A list of Features. This is in fact the geometry type that all message parts are associated with.</p></td>
 </tr>
 </tbody>
 </table>
@@ -2704,16 +2704,80 @@ for more information.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="graphical-editor"><a class="anchor" href="#graphical-editor"></a><a class="link" href="#graphical-editor">5.7.2. Graphical Editor</a></h4>
-
-</div>
-<div class="sect3">
-<h4 id="text-editor"><a class="anchor" href="#text-editor"></a><a class="link" href="#text-editor">5.7.3. Text Editor</a></h4>
+<h4 id="text-editor"><a class="anchor" href="#text-editor"></a><a class="link" href="#text-editor">5.7.2. Text Editor</a></h4>
 <div class="imageblock">
 <div class="content">
 <img src="images/PositionTextEditor.png" alt="Position Text Editor" width="600">
 </div>
 </div>
+<div class="paragraph">
+<p>For relatively simple geometries, the user may choose to use the Text-based <em>Position Editor</em>
+(by clicking the "Edit as Text" button).
+The textual editor is also quite useful if the user wants to create a geometry based on a position list
+copied from a different source, such as an e-mail.</p>
+</div>
+<div class="paragraph">
+<p>The main format of the textual representation is:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="text">&lt;&lt;Feature 1 Geometry Type&gt;&gt;, &lt;&lt;Feature Name&gt;&gt;
+&lt;&lt;Feature 1, Coordinate #1&gt;&gt;, &lt;&lt;Coordinate Name&gt;&gt;
+...
+&lt;&lt;Feature 1, Coordinate #X&gt;&gt;, &lt;&lt;Coordinate Name&gt;&gt;
+
+&lt;&lt;Feature 2, Geometry Type&gt;&gt;, &lt;&lt;Feature Name&gt;&gt;
+&lt;&lt;Feature 2, Coordinate #1&gt;&gt;, &lt;&lt;Coordinate Name&gt;&gt;
+...
+&lt;&lt;Feature 2, Coordinate #Y&gt;&gt;, &lt;&lt;Coordinate Name&gt;&gt;
+
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>So, each feature starts with a header line stating the geometry type (<em>Point</em>, <em>LineString</em>, etc).
+Next, there will be a new line for each coordinate of the geometry.
+If there are multiple features, each feature must be separated with one or more blank lines.</p>
+</div>
+<div class="paragraph">
+<p>The feature names and coordinate names are optional, but may be useful when displayed as a label on
+a map. For instance, if the feature is a polygon that represents a restricted area, then it may
+be useful to display the buoy types that span the area on the map.
+The feature or coordinate names are defined by prefixing the name with a two-letter language code, e.g.
+"en: yellow spar bouy with topmark., da: gul stage med krydstopbetegnelse."</p>
+</div>
+<div class="sect4">
+<h5 id="examples"><a class="anchor" href="#examples"></a><a class="link" href="#examples">Examples</a></h5>
+<div class="paragraph">
+<p>Create a simple point by simply typing a latitude-longitude position on a separate line. When
+no geometry type is specified, and only a single position, then it is assumed to be a <em>Point</em>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="text">56N 11 30.23E</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Create a named polygon plus a line-string with named coordinates:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="text">Polygon, da: ES D 139 Bornholm Ø., en: ES D 139 Bornholm E.
+54° 54.967'N 015° 49.961'E
+54° 54.969'N 015° 15.029'E
+55° 03.006'N 015° 15.029'E
+55° 19.930'N 015° 49.942'E
+54° 54.967'N 015° 49.961'E
+
+LineString
+1) 54° 53.397'N 009° 53.071'E, da: kyst, en: coast
+2) 54° 53.982'N 009° 52.170'E, da: kyst, en: coast</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="graphical-editor"><a class="anchor" href="#graphical-editor"></a><a class="link" href="#graphical-editor">5.7.3. Graphical Editor</a></h4>
 <div style="page-break-after: always;"></div>
 <hr>
 </div>

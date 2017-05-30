@@ -8,21 +8,21 @@ image::PositionEditor.png[Position Editor, 800]
 
 The _Position Editor_ is used for editing the geographical extent of various entities in Niord.
 Most prominently, the _Position Editor_ is used to define the geographical extent of message parts
-in the message editor - please refer to the <<Positions Editor Field>> section.
+- please refer to the <<Positions Editor Field>> section.
 
-However, the position editor is also used by administrative users to defined the geographical extent
+However, the position editor is also used by administrative users to define the geographical extent
 of e.g. charts and areas - please refer to the
 http://docs.niord.org/admin-manual/manual.html[User Manual for Admins].
 
 ==== GeoJSON ====
 
-Internally, Niord has adopted a GeoJSON representation for position lists and geographical extents.
+Internally, Niord has adopted the GeoJSON format for position lists and geographical extents.
 Please refer to http://docs.niord.org/model/model.html#niord-geojson-model[use of GeoJSON in Niord]
 for more information.
 
-The following geometry types are supported in Niords _Position Editor_
+The following geometry types are supported in the Niord _Position Editor_
 
-[cols="30,70",options="header"]
+[cols="20,80",options="header"]
 |===
 |Geometry Type|Description
 
@@ -54,18 +54,78 @@ The following geometry types are supported in Niords _Position Editor_
   such as feature names, restriction flags, etc.
 
 | FeatureCollection
-| A list of Features. This is in fact the structure that all message parts are associated with.
+| A list of Features. This is in fact the geometry type that all message parts are associated with.
 
 |===
 
 Of all these geometry types, the user will usually only deal with _Points_, _LineStrings_ and
 _Polygons_.
 
-==== Graphical Editor ====
-
-
-
 ==== Text Editor ====
 
 image::PositionTextEditor.png[Position Text Editor, 600]
+
+For relatively simple geometries, the user may choose to use the Text-based _Position Editor_
+(by clicking the "Edit as Text" button).
+The textual editor is also quite useful if the user wants to create a geometry based on a position list
+copied from a different source, such as an e-mail.
+
+The main format of the textual representation is:
+
+[source,text]
+----
+<<Feature 1 Geometry Type>>, <<Feature Name>>
+<<Feature 1, Coordinate #1>>, <<Coordinate Name>>
+...
+<<Feature 1, Coordinate #X>>, <<Coordinate Name>>
+
+<<Feature 2, Geometry Type>>, <<Feature Name>>
+<<Feature 2, Coordinate #1>>, <<Coordinate Name>>
+...
+<<Feature 2, Coordinate #Y>>, <<Coordinate Name>>
+
+...
+----
+
+So, each feature starts with a header line stating the geometry type (_Point_, _LineString_, etc).
+Next, there will be a new line for each coordinate of the geometry.
+If there are multiple features, each feature must be separated with one or more blank lines.
+
+The feature names and coordinate names are optional, but may be useful when displayed as a label on
+a map. For instance, if the feature is a polygon that represents a restricted area, then it may
+be useful to display the buoy types that span the area on the map.
+The feature or coordinate names are defined by prefixing the name with a two-letter language code, e.g.
+"en: yellow spar bouy with topmark., da: gul stage med krydstopbetegnelse."
+
+===== Examples
+
+Create a simple point by simply typing a latitude-longitude position on a separate line. When
+no geometry type is specified, and only a single position, then it is assumed to be a _Point_:
+
+[source,text]
+----
+56N 11 30.23E
+----
+
+
+Create a named polygon plus a line-string with named coordinates:
+
+[source,text]
+----
+Polygon, da: ES D 139 Bornholm Ø., en: ES D 139 Bornholm E.
+54° 54.967'N 015° 49.961'E
+54° 54.969'N 015° 15.029'E
+55° 03.006'N 015° 15.029'E
+55° 19.930'N 015° 49.942'E
+54° 54.967'N 015° 49.961'E
+
+LineString
+1) 54° 53.397'N 009° 53.071'E, da: kyst, en: coast
+2) 54° 53.982'N 009° 52.170'E, da: kyst, en: coast
+----
+
+
+==== Graphical Editor ====
+
+
 
