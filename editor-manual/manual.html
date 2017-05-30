@@ -2620,11 +2620,103 @@ not displayed by default.</p>
 </div>
 <div class="sect2">
 <h3 id="position-editor"><a class="anchor" href="#position-editor"></a><a class="link" href="#position-editor">5.7. Position Editor</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/PositionEditor.png" alt="Position Editor" width="800">
+</div>
+</div>
 <div class="paragraph">
-<p>TBD</p>
+<p>The <em>Position Editor</em> is used for editing the geographical extent of various entities in Niord.
+Most prominently, the <em>Position Editor</em> is used to define the geographical extent of message parts
+in the message editor - please refer to the <a href="#positions-editor-field">Positions Editor Field</a> section.</p>
+</div>
+<div class="paragraph">
+<p>However, the position editor is also used by administrative users to defined the geographical extent
+of e.g. charts and areas - please refer to the
+<a href="http://docs.niord.org/admin-manual/manual.html">User Manual for Admins</a>.</p>
+</div>
+<div class="sect3">
+<h4 id="geojson"><a class="anchor" href="#geojson"></a><a class="link" href="#geojson">5.7.1. GeoJSON</a></h4>
+<div class="paragraph">
+<p>Internally, Niord has adopted a GeoJSON representation for position lists and geographical extents.
+Please refer to <a href="http://docs.niord.org/model/model.html#niord-geojson-model">use of GeoJSON in Niord</a>
+for more information.</p>
+</div>
+<div class="paragraph">
+<p>The following geometry types are supported in Niords <em>Position Editor</em></p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Geometry Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Point</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A single longitude-latitude position</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MultiPoint</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A list Points</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LineString</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A connected list of longitude-latitude positions</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MultiLineString</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A list of LineStrings</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Polygon</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A polygon consists of an exterior ring, plus an optional list of interior rings that represents
+  holes in the exterior ring.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MultiPolygon</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A list of Polygons</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GeometryCollection</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A list of any of the geometry types described above.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Feature</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A feature encapsulates one of the geometry types listed above, plus some extra attributes such as
+  <em>properties</em> object. The <em>properties</em> object is used by Niord to store various auxiliary information,
+  such as feature names, restriction flags, etc.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FeatureCollection</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A list of Features. This is in fact the structure that all message parts are associated with.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Of all these geometry types, the user will usually only deal with <em>Points</em>, <em>LineStrings</em> and
+<em>Polygons</em>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="graphical-editor"><a class="anchor" href="#graphical-editor"></a><a class="link" href="#graphical-editor">5.7.2. Graphical Editor</a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="text-editor"><a class="anchor" href="#text-editor"></a><a class="link" href="#text-editor">5.7.3. Text Editor</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/PositionTextEditor.png" alt="Position Text Editor" width="600">
+</div>
 </div>
 <div style="page-break-after: always;"></div>
 <hr>
+</div>
 </div>
 <div class="sect2">
 <h3 id="message-template-execution"><a class="anchor" href="#message-template-execution"></a><a class="link" href="#message-template-execution">5.8. Message Template Execution</a></h3>

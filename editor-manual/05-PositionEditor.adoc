@@ -1,5 +1,71 @@
 
+:imagesdir: images
+
 '''
 === Position Editor ===
 
-TBD
+image::PositionEditor.png[Position Editor, 800]
+
+The _Position Editor_ is used for editing the geographical extent of various entities in Niord.
+Most prominently, the _Position Editor_ is used to define the geographical extent of message parts
+in the message editor - please refer to the <<Positions Editor Field>> section.
+
+However, the position editor is also used by administrative users to defined the geographical extent
+of e.g. charts and areas - please refer to the
+http://docs.niord.org/admin-manual/manual.html[User Manual for Admins].
+
+==== GeoJSON ====
+
+Internally, Niord has adopted a GeoJSON representation for position lists and geographical extents.
+Please refer to http://docs.niord.org/model/model.html#niord-geojson-model[use of GeoJSON in Niord]
+for more information.
+
+The following geometry types are supported in Niords _Position Editor_
+
+[cols="30,70",options="header"]
+|===
+|Geometry Type|Description
+
+| Point
+| A single longitude-latitude position
+
+| MultiPoint
+| A list Points
+
+| LineString
+| A connected list of longitude-latitude positions
+
+| MultiLineString
+| A list of LineStrings
+
+| Polygon
+| A polygon consists of an exterior ring, plus an optional list of interior rings that represents
+  holes in the exterior ring.
+
+| MultiPolygon
+| A list of Polygons
+
+| GeometryCollection
+| A list of any of the geometry types described above.
+
+| Feature
+| A feature encapsulates one of the geometry types listed above, plus some extra attributes such as
+  _properties_ object. The _properties_ object is used by Niord to store various auxiliary information,
+  such as feature names, restriction flags, etc.
+
+| FeatureCollection
+| A list of Features. This is in fact the structure that all message parts are associated with.
+
+|===
+
+Of all these geometry types, the user will usually only deal with _Points_, _LineStrings_ and
+_Polygons_.
+
+==== Graphical Editor ====
+
+
+
+==== Text Editor ====
+
+image::PositionTextEditor.png[Position Text Editor, 600]
+
