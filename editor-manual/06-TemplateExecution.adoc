@@ -63,10 +63,23 @@ execution, by clicking the "Execute Template" button or tab.
 === Template Execution Dialog
 
 As mentioned above, the user can enter the _Template Execution Dialog_ directly from the
-_Template Selection Dialog_. Alternatively, the use can click the
+_Template Selection Dialog_. Alternatively, the user can click the
 image:TemplateExecutionBtn.png[Template Execution, 18] execution button
 in the template field.
 
 image::TemplateExecutionDialog.png[Template Execution Dialog, 800]
+
+The dialog is divided into three main sections: The general template parameter panels and the
+template-specific parameter panels, both at the left side of the dialog, and the preview panel
+at the right side of the dialog.
+
+The user must first fill out the parameters, typically in a top-to-bottom fashion, in the
+parameter panels. At any point of time, the user may click the "Refresh Preview" button to
+actually execute the template, and inspect the result in the preview panel in all supported languages.
+
+When the user is satisfied with the result, she can click "OK", upon which, the generated message
+will be opened in the <<Edit Editor Page>> - still unsaved.
+Here, the user should polish the remaining fields and eventually save the message as a new draft.
+
 
 
