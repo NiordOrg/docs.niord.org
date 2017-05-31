@@ -443,6 +443,42 @@ embedded attachment will be scaled proportionally.
 As part of the _Width_ or _Height_ values, the user must also specify the unit, which must be one of
 "em", "px", "%", "cm", "mm", "in", "pt" or "pc".
 
+==== Promulgation Editor Field ====
+
+image::EditorFieldPromulgation.png[Promulgation Editor Field, 600]
+
+For Navigational Warnings, there may be a need to promulgate specialized versions of a message
+to external channels. The availability of these _promulgations_ is configured by system
+administrators on a per-domain basis.
+
+Niord has a plug-in architecture for adding new promulgation types. By default, it supports
+distributing _NAVTEX_ versions of navigational warnings via mailing lists, and support for posting
+messages at Twitter upon publication.
+
+Furthermore, the Danish version of Niord supports generating an _Audio_ promulgation for
+navigational warnings. This will promulgate a verbose textual version of the messages,
+suitable to be read up on radio by non-maritime personal, to a mailing list.
+
+In most cases, the user will create new Navigational Warnings by executing message templates - please
+refer to <<Message Template Execution>>. The templates will automatically produce the promulgations
+needed for a message.
+
+However, before publishing a message, the promulgations should be proof-read and updated as
+appropriate.
+The _Promulgation Editor Field_ thus allows the user to choose which promulgation types to
+support (via a checkbox in the promulgation tabs), and to update the promulgation contents.
+
+For the _NAVTEX_ promulgation (see screenshot above), ensure that _Priority_ and _Transmitter_
+selection is correct, and that the text adheres to NAVTEX standards.
+
+Most promulgation types will have a "Generate" button, that can be used as a starting point
+if the message has not been created by executing a message template.
+This will create a crude starting point, that must subsequently be edited and polished.
+
+The NAVTEX promulgation also contains a read-only field for the NAVTEX preamble. This may contain
+_replacement tokens_ such as "${publish-date}" and "${number-year-id}" that will automatically be
+substituted upon publication of the message.
+
 ==== Charts Editor Field ====
 
 image::EditorFieldCharts.png[Charts Editor Field, 600]

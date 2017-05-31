@@ -81,5 +81,6 @@ When the user is satisfied with the result, she can click "OK", upon which, the 
 will be opened in the <<Edit Editor Page>> - still unsaved.
 Here, the user should polish the remaining fields and eventually save the message as a new draft.
 
-
+Most of the general template parameters are (sometimes simplified) versions of the corresponding
+editor field described in the <<Edit Editor Page>> chapter.
 

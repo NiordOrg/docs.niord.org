@@ -2270,7 +2270,55 @@ embedded attachment will be scaled proportionally.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="charts-editor-field"><a class="anchor" href="#charts-editor-field"></a><a class="link" href="#charts-editor-field">5.2.16. Charts Editor Field</a></h4>
+<h4 id="promulgation-editor-field"><a class="anchor" href="#promulgation-editor-field"></a><a class="link" href="#promulgation-editor-field">5.2.16. Promulgation Editor Field</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/EditorFieldPromulgation.png" alt="Promulgation Editor Field" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>For Navigational Warnings, there may be a need to promulgate specialized versions of a message
+to external channels. The availability of these <em>promulgations</em> is configured by system
+administrators on a per-domain basis.</p>
+</div>
+<div class="paragraph">
+<p>Niord has a plug-in architecture for adding new promulgation types. By default, it supports
+distributing <em>NAVTEX</em> versions of navigational warnings via mailing lists, and support for posting
+messages at Twitter upon publication.</p>
+</div>
+<div class="paragraph">
+<p>Furthermore, the Danish version of Niord supports generating an <em>Audio</em> promulgation for
+navigational warnings. This will promulgate a verbose textual version of the messages,
+suitable to be read up on radio by non-maritime personal, to a mailing list.</p>
+</div>
+<div class="paragraph">
+<p>In most cases, the user will create new Navigational Warnings by executing message templates - please
+refer to <a href="#message-template-execution">Message Template Execution</a>. The templates will automatically produce the promulgations
+needed for a message.</p>
+</div>
+<div class="paragraph">
+<p>However, before publishing a message, the promulgations should be proof-read and updated as
+appropriate.
+The <em>Promulgation Editor Field</em> thus allows the user to choose which promulgation types to
+support (via a checkbox in the promulgation tabs), and to update the promulgation contents.</p>
+</div>
+<div class="paragraph">
+<p>For the <em>NAVTEX</em> promulgation (see screenshot above), ensure that <em>Priority</em> and <em>Transmitter</em>
+selection is correct, and that the text adheres to NAVTEX standards.</p>
+</div>
+<div class="paragraph">
+<p>Most promulgation types will have a "Generate" button, that can be used as a starting point
+if the message has not been created by executing a message template.
+This will create a crude starting point, that must subsequently be edited and polished.</p>
+</div>
+<div class="paragraph">
+<p>The NAVTEX promulgation also contains a read-only field for the NAVTEX preamble. This may contain
+<em>replacement tokens</em> such as "${publish-date}" and "${number-year-id}" that will automatically be
+substituted upon publication of the message.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="charts-editor-field"><a class="anchor" href="#charts-editor-field"></a><a class="link" href="#charts-editor-field">5.2.17. Charts Editor Field</a></h4>
 <div class="imageblock">
 <div class="content">
 <img src="images/EditorFieldCharts.png" alt="Charts Editor Field" width="600">
@@ -2297,7 +2345,7 @@ The horizontal datum is not currently used anywhere in Niord.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="publication-editor-field"><a class="anchor" href="#publication-editor-field"></a><a class="link" href="#publication-editor-field">5.2.17. Publication Editor Field</a></h4>
+<h4 id="publication-editor-field"><a class="anchor" href="#publication-editor-field"></a><a class="link" href="#publication-editor-field">5.2.18. Publication Editor Field</a></h4>
 <div class="imageblock">
 <div class="content">
 <img src="images/EditorFieldPublication.png" alt="Publication Editor Field" width="600">
@@ -2340,7 +2388,7 @@ or update all language versions.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="source-editor-field"><a class="anchor" href="#source-editor-field"></a><a class="link" href="#source-editor-field">5.2.18. Source Editor Field</a></h4>
+<h4 id="source-editor-field"><a class="anchor" href="#source-editor-field"></a><a class="link" href="#source-editor-field">5.2.19. Source Editor Field</a></h4>
 <div class="imageblock">
 <div class="content">
 <img src="images/EditorFieldSource.png" alt="Source Editor Field" width="600">
@@ -2371,7 +2419,7 @@ or more of the pre-defined sources along with the date of contact:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="layout-editor-field"><a class="anchor" href="#layout-editor-field"></a><a class="link" href="#layout-editor-field">5.2.19. Layout Editor Field</a></h4>
+<h4 id="layout-editor-field"><a class="anchor" href="#layout-editor-field"></a><a class="link" href="#layout-editor-field">5.2.20. Layout Editor Field</a></h4>
 <div class="imageblock">
 <div class="content">
 <img src="images/EditorFieldLayout.png" alt="Layout Editor Field" width="600">
@@ -3255,6 +3303,10 @@ actually execute the template, and inspect the result in the preview panel in al
 <p>When the user is satisfied with the result, she can click "OK", upon which, the generated message
 will be opened in the <a href="#edit-editor-page">Edit Editor Page</a> - still unsaved.
 Here, the user should polish the remaining fields and eventually save the message as a new draft.</p>
+</div>
+<div class="paragraph">
+<p>Most of the general template parameters are (sometimes simplified) versions of the corresponding
+editor field described in the <a href="#edit-editor-page">Edit Editor Page</a> chapter.</p>
 </div>
 </div>
 </div>
