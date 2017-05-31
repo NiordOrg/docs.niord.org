@@ -552,7 +552,12 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#graphical-editor">6.3. Graphical Editor</a></li>
 </ul>
 </li>
-<li><a href="#message-template-execution">7. Message Template Execution</a></li>
+<li><a href="#message-template-execution">7. Message Template Execution</a>
+<ul class="sectlevel2">
+<li><a href="#template-selection-dialog">7.1. Template Selection Dialog</a></li>
+<li><a href="#template-execution-dialog">7.2. Template Execution Dialog</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -2621,7 +2626,6 @@ for Navigational Warnings.</p>
 not displayed by default.</p>
 </div>
 <div style="page-break-after: always;"></div>
-<hr>
 </div>
 </div>
 </div>
@@ -3137,7 +3141,6 @@ displayed next to a selected coordinate.</p>
 </ol>
 </div>
 <div style="page-break-after: always;"></div>
-<hr>
 </div>
 </div>
 </div>
@@ -3145,8 +3148,99 @@ displayed next to a selected coordinate.</p>
 <div class="sect1">
 <h2 id="message-template-execution"><a class="anchor" href="#message-template-execution"></a><a class="link" href="#message-template-execution">7. Message Template Execution</a></h2>
 <div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="images/TemplateExecution.png" alt="Template Execution" width="800">
+</div>
+</div>
 <div class="paragraph">
-<p>TBD</p>
+<p>The <em>Message Template Execution</em> feature is set up and configured per domain by a system administrator.</p>
+</div>
+<div class="paragraph">
+<p>The overarching idea is to allow the user to select and execute a message template for a specific
+hazard, such as "Light Unlit".
+The user will be asked to fill out a few standard template-specific parameters, and then a message
+will be composed and opened in the <a href="#edit-editor-page">Edit Editor Page</a> with most of its fields filled out in
+a standardized manner.</p>
+</div>
+<div class="paragraph">
+<p>This mechanism is particularly suitable for generating Navigational Warnings, since they are mostly
+short and concise, and follow very strict guidelines for how to formulate the messages so as to
+adhere to the standards for MSI, NAVTEX, etc.</p>
+</div>
+<div class="paragraph">
+<p>Notices to Mariners are much less suitable, since they are often longer, more varied and written in
+a more free prose.</p>
+</div>
+<div class="paragraph">
+<p>A <em>Message Template</em> is actually just another name for a <em>category</em> that can be executed as described
+above.
+<em>Categories</em> are assigned to a message in the editor, as described in the <a href="#categories-editor-field">Categories Editor Field</a>
+section, and they are created and managed by system administrators. Please refer to the System
+Administrator Manual.</p>
+</div>
+<div class="sect2">
+<h3 id="template-selection-dialog"><a class="anchor" href="#template-selection-dialog"></a><a class="link" href="#template-selection-dialog">7.1. Template Selection Dialog</a></h3>
+<div class="paragraph">
+<p>The most direct way to commence executing a message template, however, is from the
+template field of the <a href="#blank-editor-page">Blank Editor Page</a> (in domains that support template execution):</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/TemplateExecutionField.png" alt="Template Execution Field" width="240">
+</div>
+</div>
+<div class="paragraph">
+<p>If the user knows in advanced which template to execute, she can type it directly into the field.</p>
+</div>
+<div class="paragraph">
+<p>If the user does not know in advance which template to execute, she can click the
+<span class="image"><img src="images/TemplateSelectionBtn.png" alt="Template Selection" width="18"></span> selection button
+in the template field, thereby opening the <em>Template Selection Dialog</em>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/TemplateSelection.png" alt="Template Selection" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The main panel, "Categories", in the left side of the dialog, lists all available
+executable categories (templates).
+The user can select one or more of the categories in this list, and click the "Add Selected"
+button below to add these to the "Selected Categories" panel in the right side of the dialog.</p>
+</div>
+<div class="paragraph">
+<p>For many of the categories, an example message will be displayed in the bottom-right side of the
+dialog to assist the user.</p>
+</div>
+<div class="paragraph">
+<p>Most often, only a single template will be executed, but it is actually possible to execute multiple
+template at once, which will produce a message with one message part per templates.</p>
+</div>
+<div class="paragraph">
+<p>Above the "Categories" panel, there are a couple of fields to filter the available set of categories.
+A "Name" input field that may be used to filter categories by name, and a "Parent Category" field
+that will restrict the categories to a specific parent category (e.g. "Buoy").</p>
+</div>
+<div class="paragraph">
+<p>Once the selection is complete, the user can either click "OK" and return to the <em>Blank Editor Page</em>
+with the updated template selection, or the user may progress directly to the actual template
+execution, by clicking the "Execute Template" button or tab.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="template-execution-dialog"><a class="anchor" href="#template-execution-dialog"></a><a class="link" href="#template-execution-dialog">7.2. Template Execution Dialog</a></h3>
+<div class="paragraph">
+<p>As mentioned above, the user can enter the <em>Template Execution Dialog</em> directly from the
+<em>Template Selection Dialog</em>. Alternatively, the use can click the
+<span class="image"><img src="images/TemplateExecutionBtn.png" alt="Template Execution" width="18"></span> execution button
+in the template field.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/TemplateExecutionDialog.png" alt="Template Execution Dialog" width="800">
+</div>
+</div>
 </div>
 </div>
 </div>

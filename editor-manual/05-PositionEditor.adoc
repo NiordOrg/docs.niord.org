@@ -1,7 +1,6 @@
 
 :imagesdir: images
 
-'''
 == Position Editor ==
 
 image::PositionEditor.png[Position Editor, 800]

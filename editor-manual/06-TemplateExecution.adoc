@@ -1,7 +1,72 @@
 
 :imagesdir: images
 
-'''
 == Message Template Execution ==
 
-TBD
+image::TemplateExecution.png[Template Execution, 800]
+
+The _Message Template Execution_ feature is set up and configured per domain by a system administrator.
+
+The overarching idea is to allow the user to select and execute a message template for a specific
+hazard, such as "Light Unlit".
+The user will be asked to fill out a few standard template-specific parameters, and then a message
+will be composed and opened in the <<Edit Editor Page>> with most of its fields filled out in
+a standardized manner.
+
+This mechanism is particularly suitable for generating Navigational Warnings, since they are mostly
+short and concise, and follow very strict guidelines for how to formulate the messages so as to
+adhere to the standards for MSI, NAVTEX, etc.
+
+Notices to Mariners are much less suitable, since they are often longer, more varied and written in
+a more free prose.
+
+A _Message Template_ is actually just another name for a _category_ that can be executed as described
+above.
+_Categories_ are assigned to a message in the editor, as described in the <<Categories Editor Field>>
+section, and they are created and managed by system administrators. Please refer to the System
+Administrator Manual.
+
+=== Template Selection Dialog
+
+The most direct way to commence executing a message template, however, is from the
+template field of the <<Blank Editor Page>> (in domains that support template execution):
+
+image::TemplateExecutionField.png[Template Execution Field, 240]
+
+If the user knows in advanced which template to execute, she can type it directly into the field.
+
+If the user does not know in advance which template to execute, she can click the
+image:TemplateSelectionBtn.png[Template Selection, 18] selection button
+in the template field, thereby opening the _Template Selection Dialog_:
+
+image::TemplateSelection.png[Template Selection, 600]
+
+The main panel, "Categories", in the left side of the dialog, lists all available
+executable categories (templates).
+The user can select one or more of the categories in this list, and click the "Add Selected"
+button below to add these to the "Selected Categories" panel in the right side of the dialog.
+
+For many of the categories, an example message will be displayed in the bottom-right side of the
+dialog to assist the user.
+
+Most often, only a single template will be executed, but it is actually possible to execute multiple
+template at once, which will produce a message with one message part per templates.
+
+Above the "Categories" panel, there are a couple of fields to filter the available set of categories.
+A "Name" input field that may be used to filter categories by name, and a "Parent Category" field
+that will restrict the categories to a specific parent category (e.g. "Buoy").
+
+Once the selection is complete, the user can either click "OK" and return to the _Blank Editor Page_
+with the updated template selection, or the user may progress directly to the actual template
+execution, by clicking the "Execute Template" button or tab.
+
+=== Template Execution Dialog
+
+As mentioned above, the user can enter the _Template Execution Dialog_ directly from the
+_Template Selection Dialog_. Alternatively, the use can click the
+image:TemplateExecutionBtn.png[Template Execution, 18] execution button
+in the template field.
+
+image::TemplateExecutionDialog.png[Template Execution Dialog, 800]
+
+
