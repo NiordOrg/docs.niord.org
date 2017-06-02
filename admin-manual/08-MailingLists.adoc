@@ -1,0 +1,19 @@
+
+:imagesdir: images
+
+== Mailing Lists
+
+The _Mailing Lists_ page allows an administrator to manage the list recipients to mailing lists.
+
+image::MailingListsPage.png[Mailing Lists, 800]
+
+IMPORTANT: The _Mailing Lists_ page has a lot more functionality for _system administrators_, who can create
+and manage the mailing lists, define the _triggers_ that will causes a mailing list to be sent
+and create the reports that generate the actual mail contents. This is detailed in the _User Manual for Sysadmins_,
+whereas this chapter only details the functionality for normal administrators.
+
+=== Manage Mailing List Recipients
+
+image::MailingListRecipients.png[Mailing List Recipients, 600]
+
+

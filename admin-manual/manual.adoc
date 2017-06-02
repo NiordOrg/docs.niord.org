@@ -62,4 +62,8 @@ include::06-Sources.adoc[]
 
 include::07-Users.adoc[]
 
+<<<
+
+include::08-MailingLists.adoc[]
+
 
