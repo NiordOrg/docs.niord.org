@@ -58,4 +58,8 @@ include::05-Publications.adoc[]
 
 include::06-Sources.adoc[]
 
+<<<
+
+include::07-Users.adoc[]
+
 

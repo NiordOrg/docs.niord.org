@@ -1,7 +1,6 @@
 
 :imagesdir: images
 
-'''
 == Sources
 
 The _Sources_ page allows an administrator to manage a list of sources, so that they can

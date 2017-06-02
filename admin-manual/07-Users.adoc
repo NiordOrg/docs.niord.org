@@ -1,0 +1,128 @@
+
+:imagesdir: images
+
+== Users & Contacts
+
+The _Users & Contacts_ page allows administrators to manage users and contacts in the Niord system.
+
+image::UsersPage.png[Users & Contacts, 600]
+
+The main difference between _users_ and _contacts_ is that users can actually log in and work in Niord,
+whereas contacts are solely maintained in Niord as recipients of mailing lists.
+
+=== Users Tab
+
+The _Users_ tab can be used to add and manage users, and, in particular, assign users to the proper user
+groups to grant them various levels of access in the different domains of Niord.
+
+The list of users can be filtered by typing a term in the _Filter_ input field above the user list, which will
+be matched against the users' name and e-mail address.
+
+==== Adding or Editing a User
+
+Depending on how Niord has been configured, some types of users should not be added manually in Niord, but are
+created automatically via integration with other identity registries.
+
+For instance, in the set-up used by the Danish Maritime Authority (DMA), Niord is integrated with the
+_DMA Active Directory Federation Service_, and hence, the first time a DMA employee clicks the "DMA" link
+on the log-in page and logs in using her usual work credentials, she will automatically be created as
+a user in Niord.
+
+However, the new user still needs to be assigned proper user roles by a Niord administrator, and
+the administrator must also create users that are not employees as described next.
+
+
+An administrator can add a new user by clicking the "Add" button, or edit an existing user by clicking
+the pencil symbol next to the user.
+
+This will open the _User Details Panel_:
+
+image::UserDetailsPanel.png[User Details Panel, 400]
+
+The user attributes that can be edited are as follows:
+
+[ cols="30,70", options="header" ]
+|===
+| Username
+| A user must have a unique user name, that they can use when logging in.
+
+| Name
+| The name of the user.
+
+| Password
+| The user password.
+
+| Preferred Language
+| The preferred language is used in the mails sent out via mailing lists.
+
+| Update Profile
+| If the _Update Profile_ flag is checked, the user will be asked to revise and update their user profile
+  upon next log-in.
+
+| Update Password
+| If the _Update Password_ flag is checked, the user will be asked to update their password
+  upon next log-in.
+
+| Update E-mail
+| If the _Update E-mail_ flag is checked, the user will be asked to update their e-mail address
+  upon next log-in.
+
+|===
+
+
+==== Managing User Group Membership
+
+As described in the <<Administrators Manual>> chapter, all users have different roles in different domains.
+The available roles are _User_, _Editor_, _Admin_ and _Sysadmin_; and with a good handful of domains in Niord,
+this leaves _a lot_ of user-role relationships to maintain.
+
+To simplify user management, Niord instead let administrators assign users to _user groups_,
+where each user group in turn defines a set of roles for all domains.
+
+The configuration of user groups is handled by system administrators, and will seldom change. At the Danish
+Maritime Authority, the following user groups are defined, at the time of writing:
+
+* _Sysadmin_: Members of the "Sysadmin" user group will have the _Sysadmin_ role in all domains.
+* _Admins_: Members of the "Admins" user group will have the _Admin_ role in all domains.
+* _Editors_: Members of the "Editor" user group will have the _Editor_ role in the "NW", "NM", "Firing Areas",
+  "NM Almanac", "NM Annex" and "NW Greenland" domains.
+* _Case Officers_: Members of the "Case Officers" user group will have the _User_ role the "NW", "NM", "Firing Areas",
+  "NM Almanac", "NM Annex" and "NW Greenland" domains.
+* _FE Editors_: Members of the "FE Editors" user group will have the _Editor_ role in the "Firing Areas" domain.
+
+The place to manage group membership for a user is the _Group Membership_ tab of the _User Details Panel_.
+
+image::UserGroupsPanel.png[User Groups Editor Panel, 400]
+
+The "Group Membership" panel at the left side will list all user groups that the user is currently member of.
+The administrator can click the trash icon to remove the user from a group.
+
+The available user groups are in the "Available Groups" panel at the right side.
+The administrator can select a group and click the "Join" button to make the user member of the selected group.
+
+Note however, that some of the available groups may be disabled (gray), and thus, cannot be selected. This is
+because the administrator may not have access-rights to assign members to those groups.
+For instance, an administrator that is herself member of the "Admins" group, should never be allowed to assign
+anybody (including herself) to the "Sysadmin" group.
+Similarly, the selectable user groups may depend on the currently selected domain, since the administrator may
+be the administrator in the current domain, but not in the domain that a user groups would give access rights to.
+
+
+==== Managing User Mailing Lists
+
+image::UserMailingListsPanel.png[User Mailing Lists Panel, 400]
+
+An administrator can also manage the mailing lists for a user via the _Mailing Lists_ tab
+of the _User Details Panel_.
+
+For each available mailing list, the administrator can either click the "Join" button to add the
+user as a recipient, or click the "Leave" button to remove the user as a recipient.
+
+==== Deleting a User
+
+A user can be deleted by clicking the trash icon next to the user in the user list. However, this will only
+work if the user has no _revision history_, that is, has never created or edited messages or comments.
+
+If the user does have a revision history, the administrator can instead reset the users password and remove
+the user from all user groups.
+

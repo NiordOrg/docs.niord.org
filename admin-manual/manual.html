@@ -523,6 +523,7 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#areas">5. Areas</a></li>
 <li><a href="#publications">6. Publications</a></li>
 <li><a href="#sources">7. Sources</a></li>
+<li><a href="#users-contacts">8. Users &amp; Contacts</a></li>
 </ul>
 </div>
 </div>
@@ -653,7 +654,6 @@ the charts when in the "NW" domain, but not when in the "NM" domain.</p>
 administrator of all domains. However, it is something to be aware of&#8230;&#8203;</p>
 </div>
 <div style="page-break-after: always;"></div>
-<hr>
 </div>
 </div>
 <div class="sect1">
@@ -809,7 +809,6 @@ Batch jobs can be monitored and managed by system administrators.</p>
 the file can be copied to the <em>$NIORD_HOME/batch-jobs/chart-import/in</em> folder.</p>
 </div>
 <div style="page-break-after: always;"></div>
-<hr>
 </div>
 </div>
 </div>
@@ -1056,7 +1055,6 @@ Batch jobs can be monitored and managed by system administrators.</p>
 the file can be copied to the <em>$NIORD_HOME/batch-jobs/area-import/in</em> folder.</p>
 </div>
 <div style="page-break-after: always;"></div>
-<hr>
 </div>
 </div>
 </div>
@@ -1651,7 +1649,6 @@ Batch jobs can be monitored and managed by system administrators.</p>
 the file can be copied to the <em>$NIORD_HOME/batch-jobs/publication-import/in</em> folder.</p>
 </div>
 <div style="page-break-after: always;"></div>
-<hr>
 </div>
 </div>
 </div>
@@ -1784,13 +1781,203 @@ Batch jobs can be monitored and managed by system administrators.</p>
 <p>As an alternative to manually uploading a source JSON file on the <em>Sources</em> page,
 the file can be copied to the <em>$NIORD_HOME/batch-jobs/sources-import/in</em> folder.</p>
 </div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="users-contacts"><a class="anchor" href="#users-contacts"></a><a class="link" href="#users-contacts">8. Users &amp; Contacts</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <em>Users &amp; Contacts</em> page allows administrators to manage users and contacts in the Niord system.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UsersPage.png" alt="Users &amp; Contacts" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The main difference between <em>users</em> and <em>contacts</em> is that users can actually log in and work in Niord,
+whereas contacts are solely maintained in Niord as recipients of mailing lists.</p>
+</div>
+<div class="sect2">
+<h3 id="users-tab"><a class="anchor" href="#users-tab"></a><a class="link" href="#users-tab">8.1. Users Tab</a></h3>
+<div class="paragraph">
+<p>The <em>Users</em> tab can be used to add and manage users, and, in particular, assign users to the proper user
+groups to grant them various levels of access in the different domains of Niord.</p>
+</div>
+<div class="paragraph">
+<p>The list of users can be filtered by typing a term in the <em>Filter</em> input field above the user list, which will
+be matched against the users' name and e-mail address.</p>
+</div>
+<div class="sect3">
+<h4 id="adding-or-editing-a-user"><a class="anchor" href="#adding-or-editing-a-user"></a><a class="link" href="#adding-or-editing-a-user">8.1.1. Adding or Editing a User</a></h4>
+<div class="paragraph">
+<p>Depending on how Niord has been configured, some types of users should not be added manually in Niord, but are
+created automatically via integration with other identity registries.</p>
+</div>
+<div class="paragraph">
+<p>For instance, in the set-up used by the Danish Maritime Authority (DMA), Niord is integrated with the
+<em>DMA Active Directory Federation Service</em>, and hence, the first time a DMA employee clicks the "DMA" link
+on the log-in page and logs in using her usual work credentials, she will automatically be created as
+a user in Niord.</p>
+</div>
+<div class="paragraph">
+<p>However, the new user still needs to be assigned proper user roles by a Niord administrator, and
+the administrator must also create users that are not employees as described next.</p>
+</div>
+<div class="paragraph">
+<p>An administrator can add a new user by clicking the "Add" button, or edit an existing user by clicking
+the pencil symbol next to the user.</p>
+</div>
+<div class="paragraph">
+<p>This will open the <em>User Details Panel</em>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UserDetailsPanel.png" alt="User Details Panel" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>The user attributes that can be edited are as follows:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Username</th>
+<th class="tableblock halign-left valign-top">A user must have a unique user name, that they can use when logging in.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the user.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Password</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The user password.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Preferred Language</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The preferred language is used in the mails sent out via mailing lists.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Update Profile</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the <em>Update Profile</em> flag is checked, the user will be asked to revise and update their user profile
+  upon next log-in.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Update Password</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the <em>Update Password</em> flag is checked, the user will be asked to update their password
+  upon next log-in.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Update E-mail</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the <em>Update E-mail</em> flag is checked, the user will be asked to update their e-mail address
+  upon next log-in.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="managing-user-group-membership"><a class="anchor" href="#managing-user-group-membership"></a><a class="link" href="#managing-user-group-membership">8.1.2. Managing User Group Membership</a></h4>
+<div class="paragraph">
+<p>As described in the <a href="#administrators-manual">Administrators Manual</a> chapter, all users have different roles in different domains.
+The available roles are <em>User</em>, <em>Editor</em>, <em>Admin</em> and <em>Sysadmin</em>; and with a good handful of domains in Niord,
+this leaves <em>a lot</em> of user-role relationships to maintain.</p>
+</div>
+<div class="paragraph">
+<p>To simplify user management, Niord instead let administrators assign users to <em>user groups</em>,
+where each user group in turn defines a set of roles for all domains.</p>
+</div>
+<div class="paragraph">
+<p>The configuration of user groups is handled by system administrators, and will seldom change. At the Danish
+Maritime Authority, the following user groups are defined, at the time of writing:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><em>Sysadmin</em>: Members of the "Sysadmin" user group will have the <em>Sysadmin</em> role in all domains.</p>
+</li>
+<li>
+<p><em>Admins</em>: Members of the "Admins" user group will have the <em>Admin</em> role in all domains.</p>
+</li>
+<li>
+<p><em>Editors</em>: Members of the "Editor" user group will have the <em>Editor</em> role in the "NW", "NM", "Firing Areas",
+"NM Almanac", "NM Annex" and "NW Greenland" domains.</p>
+</li>
+<li>
+<p><em>Case Officers</em>: Members of the "Case Officers" user group will have the <em>User</em> role the "NW", "NM", "Firing Areas",
+"NM Almanac", "NM Annex" and "NW Greenland" domains.</p>
+</li>
+<li>
+<p><em>FE Editors</em>: Members of the "FE Editors" user group will have the <em>Editor</em> role in the "Firing Areas" domain.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The place to manage group membership for a user is the <em>Group Membership</em> tab of the <em>User Details Panel</em>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UserGroupsPanel.png" alt="User Groups Editor Panel" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>The "Group Membership" panel at the left side will list all user groups that the user is currently member of.
+The administrator can click the trash icon to remove the user from a group.</p>
+</div>
+<div class="paragraph">
+<p>The available user groups are in the "Available Groups" panel at the right side.
+The administrator can select a group and click the "Join" button to make the user member of the selected group.</p>
+</div>
+<div class="paragraph">
+<p>Note however, that some of the available groups may be disabled (gray), and thus, cannot be selected. This is
+because the administrator may not have access-rights to assign members to those groups.
+For instance, an administrator that is herself member of the "Admins" group, should never be allowed to assign
+anybody (including herself) to the "Sysadmin" group.
+Similarly, the selectable user groups may depend on the currently selected domain, since the administrator may
+be the administrator in the current domain, but not in the domain that a user groups would give access rights to.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="managing-user-mailing-lists"><a class="anchor" href="#managing-user-mailing-lists"></a><a class="link" href="#managing-user-mailing-lists">8.1.3. Managing User Mailing Lists</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/UserMailingListsPanel.png" alt="User Mailing Lists Panel" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>An administrator can also manage the mailing lists for a user via the <em>Mailing Lists</em> tab
+of the <em>User Details Panel</em>.</p>
+</div>
+<div class="paragraph">
+<p>For each available mailing list, the administrator can either click the "Join" button to add the
+user as a recipient, or click the "Leave" button to remove the user as a recipient.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="deleting-a-user"><a class="anchor" href="#deleting-a-user"></a><a class="link" href="#deleting-a-user">8.1.4. Deleting a User</a></h4>
+<div class="paragraph">
+<p>A user can be deleted by clicking the trash icon next to the user in the user list. However, this will only
+work if the user has no <em>revision history</em>, that is, has never created or edited messages or comments.</p>
+</div>
+<div class="paragraph">
+<p>If the user does have a revision history, the administrator can instead reset the users password and remove
+the user from all user groups.</p>
+</div>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-05-29 06:58:20 CEST
+Last updated 2017-06-02 07:46:12 CEST
 </div>
 </div>
 <script type="text/x-mathjax-config">
