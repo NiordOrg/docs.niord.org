@@ -3,17 +3,40 @@
 
 == Mailing Lists
 
-The _Mailing Lists_ page allows an administrator to manage the list recipients to mailing lists.
+The _Mailing Lists_ page allows an administrator to manage the recipients of the mailing lists.
 
 image::MailingListsPage.png[Mailing Lists, 800]
 
 IMPORTANT: The _Mailing Lists_ page has a lot more functionality for _system administrators_, who can create
-and manage the mailing lists, define the _triggers_ that will causes a mailing list to be sent
+and manage the mailing lists, define the _triggers_ that cause mailing lists to execute,
 and create the reports that generate the actual mail contents. This is detailed in the _User Manual for Sysadmins_,
 whereas this chapter only details the functionality for normal administrators.
 
 === Manage Mailing List Recipients
 
+The administrator manages the recipients of a mailing list by clicking the recipient icon next to the
+mailing list.
+
+The will open the mailing list _Recipients Panel_:
+
 image::MailingListRecipients.png[Mailing List Recipients, 600]
+
+There are two main types of recipients; _users_ and _contacts_.
+The two tabs look identical, except that the former is for managing the users that should be mailing list recipients,
+and the latter is for managing the contacts that should be mailing list recipients.
+Hence, only the _Users_ tab is detailed in this section.
+
+The "Selected" panel in the left side displays the list of users currently assigned to the mailing list.
+The "Unselected" panel in the right side displays all remaining users.
+
+Users can be removed from the selection by clicking the "Remove" link next to them. Similarly, they can
+be added to the selection by clicking "Add".
+Clicking "Remove All" will clear the selection, whereas clicking "Add All" will select all users.
+
+The lists of users in both panels can be filtered by typing a term into the "Filter" input field, which will be
+matched against a users' name and e-mails address.
+
+No changes the list of recipient users is persisted until the "Save User Selection" button is clicked.
+Clicking "Cancel" will discard all changes and return to the main mailing list page.
 
 
