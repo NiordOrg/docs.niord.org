@@ -31,7 +31,6 @@ a user in Niord.
 However, the new user still needs to be assigned proper user roles by a Niord administrator, and
 the administrator must also create users that are not employees as described next.
 
-
 An administrator can add a new user by clicking the "Add" button, or edit an existing user by clicking
 the pencil symbol next to the user.
 
@@ -43,8 +42,14 @@ The user attributes that can be edited are as follows:
 
 [ cols="30,70", options="header" ]
 |===
+| User Attribute
+| Description
+
 | Username
 | A user must have a unique user name, that they can use when logging in.
+
+| E-mail
+| A user must have a unique e-mail address.
 
 | Name
 | The name of the user.
@@ -107,7 +112,6 @@ anybody (including herself) to the "Sysadmin" group.
 Similarly, the selectable user groups may depend on the currently selected domain, since the administrator may
 be the administrator in the current domain, but not in the domain that a user groups would give access rights to.
 
-
 ==== Managing User Mailing Lists
 
 image::UserMailingListsPanel.png[User Mailing Lists Panel, 400]
@@ -126,3 +130,68 @@ work if the user has no _revision history_, that is, has never created or edited
 If the user does have a revision history, the administrator can instead reset the users password and remove
 the user from all user groups.
 
+=== Contacts Tab
+
+image::ContactsPanel.png[Contacts Panel, 400]
+
+The _Contacts_ tab can be used to add and manage contacts.
+
+The list of contacts may be long and is thus divided into pages of 20 contacts. The pages can be navigated
+using the pagination controls below the contact list.
+
+Furthermore, the contacts can be filtered by typing a term in the _Filter_ input field above the contact list,
+which will be matched against the contacts' name and e-mail address.
+
+==== Adding or Editing a Contact
+
+An administrator can add a new contact by clicking the "Add" button, or edit an existing contact by clicking
+the pencil symbol next to the contact.
+
+This will open the _Contact Details Panel_:
+
+image::ContactDetailsPanel.png[Contact Details Panel, 400]
+
+The contact attributes that can be edited are as follows:
+
+[ cols="30,70", options="header" ]
+|===
+| Contact Attribute
+| Description
+
+| E-mail
+| A contact must have a unique e-mail address.
+
+| Name
+| The name of the contact.
+
+| Preferred Language
+| The preferred language is used in the mails sent out via mailing lists.
+
+|===
+
+==== Managing Contact Mailing Lists
+
+image::ContactMailingListsPanel.png[Contact Mailing Lists Panel, 400]
+
+An administrator can also manage the mailing lists for a contact via the _Mailing Lists_ tab
+of the _Contact Details Panel_.
+
+For each available mailing list, the administrator can either click the "Join" button to add the
+contact as a recipient, or click the "Leave" button to remove the contact as a recipient.
+
+
+==== Deleting a Contact
+
+A contact can be deleted by clicking the trash icon next to the contact in the contact list.
+
+=== Importing and Exporting Contacts
+
+The administrator can export and import contacts from the action menu above the contact list.
+
+Enacting the _Export_ function will generate a text file in a comma-separated format with fields for
+e-mail, first name, last name and preferred language.
+
+Enacting the _Import_ function, will prompt the administrator to type a comma-, semicolon- or newline-separated
+list of e-mail addresses into a text-field, and import these contacts.
+Existing e-mail addresses will be ignored. The newly imported contacts should - in time - be updated with proper
+names and preferred language selection.
