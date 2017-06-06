@@ -520,6 +520,7 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#system-administrators-manual">2. System Administrators Manual</a></li>
 <li><a href="#sysadmin-page">3. Sysadmin Page</a></li>
 <li><a href="#message-series">4. Message Series</a></li>
+<li><a href="#domain">5. Domain</a></li>
 </ul>
 </div>
 </div>
@@ -769,13 +770,159 @@ However, this only works if the message series being deleted has never been assi
 <p>If a message series has indeed been assigned to a message, the sysadmin should instead remove
 the message series from the relevant domain.</p>
 </div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="domain"><a class="anchor" href="#domain"></a><a class="link" href="#domain">5. Domain</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <em>Domains</em> page allows a system administrator to manage the list of domains in Niord.</p>
+</div>
+<div class="paragraph">
+<p>As described in the <a href="#system-administrators-manual">System Administrators Manual</a> section, a Niord user always works in the context
+of a <em>current domain</em>.
+Domains are used to separate NW &amp; NM messages into more manageable lists -
+such as a specific domain for NW messages, a domain for NM messages, a domain
+for firing exercises (also NWs), or indeed domains for separate regions with
+separate time-zones, etc.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/DomainsPage.png" alt="Domains" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The sysadmin may filter the list of domains by typing a term into the <em>Filter</em> input field above the
+domain list. The term is matched against the ID and name of the domains.</p>
+</div>
+<div class="sect2">
+<h3 id="adding-or-editing-a-domain"><a class="anchor" href="#adding-or-editing-a-domain"></a><a class="link" href="#adding-or-editing-a-domain">5.1. Adding or Editing a Domain</a></h3>
+<div class="paragraph">
+<p>The sysadmin can add a new domain by clicking the "New domain" button, or edit an existing
+domain by clicking the pencil symbol next to the domain.</p>
+</div>
+<div class="paragraph">
+<p>This will open the <em>Domain Edit Page</em>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/DomainsEditPage.png" alt="Message Series Editor Page" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>The domains attributes:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Domain Attribute</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keycloak ID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A unique ID for the domain. The ID is also used as an application client in Keycloak.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Active</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Only active domains is available in the domain selector in the main menu of Niord.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sort Order</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The domain sort order. Controls the order of the domains in the domain menu.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keycloak Status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the corresponding Keycloak client does not exist in Keycloak, there will be a button to create
+  it.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The human readable name of the domain.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Time Zone</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The time-zone of the domain. The domain time zone will be used at various placed where the
+  editor specifies dates, such as the publication dates of a message.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Map Center</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optionally, a map center and zoom level can be specified. This will be used whenever a map is opened
+  with empty contents, such as when opening the
+  <a href="http://docs.niord.org/editor-manual/manual.html#position-editor">Position Editor</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Message Sort Order</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The default sort order of messages in the domain. The sort order may be either by message area, ID or
+  event dates, in ascending or descending order.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HTML Color</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If an HTML color is defined for the message, this color will be displayed in the main menu of Niord
+  when the domain is the currently selected domain.
+  Any valid HTML color code can be used, such as "red", "#ff0000", etc.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Areas</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <em>Areas</em> field can be used to restrict the areas that may be assigned to messages of that domain.
+  If e.g. "Denmark" is selected, then only "Denmark" or any of the sub-areas of "Denmark" can be
+  assigned to a message of that domain.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Categories</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <em>Categories</em> field can be used to restrict the categories that may be assigned to messages of that domain.
+  If e.g. "Firing Exercises" is selected, then only "Firing Exercises" or any of the sub-categories of
+  "Firing Exercises" can be assigned to a message of that domain.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Message Series</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <em>Message Series</em> field must define the valid message series to use in the domain.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Publish</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the <em>Publish</em> flag is checked, then the messages of the domain is included by default, when using
+  the public Niord REST API to fetch messages. In effect, this means that third party clients will
+  receive messages of the domain by default.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AtoNs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the <em>AtoNs</em> flag is checked, then the "AtoN" domain will be turned on when the domain is the
+  currently selected domain.
+  The AtoN module is a prototype module, that integrates an AtoN registry with Niord.
+  Since it is not complete, it is not yet documented, and not turned on by default.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Templates</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the <em>Templates</em> flag is checked, then the message template mechanism described in the
+  <a href="http://docs.niord.org/editor-manual/manual.html#message-template-execution">Message Template Execution</a>
+  chapter will be enabled.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-domain"><a class="anchor" href="#deleting-a-domain"></a><a class="link" href="#deleting-a-domain">5.2. Deleting a Domain</a></h3>
+<div class="paragraph">
+<p>A domain can be deleted by clicking the trash icon next to them.
+However, this only works if there is not related data associated with the domain.</p>
+</div>
+<div class="paragraph">
+<p>Instead the system administrator can choose to in-activate the domain.</p>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-06-06 09:16:17 CEST
+Last updated 2017-06-06 11:21:26 CEST
 </div>
 </div>
 <script type="text/x-mathjax-config">

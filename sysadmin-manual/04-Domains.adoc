@@ -1,0 +1,108 @@
+
+:imagesdir: images
+
+== Domain
+
+The _Domains_ page allows a system administrator to manage the list of domains in Niord.
+
+As described in the <<System Administrators Manual>> section, a Niord user always works in the context
+of a _current domain_.
+Domains are used to separate NW & NM messages into more manageable lists -
+such as a specific domain for NW messages, a domain for NM messages, a domain
+for firing exercises (also NWs), or indeed domains for separate regions with
+separate time-zones, etc.
+
+image::DomainsPage.png[Domains, 600]
+
+The sysadmin may filter the list of domains by typing a term into the _Filter_ input field above the
+domain list. The term is matched against the ID and name of the domains.
+
+=== Adding or Editing a Domain
+
+The sysadmin can add a new domain by clicking the "New domain" button, or edit an existing
+domain by clicking the pencil symbol next to the domain.
+
+This will open the _Domain Edit Page_:
+
+image::DomainsEditPage.png[Message Series Editor Page, 400]
+
+The domains attributes:
+
+[ cols="30,70", options="header" ]
+|===
+| Domain Attribute
+| Description
+
+| Keycloak ID
+| A unique ID for the domain. The ID is also used as an application client in Keycloak.
+
+| Active
+| Only active domains is available in the domain selector in the main menu of Niord.
+
+| Sort Order
+| The domain sort order. Controls the order of the domains in the domain menu.
+
+| Keycloak Status
+| If the corresponding Keycloak client does not exist in Keycloak, there will be a button to create
+  it.
+
+| Name
+| The human readable name of the domain.
+
+| Time Zone
+| The time-zone of the domain. The domain time zone will be used at various placed where the
+  editor specifies dates, such as the publication dates of a message.
+
+| Map Center
+| Optionally, a map center and zoom level can be specified. This will be used whenever a map is opened
+  with empty contents, such as when opening the
+  http://docs.niord.org/editor-manual/manual.html#position-editor[Position Editor].
+
+| Message Sort Order
+| The default sort order of messages in the domain. The sort order may be either by message area, ID or
+  event dates, in ascending or descending order.
+
+| HTML Color
+| If an HTML color is defined for the message, this color will be displayed in the main menu of Niord
+  when the domain is the currently selected domain.
+  Any valid HTML color code can be used, such as "red", "#ff0000", etc.
+
+| Areas
+| The _Areas_ field can be used to restrict the areas that may be assigned to messages of that domain.
+  If e.g. "Denmark" is selected, then only "Denmark" or any of the sub-areas of "Denmark" can be
+  assigned to a message of that domain.
+
+| Categories
+| The _Categories_ field can be used to restrict the categories that may be assigned to messages of that domain.
+  If e.g. "Firing Exercises" is selected, then only "Firing Exercises" or any of the sub-categories of
+  "Firing Exercises" can be assigned to a message of that domain.
+
+| Message Series
+| The _Message Series_ field must define the valid message series to use in the domain.
+
+| Publish
+| If the _Publish_ flag is checked, then the messages of the domain is included by default, when using
+  the public Niord REST API to fetch messages. In effect, this means that third party clients will
+  receive messages of the domain by default.
+
+| AtoNs
+| If the _AtoNs_ flag is checked, then the "AtoN" domain will be turned on when the domain is the
+  currently selected domain.
+  The AtoN module is a prototype module, that integrates an AtoN registry with Niord.
+  Since it is not complete, it is not yet documented, and not turned on by default.
+
+| Templates
+| If the _Templates_ flag is checked, then the message template mechanism described in the
+  http://docs.niord.org/editor-manual/manual.html#message-template-execution[Message Template Execution]
+  chapter will be enabled.
+
+|===
+
+
+=== Deleting a Domain
+
+A domain can be deleted by clicking the trash icon next to them.
+However, this only works if there is not related data associated with the domain.
+
+Instead the system administrator can choose to in-activate the domain.
+

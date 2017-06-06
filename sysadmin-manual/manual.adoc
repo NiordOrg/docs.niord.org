@@ -45,3 +45,7 @@ include::02-Sysadmin.adoc[]
 <<<
 
 include::03-MessageSeries.adoc[]
+
+<<<
+
+include::04-Domains.adoc[]
