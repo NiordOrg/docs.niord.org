@@ -49,3 +49,7 @@ include::03-MessageSeries.adoc[]
 <<<
 
 include::04-Domains.adoc[]
+
+<<<
+
+include::A1-KeycloakIntegration.adoc[]

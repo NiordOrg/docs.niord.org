@@ -1,0 +1,116 @@
+
+:imagesdir: images
+
+== Keycloak Integration
+
+Keycloak is an open source identity and access management middleware product, which is documented
+in detail at the http://www.keycloak.org[Keycloak website].
+
+In general, once Niord has been set up and configured, there is hardly any need for administrators
+to use Keycloak directly.
+
+Keycloak has been integrated tightly with Niord in the manner detailed below. The reader should be
+somewhat familiar with Keycloak before reading this.
+
+=== Niord Domains
+
+Domains in Niord are detailed in the <<Domains>> chapter.
+For each domain in Niord, there will be _bearer only_ application client in Keycloak.
+
+image::KeycloakClients.png[Keycloak Clients, 600]
+
+As an example, for the "NM" Niord domain, there is a corresponding "niord-nm" application client
+in Keycloak.
+
+Also, there is a single _public_ application client for the actual Niord web application.
+
+==== Roles ====
+
+As described in the <<System Administrators Manual>> chapter, a user may have either the _User_,
+_Editor_, _Admin_ or _Sysadmin_ role in each of the Niord domains.
+
+These roles area really just _application client roles_ in Keycloak:
+
+image::KeycloakClientRoles.png[Keycloak Client Roles, 600]
+
+The roles are _composite_ client roles, defined hierarchically, so that if a user has the _Sysadmin_
+role, she also automatically has the _Admin_ role, if she has the _Admin_ roles, she also automatically
+has the _Editor_ role, and if she has the _Editor_ role, she also automatically has the _User_ role.
+
+
+When a domain is created via the Niord UI, the corresponding application client, including the client
+roles mentioned above, are created automatically in Keycloak.
+
+=== Niord Users
+
+All users in Niord are created and maintained in Keycloak, although Niord also provides a UI for
+managing users on top of Keycloak, as detailed in the
+http://docs.niord.org/admin-manual/manual.html#users-contacts[Users & Contacts] chapter of the
+administrator guide.
+
+image::KeycloakUsers.png[Keycloak Users, 600]
+
+In turn, Keycloak may be configured to use other identity providers.
+For instance, in the set-up used by the Danish Maritime Authority (DMA), Keycloak is integrated with the
+_DMA Active Directory Federation Service_, and hence, the first time a DMA employee clicks the "DMA" link
+on the log-in page and logs in using her usual work credentials, she will automatically be created as
+a user in Keycloak.
+
+Keycloak can also be integrated with other Keycloak services, Active Directory or other LDAP provides, etc.
+
+==== User Groups
+
+Instead of assigning domain roles (i.e. Keycloak application client roles) directly to users, which would
+be a tedious task, Niord instead rely on Keycloak _Groups_.
+
+As an example, at the Danish Maritime Authority, the following user groups are defined,
+at the time of writing:
+
+* _Sysadmin_: Members of the "Sysadmin" user group will have the _Sysadmin_ role in all domains.
+* _Admins_: Members of the "Admins" user group will have the _Admin_ role in all domains.
+* _Editors_: Members of the "Editor" user group will have the _Editor_ role in the "NW", "NM", "Firing Areas",
+  "NM Almanac", "NM Annex" and "NW Greenland" domains.
+* _Case Officers_: Members of the "Case Officers" user group will have the _User_ role the "NW", "NM", "Firing Areas",
+  "NM Almanac", "NM Annex" and "NW Greenland" domains.
+* _FE Editors_: Members of the "FE Editors" user group will have the _Editor_ role in the "Firing Areas" domain.
+
+These groups are defined and maintained in Keycloak:
+
+image::KeycloakGroups.png[Keycloak Groups, 600]
+
+For each group, the relevant domain roles are assigned, as in the example below, where the
+"Editors" group is assigned the "editor" role of the "niord-nm" application client (i.e. "NM" domain):
+
+image::KeycloakGroupRoles.png[Keycloak Group Roles, 600]
+
+Groups are created and maintained quite rarely. However, assigning users to groups is a common
+everyday task for administrators.
+Hence, Niord provides a simplified UI for this task, as detailed in the
+http://docs.niord.org/admin-manual/manual.html#managing-user-group-membership[Managing User Group Memebership]
+chapter.
+
+=== Niord Security
+
+All access to the Niord backend happens via calls to REST endpoints. The obvious example is the
+actual Niord web application which makes Ajax calls to the Niord backend.
+
+The Niord backend has been integrated with Keycloak, so that all calls to Niord resolves the
+roles of the callee in the context of the current domain
+(the current domain is specified via a request header).
+
+Hence, access to Niord can be checked using standard Java EE security checks.
+See the (simplified) example below, where annotating a REST endpoint with "@RolesAllowed(Roles.ADMIN)"
+will validate that the user has the _Admin_ role in the current domain, or throw an exception.
+
+[source,java]
+----
+@PUT
+@Path("/area/{areaId}")
+@Consumes("application/json;charset=UTF-8")
+@Produces("application/json;charset=UTF-8")
+@RolesAllowed(Roles.ADMIN)
+public SystemAreaVo updateArea(@PathParam("areaId") Integer areaId, SystemAreaVo areaVo) {
+    Area area = new Area(areaVo);
+    return areaService.updateAreaData(area).toVo(SystemAreaVo.class, DataFilter.get());
+}
+----

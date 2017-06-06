@@ -520,7 +520,8 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#system-administrators-manual">2. System Administrators Manual</a></li>
 <li><a href="#sysadmin-page">3. Sysadmin Page</a></li>
 <li><a href="#message-series">4. Message Series</a></li>
-<li><a href="#domain">5. Domain</a></li>
+<li><a href="#domains">5. Domains</a></li>
+<li><a href="#keycloak-integration">6. Keycloak Integration</a></li>
 </ul>
 </div>
 </div>
@@ -775,7 +776,7 @@ the message series from the relevant domain.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="domain"><a class="anchor" href="#domain"></a><a class="link" href="#domain">5. Domain</a></h2>
+<h2 id="domains"><a class="anchor" href="#domains"></a><a class="link" href="#domains">5. Domains</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The <em>Domains</em> page allows a system administrator to manage the list of domains in Niord.</p>
@@ -787,6 +788,10 @@ Domains are used to separate NW &amp; NM messages into more manageable lists -
 such as a specific domain for NW messages, a domain for NM messages, a domain
 for firing exercises (also NWs), or indeed domains for separate regions with
 separate time-zones, etc.</p>
+</div>
+<div class="paragraph">
+<p>Domains also plays a central role in <a href="#keycloak-integration">Keycloak Integration</a>. Each domain is created as an
+application client in Keycloak.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -916,13 +921,184 @@ However, this only works if there is not related data associated with the domain
 <div class="paragraph">
 <p>Instead the system administrator can choose to in-activate the domain.</p>
 </div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="keycloak-integration"><a class="anchor" href="#keycloak-integration"></a><a class="link" href="#keycloak-integration">6. Keycloak Integration</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Keycloak is an open source identity and access management middleware product, which is documented
+in detail at the <a href="http://www.keycloak.org">Keycloak website</a>.</p>
+</div>
+<div class="paragraph">
+<p>In general, once Niord has been set up and configured, there is hardly any need for administrators
+to use Keycloak directly.</p>
+</div>
+<div class="paragraph">
+<p>Keycloak has been integrated tightly with Niord in the manner detailed below. The reader should be
+somewhat familiar with Keycloak before reading this.</p>
+</div>
+<div class="sect2">
+<h3 id="niord-domains"><a class="anchor" href="#niord-domains"></a><a class="link" href="#niord-domains">6.1. Niord Domains</a></h3>
+<div class="paragraph">
+<p>Domains in Niord are detailed in the <a href="#domains">Domains</a> chapter.
+For each domain in Niord, there will be <em>bearer only</em> application client in Keycloak.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/KeycloakClients.png" alt="Keycloak Clients" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>As an example, for the "NM" Niord domain, there is a corresponding "niord-nm" application client
+in Keycloak.</p>
+</div>
+<div class="paragraph">
+<p>Also, there is a single <em>public</em> application client for the actual Niord web application.</p>
+</div>
+<div class="sect3">
+<h4 id="roles"><a class="anchor" href="#roles"></a><a class="link" href="#roles">6.1.1. Roles</a></h4>
+<div class="paragraph">
+<p>As described in the <a href="#system-administrators-manual">System Administrators Manual</a> chapter, a user may have either the <em>User</em>,
+<em>Editor</em>, <em>Admin</em> or <em>Sysadmin</em> role in each of the Niord domains.</p>
+</div>
+<div class="paragraph">
+<p>These roles area really just <em>application client roles</em> in Keycloak:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/KeycloakClientRoles.png" alt="Keycloak Client Roles" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The roles are <em>composite</em> client roles, defined hierarchically, so that if a user has the <em>Sysadmin</em>
+role, she also automatically has the <em>Admin</em> role, if she has the <em>Admin</em> roles, she also automatically
+has the <em>Editor</em> role, and if she has the <em>Editor</em> role, she also automatically has the <em>User</em> role.</p>
+</div>
+<div class="paragraph">
+<p>When a domain is created via the Niord UI, the corresponding application client, including the client
+roles mentioned above, are created automatically in Keycloak.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="niord-users"><a class="anchor" href="#niord-users"></a><a class="link" href="#niord-users">6.2. Niord Users</a></h3>
+<div class="paragraph">
+<p>All users in Niord are created and maintained in Keycloak, although Niord also provides a UI for
+managing users on top of Keycloak, as detailed in the
+<a href="http://docs.niord.org/admin-manual/manual.html#users-contacts">Users &amp; Contacts</a> chapter of the
+administrator guide.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/KeycloakUsers.png" alt="Keycloak Users" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>In turn, Keycloak may be configured to use other identity providers.
+For instance, in the set-up used by the Danish Maritime Authority (DMA), Keycloak is integrated with the
+<em>DMA Active Directory Federation Service</em>, and hence, the first time a DMA employee clicks the "DMA" link
+on the log-in page and logs in using her usual work credentials, she will automatically be created as
+a user in Keycloak.</p>
+</div>
+<div class="paragraph">
+<p>Keycloak can also be integrated with other Keycloak services, Active Directory or other LDAP provides, etc.</p>
+</div>
+<div class="sect3">
+<h4 id="user-groups"><a class="anchor" href="#user-groups"></a><a class="link" href="#user-groups">6.2.1. User Groups</a></h4>
+<div class="paragraph">
+<p>Instead of assigning domain roles (i.e. Keycloak application client roles) directly to users, which would
+be a tedious task, Niord instead rely on Keycloak <em>Groups</em>.</p>
+</div>
+<div class="paragraph">
+<p>As an example, at the Danish Maritime Authority, the following user groups are defined,
+at the time of writing:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><em>Sysadmin</em>: Members of the "Sysadmin" user group will have the <em>Sysadmin</em> role in all domains.</p>
+</li>
+<li>
+<p><em>Admins</em>: Members of the "Admins" user group will have the <em>Admin</em> role in all domains.</p>
+</li>
+<li>
+<p><em>Editors</em>: Members of the "Editor" user group will have the <em>Editor</em> role in the "NW", "NM", "Firing Areas",
+"NM Almanac", "NM Annex" and "NW Greenland" domains.</p>
+</li>
+<li>
+<p><em>Case Officers</em>: Members of the "Case Officers" user group will have the <em>User</em> role the "NW", "NM", "Firing Areas",
+"NM Almanac", "NM Annex" and "NW Greenland" domains.</p>
+</li>
+<li>
+<p><em>FE Editors</em>: Members of the "FE Editors" user group will have the <em>Editor</em> role in the "Firing Areas" domain.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These groups are defined and maintained in Keycloak:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/KeycloakGroups.png" alt="Keycloak Groups" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>For each group, the relevant domain roles are assigned, as in the example below, where the
+"Editors" group is assigned the "editor" role of the "niord-nm" application client (i.e. "NM" domain):</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/KeycloakGroupRoles.png" alt="Keycloak Group Roles" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Groups are created and maintained quite rarely. However, assigning users to groups is a common
+everyday task for administrators.
+Hence, Niord provides a simplified UI for this task, as detailed in the
+<a href="http://docs.niord.org/admin-manual/manual.html#managing-user-group-membership">Managing User Group Memebership</a>
+chapter.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="niord-security"><a class="anchor" href="#niord-security"></a><a class="link" href="#niord-security">6.3. Niord Security</a></h3>
+<div class="paragraph">
+<p>All access to the Niord backend happens via calls to REST endpoints. The obvious example is the
+actual Niord web application which makes Ajax calls to the Niord backend.</p>
+</div>
+<div class="paragraph">
+<p>The Niord backend has been integrated with Keycloak, so that all calls to Niord resolves the
+roles of the callee in the context of the current domain
+(the current domain is specified via a request header).</p>
+</div>
+<div class="paragraph">
+<p>Hence, access to Niord can be checked using standard Java EE security checks.
+See the (simplified) example below, where annotating a REST endpoint with "@RolesAllowed(Roles.ADMIN)"
+will validate that the user has the <em>Admin</em> role in the current domain, or throw an exception.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@PUT</span>
+<span class="annotation">@Path</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">/area/{areaId}</span><span class="delimiter">&quot;</span></span>)
+<span class="annotation">@Consumes</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">application/json;charset=UTF-8</span><span class="delimiter">&quot;</span></span>)
+<span class="annotation">@Produces</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">application/json;charset=UTF-8</span><span class="delimiter">&quot;</span></span>)
+<span class="annotation">@RolesAllowed</span>(Roles.ADMIN)
+<span class="directive">public</span> SystemAreaVo updateArea(<span class="annotation">@PathParam</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">areaId</span><span class="delimiter">&quot;</span></span>) <span class="predefined-type">Integer</span> areaId, SystemAreaVo areaVo) {
+    <span class="predefined-type">Area</span> area = <span class="keyword">new</span> <span class="predefined-type">Area</span>(areaVo);
+    <span class="keyword">return</span> areaService.updateAreaData(area).toVo(SystemAreaVo.class, DataFilter.get());
+}</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-06-06 11:21:26 CEST
+Last updated 2017-06-06 12:29:15 CEST
 </div>
 </div>
 <script type="text/x-mathjax-config">

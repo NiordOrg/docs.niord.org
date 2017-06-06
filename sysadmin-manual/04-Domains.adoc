@@ -1,7 +1,7 @@
 
 :imagesdir: images
 
-== Domain
+== Domains
 
 The _Domains_ page allows a system administrator to manage the list of domains in Niord.
 
@@ -11,6 +11,9 @@ Domains are used to separate NW & NM messages into more manageable lists -
 such as a specific domain for NW messages, a domain for NM messages, a domain
 for firing exercises (also NWs), or indeed domains for separate regions with
 separate time-zones, etc.
+
+Domains also plays a central role in <<Keycloak Integration>>. Each domain is created as an
+application client in Keycloak.
 
 image::DomainsPage.png[Domains, 600]
 
