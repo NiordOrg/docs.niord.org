@@ -109,3 +109,48 @@ However, this only works if there is not related data associated with the domain
 
 Instead the system administrator can choose to in-activate the domain.
 
+
+=== Importing and Exporting Domains
+
+The system administrator can export and import domains from the action menu.
+
+The export/import file format is based on a JSON representation of the
+https://github.com/NiordOrg/niord/blob/master/niord-core/src/main/java/org/niord/core/domain/vo/DomainVo.java[DomainVo]
+class.
+
+Example:
+[source,json]
+----
+[
+  {
+    "domainId": "niord-nw",
+    "active": true,
+    "sortOrder": 1,
+    "name": "NW",
+    "timeZone": "Europe/Copenhagen",
+    "messageSeries": [
+      {
+        "seriesId": "dma-nw",
+        "mainType": "NW",
+        "shortFormat": "NW-${number-3-digits}-${year-2-digits}",
+        "navtexFormat": "${publish-date}\nDANISH NAV WARN ${number-year-id}",
+        "numberSequenceType": "YEARLY"
+      },
+      {
+        "seriesId": "dma-nw-local",
+        "mainType": "NW",
+        "numberSequenceType": "NONE"
+      }
+    ],
+    "publish": false,
+    "templates":true
+  },
+  ...
+]
+----
+
+Importing a domain JSON file will trigger the _domain-import_ batch job.
+Batch jobs can be monitored and managed by system administrators.
+
+As an alternative to manually uploading a domain import JSON file on the _Domains_ sysadmin page,
+the file can be copied to the _$NIORD_HOME/batch-jobs/domain-import/in_ folder.
