@@ -518,6 +518,8 @@ table.CodeRay td.code>pre{padding:0}
 <ul class="sectlevel1">
 <li><a href="#introduction">1. Introduction</a></li>
 <li><a href="#system-administrators-manual">2. System Administrators Manual</a></li>
+<li><a href="#sysadmin-page">3. Sysadmin Page</a></li>
+<li><a href="#message-series">4. Message Series</a></li>
 </ul>
 </div>
 </div>
@@ -620,12 +622,160 @@ Please use a newish Chrome, Safari or Firefox browser when using Niord.
 </tr>
 </table>
 </div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sysadmin-page"><a class="anchor" href="#sysadmin-page"></a><a class="link" href="#sysadmin-page">3. Sysadmin Page</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <em>Sysadmin</em> page of Niord only become available if you log in as a system administrator.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SysadminPage.png" alt="Sysadmin" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>The <em>Sysadmin</em> page allows system administrators to manage and configure the Niord system.</p>
+</div>
+<div class="paragraph">
+<p>In general a user that is system administrator in one domain should be system administrator
+in all domains, since all the setup and configuration they can manage on the Sysadmin pages
+applies to all domains.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="message-series"><a class="anchor" href="#message-series"></a><a class="link" href="#message-series">4. Message Series</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <em>Message Series</em> page allows a system administrator to manage the list of message series used
+throughout Niord.
+A message series define the types of messages that can be assigned to the message. It also defines how
+messages are numbered and the format of their IDs.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/MessageSeriesPage.png" alt="Message Series" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The sysadmin may filter the list of message series by typing a term into the <em>Filter</em> input field above the
+message series list. The term is matched against the ID of the message series.</p>
+</div>
+<div class="sect2">
+<h3 id="adding-or-editing-a-message-series"><a class="anchor" href="#adding-or-editing-a-message-series"></a><a class="link" href="#adding-or-editing-a-message-series">4.1. Adding or Editing a Message Series</a></h3>
+<div class="paragraph">
+<p>The sysadmin can add a new message series by clicking the "New Message Series" button, or edit an existing
+message series by clicking the pencil symbol next to the series.</p>
+</div>
+<div class="paragraph">
+<p>This will open the <em>Message Series Edit Page</em>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/MessageSeriesEditPage.png" alt="Message Series Editor Page" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The message series attributes:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Series Attribute</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Message Series ID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A unique ID for the message series. Should be globally unique.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Main Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The main type, i.e. <em>Navigational Warnings</em> or <em>Notices to Mariners</em>, of the messages assigned to the
+  message series.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optionally, the sysadmin may specify the specific types (sub-types of the main type) of the messages
+  assigned to the message series.
+  If the current main type is <em>Navigational Warnings</em>, the possible types include <em>Local</em>, <em>Coastal</em>,
+  <em>Subarea</em> and <em>Navarea</em>. If the main type is <em>Notices to Mariners</em>, the possible types include
+  <em>Preliminary</em>, <em>Temporary</em>, <em>Permanent</em> and <em>Miscellaneous</em>.
+  If none of the types have been selected, all types are valid for the given messages series.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number Sequence Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <em>Number Sequence Type</em> defines how numbers get assigned (or not) to a message when the message
+  is published.
+  If the type is <em>Yearly</em>, the first message published every year will be assigned the number "1",
+  and subsequent message will be numbered consecutively from that.
+  If the type is <em>Continuous</em>, the first message published will be assigned the number "1",
+  and subsequent message will be numbered consecutively from that.
+  If the type is <em>Manual</em>, the editor will get to assign a number manually to a message in the message
+  editor. Please refer to the <a href="http://docs.niord.org/editor-manual/manual.html#id-editor-field">Editor Guide</a>.
+  If the type is <em>None</em>, no number will be assigned to the messages belonging to this message series.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Short Format</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <em>Short Format</em> attribute defines the format of the <em>short ID</em> that gets assigned to a message
+  upon publication (except if the <em>Number Sequence Type</em> is <em>None</em>).
+  The format will typically contain <em>replacement tokens</em> that gets substituted with real values.
+  Valid <em>replacement tokens</em> can be inserted into the field via the <em>insert</em> menu, and include tokens
+  such as "${number}", "${number-3-digits}", "${year}", "${year-2-digits}", etc.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Next Number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <em>Next number</em> field allows the sysadmin to manually specify the next number to assign to a
+  message upon publication. This can be used for all message series with a <em>Number Sequence Type</em> of
+  <em>Yearly</em> or <em>Continuous</em>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Additional Editor Fields</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">As described in the <a href="http://docs.niord.org/editor-manual/manual.html#editor">Editors Manual</a>,
+  the set of <em>editor fields</em> used by default when editing a message depends on e.g. the main
+  type of the message, the category, etc.
+  It is also possible to enable non-standard editor fields per message series using the
+  <em>Additional Editor Field</em>. As an example, if a message series is used exclusively for firing
+  exercise navigational warnings, the sysadmin could enable the "Signals" editor field for that
+  message series.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NAVTEX Preamble</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <em>NAVTEX Preamble</em> field is only enabled for Navigational Warnings-related message series.
+  It allows for the specification of a standardized NAVTEX preamble to be used for NAVTEX
+  promulgations associated with the message. Please refer to the
+  <a href="http://docs.niord.org/editor-manual/manual.html#promulgation-editor-field">Editors Guide</a> about
+  promulgations.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-message-series"><a class="anchor" href="#deleting-a-message-series"></a><a class="link" href="#deleting-a-message-series">4.2. Deleting a Message Series</a></h3>
+<div class="paragraph">
+<p>A message series can be deleted by clicking the trash icon next to them.
+However, this only works if the message series being deleted has never been assigned to a message.</p>
+</div>
+<div class="paragraph">
+<p>If a message series has indeed been assigned to a message, the sysadmin should instead remove
+the message series from the relevant domain.</p>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-06-02 11:13:53 CEST
+Last updated 2017-06-06 09:16:17 CEST
 </div>
 </div>
 <script type="text/x-mathjax-config">

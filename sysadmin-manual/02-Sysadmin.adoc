@@ -1,0 +1,15 @@
+
+:imagesdir: images
+
+== Sysadmin Page
+
+The _Sysadmin_ page of Niord only become available if you log in as a system administrator.
+
+image::SysadminPage.png[Sysadmin, 800]
+
+The _Sysadmin_ page allows system administrators to manage and configure the Niord system.
+
+In general a user that is system administrator in one domain should be system administrator
+in all domains, since all the setup and configuration they can manage on the Sysadmin pages
+applies to all domains.
+

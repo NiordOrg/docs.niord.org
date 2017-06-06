@@ -1,0 +1,95 @@
+
+:imagesdir: images
+
+== Message Series
+
+The _Message Series_ page allows a system administrator to manage the list of message series used
+throughout Niord.
+A message series define the types of messages that can be assigned to the message. It also defines how
+messages are numbered and the format of their IDs.
+
+image::MessageSeriesPage.png[Message Series, 600]
+
+The sysadmin may filter the list of message series by typing a term into the _Filter_ input field above the
+message series list. The term is matched against the ID of the message series.
+
+=== Adding or Editing a Message Series
+
+The sysadmin can add a new message series by clicking the "New Message Series" button, or edit an existing
+message series by clicking the pencil symbol next to the series.
+
+This will open the _Message Series Edit Page_:
+
+image::MessageSeriesEditPage.png[Message Series Editor Page, 600]
+
+The message series attributes:
+
+[ cols="30,70", options="header" ]
+|===
+| Series Attribute
+| Description
+
+| Message Series ID
+| A unique ID for the message series. Should be globally unique.
+
+| Main Type
+| The main type, i.e. _Navigational Warnings_ or _Notices to Mariners_, of the messages assigned to the
+  message series.
+
+| Type
+| Optionally, the sysadmin may specify the specific types (sub-types of the main type) of the messages
+  assigned to the message series.
+  If the current main type is _Navigational Warnings_, the possible types include _Local_, _Coastal_,
+  _Subarea_ and _Navarea_. If the main type is _Notices to Mariners_, the possible types include
+  _Preliminary_, _Temporary_, _Permanent_ and _Miscellaneous_.
+  If none of the types have been selected, all types are valid for the given messages series.
+
+| Number Sequence Type
+| The _Number Sequence Type_ defines how numbers get assigned (or not) to a message when the message
+  is published.
+  If the type is _Yearly_, the first message published every year will be assigned the number "1",
+  and subsequent message will be numbered consecutively from that.
+  If the type is _Continuous_, the first message published will be assigned the number "1",
+  and subsequent message will be numbered consecutively from that.
+  If the type is _Manual_, the editor will get to assign a number manually to a message in the message
+  editor. Please refer to the http://docs.niord.org/editor-manual/manual.html#id-editor-field[Editor Guide].
+  If the type is _None_, no number will be assigned to the messages belonging to this message series.
+
+| Short Format
+| The _Short Format_ attribute defines the format of the _short ID_ that gets assigned to a message
+  upon publication (except if the _Number Sequence Type_ is _None_).
+  The format will typically contain _replacement tokens_ that gets substituted with real values.
+  Valid _replacement tokens_ can be inserted into the field via the _insert_ menu, and include tokens
+  such as "${number}", "${number-3-digits}", "${year}", "${year-2-digits}", etc.
+
+| Next Number
+| The _Next number_ field allows the sysadmin to manually specify the next number to assign to a
+  message upon publication. This can be used for all message series with a _Number Sequence Type_ of
+  _Yearly_ or _Continuous_.
+
+| Additional Editor Fields
+| As described in the http://docs.niord.org/editor-manual/manual.html#editor[Editors Manual],
+  the set of _editor fields_ used by default when editing a message depends on e.g. the main
+  type of the message, the category, etc.
+  It is also possible to enable non-standard editor fields per message series using the
+  _Additional Editor Field_. As an example, if a message series is used exclusively for firing
+  exercise navigational warnings, the sysadmin could enable the "Signals" editor field for that
+  message series.
+
+| NAVTEX Preamble
+| The _NAVTEX Preamble_ field is only enabled for Navigational Warnings-related message series.
+  It allows for the specification of a standardized NAVTEX preamble to be used for NAVTEX
+  promulgations associated with the message. Please refer to the
+  http://docs.niord.org/editor-manual/manual.html#promulgation-editor-field[Editors Guide] about
+  promulgations.
+
+|===
+
+
+=== Deleting a Message Series
+
+A message series can be deleted by clicking the trash icon next to them.
+However, this only works if the message series being deleted has never been assigned to a message.
+
+If a message series has indeed been assigned to a message, the sysadmin should instead remove
+the message series from the relevant domain.
