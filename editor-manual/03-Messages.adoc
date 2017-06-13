@@ -320,6 +320,20 @@ active T&P messages.
 
 Similar to the <<print-messages>>, except that only the current selection of messages get printed.
 
+==== Report Action ====
+
+image::MailingListReportDialog.png[Mailing List Report Dialog, 600]
+
+Niord can be configured to send reports on a scheduled basis to mailing list recipients - please
+refer to the http://docs.niord.org/admin-manual/manual.html#mailing-lists[Mailing Lists] chapter.
+
+Sometimes, however, it can be necessary to pull one such report outside its normal schedule.
+The _Report_ action will open a dialog window with a list of all the mailing list reports that
+can be executed on-demand. The user can click the "Execute" button and see the result below.
+
+If the result needs to be e.g. printed out, the user can choose the "New Window" function to
+open the result in a separate window.
+
 ==== E-mail Selection Action ====
 
 image::MailDialog.png[Email Dialog, 400]
