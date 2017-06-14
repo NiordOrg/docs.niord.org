@@ -89,6 +89,29 @@ Hence, Niord provides a simplified UI for this task, as detailed in the
 http://docs.niord.org/admin-manual/manual.html#managing-user-group-membership[Managing User Group Memebership]
 chapter.
 
+=== User-Specific Editor-Fields
+
+The list of editor fields being displayed when a user edits a message in Niord is highly configurable.
+There are settings to define a base set of fields, a message main-type (NW,NM) specific set,
+plus the list can be customized depending on the message series, areas and categories assigned
+to the message.
+
+It is also possible to customize the list of editor fields per user in Keycloak, or indeed, per user
+group.
+
+Step 1 is for the system administrator to define two _User Attribute Mappers_ for the "niord-web"
+application client; one for the "editorFieldsNw" _token claim_ and one for the "editorFieldsNm"
+_token claim_. Example:
+
+image::KeycloakClientMapper.png[Keycloak Client Mapper, 600]
+
+Step 2 is for the system administrator to assign the relevant "editorFieldsNw" and "editorFieldsNm"
+user attributes either directly to the user, or - more likely - to the relevant user groups.
+The format of the attribute values should be a JSON structure that enables and disables specific
+editor fields. Example:
+
+image::KeycloakGroupAttribute.png[Keycloak Group Attribute, 600]
+
 === Niord Security
 
 All access to the Niord backend happens via calls to REST endpoints. The obvious example is the

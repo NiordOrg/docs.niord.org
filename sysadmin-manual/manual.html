@@ -1116,7 +1116,41 @@ chapter.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="niord-security"><a class="anchor" href="#niord-security"></a><a class="link" href="#niord-security">6.3. Niord Security</a></h3>
+<h3 id="user-specific-editor-fields"><a class="anchor" href="#user-specific-editor-fields"></a><a class="link" href="#user-specific-editor-fields">6.3. User-Specific Editor-Fields</a></h3>
+<div class="paragraph">
+<p>The list of editor fields being displayed when a user edits a message in Niord is highly configurable.
+There are settings to define a base set of fields, a message main-type (NW,NM) specific set,
+plus the list can be customized depending on the message series, areas and categories assigned
+to the message.</p>
+</div>
+<div class="paragraph">
+<p>It is also possible to customize the list of editor fields per user in Keycloak, or indeed, per user
+group.</p>
+</div>
+<div class="paragraph">
+<p>Step 1 is for the system administrator to define two <em>User Attribute Mappers</em> for the "niord-web"
+application client; one for the "editorFieldsNw" <em>token claim</em> and one for the "editorFieldsNm"
+<em>token claim</em>. Example:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/KeycloakClientMapper.png" alt="Keycloak Client Mapper" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Step 2 is for the system administrator to assign the relevant "editorFieldsNw" and "editorFieldsNm"
+user attributes either directly to the user, or - more likely - to the relevant user groups.
+The format of the attribute values should be a JSON structure that enables and disables specific
+editor fields. Example:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/KeycloakGroupAttribute.png" alt="Keycloak Group Attribute" width="600">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="niord-security"><a class="anchor" href="#niord-security"></a><a class="link" href="#niord-security">6.4. Niord Security</a></h3>
 <div class="paragraph">
 <p>All access to the Niord backend happens via calls to REST endpoints. The obvious example is the
 actual Niord web application which makes Ajax calls to the Niord backend.</p>
