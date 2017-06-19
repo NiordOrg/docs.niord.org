@@ -221,8 +221,17 @@ The edited geometry will be opened in the <<Text Editor>> described in a previou
 
 ===== Import Action
 
-The _Import_ action will open a dialog and allow the user to import any geometry defined for
-an existing area.
+image::PositionEditorImportGeometry.png[Position Editor Import Geometry, 400]
+
+The _Import_ action will open a dialog and allow the user to import a geometry from
+one of the following sources:
+
+* _From Area_: Areas may be administratively defined with a geometry.
+  This tab will allow the user to select the area to import a geometry from.
+* _From Text_: Allows the user to import a geometry specified in plain text, as described in the
+  <<Text Editor>> section.
+* _From UTM_: Allows the user to import a list of positions specified in the
+  _Universal Transverse Mercator_ (UTM) coordinate system.
 
 ===== Add Affected Radius Action
 
