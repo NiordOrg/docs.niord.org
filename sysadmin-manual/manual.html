@@ -522,7 +522,8 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#message-series">4. Message Series</a></li>
 <li><a href="#domains">5. Domains</a></li>
 <li><a href="#promulgation-types">6. Promulgation Types</a></li>
-<li><a href="#keycloak-integration">7. Keycloak Integration</a></li>
+<li><a href="#firing-schedules">7. Firing Schedules</a></li>
+<li><a href="#keycloak-integration">8. Keycloak Integration</a></li>
 </ul>
 </div>
 </div>
@@ -1213,7 +1214,208 @@ sysadmin page, the file can be copied to the <em>$NIORD_HOME/batch-jobs/promulga
 </div>
 </div>
 <div class="sect1">
-<h2 id="keycloak-integration"><a class="anchor" href="#keycloak-integration"></a><a class="link" href="#keycloak-integration">7. Keycloak Integration</a></h2>
+<h2 id="firing-schedules"><a class="anchor" href="#firing-schedules"></a><a class="link" href="#firing-schedules">7. Firing Schedules</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <em>Firing Schedules</em> page allows a system administrator to configure one or more firing schedules
+in Niord.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/FiringSchedulesPage.png" alt="Firing Schedules" width="400">
+</div>
+</div>
+<div class="sect2">
+<h3 id="firing-exercises-system-setup"><a class="anchor" href="#firing-exercises-system-setup"></a><a class="link" href="#firing-exercises-system-setup">7.1. Firing Exercises System Setup</a></h3>
+<div class="paragraph">
+<p>Before configuring a schedule on the <em>Firing Schedules</em> system admin page, the Niord system must be
+configured with the proper firing areas base data and the domains for firing areas and exercises.</p>
+</div>
+<div class="paragraph">
+<p>The overarching idea is as follows:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Firing areas must be defined as base data on the Admin
+<a href="http://docs.niord.org/admin-manual/manual.html#areas">Areas</a> page.
+Each firing area implicitly has an associated firing schedule.</p>
+</li>
+<li>
+<p>In a separate domain, "Firing Areas", editors will create a <em>Miscellaneous NM</em> message for each firing
+area, which provides details about the firing area, contact information, signals, prohibition, etc.</p>
+</li>
+<li>
+<p>The "Firing Areas" domain also has a special "Schedule" sub-page that provides a UI for easily
+scheduling firing exercises per firing area.</p>
+</li>
+<li>
+<p>The firing area messages and firing area schedule will be combined to create firing exercise
+<em>Local Warning</em> messages in a separate domain, "Firing Exercises".</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The schedules configured on the <em>Firing Schedules</em> system admin page provide the underlying engine
+that generates firing exercise message based on firing areas and firing area schedules.</p>
+</div>
+<div class="paragraph">
+<p>The steps outlined above are described in more details below.</p>
+</div>
+<div class="sect3">
+<h4 id="configuring-firing-area-base-data"><a class="anchor" href="#configuring-firing-area-base-data"></a><a class="link" href="#configuring-firing-area-base-data">7.1.1. Configuring Firing Area Base Data</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/FiringArea.png" alt="Firing Areas" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Administrators must define all firing practice areas in the country on the Admin
+<a href="http://docs.niord.org/admin-manual/manual.html#areas">Areas</a> page. Each of these areas should
+have their type set to "Firing area". This will trigger that a firing schedule can be associated
+with the areas.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="create-a-firing-areas-domain"><a class="anchor" href="#create-a-firing-areas-domain"></a><a class="link" href="#create-a-firing-areas-domain">7.1.2. Create a Firing Areas Domain</a></h4>
+<div class="paragraph">
+<p>There should be a separate domain, e.g. "Firing Areas", where editors should create
+<em>Miscellaneous NM</em> messages for each firing area.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/FiringAreaMessages.png" alt="Firing Area Messages" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The messages should provide details about the firing areas, contact information, signals, prohibition, etc.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+A common task for Notices to Mariners departments is to publish a yearly publication with
+     firing practice areas.
+     The message list of the "Firing Areas" domain is ideally suited to form the basis for one such publication.
+     The publication can be defined as described in the
+     <a href="http://docs.niord.org/admin-manual/manual.html#publications">Publications</a> chapter of the administrator
+     manual. Indeed, Niord ships with a report, "fa-list", that can be used for this publication.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="maintain-firing-exercise-schedule"><a class="anchor" href="#maintain-firing-exercise-schedule"></a><a class="link" href="#maintain-firing-exercise-schedule">7.1.3. Maintain Firing Exercise Schedule</a></h4>
+<div class="paragraph">
+<p>Once everything has been configured, a new sub-page, "Schedule", will become available in the
+"Firing Areas" domain:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/FiringAreaSchedule.png" alt="Firing Area Schedule" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Editors can maintain the firing exercise schedule on this page.
+Firstly, they select a date in the <em>Schedule Date</em> field. The firing practice schedule of that date
+will be displayed below for all available firing areas.</p>
+</div>
+<div class="paragraph">
+<p>The editor can add and modify the firing period for a given area by clicking the pencil symbol next
+to the area.</p>
+</div>
+<div class="paragraph">
+<p>Clicking the "Update Firing Exercises" button will directly update firing exercise messages from
+the updated schedule. This operation is also called periodically by the system.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="generating-firing-exercises"><a class="anchor" href="#generating-firing-exercises"></a><a class="link" href="#generating-firing-exercises">7.1.4. Generating Firing Exercises</a></h4>
+<div class="paragraph">
+<p>Once everything has been configured, the firing area messages and firing exercise schedule maintained
+in the "Firing Areas" domain will be combined to created firing exercise messages in a new domain,
+e.g. "Firing Exercises".</p>
+</div>
+<div class="paragraph">
+<p>No editor should have access rights to edit messages in the "Firing Exercises" domain, since these
+are generated by the system.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-or-editing-a-firing-schedule"><a class="anchor" href="#adding-or-editing-a-firing-schedule"></a><a class="link" href="#adding-or-editing-a-firing-schedule">7.2. Adding or Editing a Firing Schedule</a></h3>
+<div class="paragraph">
+<p>A prerequisite for the firing exercise-generating mechanism to work, and for the schedule page
+to become available in the "Firing Areas" domain, is that a firing schedule has been defined
+on the <em>Firing Schedules</em> system admin page.</p>
+</div>
+<div class="paragraph">
+<p>The sysadmin can add a new schedule by clicking the "New Firing Schedule" button, or edit an existing
+schedule by clicking the pencil symbol next to the schedule.</p>
+</div>
+<div class="paragraph">
+<p>This will open the <em>Firing Schedule Edit Page</em>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/FiringScheduleEditPage.png" alt="Firing Schedule Editor Page" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The schedule attributes:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Schedule Attribute</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Domain</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The domain that is used for maintaining the firing area messages. The domain selected in this
+  field will automatically sport a "Schedule" page, used for maintaining the firing schedule
+  as described above.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Target Domain</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The target domain, where the generated firing exercise messages will be created.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Target Message Series</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The message series of the target domain, that will be assigned to the generated firing exercise messages.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Schedule Days</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of days into the future that will be included in the generated firing exercises.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Active</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Firing exercise messages will be created automatically only when the <em>Active</em> flag is checked.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-firing-schedule"><a class="anchor" href="#deleting-a-firing-schedule"></a><a class="link" href="#deleting-a-firing-schedule">7.3. Deleting a Firing Schedule</a></h3>
+<div class="paragraph">
+<p>A firing schedule can be deleted by clicking the trash icon next to them.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="keycloak-integration"><a class="anchor" href="#keycloak-integration"></a><a class="link" href="#keycloak-integration">8. Keycloak Integration</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Keycloak is an open source identity and access management middleware product, which is documented
@@ -1228,7 +1430,7 @@ to use Keycloak directly.</p>
 somewhat familiar with Keycloak before reading this.</p>
 </div>
 <div class="sect2">
-<h3 id="niord-domains"><a class="anchor" href="#niord-domains"></a><a class="link" href="#niord-domains">7.1. Niord Domains</a></h3>
+<h3 id="niord-domains"><a class="anchor" href="#niord-domains"></a><a class="link" href="#niord-domains">8.1. Niord Domains</a></h3>
 <div class="paragraph">
 <p>Domains in Niord are detailed in the <a href="#domains">Domains</a> chapter.
 For each domain in Niord, there will be <em>bearer only</em> application client in Keycloak.</p>
@@ -1246,7 +1448,7 @@ in Keycloak.</p>
 <p>Also, there is a single <em>public</em> application client for the actual Niord web application.</p>
 </div>
 <div class="sect3">
-<h4 id="roles"><a class="anchor" href="#roles"></a><a class="link" href="#roles">7.1.1. Roles</a></h4>
+<h4 id="roles"><a class="anchor" href="#roles"></a><a class="link" href="#roles">8.1.1. Roles</a></h4>
 <div class="paragraph">
 <p>As described in the <a href="#system-administrators-manual">System Administrators Manual</a> chapter, a user may have either the <em>User</em>,
 <em>Editor</em>, <em>Admin</em> or <em>Sysadmin</em> role in each of the Niord domains.</p>
@@ -1271,7 +1473,7 @@ roles mentioned above, are created automatically in Keycloak.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="niord-users"><a class="anchor" href="#niord-users"></a><a class="link" href="#niord-users">7.2. Niord Users</a></h3>
+<h3 id="niord-users"><a class="anchor" href="#niord-users"></a><a class="link" href="#niord-users">8.2. Niord Users</a></h3>
 <div class="paragraph">
 <p>All users in Niord are created and maintained in Keycloak, although Niord also provides a UI for
 managing users on top of Keycloak, as detailed in the
@@ -1294,7 +1496,7 @@ a user in Keycloak.</p>
 <p>Keycloak can also be integrated with other Keycloak services, Active Directory or other LDAP provides, etc.</p>
 </div>
 <div class="sect3">
-<h4 id="user-groups"><a class="anchor" href="#user-groups"></a><a class="link" href="#user-groups">7.2.1. User Groups</a></h4>
+<h4 id="user-groups"><a class="anchor" href="#user-groups"></a><a class="link" href="#user-groups">8.2.1. User Groups</a></h4>
 <div class="paragraph">
 <p>Instead of assigning domain roles (i.e. Keycloak application client roles) directly to users, which would
 be a tedious task, Niord instead rely on Keycloak <em>Groups</em>.</p>
@@ -1351,7 +1553,7 @@ chapter.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="user-specific-editor-fields"><a class="anchor" href="#user-specific-editor-fields"></a><a class="link" href="#user-specific-editor-fields">7.3. User-Specific Editor-Fields</a></h3>
+<h3 id="user-specific-editor-fields"><a class="anchor" href="#user-specific-editor-fields"></a><a class="link" href="#user-specific-editor-fields">8.3. User-Specific Editor-Fields</a></h3>
 <div class="paragraph">
 <p>The list of editor fields being displayed when a user edits a message in Niord is highly configurable.
 There are settings to define a base set of fields, a message main-type (NW,NM) specific set,
@@ -1385,7 +1587,7 @@ editor fields. Example:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="niord-security"><a class="anchor" href="#niord-security"></a><a class="link" href="#niord-security">7.4. Niord Security</a></h3>
+<h3 id="niord-security"><a class="anchor" href="#niord-security"></a><a class="link" href="#niord-security">8.4. Niord Security</a></h3>
 <div class="paragraph">
 <p>All access to the Niord backend happens via calls to REST endpoints. The obvious example is the
 actual Niord web application which makes Ajax calls to the Niord backend.</p>
@@ -1419,7 +1621,7 @@ will validate that the user has the <em>Admin</em> role in the current domain, o
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-06-20 09:36:28 CEST
+Last updated 2017-06-20 11:10:49 CEST
 </div>
 </div>
 <script type="text/x-mathjax-config">

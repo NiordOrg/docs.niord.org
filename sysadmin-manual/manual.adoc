@@ -56,4 +56,8 @@ include::05-PromulgationTypes.adoc[]
 
 <<<
 
+include::06-FiringSchedules.adoc[]
+
+<<<
+
 include::A1-KeycloakIntegration.adoc[]
