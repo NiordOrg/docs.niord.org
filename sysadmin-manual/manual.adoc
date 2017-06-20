@@ -52,4 +52,8 @@ include::04-Domains.adoc[]
 
 <<<
 
+include::05-PromulgationTypes.adoc[]
+
+<<<
+
 include::A1-KeycloakIntegration.adoc[]

@@ -521,7 +521,8 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#sysadmin-page">3. Sysadmin Page</a></li>
 <li><a href="#message-series">4. Message Series</a></li>
 <li><a href="#domains">5. Domains</a></li>
-<li><a href="#keycloak-integration">6. Keycloak Integration</a></li>
+<li><a href="#promulgation-types">6. Promulgation Types</a></li>
+<li><a href="#keycloak-integration">7. Keycloak Integration</a></li>
 </ul>
 </div>
 </div>
@@ -978,7 +979,241 @@ the file can be copied to the <em>$NIORD_HOME/batch-jobs/domain-import/in</em> f
 </div>
 </div>
 <div class="sect1">
-<h2 id="keycloak-integration"><a class="anchor" href="#keycloak-integration"></a><a class="link" href="#keycloak-integration">6. Keycloak Integration</a></h2>
+<h2 id="promulgation-types"><a class="anchor" href="#promulgation-types"></a><a class="link" href="#promulgation-types">6. Promulgation Types</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <em>Promulgation Types</em> page allows a system administrator to manage the list of promulgation types
+in Niord.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/PromulgationTypesPage.png" alt="Promulgation Types" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>For Navigational Warnings in particular, there may be a need to promulgate specialized versions of
+a message to external channels.
+Niord has a plug-in architecture for adding new promulgation types. By default, it supports
+distributing <em>NAVTEX</em> versions of navigational warnings via mailing lists, and support for posting
+messages at Twitter upon publication.</p>
+</div>
+<div class="paragraph">
+<p>Furthermore, the Danish version of Niord supports generating an <em>Audio</em> promulgation for
+navigational warnings. This will promulgate a verbose textual version of the messages,
+suitable to be read up on radio by non-maritime personal, to a mailing list.</p>
+</div>
+<div class="paragraph">
+<p>The integration of promulgation types in the message editor is detailed in the
+<a href="http://docs.niord.org/editor-manual/manual.html#promulgation-editor-field">Promulgation Editor Field</a>
+chapter of the Editors Manual.</p>
+</div>
+<div class="sect2">
+<h3 id="adding-or-editing-a-promulgation-type"><a class="anchor" href="#adding-or-editing-a-promulgation-type"></a><a class="link" href="#adding-or-editing-a-promulgation-type">6.1. Adding or Editing a Promulgation Type</a></h3>
+<div class="paragraph">
+<p>The sysadmin can add a new instance of a promulgation type by clicking the "Add Promulgation Type" button,
+which will allow the sysadmin to select which promulgation type to add:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/PromulgationTypesAddBtn.png" alt="Promulgation Types Add Button" width="120">
+</div>
+</div>
+<div class="paragraph">
+<p>Similarly, an existing promulgation type can be edited by clicking the pencil symbol next to the
+promulgation type.</p>
+</div>
+<div class="paragraph">
+<p>Adding or editing a promulgation type will open the <em>Promulgation Type Edit Page</em>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/PromulgationTypeEditPage.png" alt="Promulgation Type Editor Page" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>All editable attributes, except the bottom-most one, are common to all promulgation types:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Promulgation Type Attribute</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Active</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Only active promulgation types are used when creating a new message.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Promulgate by Default</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use this checkbox to flag if the promulgation type should be turned on by default for qualifying
+  messages.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type ID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The unique ID of the promulgation type.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the promulgation type.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Priority</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The sort order of the promulgation type in the message editor.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Language</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Some promulgation types may be tied to one of the message model languages. For instance, the
+  <em>NAVTEX</em> promulgation type should always be tied to English.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Domains</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The list of domains for which the promulgation type will be included in the message editor.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Restrict Types</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Depending on the <em>Domains</em> selection above, the messages that will be assigned promulgations
+  of the promulgation type can be either <em>NW</em> (navigational warnings) or <em>NM</em> (notices to mariners),
+  or both. The <em>Restrict Types</em> field will allow the sysadmin to restrict the promulgation type
+  to a selection of <em>NW</em> or <em>NM</em> sub-types.
+  As an example, <em>NAVTEX</em> should be associated with <em>Coastal Warnings</em>, not <em>Local Warnings</em>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Script Resource Paths</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optionally, the sysadmin can specify one or more script resources that will be enacted when
+  an editor chooses to generate promulgations by executing message templates.
+  As an example, the <em>NAVTEX</em> promulgation type runs a Freemarker script that adds the
+  currently selected message area as a preamble NAVTEX line.
+  Script Resources is an advanced topic detailed in the <a href="#Script Resources">[Script Resources]</a> chapter.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="promulgation-type-specific-editor-fields"><a class="anchor" href="#promulgation-type-specific-editor-fields"></a><a class="link" href="#promulgation-type-specific-editor-fields">6.1.1. Promulgation Type Specific Editor Fields</a></h4>
+<div class="paragraph">
+<p>Each promulgation type may have custom editor fields at the bottom of the <em>Promulgation Type Edit Page</em>.
+This may be used for editing promulgation type-specific settings.</p>
+</div>
+<div class="sect4">
+<h5 id="navtex"><a class="anchor" href="#navtex"></a><a class="link" href="#navtex">NAVTEX</a></h5>
+<div class="paragraph">
+<p>The NAVTEX promulgation type has a button for managing the available transmitters (NAVTEX stations).
+Clicking the button will open the <em>Transmitters</em> dialog:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/NavtexTransmitterDialog.png" alt="NAVTEX Transmitter Dialog" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>For each transmitter added via this dialog, the sysadmin can specify which areas the transmitter covers.
+This will facility automatic selection of the correct transmitters when a new message is created
+by executing a message template.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="twitter-settings"><a class="anchor" href="#twitter-settings"></a><a class="link" href="#twitter-settings">Twitter Settings</a></h5>
+<div class="paragraph">
+<p>The Twitter promulgation type has an "Update Settings" button that opens a dialog used for managing the
+format of the generated tweets, and the OAuth credential used when submitting a tweet to Twitter:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/TwitterSettingsDialog.png" alt="Twitter Settings Dialog" width="400"></span></p>
+</div>
+<div class="paragraph">
+<p>The <em>Format</em> field may contain <em>replacement tokens</em> such as "${short-id}", "${tweet}" "${base-uri}"
+and "${uid}". The tokens will be replaced with real values when a message is published.</p>
+</div>
+<div class="paragraph">
+<p>As a example, the format "${short-id} ${tweet} ${base-uri}/#/message/${uid}" will generate a tweet
+similar to the example below, that contains the message short id, the actual message-specific tweet
+(title line of the message), and a link to open the full message in Niord:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/Tweet.png" alt="Tweet" width="300"></span></p>
+</div>
+<div class="paragraph">
+<p>When the <em>Thumbnail</em> option is turned on, as in the example above, a thumbnail image will be generated
+and submitted with the tweet.</p>
+</div>
+<div class="paragraph">
+<p>The <em>API Key</em> and <em>Access Token</em> fields must be filled out with the corresponding values defined at
+<a href="https://apps.twitter.com" class="bare">https://apps.twitter.com</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-promulgation-type"><a class="anchor" href="#deleting-a-promulgation-type"></a><a class="link" href="#deleting-a-promulgation-type">6.2. Deleting a Promulgation Type</a></h3>
+<div class="paragraph">
+<p>A promulgation type can be deleted by clicking the trash icon next to them.
+However, this only works if there is not related data associated with the promulgation type.</p>
+</div>
+<div class="paragraph">
+<p>Instead the system administrator can choose to in-activate the promulgation type.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="importing-and-exporting-promulgation-types"><a class="anchor" href="#importing-and-exporting-promulgation-types"></a><a class="link" href="#importing-and-exporting-promulgation-types">6.3. Importing and Exporting Promulgation Types</a></h3>
+<div class="paragraph">
+<p>The system administrator can export and import promulgation types from the action menu.</p>
+</div>
+<div class="paragraph">
+<p>The export/import file format is based on a JSON representation of the
+<a href="https://github.com/NiordOrg/niord/blob/master/niord-core/src/main/java/org/niord/core/promulgation/vo/PromulgationTypeVo.java">PromulgationTypeVo</a>
+class.</p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="json">[
+  {
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">active</span><span class="delimiter">&quot;</span></span>: <span class="value">true</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">domains</span><span class="delimiter">&quot;</span></span>: [
+            { <span class="key"><span class="delimiter">&quot;</span><span class="content">domainId</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">niord-client-nw</span><span class="delimiter">&quot;</span></span> }
+    ],
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">language</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">en</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">messageTypes</span><span class="delimiter">&quot;</span></span>: [
+      <span class="string"><span class="delimiter">&quot;</span><span class="content">COASTAL_WARNING</span><span class="delimiter">&quot;</span></span>
+    ],
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">NAVTEX</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">priority</span><span class="delimiter">&quot;</span></span>: <span class="integer">1</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">promulgateByDefault</span><span class="delimiter">&quot;</span></span>: <span class="value">false</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">scriptResourcePaths</span><span class="delimiter">&quot;</span></span>: [
+      <span class="string"><span class="delimiter">&quot;</span><span class="content">templates/tmpl/navtex.ftl</span><span class="delimiter">&quot;</span></span>
+    ],
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">serviceId</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">navtex</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">typeId</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">navtex</span><span class="delimiter">&quot;</span></span>
+  },
+  <span class="error">.</span><span class="error">.</span><span class="error">.</span>
+]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Please note, this data format does <em>not</em> include support for the promulgation type-specific attributes
+such as the NAVTEX transmitters. These attributes must be handled manually.</p>
+</div>
+<div class="paragraph">
+<p>Importing a promulgation type JSON file will trigger the <em>promulgation-type-import</em> batch job.
+Batch jobs can be monitored and managed by system administrators.</p>
+</div>
+<div class="paragraph">
+<p>As an alternative to manually uploading a promulgation type import JSON file on the <em>Promulgation Types</em>
+sysadmin page, the file can be copied to the <em>$NIORD_HOME/batch-jobs/promulgation-type-import/in</em> folder.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="keycloak-integration"><a class="anchor" href="#keycloak-integration"></a><a class="link" href="#keycloak-integration">7. Keycloak Integration</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Keycloak is an open source identity and access management middleware product, which is documented
@@ -993,7 +1228,7 @@ to use Keycloak directly.</p>
 somewhat familiar with Keycloak before reading this.</p>
 </div>
 <div class="sect2">
-<h3 id="niord-domains"><a class="anchor" href="#niord-domains"></a><a class="link" href="#niord-domains">6.1. Niord Domains</a></h3>
+<h3 id="niord-domains"><a class="anchor" href="#niord-domains"></a><a class="link" href="#niord-domains">7.1. Niord Domains</a></h3>
 <div class="paragraph">
 <p>Domains in Niord are detailed in the <a href="#domains">Domains</a> chapter.
 For each domain in Niord, there will be <em>bearer only</em> application client in Keycloak.</p>
@@ -1011,7 +1246,7 @@ in Keycloak.</p>
 <p>Also, there is a single <em>public</em> application client for the actual Niord web application.</p>
 </div>
 <div class="sect3">
-<h4 id="roles"><a class="anchor" href="#roles"></a><a class="link" href="#roles">6.1.1. Roles</a></h4>
+<h4 id="roles"><a class="anchor" href="#roles"></a><a class="link" href="#roles">7.1.1. Roles</a></h4>
 <div class="paragraph">
 <p>As described in the <a href="#system-administrators-manual">System Administrators Manual</a> chapter, a user may have either the <em>User</em>,
 <em>Editor</em>, <em>Admin</em> or <em>Sysadmin</em> role in each of the Niord domains.</p>
@@ -1036,7 +1271,7 @@ roles mentioned above, are created automatically in Keycloak.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="niord-users"><a class="anchor" href="#niord-users"></a><a class="link" href="#niord-users">6.2. Niord Users</a></h3>
+<h3 id="niord-users"><a class="anchor" href="#niord-users"></a><a class="link" href="#niord-users">7.2. Niord Users</a></h3>
 <div class="paragraph">
 <p>All users in Niord are created and maintained in Keycloak, although Niord also provides a UI for
 managing users on top of Keycloak, as detailed in the
@@ -1059,7 +1294,7 @@ a user in Keycloak.</p>
 <p>Keycloak can also be integrated with other Keycloak services, Active Directory or other LDAP provides, etc.</p>
 </div>
 <div class="sect3">
-<h4 id="user-groups"><a class="anchor" href="#user-groups"></a><a class="link" href="#user-groups">6.2.1. User Groups</a></h4>
+<h4 id="user-groups"><a class="anchor" href="#user-groups"></a><a class="link" href="#user-groups">7.2.1. User Groups</a></h4>
 <div class="paragraph">
 <p>Instead of assigning domain roles (i.e. Keycloak application client roles) directly to users, which would
 be a tedious task, Niord instead rely on Keycloak <em>Groups</em>.</p>
@@ -1116,7 +1351,7 @@ chapter.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="user-specific-editor-fields"><a class="anchor" href="#user-specific-editor-fields"></a><a class="link" href="#user-specific-editor-fields">6.3. User-Specific Editor-Fields</a></h3>
+<h3 id="user-specific-editor-fields"><a class="anchor" href="#user-specific-editor-fields"></a><a class="link" href="#user-specific-editor-fields">7.3. User-Specific Editor-Fields</a></h3>
 <div class="paragraph">
 <p>The list of editor fields being displayed when a user edits a message in Niord is highly configurable.
 There are settings to define a base set of fields, a message main-type (NW,NM) specific set,
@@ -1150,7 +1385,7 @@ editor fields. Example:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="niord-security"><a class="anchor" href="#niord-security"></a><a class="link" href="#niord-security">6.4. Niord Security</a></h3>
+<h3 id="niord-security"><a class="anchor" href="#niord-security"></a><a class="link" href="#niord-security">7.4. Niord Security</a></h3>
 <div class="paragraph">
 <p>All access to the Niord backend happens via calls to REST endpoints. The obvious example is the
 actual Niord web application which makes Ajax calls to the Niord backend.</p>
@@ -1184,7 +1419,7 @@ will validate that the user has the <em>Admin</em> role in the current domain, o
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-06-06 12:29:15 CEST
+Last updated 2017-06-20 09:36:28 CEST
 </div>
 </div>
 <script type="text/x-mathjax-config">

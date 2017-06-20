@@ -1,0 +1,170 @@
+
+:imagesdir: images
+
+== Promulgation Types
+
+The _Promulgation Types_ page allows a system administrator to manage the list of promulgation types
+in Niord.
+
+image::PromulgationTypesPage.png[Promulgation Types, 600]
+
+For Navigational Warnings in particular, there may be a need to promulgate specialized versions of
+a message to external channels.
+Niord has a plug-in architecture for adding new promulgation types. By default, it supports
+distributing _NAVTEX_ versions of navigational warnings via mailing lists, and support for posting
+messages at Twitter upon publication.
+
+Furthermore, the Danish version of Niord supports generating an _Audio_ promulgation for
+navigational warnings. This will promulgate a verbose textual version of the messages,
+suitable to be read up on radio by non-maritime personal, to a mailing list.
+
+The integration of promulgation types in the message editor is detailed in the
+http://docs.niord.org/editor-manual/manual.html#promulgation-editor-field[Promulgation Editor Field]
+chapter of the Editors Manual.
+
+=== Adding or Editing a Promulgation Type
+
+The sysadmin can add a new instance of a promulgation type by clicking the "Add Promulgation Type" button,
+which will allow the sysadmin to select which promulgation type to add:
+
+image::PromulgationTypesAddBtn.png[Promulgation Types Add Button, 120]
+
+Similarly, an existing promulgation type can be edited by clicking the pencil symbol next to the
+promulgation type.
+
+Adding or editing a promulgation type will open the _Promulgation Type Edit Page_:
+
+image::PromulgationTypeEditPage.png[Promulgation Type Editor Page, 600]
+
+All editable attributes, except the bottom-most one, are common to all promulgation types:
+
+[ cols="30,70", options="header" ]
+|===
+| Promulgation Type Attribute
+| Description
+
+| Active
+| Only active promulgation types are used when creating a new message.
+
+| Promulgate by Default
+| Use this checkbox to flag if the promulgation type should be turned on by default for qualifying
+  messages.
+
+| Type ID
+| The unique ID of the promulgation type.
+
+| Name
+| The name of the promulgation type.
+
+| Priority
+| The sort order of the promulgation type in the message editor.
+
+| Language
+| Some promulgation types may be tied to one of the message model languages. For instance, the
+  _NAVTEX_ promulgation type should always be tied to English.
+
+| Domains
+| The list of domains for which the promulgation type will be included in the message editor.
+
+| Restrict Types
+| Depending on the _Domains_ selection above, the messages that will be assigned promulgations
+  of the promulgation type can be either _NW_ (navigational warnings) or _NM_ (notices to mariners),
+  or both. The _Restrict Types_ field will allow the sysadmin to restrict the promulgation type
+  to a selection of _NW_ or _NM_ sub-types.
+  As an example, _NAVTEX_ should be associated with _Coastal Warnings_, not _Local Warnings_.
+
+| Script Resource Paths
+| Optionally, the sysadmin can specify one or more script resources that will be enacted when
+  an editor chooses to generate promulgations by executing message templates.
+  As an example, the _NAVTEX_ promulgation type runs a Freemarker script that adds the
+  currently selected message area as a preamble NAVTEX line.
+  Script Resources is an advanced topic detailed in the <<Script Resources>> chapter.
+
+|===
+
+==== Promulgation Type Specific Editor Fields
+
+Each promulgation type may have custom editor fields at the bottom of the _Promulgation Type Edit Page_.
+This may be used for editing promulgation type-specific settings.
+
+===== NAVTEX
+The NAVTEX promulgation type has a button for managing the available transmitters (NAVTEX stations).
+Clicking the button will open the _Transmitters_ dialog:
+
+image::NavtexTransmitterDialog.png[NAVTEX Transmitter Dialog, 400]
+
+For each transmitter added via this dialog, the sysadmin can specify which areas the transmitter covers.
+This will facility automatic selection of the correct transmitters when a new message is created
+by executing a message template.
+
+===== Twitter Settings
+The Twitter promulgation type has an "Update Settings" button that opens a dialog used for managing the
+format of the generated tweets, and the OAuth credential used when submitting a tweet to Twitter:
+
+image:TwitterSettingsDialog.png[Twitter Settings Dialog, 400]
+
+The _Format_ field may contain _replacement tokens_ such as "${short-id}", "${tweet}" "${base-uri}"
+and "${uid}". The tokens will be replaced with real values when a message is published.
+
+As a example, the format "${short-id} ${tweet} ${base-uri}/#/message/${uid}" will generate a tweet
+similar to the example below, that contains the message short id, the actual message-specific tweet
+(title line of the message), and a link to open the full message in Niord:
+
+image:Tweet.png[Tweet, 300]
+
+When the _Thumbnail_ option is turned on, as in the example above, a thumbnail image will be generated
+and submitted with the tweet.
+
+The _API Key_ and _Access Token_ fields must be filled out with the corresponding values defined at
+https://apps.twitter.com.
+
+=== Deleting a Promulgation Type
+
+A promulgation type can be deleted by clicking the trash icon next to them.
+However, this only works if there is not related data associated with the promulgation type.
+
+Instead the system administrator can choose to in-activate the promulgation type.
+
+
+=== Importing and Exporting Promulgation Types
+
+The system administrator can export and import promulgation types from the action menu.
+
+The export/import file format is based on a JSON representation of the
+https://github.com/NiordOrg/niord/blob/master/niord-core/src/main/java/org/niord/core/promulgation/vo/PromulgationTypeVo.java[PromulgationTypeVo]
+class.
+
+Example:
+[source,json]
+----
+[
+  {
+    "active": true,
+    "domains": [
+    	{ "domainId": "niord-client-nw" }
+    ],
+    "language": "en",
+    "messageTypes": [
+      "COASTAL_WARNING"
+    ],
+    "name": "NAVTEX",
+    "priority": 1,
+    "promulgateByDefault": false,
+    "scriptResourcePaths": [
+      "templates/tmpl/navtex.ftl"
+    ],
+    "serviceId": "navtex",
+    "typeId": "navtex"
+  },
+  ...
+]
+----
+
+Please note, this data format does _not_ include support for the promulgation type-specific attributes
+such as the NAVTEX transmitters. These attributes must be handled manually.
+
+Importing a promulgation type JSON file will trigger the _promulgation-type-import_ batch job.
+Batch jobs can be monitored and managed by system administrators.
+
+As an alternative to manually uploading a promulgation type import JSON file on the _Promulgation Types_
+sysadmin page, the file can be copied to the _$NIORD_HOME/batch-jobs/promulgation-type-import/in_ folder.
