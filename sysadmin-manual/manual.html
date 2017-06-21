@@ -524,7 +524,8 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#promulgation-types">6. Promulgation Types</a></li>
 <li><a href="#firing-schedules">7. Firing Schedules</a></li>
 <li><a href="#dictionaries">8. Dictionaries</a></li>
-<li><a href="#keycloak-integration">9. Keycloak Integration</a></li>
+<li><a href="#parameter-types">9. Parameter Types</a></li>
+<li><a href="#keycloak-integration">10. Keycloak Integration</a></li>
 </ul>
 </div>
 </div>
@@ -1589,7 +1590,7 @@ chapter.</p>
 <p>A dictionary entry can be deleted by clicking the trash icon next to them.</p>
 </div>
 <div class="paragraph">
-<p>Be careful that the dictionary entry is not used in on of the <a href="#Parameter Types">[Parameter Types]</a> definitions.</p>
+<p>Be careful that the dictionary entry is not used in on of the <a href="#parameter-types">Parameter Types</a> definitions.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1654,7 +1655,239 @@ function in the action menu.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="keycloak-integration"><a class="anchor" href="#keycloak-integration"></a><a class="link" href="#keycloak-integration">9. Keycloak Integration</a></h2>
+<h2 id="parameter-types"><a class="anchor" href="#parameter-types"></a><a class="link" href="#parameter-types">9. Parameter Types</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <em>Parameter Types</em> page allows a system administrator to manage named parameters that
+may be used for user input when executing message templates - please refer to the
+<a href="http://docs.niord.org/editor-manual/manual.html#message-template-execution">Message Template Execution</a>
+chapter.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ParameterTypesPage.png" alt="Parameter Types" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>There are three categories of parameter types:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Category</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">standard</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">There is a fixed set of <em>standard</em> parameter types, such as "text", "number",
+  "boolean", "date", etc. These types cannot be modified or deleted.
+  When executing a message template, parameters of the <em>standard</em> type will
+  be represented via standard input widgets such as an input field for "text",
+  a checkbox for "boolean", etc.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">list</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A <em>list</em> parameter type is a named and ordered collection of dictionary entries - please refer
+  to the <a href="#dictionaries">Dictionaries</a> chapter.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">composite</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A <em>composite</em> parameter type is a named collection of <em>standard</em> and <em>list</em> parameter types.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Example: When executing the "Marked Wreck" message template, one of the parameters the editor
+is asked to fill out, is the "Wreck" parameter:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ParameterTypeExample.png" alt="Parameter Type Example" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The "Wreck" parameter is really just a <em>composite</em> parameter made up of a <em>list</em> parameter type
+("vessel_type_list") for specifying the wreck type, a <em>standard</em> parameter type ("number") for
+specifying the wreck depth, and a <em>standard</em> parameter type ("boolean") for specifying if the
+wreck is visible above sea surface.</p>
+</div>
+<div class="paragraph">
+<p>The "vessel_type_list" <em>list</em> parameter type in turn includes the "aton" dictionary entries for
+"vessel", "fishing vessel" and "sailing vessel".</p>
+</div>
+<div class="sect2">
+<h3 id="adding-or-editing-a-parameter-type"><a class="anchor" href="#adding-or-editing-a-parameter-type"></a><a class="link" href="#adding-or-editing-a-parameter-type">9.1. Adding or Editing a Parameter Type</a></h3>
+<div class="paragraph">
+<p>The sysadmin can add a new parameter type by clicking the "New Parameter Type" button, and then select
+either "List Parameter Type" or "Composite Parameter Type":</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ParameterTypeAddBtn.png" alt="Parameter Type Add Button" width="120">
+</div>
+</div>
+<div class="paragraph">
+<p>Similarly, the sysadmin can edit an existing <em>list</em> or <em>composite</em> (but not <em>standard</em>) parameter type
+by clicking the pencil symbol next to the entry.</p>
+</div>
+<div class="paragraph">
+<p>This will open either the <em>List Parameter Type Edit Page</em> or the <em>Composite Parameter Type Edit Page</em>:</p>
+</div>
+<div class="sect3">
+<h4 id="list-parameter-type-edit-page"><a class="anchor" href="#list-parameter-type-edit-page"></a><a class="link" href="#list-parameter-type-edit-page">9.1.1. List Parameter Type Edit Page</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/ParameterTypesListEditPage.png" alt="List Parameter Type Editor Page" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The sysadmin specifies a unique name for the parameter list, and assigns the relevant dictionary
+entries to the list. For a discussion of dictionaries, please refer to the <a href="#dictionaries">Dictionaries</a>
+chapter.</p>
+</div>
+<div class="paragraph">
+<p>The sysadmin can select the relevant dictionary using the dictionary menu in the top of the
+"Available values" panel. She can also filter the entries of the currently selected dictionary
+using the filter input field.</p>
+</div>
+<div class="paragraph">
+<p>Dictionary entries are added to the list by clicking the plus icon next to the entries.
+Similarly, dictionary entries are removed from the parameter type list by clicking the
+trash icon next to the entries in the "Selected Values" panel.
+Lastly, selected dictionary entries can be re-arranged by dragging an entry
+to its proper position using the <span class="image"><img src="images/DragHandle.png" alt="Drag Handle" width="16"></span> drag handle.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="composite-parameter-type-edit-page"><a class="anchor" href="#composite-parameter-type-edit-page"></a><a class="link" href="#composite-parameter-type-edit-page">9.1.2. Composite Parameter Type Edit Page</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/ParameterTypesCompositeEditPage.png" alt="Composite Parameter Type Editor Page" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>The sysadmin specifies a unique name for the parameter list, and assigns the relevant nested
+parameters.</p>
+</div>
+<div class="paragraph">
+<p>The sysadmin adds a new nested parameter by clicking the "Add" button, and edits the nested
+parameter by clicking the pencil icon next to the parameter.
+This will open the <em>Nested Composite Parameter Edit Dialog</em>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ParameterTypesCompositeDialog.png" alt="Nested Composite Parameter Edit Dialog" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>The nested parameter must be assigned a unique <em>Parameter ID</em>, a <em>Name</em> in all supported languages,
+a <em>Type</em> which can be any of the defined <em>standard</em> or <em>list</em> parameter types.</p>
+</div>
+<div class="paragraph">
+<p>Furthermore, the sysadmin must decide whether the parameter should be mandatory, and if the
+parameter is tied to a position list.</p>
+</div>
+<div class="paragraph">
+<p>Tying a nested parameter type to a position list will ensure the following effect:
+When executing a message template, the parameter will be repeated for each position defined
+for the message. In the example below, the "Buoy" parameter is repeated for both positions
+selected in the <em>Positions</em> editor.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ParameterTypeExample2.png" alt="Parameter Type Example" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Nested parameters can be deleted from the <em>composite</em> parameter type by clicking the trash
+icon next to the parameters.</p>
+</div>
+<div class="paragraph">
+<p>Lastly, the nested parameters can be re-arranged by dragging a parameter
+to its proper position using the <span class="image"><img src="images/DragHandle.png" alt="Drag Handle" width="16"></span> drag handle.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-parameter-type"><a class="anchor" href="#deleting-a-parameter-type"></a><a class="link" href="#deleting-a-parameter-type">9.2. Deleting a Parameter Type</a></h3>
+<div class="paragraph">
+<p>A parameter type can be deleted by clicking the trash icon next to them.
+However, the sysadmin should first check that the parameter is not used in either message
+template definitions (see the <a href="#Categories">[Categories]</a> chapter) or in <em>composite</em> parameter types.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="duplicating-a-parameter-type"><a class="anchor" href="#duplicating-a-parameter-type"></a><a class="link" href="#duplicating-a-parameter-type">9.3. Duplicating a Parameter Type</a></h3>
+<div class="paragraph">
+<p>A parameter type can be duplicated by clicking the copy icon next to them.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="importing-and-exporting-parameter-types"><a class="anchor" href="#importing-and-exporting-parameter-types"></a><a class="link" href="#importing-and-exporting-parameter-types">9.4. Importing and Exporting Parameter Types</a></h3>
+<div class="paragraph">
+<p>The system administrator can export and import parameter types from the action menu.</p>
+</div>
+<div class="paragraph">
+<p>The export/import file format is based on a JSON representation of the
+<a href="https://github.com/NiordOrg/niord/blob/master/niord-core/src/main/java/org/niord/core/category/vo/ParamTypeVo.java">ParamTypeVo</a> class and its sub-classes:
+<a href="https://github.com/NiordOrg/niord/blob/master/niord-core/src/main/java/org/niord/core/category/vo/StandardParamTypeVo.java">StandardParamTypeVo</a>,
+<a href="https://github.com/NiordOrg/niord/blob/master/niord-core/src/main/java/org/niord/core/category/vo/ListParamTypeVo.java">ListParamTypeVo</a> and
+<a href="https://github.com/NiordOrg/niord/blob/master/niord-core/src/main/java/org/niord/core/category/vo/CompositeParamTypeVo.java">CompositeParamTypeVo</a>.</p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="json">[
+  {
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">ais</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">COMPOSITE</span><span class="delimiter">&quot;</span></span>
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">templateParams</span><span class="delimiter">&quot;</span></span>: [
+      {
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">descs</span><span class="delimiter">&quot;</span></span>: [
+          {
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">lang</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">da</span><span class="delimiter">&quot;</span></span>,
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Afm</span><span class="char">\u00e6</span><span class="content">rk. type</span><span class="delimiter">&quot;</span></span>
+          },
+          {
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">lang</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">en</span><span class="delimiter">&quot;</span></span>,
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">AtoN Type</span><span class="delimiter">&quot;</span></span>
+          }
+        ],
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">mandatory</span><span class="delimiter">&quot;</span></span>: <span class="value">false</span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">paramId</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">aton_type</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">positionList</span><span class="delimiter">&quot;</span></span>: <span class="value">false</span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">radio_navigation_aton_list</span><span class="delimiter">&quot;</span></span>
+      },
+      <span class="error">.</span><span class="error">.</span><span class="error">.</span>
+    ]
+  },
+  <span class="error">.</span><span class="error">.</span><span class="error">.</span>
+]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Importing a parameter type JSON file will trigger the <em>param-type-import</em> batch job.
+Batch jobs can be monitored and managed by system administrators.</p>
+</div>
+<div class="paragraph">
+<p>As an alternative to manually uploading a parameter type import JSON file on the
+<em>Parameter Types</em> sysadmin page,
+the file can be copied to the <em>$NIORD_HOME/batch-jobs/param-type-import/in</em> folder.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="keycloak-integration"><a class="anchor" href="#keycloak-integration"></a><a class="link" href="#keycloak-integration">10. Keycloak Integration</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Keycloak is an open source identity and access management middleware product, which is documented
@@ -1669,7 +1902,7 @@ to use Keycloak directly.</p>
 somewhat familiar with Keycloak before reading this.</p>
 </div>
 <div class="sect2">
-<h3 id="niord-domains"><a class="anchor" href="#niord-domains"></a><a class="link" href="#niord-domains">9.1. Niord Domains</a></h3>
+<h3 id="niord-domains"><a class="anchor" href="#niord-domains"></a><a class="link" href="#niord-domains">10.1. Niord Domains</a></h3>
 <div class="paragraph">
 <p>Domains in Niord are detailed in the <a href="#domains">Domains</a> chapter.
 For each domain in Niord, there will be <em>bearer only</em> application client in Keycloak.</p>
@@ -1687,7 +1920,7 @@ in Keycloak.</p>
 <p>Also, there is a single <em>public</em> application client for the actual Niord web application.</p>
 </div>
 <div class="sect3">
-<h4 id="roles"><a class="anchor" href="#roles"></a><a class="link" href="#roles">9.1.1. Roles</a></h4>
+<h4 id="roles"><a class="anchor" href="#roles"></a><a class="link" href="#roles">10.1.1. Roles</a></h4>
 <div class="paragraph">
 <p>As described in the <a href="#system-administrators-manual">System Administrators Manual</a> chapter, a user may have either the <em>User</em>,
 <em>Editor</em>, <em>Admin</em> or <em>Sysadmin</em> role in each of the Niord domains.</p>
@@ -1712,7 +1945,7 @@ roles mentioned above, are created automatically in Keycloak.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="niord-users"><a class="anchor" href="#niord-users"></a><a class="link" href="#niord-users">9.2. Niord Users</a></h3>
+<h3 id="niord-users"><a class="anchor" href="#niord-users"></a><a class="link" href="#niord-users">10.2. Niord Users</a></h3>
 <div class="paragraph">
 <p>All users in Niord are created and maintained in Keycloak, although Niord also provides a UI for
 managing users on top of Keycloak, as detailed in the
@@ -1735,7 +1968,7 @@ a user in Keycloak.</p>
 <p>Keycloak can also be integrated with other Keycloak services, Active Directory or other LDAP provides, etc.</p>
 </div>
 <div class="sect3">
-<h4 id="user-groups"><a class="anchor" href="#user-groups"></a><a class="link" href="#user-groups">9.2.1. User Groups</a></h4>
+<h4 id="user-groups"><a class="anchor" href="#user-groups"></a><a class="link" href="#user-groups">10.2.1. User Groups</a></h4>
 <div class="paragraph">
 <p>Instead of assigning domain roles (i.e. Keycloak application client roles) directly to users, which would
 be a tedious task, Niord instead rely on Keycloak <em>Groups</em>.</p>
@@ -1792,7 +2025,7 @@ chapter.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="user-specific-editor-fields"><a class="anchor" href="#user-specific-editor-fields"></a><a class="link" href="#user-specific-editor-fields">9.3. User-Specific Editor-Fields</a></h3>
+<h3 id="user-specific-editor-fields"><a class="anchor" href="#user-specific-editor-fields"></a><a class="link" href="#user-specific-editor-fields">10.3. User-Specific Editor-Fields</a></h3>
 <div class="paragraph">
 <p>The list of editor fields being displayed when a user edits a message in Niord is highly configurable.
 There are settings to define a base set of fields, a message main-type (NW,NM) specific set,
@@ -1826,7 +2059,7 @@ editor fields. Example:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="niord-security"><a class="anchor" href="#niord-security"></a><a class="link" href="#niord-security">9.4. Niord Security</a></h3>
+<h3 id="niord-security"><a class="anchor" href="#niord-security"></a><a class="link" href="#niord-security">10.4. Niord Security</a></h3>
 <div class="paragraph">
 <p>All access to the Niord backend happens via calls to REST endpoints. The obvious example is the
 actual Niord web application which makes Ajax calls to the Niord backend.</p>
@@ -1860,7 +2093,7 @@ will validate that the user has the <em>Admin</em> role in the current domain, o
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-06-21 07:23:27 CEST
+Last updated 2017-06-21 10:57:41 CEST
 </div>
 </div>
 <script type="text/x-mathjax-config">

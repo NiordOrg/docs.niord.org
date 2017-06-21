@@ -1,0 +1,167 @@
+
+:imagesdir: images
+
+== Parameter Types
+
+The _Parameter Types_ page allows a system administrator to manage named parameters that
+may be used for user input when executing message templates - please refer to the
+http://docs.niord.org/editor-manual/manual.html#message-template-execution[Message Template Execution]
+chapter.
+
+image::ParameterTypesPage.png[Parameter Types, 600]
+
+There are three categories of parameter types:
+
+[ cols="30,70", options="header" ]
+|===
+| Category
+| Description
+
+| standard
+| There is a fixed set of _standard_ parameter types, such as "text", "number",
+  "boolean", "date", etc. These types cannot be modified or deleted.
+  When executing a message template, parameters of the _standard_ type will
+  be represented via standard input widgets such as an input field for "text",
+  a checkbox for "boolean", etc.
+
+| list
+| A _list_ parameter type is a named and ordered collection of dictionary entries - please refer
+  to the <<Dictionaries>> chapter.
+
+| composite
+| A _composite_ parameter type is a named collection of _standard_ and _list_ parameter types.
+
+|===
+
+Example: When executing the "Marked Wreck" message template, one of the parameters the editor
+is asked to fill out, is the "Wreck" parameter:
+
+image::ParameterTypeExample.png[Parameter Type Example, 600]
+
+The "Wreck" parameter is really just a _composite_ parameter made up of a _list_ parameter type
+("vessel_type_list") for specifying the wreck type, a _standard_ parameter type ("number") for
+specifying the wreck depth, and a _standard_ parameter type ("boolean") for specifying if the
+wreck is visible above sea surface.
+
+The "vessel_type_list" _list_ parameter type in turn includes the "aton" dictionary entries for
+"vessel", "fishing vessel" and "sailing vessel".
+
+=== Adding or Editing a Parameter Type
+
+The sysadmin can add a new parameter type by clicking the "New Parameter Type" button, and then select
+either "List Parameter Type" or "Composite Parameter Type":
+
+image::ParameterTypeAddBtn.png[Parameter Type Add Button, 120]
+
+Similarly, the sysadmin can edit an existing _list_ or _composite_ (but not _standard_) parameter type
+by clicking the pencil symbol next to the entry.
+
+This will open either the _List Parameter Type Edit Page_ or the _Composite Parameter Type Edit Page_:
+
+==== List Parameter Type Edit Page
+
+image::ParameterTypesListEditPage.png[List Parameter Type Editor Page, 600]
+
+The sysadmin specifies a unique name for the parameter list, and assigns the relevant dictionary
+entries to the list. For a discussion of dictionaries, please refer to the <<Dictionaries>>
+chapter.
+
+The sysadmin can select the relevant dictionary using the dictionary menu in the top of the
+"Available values" panel. She can also filter the entries of the currently selected dictionary
+using the filter input field.
+
+Dictionary entries are added to the list by clicking the plus icon next to the entries.
+Similarly, dictionary entries are removed from the parameter type list by clicking the
+trash icon next to the entries in the "Selected Values" panel.
+Lastly, selected dictionary entries can be re-arranged by dragging an entry
+to its proper position using the image:DragHandle.png[Drag Handle, 16] drag handle.
+
+==== Composite Parameter Type Edit Page
+
+image::ParameterTypesCompositeEditPage.png[Composite Parameter Type Editor Page, 500]
+
+The sysadmin specifies a unique name for the parameter list, and assigns the relevant nested
+parameters.
+
+The sysadmin adds a new nested parameter by clicking the "Add" button, and edits the nested
+parameter by clicking the pencil icon next to the parameter.
+This will open the _Nested Composite Parameter Edit Dialog_:
+
+image::ParameterTypesCompositeDialog.png[Nested Composite Parameter Edit Dialog, 500]
+
+The nested parameter must be assigned a unique _Parameter ID_, a _Name_ in all supported languages,
+a _Type_ which can be any of the defined _standard_ or _list_ parameter types.
+
+Furthermore, the sysadmin must decide whether the parameter should be mandatory, and if the
+parameter is tied to a position list.
+
+Tying a nested parameter type to a position list will ensure the following effect:
+When executing a message template, the parameter will be repeated for each position defined
+for the message. In the example below, the "Buoy" parameter is repeated for both positions
+selected in the _Positions_ editor.
+
+image::ParameterTypeExample2.png[Parameter Type Example, 600]
+
+Nested parameters can be deleted from the _composite_ parameter type by clicking the trash
+icon next to the parameters.
+
+Lastly, the nested parameters can be re-arranged by dragging a parameter
+to its proper position using the image:DragHandle.png[Drag Handle, 16] drag handle.
+
+=== Deleting a Parameter Type
+
+A parameter type can be deleted by clicking the trash icon next to them.
+However, the sysadmin should first check that the parameter is not used in either message
+template definitions (see the <<Categories>> chapter) or in _composite_ parameter types.
+
+=== Duplicating a Parameter Type
+
+A parameter type can be duplicated by clicking the copy icon next to them.
+
+=== Importing and Exporting Parameter Types
+
+The system administrator can export and import parameter types from the action menu.
+
+The export/import file format is based on a JSON representation of the
+https://github.com/NiordOrg/niord/blob/master/niord-core/src/main/java/org/niord/core/category/vo/ParamTypeVo.java[ParamTypeVo] class and its sub-classes:
+https://github.com/NiordOrg/niord/blob/master/niord-core/src/main/java/org/niord/core/category/vo/StandardParamTypeVo.java[StandardParamTypeVo],
+https://github.com/NiordOrg/niord/blob/master/niord-core/src/main/java/org/niord/core/category/vo/ListParamTypeVo.java[ListParamTypeVo] and
+https://github.com/NiordOrg/niord/blob/master/niord-core/src/main/java/org/niord/core/category/vo/CompositeParamTypeVo.java[CompositeParamTypeVo].
+
+Example:
+[source,json]
+----
+[
+  {
+    "name": "ais",
+    "type": "COMPOSITE"
+    "templateParams": [
+      {
+        "descs": [
+          {
+            "lang": "da",
+            "name": "Afm\u00e6rk. type"
+          },
+          {
+            "lang": "en",
+            "name": "AtoN Type"
+          }
+        ],
+        "mandatory": false,
+        "paramId": "aton_type",
+        "positionList": false,
+        "type": "radio_navigation_aton_list"
+      },
+      ...
+    ]
+  },
+  ...
+]
+----
+
+Importing a parameter type JSON file will trigger the _param-type-import_ batch job.
+Batch jobs can be monitored and managed by system administrators.
+
+As an alternative to manually uploading a parameter type import JSON file on the
+_Parameter Types_ sysadmin page,
+the file can be copied to the _$NIORD_HOME/batch-jobs/param-type-import/in_ folder.

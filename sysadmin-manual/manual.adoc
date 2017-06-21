@@ -64,4 +64,8 @@ include::07-Dictionaries.adoc[]
 
 <<<
 
+include::08-ParameterTypes.adoc[]
+
+<<<
+
 include::A1-KeycloakIntegration.adoc[]
