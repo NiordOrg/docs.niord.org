@@ -523,7 +523,8 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#domains">5. Domains</a></li>
 <li><a href="#promulgation-types">6. Promulgation Types</a></li>
 <li><a href="#firing-schedules">7. Firing Schedules</a></li>
-<li><a href="#keycloak-integration">8. Keycloak Integration</a></li>
+<li><a href="#dictionaries">8. Dictionaries</a></li>
+<li><a href="#keycloak-integration">9. Keycloak Integration</a></li>
 </ul>
 </div>
 </div>
@@ -1415,7 +1416,245 @@ schedule by clicking the pencil symbol next to the schedule.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="keycloak-integration"><a class="anchor" href="#keycloak-integration"></a><a class="link" href="#keycloak-integration">8. Keycloak Integration</a></h2>
+<h2 id="dictionaries"><a class="anchor" href="#dictionaries"></a><a class="link" href="#dictionaries">8. Dictionaries</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <em>Dictionaries</em> page allows a system administrator to manage the named dictionaries used in Niord.
+The dictionaries contain translatable text used in the Niord website, in PDF reports, e-mails,
+template parameter lists, etc.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/DictionariesPage.png" alt="Dictionaries" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The topmost menu is used to select the currently selected dictionary.</p>
+</div>
+<div class="paragraph">
+<p>The sysadmin may filter the list of dictionary entries, displayed for the currently selected dictionary,
+by typing a term into the <em>Filter</em> input field.
+The term is matched against the key of the dictionary entries.</p>
+</div>
+<div class="sect2">
+<h3 id="standard-dictionaries"><a class="anchor" href="#standard-dictionaries"></a><a class="link" href="#standard-dictionaries">8.1. Standard Dictionaries</a></h3>
+<div class="paragraph">
+<p>Niord defines a set of standard dictionaries, that are initially loaded from <em>resource bundles</em> in
+the Niord distribution.
+The standard dictionaries are:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Dictionary</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">web</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The "web" dictionary contains much of the text actually displayed on the Niord website.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">message</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The "message" dictionary contains many of the terms used for NW and NM messages, and is used
+  in the Niord website, PDF reports, e-mails, etc.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">mail</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The "mail" dictionary contains additional translatable terms used in e-mails.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">pdf</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The "pdf" dictionary contains additional translatable terms used in PDF reports.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">template</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The "template" dictionary contains additional translatable terms used when executing message templates.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="extended-dictionaries"><a class="anchor" href="#extended-dictionaries"></a><a class="link" href="#extended-dictionaries">8.2. Extended Dictionaries</a></h3>
+<div class="paragraph">
+<p>Niord also supports importing <em>extended dictionaries</em>, as detailed in the
+<a href="#importing-and-exporting-dictionaries">Importing and Exporting Dictionaries</a> section.</p>
+</div>
+<div class="paragraph">
+<p>The entries of these dictionaries have an extra translatable <em>long value</em> field, which can be
+viewed and edited by checking the "Show Extended" option, next to the dictionary menu:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/DictionariesExtendedPage.png" alt="Extended Dictionaries" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>One such dictionary is the "aton" dictionary, which contain parameter list entries used in the
+message template function - please refer to the
+<a href="http://docs.niord.org/editor-manual/manual.html#message-template-execution">Message Template Execution</a>
+chapter.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-or-editing-a-dictionary-entry"><a class="anchor" href="#adding-or-editing-a-dictionary-entry"></a><a class="link" href="#adding-or-editing-a-dictionary-entry">8.3. Adding or Editing a Dictionary Entry</a></h3>
+<div class="paragraph">
+<p>The sysadmin can add a new dictionary entry to the currently selected dictionary by clicking the
+"New Entry" button, or edit an existing dictionary entry by clicking the pencil symbol next to the entry.</p>
+</div>
+<div class="paragraph">
+<p>This will open the <em>Dictionary Entry Edit Page</em>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/DictionaryEntryEditPage.png" alt="Dictionary Entry Editor Page" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>The standard dictionary entry attributes:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Entry Attribute</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A unique key for the dictionary entry</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Values</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The textual values for all supported languages.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>For extended dictionaries - i.e. when the "Show Extended" option is checked - there are a
+couple of additional attributes. These entries are typically used in parameter lists when executing
+message templates - please refer to the
+<a href="http://docs.niord.org/editor-manual/manual.html#message-template-execution">Message Template Execution</a>
+chapter.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/DictionaryEntryExtendedEditPage.png" alt="Dictionary Entry Extended Editor Page" width="400">
+</div>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Entry Attribute</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long version</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A secondary version of the dictionary entry for all supported languages.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AtoN filter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <em>AtoN</em> filter is not currently used in production, but it ties in with the <em>Aids to Navigation</em> module
+  of Niord. Here, you can start by selecting an AtoN and then execute a message template based on the AtoN
+  data.
+  The <em>AtoN filter</em> attribute can be used to facilitate pre-selection of the correct parameters in the
+  message templates. For instance, in the example above the "north cardinal buoy" entry matches AtoNs according
+  to the filter: "aton.kv(<em>seamark:buoy_cardinal:category</em>, <em>north</em>) &amp;&amp; !aton.k(<em>seamark:light.*</em>)".
+  AtoNs are defined in an
+  <a href="http://wiki.openstreetmap.org/wiki/Seamarks/Seamark_Objects">OpenStreetmap (OSM) Seamark</a> format, and thus,
+  the filter states that the AtoN should be a north cardinal buoy, but not a light buoy.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-dictionary-entry"><a class="anchor" href="#deleting-a-dictionary-entry"></a><a class="link" href="#deleting-a-dictionary-entry">8.4. Deleting a Dictionary Entry</a></h3>
+<div class="paragraph">
+<p>A dictionary entry can be deleted by clicking the trash icon next to them.</p>
+</div>
+<div class="paragraph">
+<p>Be careful that the dictionary entry is not used in on of the <a href="#Parameter Types">[Parameter Types]</a> definitions.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="importing-and-exporting-dictionaries"><a class="anchor" href="#importing-and-exporting-dictionaries"></a><a class="link" href="#importing-and-exporting-dictionaries">8.5. Importing and Exporting Dictionaries</a></h3>
+<div class="paragraph">
+<p>The system administrator can export and import dictionaries from the action menu.</p>
+</div>
+<div class="paragraph">
+<p>The export/import file format is based on a JSON representation of the
+<a href="https://github.com/NiordOrg/niord/blob/master/niord-core/src/main/java/org/niord/core/dictionary/vo/ExportedDictionaryVo.java">ExportedDictionaryVo</a>
+class.</p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="json">[
+  {
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">mail</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">entries</span><span class="delimiter">&quot;</span></span>: [
+      {
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">descs</span><span class="delimiter">&quot;</span></span>: [
+          {
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">lang</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">da</span><span class="delimiter">&quot;</span></span>,
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">value</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">K</span><span class="char">\u00e6</span><span class="content">re {0}</span><span class="delimiter">&quot;</span></span>
+          },
+          {
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">lang</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">en</span><span class="delimiter">&quot;</span></span>,
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">value</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Dear {0}</span><span class="delimiter">&quot;</span></span>
+          }
+        ],
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">key</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">mail.dear.user</span><span class="delimiter">&quot;</span></span>
+      },
+      <span class="error">.</span><span class="error">.</span><span class="error">.</span>
+    ],
+  }
+]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Importing a dictionary JSON file will trigger the <em>dictionary-import</em> batch job.
+Batch jobs can be monitored and managed by system administrators.</p>
+</div>
+<div class="paragraph">
+<p>As an alternative to manually uploading a <em>dictionary import JSON file on the _Dictionaries</em> sysadmin page,
+the file can be copied to the <em>$NIORD_HOME/batch-jobs/dictionary-import/in</em> folder.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="reloading-standard-dictionaries"><a class="anchor" href="#reloading-standard-dictionaries"></a><a class="link" href="#reloading-standard-dictionaries">8.6. Reloading Standard Dictionaries</a></h3>
+<div class="paragraph">
+<p>As mentioned in the <a href="#standard-dictionaries">Standard Dictionaries</a> section, the standard dictionaries are initially loaded from
+<em>resource bundles</em> in the Niord distribution.</p>
+</div>
+<div class="paragraph">
+<p>These dictionaries can be re-loaded from the resource bundles by enacting the "Reload from system"
+function in the action menu.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="keycloak-integration"><a class="anchor" href="#keycloak-integration"></a><a class="link" href="#keycloak-integration">9. Keycloak Integration</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Keycloak is an open source identity and access management middleware product, which is documented
@@ -1430,7 +1669,7 @@ to use Keycloak directly.</p>
 somewhat familiar with Keycloak before reading this.</p>
 </div>
 <div class="sect2">
-<h3 id="niord-domains"><a class="anchor" href="#niord-domains"></a><a class="link" href="#niord-domains">8.1. Niord Domains</a></h3>
+<h3 id="niord-domains"><a class="anchor" href="#niord-domains"></a><a class="link" href="#niord-domains">9.1. Niord Domains</a></h3>
 <div class="paragraph">
 <p>Domains in Niord are detailed in the <a href="#domains">Domains</a> chapter.
 For each domain in Niord, there will be <em>bearer only</em> application client in Keycloak.</p>
@@ -1448,7 +1687,7 @@ in Keycloak.</p>
 <p>Also, there is a single <em>public</em> application client for the actual Niord web application.</p>
 </div>
 <div class="sect3">
-<h4 id="roles"><a class="anchor" href="#roles"></a><a class="link" href="#roles">8.1.1. Roles</a></h4>
+<h4 id="roles"><a class="anchor" href="#roles"></a><a class="link" href="#roles">9.1.1. Roles</a></h4>
 <div class="paragraph">
 <p>As described in the <a href="#system-administrators-manual">System Administrators Manual</a> chapter, a user may have either the <em>User</em>,
 <em>Editor</em>, <em>Admin</em> or <em>Sysadmin</em> role in each of the Niord domains.</p>
@@ -1473,7 +1712,7 @@ roles mentioned above, are created automatically in Keycloak.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="niord-users"><a class="anchor" href="#niord-users"></a><a class="link" href="#niord-users">8.2. Niord Users</a></h3>
+<h3 id="niord-users"><a class="anchor" href="#niord-users"></a><a class="link" href="#niord-users">9.2. Niord Users</a></h3>
 <div class="paragraph">
 <p>All users in Niord are created and maintained in Keycloak, although Niord also provides a UI for
 managing users on top of Keycloak, as detailed in the
@@ -1496,7 +1735,7 @@ a user in Keycloak.</p>
 <p>Keycloak can also be integrated with other Keycloak services, Active Directory or other LDAP provides, etc.</p>
 </div>
 <div class="sect3">
-<h4 id="user-groups"><a class="anchor" href="#user-groups"></a><a class="link" href="#user-groups">8.2.1. User Groups</a></h4>
+<h4 id="user-groups"><a class="anchor" href="#user-groups"></a><a class="link" href="#user-groups">9.2.1. User Groups</a></h4>
 <div class="paragraph">
 <p>Instead of assigning domain roles (i.e. Keycloak application client roles) directly to users, which would
 be a tedious task, Niord instead rely on Keycloak <em>Groups</em>.</p>
@@ -1553,7 +1792,7 @@ chapter.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="user-specific-editor-fields"><a class="anchor" href="#user-specific-editor-fields"></a><a class="link" href="#user-specific-editor-fields">8.3. User-Specific Editor-Fields</a></h3>
+<h3 id="user-specific-editor-fields"><a class="anchor" href="#user-specific-editor-fields"></a><a class="link" href="#user-specific-editor-fields">9.3. User-Specific Editor-Fields</a></h3>
 <div class="paragraph">
 <p>The list of editor fields being displayed when a user edits a message in Niord is highly configurable.
 There are settings to define a base set of fields, a message main-type (NW,NM) specific set,
@@ -1587,7 +1826,7 @@ editor fields. Example:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="niord-security"><a class="anchor" href="#niord-security"></a><a class="link" href="#niord-security">8.4. Niord Security</a></h3>
+<h3 id="niord-security"><a class="anchor" href="#niord-security"></a><a class="link" href="#niord-security">9.4. Niord Security</a></h3>
 <div class="paragraph">
 <p>All access to the Niord backend happens via calls to REST endpoints. The obvious example is the
 actual Niord web application which makes Ajax calls to the Niord backend.</p>
@@ -1621,7 +1860,7 @@ will validate that the user has the <em>Admin</em> role in the current domain, o
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-06-20 11:10:49 CEST
+Last updated 2017-06-21 07:23:27 CEST
 </div>
 </div>
 <script type="text/x-mathjax-config">

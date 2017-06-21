@@ -1,0 +1,167 @@
+
+:imagesdir: images
+
+== Dictionaries
+
+The _Dictionaries_ page allows a system administrator to manage the named dictionaries used in Niord.
+The dictionaries contain translatable text used in the Niord website, in PDF reports, e-mails,
+template parameter lists, etc.
+
+image::DictionariesPage.png[Dictionaries, 600]
+
+The topmost menu is used to select the currently selected dictionary.
+
+The sysadmin may filter the list of dictionary entries, displayed for the currently selected dictionary,
+by typing a term into the _Filter_ input field.
+The term is matched against the key of the dictionary entries.
+
+=== Standard Dictionaries
+
+Niord defines a set of standard dictionaries, that are initially loaded from _resource bundles_ in
+the Niord distribution.
+The standard dictionaries are:
+
+[ cols="30,70", options="header" ]
+|===
+| Dictionary
+| Description
+
+| web
+| The "web" dictionary contains much of the text actually displayed on the Niord website.
+
+| message
+| The "message" dictionary contains many of the terms used for NW and NM messages, and is used
+  in the Niord website, PDF reports, e-mails, etc.
+
+| mail
+| The "mail" dictionary contains additional translatable terms used in e-mails.
+
+| pdf
+| The "pdf" dictionary contains additional translatable terms used in PDF reports.
+
+| template
+| The "template" dictionary contains additional translatable terms used when executing message templates.
+
+|===
+
+=== Extended Dictionaries
+
+Niord also supports importing _extended dictionaries_, as detailed in the
+<<Importing and Exporting Dictionaries>> section.
+
+The entries of these dictionaries have an extra translatable _long value_ field, which can be
+viewed and edited by checking the "Show Extended" option, next to the dictionary menu:
+
+image::DictionariesExtendedPage.png[Extended Dictionaries, 600]
+
+One such dictionary is the "aton" dictionary, which contain parameter list entries used in the
+message template function - please refer to the
+http://docs.niord.org/editor-manual/manual.html#message-template-execution[Message Template Execution]
+chapter.
+
+=== Adding or Editing a Dictionary Entry
+
+The sysadmin can add a new dictionary entry to the currently selected dictionary by clicking the
+"New Entry" button, or edit an existing dictionary entry by clicking the pencil symbol next to the entry.
+
+This will open the _Dictionary Entry Edit Page_:
+
+image::DictionaryEntryEditPage.png[Dictionary Entry Editor Page, 400]
+
+The standard dictionary entry attributes:
+
+[ cols="30,70", options="header" ]
+|===
+| Entry Attribute
+| Description
+
+| Key
+| A unique key for the dictionary entry
+
+| Values
+| The textual values for all supported languages.
+
+|===
+
+For extended dictionaries - i.e. when the "Show Extended" option is checked - there are a
+couple of additional attributes. These entries are typically used in parameter lists when executing
+message templates - please refer to the
+http://docs.niord.org/editor-manual/manual.html#message-template-execution[Message Template Execution]
+chapter.
+
+image::DictionaryEntryExtendedEditPage.png[Dictionary Entry Extended Editor Page, 400]
+
+[ cols="30,70", options="header" ]
+|===
+| Entry Attribute
+| Description
+
+| Long version
+| A secondary version of the dictionary entry for all supported languages.
+
+| AtoN filter
+| The _AtoN_ filter is not currently used in production, but it ties in with the _Aids to Navigation_ module
+  of Niord. Here, you can start by selecting an AtoN and then execute a message template based on the AtoN
+  data.
+  The _AtoN filter_ attribute can be used to facilitate pre-selection of the correct parameters in the
+  message templates. For instance, in the example above the "north cardinal buoy" entry matches AtoNs according
+  to the filter: "aton.kv('seamark:buoy_cardinal:category', 'north') && !aton.k('seamark:light.*')".
+  AtoNs are defined in an
+  http://wiki.openstreetmap.org/wiki/Seamarks/Seamark_Objects[OpenStreetmap (OSM) Seamark] format, and thus,
+  the filter states that the AtoN should be a north cardinal buoy, but not a light buoy.
+
+|===
+
+=== Deleting a Dictionary Entry
+
+A dictionary entry can be deleted by clicking the trash icon next to them.
+
+Be careful that the dictionary entry is not used in on of the <<Parameter Types>> definitions.
+
+=== Importing and Exporting Dictionaries
+
+The system administrator can export and import dictionaries from the action menu.
+
+The export/import file format is based on a JSON representation of the
+https://github.com/NiordOrg/niord/blob/master/niord-core/src/main/java/org/niord/core/dictionary/vo/ExportedDictionaryVo.java[ExportedDictionaryVo]
+class.
+
+Example:
+[source,json]
+----
+[
+  {
+    "name": "mail",
+    "entries": [
+      {
+        "descs": [
+          {
+            "lang": "da",
+            "value": "K\u00e6re {0}"
+          },
+          {
+            "lang": "en",
+            "value": "Dear {0}"
+          }
+        ],
+        "key": "mail.dear.user"
+      },
+      ...
+    ],
+  }
+]
+----
+
+Importing a dictionary JSON file will trigger the _dictionary-import_ batch job.
+Batch jobs can be monitored and managed by system administrators.
+
+As an alternative to manually uploading a _dictionary import JSON file on the _Dictionaries_ sysadmin page,
+the file can be copied to the _$NIORD_HOME/batch-jobs/dictionary-import/in_ folder.
+
+=== Reloading Standard Dictionaries
+
+As mentioned in the <<Standard Dictionaries>> section, the standard dictionaries are initially loaded from
+_resource bundles_ in the Niord distribution.
+
+These dictionaries can be re-loaded from the resource bundles by enacting the "Reload from system"
+function in the action menu.

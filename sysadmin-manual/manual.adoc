@@ -60,4 +60,8 @@ include::06-FiringSchedules.adoc[]
 
 <<<
 
+include::07-Dictionaries.adoc[]
+
+<<<
+
 include::A1-KeycloakIntegration.adoc[]
