@@ -33,7 +33,7 @@ There are three categories of parameter types:
 
 |===
 
-Example: When executing the "Marked Wreck" message template, one of the parameters the editor
+Example: When executing the "Marked Wreck" message template, one of the parameters the user
 is asked to fill out, is the "Wreck" parameter:
 
 image::ParameterTypeExample.png[Parameter Type Example, 600]
@@ -68,23 +68,23 @@ chapter.
 
 The sysadmin can select the relevant dictionary using the dictionary menu in the top of the
 "Available values" panel. She can also filter the entries of the currently selected dictionary
-using the filter input field.
+using the _Filter_ input field.
 
 Dictionary entries are added to the list by clicking the plus icon next to the entries.
 Similarly, dictionary entries are removed from the parameter type list by clicking the
 trash icon next to the entries in the "Selected Values" panel.
-Lastly, selected dictionary entries can be re-arranged by dragging an entry
+Lastly, selected dictionary entries can be re-ordered by dragging an entry
 to its proper position using the image:DragHandle.png[Drag Handle, 16] drag handle.
 
 ==== Composite Parameter Type Edit Page
 
 image::ParameterTypesCompositeEditPage.png[Composite Parameter Type Editor Page, 500]
 
-The sysadmin specifies a unique name for the parameter list, and assigns the relevant nested
+The sysadmin specifies a unique name for the composite parameter, and assigns the relevant nested
 parameters.
 
 The sysadmin adds a new nested parameter by clicking the "Add" button, and edits the nested
-parameter by clicking the pencil icon next to the parameter.
+parameters by clicking the pencil icon next to the parameters.
 This will open the _Nested Composite Parameter Edit Dialog_:
 
 image::ParameterTypesCompositeDialog.png[Nested Composite Parameter Edit Dialog, 500]
