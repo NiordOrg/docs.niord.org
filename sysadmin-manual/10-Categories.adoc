@@ -1,0 +1,250 @@
+
+:imagesdir: images
+
+== Categories
+
+The _Categories_ page allows a system administrator to manage the the hierarchical tree of
+categories in Niord.
+Lists of categories may be associated with notices to mariners and navigational warnings,
+and can be used for filtering message search results.
+
+Furthermore, categories may be executable, in which case the can be used to generate message
+from user input, as described in the
+http://docs.niord.org/editor-manual/manual.html#message-template-execution[Message Template Execution]
+chapter.
+Hence, executable categories are synonymously known as _message templates_, or just _templates_,
+throughout the Niord documentation.
+
+image::CategoriesPage.png[Categories, 600]
+
+The category tree is navigated like a file system directory.
+Additionally, the user may filter the categories by typing a term into the _Filter Categories_ input field
+above the category tree. The term is matched against the name of the categories.
+
+=== Adding or Editing a Category
+
+The user can add a new category by clicking the "Add" button, or edit a category by selecting it in
+the category tree.
+
+When adding a new category, it will be a child-category of the currently selected category in the
+category tree. If no category is selected, the new category will become a new root category.
+
+The details of the new or edited category will be present in the _Category Editor Panel_ next to the
+category tree (see screenshot above).
+
+The common editable attributes for both types of categories are listed below:
+
+[ cols="30,70", options="header" ]
+|===
+| Category Attribute
+| Description
+
+| Active
+| Only an active category can be assigned to a message or executed as a message template.
+
+| Name
+| The name of the category in all supported model languages.
+
+| MRN
+| Optionally, specify a _Maritime Resource Name_ (a unique URN) for the category. Defining MRNs for
+  categories will facilitate better integration between Niord systems of different countries.
+
+| Additional Editor Fields
+| Can be used to enable extra fields in the message editor when the category is assigned to the message.
+  As an example, if a "Firing Exercises" category is assigned to a navigational warning, it might make
+  sense to show the "Signals" editor field, not normally enabled for navigational warnings, in the
+  message editor.
+
+| AtoN filter
+| The _AtoN_ filter is not currently used in production, but it ties in with the _Aids to Navigation_ module
+  of Niord. There, you can start by selecting an AtoN and then execute a message template based on the AtoN
+  data.
+  The _AtoN filter_ category attribute can be used to filter which templates should be available for
+  a given AtoN. For instance, in the example above the "Light Buoy" category and all its sub-categories,
+  are only availble to AtoNs matching the filter:
+  "aton.kv('seamark:type', 'buoy.*') && aton.k('seamark:light.*')".
+
+  AtoNs are defined in an
+  http://wiki.openstreetmap.org/wiki/Seamarks/Seamark_Objects[OpenStreetMap (OSM) Seamark] format, and thus,
+  the filter states that the AtoN should be of type "buoy" and also have an associated light.
+
+| Type
+| Optionally, specify the category type. Currently, "Category" and "Template" are the only supported types.
+  A Category of the "Category" type has no more attributes. However, a "Template" category has a few
+  more attributes detailed in the next section.
+
+|===
+
+=== Adding or Editing a Template
+
+A category of type "Template" is _executable_, as described in the
+http://docs.niord.org/editor-manual/manual.html#message-template-execution[Message Template Execution]
+chapter.
+
+This section will detail the attributes that may be edited for templates in addition to the common
+attributes editable for all categories and detailed in the previous section.
+
+image::CategoryEditorPanel.png[Category Editor Page, 500]
+
+==== Domains Attribute
+
+Most of the executable templates only really makes sense for Navigational Warnings (NW), not e.g.
+Notices to Mariners (NM), since NWs tend to be short and concise and must follow various international
+standards. NMs on the other hand, tend to be more _free style_ messages, not easily handled by
+a template system.
+
+The _Domains_ attribute can thus be used to restrict templates to specific NW-related domains.
+
+==== Standard Template Fields Attribute
+
+The _Standard Template Fields_ attributes can be use to specify a list of standard template
+editor fields, which mostly constitutes simplified versions of the corresponding message editor
+fields.
+The supported template fields are:
+
+[ cols="30,70", options="header" ]
+|===
+| Template Field
+| Description
+
+| type
+| Used for selecting the NW or NM sub-type of the message.
+
+| promulgation
+| Used for enabling and disabling the supported promulgation types.
+
+| id
+| Can be used for selecting the message series of a message.
+
+| publish_date
+| Allows the user to specify a publication date interval.
+
+| areas
+| Used to specify the areas and vicinity of the messages.
+
+| positions
+| Used for defining the positions of the message.
+
+| event_dates
+| Allows the user to specify a list of event date intervals.
+
+| work_vessel
+| Used for specifying work vessels, e.g. for cable operations.
+
+| markings
+| Used for specifying a list of markings, e.g. used for marking a wreck.
+
+|===
+
+As an example, the "light buoy unlit" message template displays the "type", "promulgation",
+"areas" and "positions" standard template fields:
+
+image::CategoryStdTemplateFields.png[Standard Template Fields, 800]
+
+==== Template Parameters Attribute
+
+TBD
+
+image::CategoryTemplateParams.png[Category Template Parameters, 800]
+
+==== Script Resources Attribute
+
+TBD
+
+==== Example Template Message Attribute
+
+TBD
+
+=== Reorganizing Categories
+
+The hierarchical order of the categories are updated in two ways:
+
+* To move a category to a different parent category, use drag-and-drop.
+* To move a category to another position under the same parent category, use the up- and
+  down-arrow buttons above the category tree.
+
+=== Deleting a Category
+
+A category, including all its sub-categories, can be deleted by selecting it and then click the
+"Delete" button above the category tree.
+However, this only works if neither the selected category, nor any of its sub-categories, have ever
+been assigned to a message.
+
+If the category has indeed been assigned to a message, the user should instead deactivate the category.
+
+=== Importing and Exporting Categories
+
+The administrator can export and import categories from the category action menu.
+
+The export/import file format is based on a JSON representation of the
+https://github.com/NiordOrg/niord/blob/master/niord-core/src/main/java/org/niord/core/category/vo/SystemCategoryVo.java[SystemCategoryVo]
+class.
+The data file should define root categories at the top level, and the recursively define sub-categories
+in the _children_ field of the parent category.
+
+The imported data is merged into the existing category tree. If an MRN is defined for an imported category,
+this is used to search for existing categories in the category tree. Alternatively, the name of the category
+(in all supported languages)
+is used to search for existing matches.
+
+Example:
+[source,json]
+----
+[
+[
+  {
+    "active": true,
+    "descs": [
+      { "name": "Fyr", "lang": "da" },
+      { "name": "Light", "lang": "en" }
+    ],
+    "type": "CATEGORY",
+    "atonFilter": "aton.kv('seamark:type', 'light.*')",
+    "children": [
+      {
+        "active": true,
+        "descs": [
+          { "name": "Fyr slukket", "lang": "da" },
+          { "name": "Light unlit", "lang": "en" }
+        ],
+        "type": "TEMPLATE",
+        "siblingSortOrder": 0.0,
+        "domains": [
+          { "domainId": "niord-nw", }
+        ],
+        "stdTemplateFields": [
+          "areas",
+          "type",
+          "promulgation",
+          "positions"
+        ],
+        "templateParams": [
+          {
+            "paramId": "aton",
+            "type": "light",
+            "mandatory": false,
+            "positionList": true,
+            "descs": [
+              { "name": "Fyr", "lang": "da" },
+              { "name": "Light", "lang": "en" }
+            ]
+          }
+        ],
+        "scriptResourcePaths": [
+          "templates/tmpl/light-unlit.ftl",
+          "templates/tmpl/compute-affected-radius.js"
+        ],
+        "messageId": "NW-003-17"
+      },
+      ...
+    ]
+  },
+  ...
+]
+----
+
+Importing a category JSON file will trigger the _category-import_ batch job.
+Batch jobs can be monitored and managed by system administrators.
+
+As an alternative to manually uploading a category import JSON file on the _Categories_ admin page,
+the file can be copied to the _$NIORD_HOME/batch-jobs/category-import/in_ folder.

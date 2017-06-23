@@ -526,7 +526,8 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#dictionaries">8. Dictionaries</a></li>
 <li><a href="#parameter-types">9. Parameter Types</a></li>
 <li><a href="#script-resources">10. Script Resources</a></li>
-<li><a href="#keycloak-integration">11. Keycloak Integration</a></li>
+<li><a href="#categories">11. Categories</a></li>
+<li><a href="#keycloak-integration">12. Keycloak Integration</a></li>
 </ul>
 </div>
 </div>
@@ -1573,7 +1574,7 @@ chapter.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">AtoN filter</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The <em>AtoN</em> filter is not currently used in production, but it ties in with the <em>Aids to Navigation</em> module
-  of Niord. Here, you can start by selecting an AtoN and then execute a message template based on the AtoN
+  of Niord. There, you can start by selecting an AtoN and then execute a message template based on the AtoN
   data.
   The <em>AtoN filter</em> attribute can be used to facilitate pre-selection of the correct parameters in the
   message templates. For instance, in the example above the "north cardinal buoy" entry matches AtoNs according
@@ -1820,7 +1821,7 @@ to its proper position using the <span class="image"><img src="images/DragHandle
 <div class="paragraph">
 <p>A parameter type can be deleted by clicking the trash icon next to them.
 However, the sysadmin should first check that the parameter is not used in either message
-template definitions (see the <a href="#Categories">[Categories]</a> chapter) or in <em>composite</em> parameter types.</p>
+template definitions (see the <a href="#categories">Categories</a> chapter) or in <em>composite</em> parameter types.</p>
 </div>
 </div>
 <div class="sect2">
@@ -2134,7 +2135,7 @@ ${text('cancellation.this_message',cancelDate)}</code></pre>
 <div class="paragraph">
 <p>Freemarker templates are used for generating an intermediate XML-based <em>Message Template Format</em>.
 Message templates are used so extensively, that the format merits its own description below.
-Please also refer to the <a href="#Categories">[Categories]</a> and
+Please also refer to the <a href="#categories">Categories</a> and
 <a href="http://docs.niord.org/editor-manual/manual.html#message-template-execution">Message Template Execution</a>
 chapters.</p>
 </div>
@@ -2331,7 +2332,342 @@ sysadmin page, the file can be copied to the <em>$NIORD_HOME/batch-jobs/script-r
 </div>
 </div>
 <div class="sect1">
-<h2 id="keycloak-integration"><a class="anchor" href="#keycloak-integration"></a><a class="link" href="#keycloak-integration">11. Keycloak Integration</a></h2>
+<h2 id="categories"><a class="anchor" href="#categories"></a><a class="link" href="#categories">11. Categories</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <em>Categories</em> page allows a system administrator to manage the the hierarchical tree of
+categories in Niord.
+Lists of categories may be associated with notices to mariners and navigational warnings,
+and can be used for filtering message search results.</p>
+</div>
+<div class="paragraph">
+<p>Furthermore, categories may be executable, in which case the can be used to generate message
+from user input, as described in the
+<a href="http://docs.niord.org/editor-manual/manual.html#message-template-execution">Message Template Execution</a>
+chapter.
+Hence, executable categories are synonymously known as <em>message templates</em>, or just <em>templates</em>,
+throughout the Niord documentation.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/CategoriesPage.png" alt="Categories" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The category tree is navigated like a file system directory.
+Additionally, the user may filter the categories by typing a term into the <em>Filter Categories</em> input field
+above the category tree. The term is matched against the name of the categories.</p>
+</div>
+<div class="sect2">
+<h3 id="adding-or-editing-a-category"><a class="anchor" href="#adding-or-editing-a-category"></a><a class="link" href="#adding-or-editing-a-category">11.1. Adding or Editing a Category</a></h3>
+<div class="paragraph">
+<p>The user can add a new category by clicking the "Add" button, or edit a category by selecting it in
+the category tree.</p>
+</div>
+<div class="paragraph">
+<p>When adding a new category, it will be a child-category of the currently selected category in the
+category tree. If no category is selected, the new category will become a new root category.</p>
+</div>
+<div class="paragraph">
+<p>The details of the new or edited category will be present in the <em>Category Editor Panel</em> next to the
+category tree (see screenshot above).</p>
+</div>
+<div class="paragraph">
+<p>The common editable attributes for both types of categories are listed below:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Category Attribute</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Active</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Only an active category can be assigned to a message or executed as a message template.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the category in all supported model languages.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MRN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optionally, specify a <em>Maritime Resource Name</em> (a unique URN) for the category. Defining MRNs for
+  categories will facilitate better integration between Niord systems of different countries.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Additional Editor Fields</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Can be used to enable extra fields in the message editor when the category is assigned to the message.
+  As an example, if a "Firing Exercises" category is assigned to a navigational warning, it might make
+  sense to show the "Signals" editor field, not normally enabled for navigational warnings, in the
+  message editor.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AtoN filter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <em>AtoN</em> filter is not currently used in production, but it ties in with the <em>Aids to Navigation</em> module
+  of Niord. There, you can start by selecting an AtoN and then execute a message template based on the AtoN
+  data.
+  The <em>AtoN filter</em> category attribute can be used to filter which templates should be available for
+  a given AtoN. For instance, in the example above the "Light Buoy" category and all its sub-categories,
+  are only availble to AtoNs matching the filter:
+  "aton.kv(<em>seamark:type</em>, <em>buoy.<strong></em>) &amp;&amp; aton.k(<em>seamark:light.</strong></em>)".
+</p><p class="tableblock">  AtoNs are defined in an
+  <a href="http://wiki.openstreetmap.org/wiki/Seamarks/Seamark_Objects">OpenStreetMap (OSM) Seamark</a> format, and thus,
+  the filter states that the AtoN should be of type "buoy" and also have an associated light.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optionally, specify the category type. Currently, "Category" and "Template" are the only supported types.
+  A Category of the "Category" type has no more attributes. However, a "Template" category has a few
+  more attributes detailed in the next section.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="adding-or-editing-a-template"><a class="anchor" href="#adding-or-editing-a-template"></a><a class="link" href="#adding-or-editing-a-template">11.2. Adding or Editing a Template</a></h3>
+<div class="paragraph">
+<p>A category of type "Template" is <em>executable</em>, as described in the
+<a href="http://docs.niord.org/editor-manual/manual.html#message-template-execution">Message Template Execution</a>
+chapter.</p>
+</div>
+<div class="paragraph">
+<p>This section will detail the attributes that may be edited for templates in addition to the common
+attributes editable for all categories and detailed in the previous section.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/CategoryEditorPanel.png" alt="Category Editor Page" width="500">
+</div>
+</div>
+<div class="sect3">
+<h4 id="domains-attribute"><a class="anchor" href="#domains-attribute"></a><a class="link" href="#domains-attribute">11.2.1. Domains Attribute</a></h4>
+<div class="paragraph">
+<p>Most of the executable templates only really makes sense for Navigational Warnings (NW), not e.g.
+Notices to Mariners (NM), since NWs tend to be short and concise and must follow various international
+standards. NMs on the other hand, tend to be more <em>free style</em> messages, not easily handled by
+a template system.</p>
+</div>
+<div class="paragraph">
+<p>The <em>Domains</em> attribute can thus be used to restrict templates to specific NW-related domains.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="standard-template-fields-attribute"><a class="anchor" href="#standard-template-fields-attribute"></a><a class="link" href="#standard-template-fields-attribute">11.2.2. Standard Template Fields Attribute</a></h4>
+<div class="paragraph">
+<p>The <em>Standard Template Fields</em> attributes can be use to specify a list of standard template
+editor fields, which mostly constitutes simplified versions of the corresponding message editor
+fields.
+The supported template fields are:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Template Field</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used for selecting the NW or NM sub-type of the message.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">promulgation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used for enabling and disabling the supported promulgation types.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Can be used for selecting the message series of a message.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">publish_date</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows the user to specify a publication date interval.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">areas</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used to specify the areas and vicinity of the messages.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">positions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used for defining the positions of the message.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">event_dates</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows the user to specify a list of event date intervals.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">work_vessel</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used for specifying work vessels, e.g. for cable operations.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">markings</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used for specifying a list of markings, e.g. used for marking a wreck.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>As an example, the "light buoy unlit" message template displays the "type", "promulgation",
+"areas" and "positions" standard template fields:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/CategoryStdTemplateFields.png" alt="Standard Template Fields" width="800">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="template-parameters-attribute"><a class="anchor" href="#template-parameters-attribute"></a><a class="link" href="#template-parameters-attribute">11.2.3. Template Parameters Attribute</a></h4>
+<div class="paragraph">
+<p>TBD</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/CategoryTemplateParams.png" alt="Category Template Parameters" width="800">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="script-resources-attribute"><a class="anchor" href="#script-resources-attribute"></a><a class="link" href="#script-resources-attribute">11.2.4. Script Resources Attribute</a></h4>
+<div class="paragraph">
+<p>TBD</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="example-template-message-attribute"><a class="anchor" href="#example-template-message-attribute"></a><a class="link" href="#example-template-message-attribute">11.2.5. Example Template Message Attribute</a></h4>
+<div class="paragraph">
+<p>TBD</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="reorganizing-categories"><a class="anchor" href="#reorganizing-categories"></a><a class="link" href="#reorganizing-categories">11.3. Reorganizing Categories</a></h3>
+<div class="paragraph">
+<p>The hierarchical order of the categories are updated in two ways:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>To move a category to a different parent category, use drag-and-drop.</p>
+</li>
+<li>
+<p>To move a category to another position under the same parent category, use the up- and
+down-arrow buttons above the category tree.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-category"><a class="anchor" href="#deleting-a-category"></a><a class="link" href="#deleting-a-category">11.4. Deleting a Category</a></h3>
+<div class="paragraph">
+<p>A category, including all its sub-categories, can be deleted by selecting it and then click the
+"Delete" button above the category tree.
+However, this only works if neither the selected category, nor any of its sub-categories, have ever
+been assigned to a message.</p>
+</div>
+<div class="paragraph">
+<p>If the category has indeed been assigned to a message, the user should instead deactivate the category.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="importing-and-exporting-categories"><a class="anchor" href="#importing-and-exporting-categories"></a><a class="link" href="#importing-and-exporting-categories">11.5. Importing and Exporting Categories</a></h3>
+<div class="paragraph">
+<p>The administrator can export and import categories from the category action menu.</p>
+</div>
+<div class="paragraph">
+<p>The export/import file format is based on a JSON representation of the
+<a href="https://github.com/NiordOrg/niord/blob/master/niord-core/src/main/java/org/niord/core/category/vo/SystemCategoryVo.java">SystemCategoryVo</a>
+class.
+The data file should define root categories at the top level, and the recursively define sub-categories
+in the <em>children</em> field of the parent category.</p>
+</div>
+<div class="paragraph">
+<p>The imported data is merged into the existing category tree. If an MRN is defined for an imported category,
+this is used to search for existing categories in the category tree. Alternatively, the name of the category
+(in all supported languages)
+is used to search for existing matches.</p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="json">[
+[
+  {
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">active</span><span class="delimiter">&quot;</span></span>: <span class="value">true</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">descs</span><span class="delimiter">&quot;</span></span>: [
+      { <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Fyr</span><span class="delimiter">&quot;</span></span>, <span class="key"><span class="delimiter">&quot;</span><span class="content">lang</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">da</span><span class="delimiter">&quot;</span></span> },
+      { <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Light</span><span class="delimiter">&quot;</span></span>, <span class="key"><span class="delimiter">&quot;</span><span class="content">lang</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">en</span><span class="delimiter">&quot;</span></span> }
+    ],
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">CATEGORY</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">atonFilter</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">aton.kv('seamark:type', 'light.*')</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">children</span><span class="delimiter">&quot;</span></span>: [
+      {
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">active</span><span class="delimiter">&quot;</span></span>: <span class="value">true</span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">descs</span><span class="delimiter">&quot;</span></span>: [
+          { <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Fyr slukket</span><span class="delimiter">&quot;</span></span>, <span class="key"><span class="delimiter">&quot;</span><span class="content">lang</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">da</span><span class="delimiter">&quot;</span></span> },
+          { <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Light unlit</span><span class="delimiter">&quot;</span></span>, <span class="key"><span class="delimiter">&quot;</span><span class="content">lang</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">en</span><span class="delimiter">&quot;</span></span> }
+        ],
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">TEMPLATE</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">siblingSortOrder</span><span class="delimiter">&quot;</span></span>: <span class="float">0.0</span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">domains</span><span class="delimiter">&quot;</span></span>: [
+          { <span class="key"><span class="delimiter">&quot;</span><span class="content">domainId</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">niord-nw</span><span class="delimiter">&quot;</span></span>, }
+        ],
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">stdTemplateFields</span><span class="delimiter">&quot;</span></span>: [
+          <span class="string"><span class="delimiter">&quot;</span><span class="content">areas</span><span class="delimiter">&quot;</span></span>,
+          <span class="string"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>,
+          <span class="string"><span class="delimiter">&quot;</span><span class="content">promulgation</span><span class="delimiter">&quot;</span></span>,
+          <span class="string"><span class="delimiter">&quot;</span><span class="content">positions</span><span class="delimiter">&quot;</span></span>
+        ],
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">templateParams</span><span class="delimiter">&quot;</span></span>: [
+          {
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">paramId</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">aton</span><span class="delimiter">&quot;</span></span>,
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">light</span><span class="delimiter">&quot;</span></span>,
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">mandatory</span><span class="delimiter">&quot;</span></span>: <span class="value">false</span>,
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">positionList</span><span class="delimiter">&quot;</span></span>: <span class="value">true</span>,
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">descs</span><span class="delimiter">&quot;</span></span>: [
+              { <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Fyr</span><span class="delimiter">&quot;</span></span>, <span class="key"><span class="delimiter">&quot;</span><span class="content">lang</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">da</span><span class="delimiter">&quot;</span></span> },
+              { <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Light</span><span class="delimiter">&quot;</span></span>, <span class="key"><span class="delimiter">&quot;</span><span class="content">lang</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">en</span><span class="delimiter">&quot;</span></span> }
+            ]
+          }
+        ],
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">scriptResourcePaths</span><span class="delimiter">&quot;</span></span>: [
+          <span class="string"><span class="delimiter">&quot;</span><span class="content">templates/tmpl/light-unlit.ftl</span><span class="delimiter">&quot;</span></span>,
+          <span class="string"><span class="delimiter">&quot;</span><span class="content">templates/tmpl/compute-affected-radius.js</span><span class="delimiter">&quot;</span></span>
+        ],
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">messageId</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">NW-003-17</span><span class="delimiter">&quot;</span></span>
+      },
+      <span class="error">.</span><span class="error">.</span><span class="error">.</span>
+    ]
+  },
+  <span class="error">.</span><span class="error">.</span><span class="error">.</span>
+]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Importing a category JSON file will trigger the <em>category-import</em> batch job.
+Batch jobs can be monitored and managed by system administrators.</p>
+</div>
+<div class="paragraph">
+<p>As an alternative to manually uploading a category import JSON file on the <em>Categories</em> admin page,
+the file can be copied to the <em>$NIORD_HOME/batch-jobs/category-import/in</em> folder.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="keycloak-integration"><a class="anchor" href="#keycloak-integration"></a><a class="link" href="#keycloak-integration">12. Keycloak Integration</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Keycloak is an open source identity and access management middleware product, which is documented
@@ -2346,7 +2682,7 @@ to use Keycloak directly.</p>
 somewhat familiar with Keycloak before reading this.</p>
 </div>
 <div class="sect2">
-<h3 id="niord-domains"><a class="anchor" href="#niord-domains"></a><a class="link" href="#niord-domains">11.1. Niord Domains</a></h3>
+<h3 id="niord-domains"><a class="anchor" href="#niord-domains"></a><a class="link" href="#niord-domains">12.1. Niord Domains</a></h3>
 <div class="paragraph">
 <p>Domains in Niord are detailed in the <a href="#domains">Domains</a> chapter.
 For each domain in Niord, there will be <em>bearer only</em> application client in Keycloak.</p>
@@ -2364,7 +2700,7 @@ in Keycloak.</p>
 <p>Also, there is a single <em>public</em> application client for the actual Niord web application.</p>
 </div>
 <div class="sect3">
-<h4 id="roles"><a class="anchor" href="#roles"></a><a class="link" href="#roles">11.1.1. Roles</a></h4>
+<h4 id="roles"><a class="anchor" href="#roles"></a><a class="link" href="#roles">12.1.1. Roles</a></h4>
 <div class="paragraph">
 <p>As described in the <a href="#system-administrators-manual">System Administrators Manual</a> chapter, a user may have either the <em>User</em>,
 <em>Editor</em>, <em>Admin</em> or <em>Sysadmin</em> role in each of the Niord domains.</p>
@@ -2389,7 +2725,7 @@ roles mentioned above, are created automatically in Keycloak.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="niord-users"><a class="anchor" href="#niord-users"></a><a class="link" href="#niord-users">11.2. Niord Users</a></h3>
+<h3 id="niord-users"><a class="anchor" href="#niord-users"></a><a class="link" href="#niord-users">12.2. Niord Users</a></h3>
 <div class="paragraph">
 <p>All users in Niord are created and maintained in Keycloak, although Niord also provides a UI for
 managing users on top of Keycloak, as detailed in the
@@ -2412,7 +2748,7 @@ a user in Keycloak.</p>
 <p>Keycloak can also be integrated with other Keycloak services, Active Directory or other LDAP provides, etc.</p>
 </div>
 <div class="sect3">
-<h4 id="user-groups"><a class="anchor" href="#user-groups"></a><a class="link" href="#user-groups">11.2.1. User Groups</a></h4>
+<h4 id="user-groups"><a class="anchor" href="#user-groups"></a><a class="link" href="#user-groups">12.2.1. User Groups</a></h4>
 <div class="paragraph">
 <p>Instead of assigning domain roles (i.e. Keycloak application client roles) directly to users, which would
 be a tedious task, Niord instead rely on Keycloak <em>Groups</em>.</p>
@@ -2469,7 +2805,7 @@ chapter.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="user-specific-editor-fields"><a class="anchor" href="#user-specific-editor-fields"></a><a class="link" href="#user-specific-editor-fields">11.3. User-Specific Editor-Fields</a></h3>
+<h3 id="user-specific-editor-fields"><a class="anchor" href="#user-specific-editor-fields"></a><a class="link" href="#user-specific-editor-fields">12.3. User-Specific Editor-Fields</a></h3>
 <div class="paragraph">
 <p>The list of editor fields being displayed when a user edits a message in Niord is highly configurable.
 There are settings to define a base set of fields, a message main-type (NW,NM) specific set,
@@ -2503,7 +2839,7 @@ editor fields. Example:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="niord-security"><a class="anchor" href="#niord-security"></a><a class="link" href="#niord-security">11.4. Niord Security</a></h3>
+<h3 id="niord-security"><a class="anchor" href="#niord-security"></a><a class="link" href="#niord-security">12.4. Niord Security</a></h3>
 <div class="paragraph">
 <p>All access to the Niord backend happens via calls to REST endpoints. The obvious example is the
 actual Niord web application which makes Ajax calls to the Niord backend.</p>
@@ -2537,7 +2873,7 @@ will validate that the user has the <em>Admin</em> role in the current domain, o
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-06-23 07:39:18 CEST
+Last updated 2017-06-23 11:58:45 CEST
 </div>
 </div>
 <script type="text/x-mathjax-config">

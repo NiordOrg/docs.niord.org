@@ -101,7 +101,7 @@ image::DictionaryEntryExtendedEditPage.png[Dictionary Entry Extended Editor Page
 
 | AtoN filter
 | The _AtoN_ filter is not currently used in production, but it ties in with the _Aids to Navigation_ module
-  of Niord. Here, you can start by selecting an AtoN and then execute a message template based on the AtoN
+  of Niord. There, you can start by selecting an AtoN and then execute a message template based on the AtoN
   data.
   The _AtoN filter_ attribute can be used to facilitate pre-selection of the correct parameters in the
   message templates. For instance, in the example above the "north cardinal buoy" entry matches AtoNs according

@@ -72,4 +72,8 @@ include::09-ScriptResources.adoc[]
 
 <<<
 
+include::10-Categories.adoc[]
+
+<<<
+
 include::A1-KeycloakIntegration.adoc[]
