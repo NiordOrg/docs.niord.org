@@ -525,7 +525,8 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#firing-schedules">7. Firing Schedules</a></li>
 <li><a href="#dictionaries">8. Dictionaries</a></li>
 <li><a href="#parameter-types">9. Parameter Types</a></li>
-<li><a href="#keycloak-integration">10. Keycloak Integration</a></li>
+<li><a href="#script-resources">10. Script Resources</a></li>
+<li><a href="#keycloak-integration">11. Keycloak Integration</a></li>
 </ul>
 </div>
 </div>
@@ -1092,7 +1093,7 @@ promulgation type.</p>
   an editor chooses to generate promulgations by executing message templates.
   As an example, the <em>NAVTEX</em> promulgation type runs a Freemarker script that adds the
   currently selected message area as a preamble NAVTEX line.
-  Script Resources is an advanced topic detailed in the <a href="#Script Resources">[Script Resources]</a> chapter.</p></td>
+  Script Resources is an advanced topic detailed in the <a href="#script-resources">Script Resources</a> chapter.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1887,7 +1888,450 @@ the file can be copied to the <em>$NIORD_HOME/batch-jobs/param-type-import/in</e
 </div>
 </div>
 <div class="sect1">
-<h2 id="keycloak-integration"><a class="anchor" href="#keycloak-integration"></a><a class="link" href="#keycloak-integration">10. Keycloak Integration</a></h2>
+<h2 id="script-resources"><a class="anchor" href="#script-resources"></a><a class="link" href="#script-resources">10. Script Resources</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <em>Script Resources</em> page allows a system administrator to manage the list of <em>script resources</em>
+in Niord.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ScriptResourcesPage.png" alt="Script Resources" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Script resources are always associated with a path, and come in two flavours; <em>Freemarker templates</em>
+(with an ".ftl" path extension) and server-side Nashorn <em>JavaScript</em> files (with a ".js" path extension).</p>
+</div>
+<div class="paragraph">
+<p>System administrators wishing to work with script resources, should acquaint themselves with these
+technologies, which are detailed further in the <a href="#server-side-javascript">Server-Side JavaScript</a> and <a href="#freemarker-templates">Freemarker Templates</a>
+sections.</p>
+</div>
+<div class="paragraph">
+<p>The Freemarker templates are typically, but not exclusively, used for generating HTML, whereas the
+server-side JavaScript files are typically used for looking up or manipulating data.</p>
+</div>
+<div class="paragraph">
+<p>The <em>Script Resources Page</em> displays the list of script resources currently persisted to the database.
+The system administrator can type a term into the <em>Filter</em> input field above the list, to filter
+the script resources by their paths.</p>
+</div>
+<div class="sect2">
+<h3 id="script-resource-usage"><a class="anchor" href="#script-resource-usage"></a><a class="link" href="#script-resource-usage">10.1. Script Resource Usage</a></h3>
+<div class="paragraph">
+<p>The script resources are used throughout Niord for operations such as generating PDF print reports,
+generating mails, etc. An overview of functions using script resources is found in the table below:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Function</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Print Reports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Print Reports are maintained on the <a href="#Print Reports">[Print Reports]</a> sysadmin page. There are a couple of standard
+  and draft reports, along with domain-specific reports, such as the weekly Notices to Mariners digest.
+  In order to generate PDF files, Niord will first use Freemarker templates to generate HTML, and then
+  convert the HTML into PDF (CSS 2 has extensions for <em>paged media</em>).
+  Print Report Freemarker templates are typically found under the "templates/messages/" sub-path.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Message Templates</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The single most extensive usage of script resources is for <em>Message Templates</em> -  please refer to
+  the subsequent <a href="#intermediate-message-template-format">Intermediate Message Template Format</a> section.
+  Message Templates use JavaScript file for data-manipulation and Freemarker templates for generating
+  an intermediate template XML-format, used for generating messages.
+  Message Template script resources are typically found under the "templates/tmpl/" sub-path.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mailing Lists</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mailing lists also use script resources for generating the actual HTML e-mails - please refer to the
+  <a href="#Mailing Lists">[Mailing Lists]</a> chapter.
+  Mailing List script resources are typically found under the "templates/mailinglist/" sub-path.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Miscellaneous</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Freemarker templates are used for quite a few discrete functions, such as formatting a light
+  character (e.g. "Al.Bu.Y 3s") as human text, and formatting message positions in various formats
+  - please see the <a href="http://docs.niord.org/editor-manual/manual.html#insert-locations">Insert Locations</a>
+  section of the Editors manual.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="script-resource-extensions"><a class="anchor" href="#script-resource-extensions"></a><a class="link" href="#script-resource-extensions">10.2. Script Resource Extensions</a></h3>
+<div class="paragraph">
+<p>Niord has added some extensions to both types of the script resources.</p>
+</div>
+<div class="paragraph">
+<p>Firstly, the script resources are <em>always</em> loaded from the database, not the file system.
+However, if a script resource, as given by its path, does not exist in the database, then
+Niord will check to see if the resource can be loaded from the class-path and persisted
+to the database, thence commencing operations.</p>
+</div>
+<div class="paragraph">
+<p>This means that Niord developers can develop and maintain the initial batch of script resources
+as project files and use a professional code editor for editing the scripts.</p>
+</div>
+<div class="paragraph">
+<p>Another Niord extension has to do with <em>script resource inclusion</em>. File system-based Freemarker Templates
+can  include other Freemarker templates, and similarly for JavaScript files; a trait that facilitates
+code reuse and libraries.
+Niord has extended the <em>script resource inclusion</em> concept, so that it works with the database-backed
+scripts as well. Subsequent sections will give examples of script resource inclusion.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="server-side-javascript"><a class="anchor" href="#server-side-javascript"></a><a class="link" href="#server-side-javascript">10.3. Server-Side JavaScript</a></h3>
+<div class="paragraph">
+<p>An introduction to Nashorn JavaScript can be found at
+<a href="http://winterbe.com/posts/2014/04/05/java8-nashorn-tutorial/" class="bare">http://winterbe.com/posts/2014/04/05/java8-nashorn-tutorial/</a>.</p>
+</div>
+<div class="paragraph">
+<p>The scripts are executed server-side, which means that you can e.g. call Java Enterprise Beans and
+load and manipulate data.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Executing JavaScripts server-side is clearly a security issue, since you can e.g. create
+a script that deletes data. However, all access to create and update JavaScripts is strictly
+restricted to system administrators, a role reserved to the person(s) that set up and configure
+the entire system, and who can wreck it anyway, should they so decide&#8230;&#8203;
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The following example illustrates how to perform a message search for published firing exercises:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="javascript"><span class="keyword">var</span> messageService = CdiUtils.getBean(org.niord.core.message.MessageService.<span class="reserved">class</span>);
+<span class="keyword">var</span> seriesIds = java.util.Collections.singleton(<span class="string"><span class="delimiter">'</span><span class="content">dma-fe</span><span class="delimiter">'</span></span>);
+<span class="keyword">var</span> statuses = java.util.Collections.singleton(org.niord.model.message.Status.PUBLISHED);
+<span class="keyword">var</span> searchParams = <span class="keyword">new</span> org.niord.core.message.MessageSearchParams();
+searchParams.seriesIds(seriesIds)
+    .statuses(statuses);
+<span class="keyword">var</span> searchResult = messageService.search(searchParams);</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="inclusion-in-javascript"><a class="anchor" href="#inclusion-in-javascript"></a><a class="link" href="#inclusion-in-javascript">10.3.1. Inclusion in JavaScript</a></h4>
+<div class="paragraph">
+<p>As mentioned in the <a href="#script-resource-extensions">Script Resource Extensions</a> section, JavaScript files are persisted in the
+database, and may include other JavaScript files.</p>
+</div>
+<div class="paragraph">
+<p>Hence, the "templates/tmpl/common.js" JavaScript file contains a collection of common JavaScript functions
+which is often included by other JavaScript files using the syntax:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="javascript"><span class="comment">/** Always load using full path and a &quot;niord:&quot; prefix **/</span>
+load(<span class="string"><span class="delimiter">'</span><span class="content">niord:templates/tmpl/common.js</span><span class="delimiter">'</span></span>);</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="freemarker-templates"><a class="anchor" href="#freemarker-templates"></a><a class="link" href="#freemarker-templates">10.4. Freemarker Templates</a></h3>
+<div class="paragraph">
+<p>The documentation for Freemarker templates are found at <a href="http://freemarker.org" class="bare">http://freemarker.org</a>.</p>
+</div>
+<div class="paragraph">
+<p>The Freemarker Templates are typically used to convert a data model, such as a message list,
+into HTML, and sometimes into plain text or XML.</p>
+</div>
+<div class="paragraph">
+<p>The following simple example, "templates/geometry/text.ftl", is instantiated with a "geometry"
+(position list) and a "format", and formats the positions as a comma-separated list of lat-lon positions.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="error">&lt;</span>#assign formatPos = &quot;org.niord.core.script.directive.LatLonDirective&quot;?new()<span class="error">&gt;</span>
+
+<span class="error">&lt;</span>#if geometry?has_content<span class="error">&gt;</span>
+    <span class="error">&lt;</span>#list geometry as feature<span class="error">&gt;</span>
+        <span class="error">&lt;</span>#if feature.coordinates?has_content<span class="error">&gt;</span>
+            <span class="error">&lt;</span>#list feature.coordinates as coord<span class="error">&gt;</span>
+                <span class="error">&lt;</span>@formatPos lat=coord.coordinates[1] lon=coord.coordinates[0] format=format /<span class="error">&gt;</span>
+                <span class="error">&lt;</span>#if coord?has_next<span class="error">&gt;</span>,<span class="entity">&amp;nbsp;</span><span class="tag">&lt;/</span>#if<span class="error">&gt;</span>
+            <span class="tag">&lt;/</span>#list<span class="error">&gt;</span>
+        <span class="tag">&lt;/</span>#if<span class="error">&gt;</span>
+        <span class="error">&lt;</span>#if feature?has_next<span class="error">&gt;</span>,<span class="entity">&amp;nbsp;</span><span class="tag">&lt;/</span>#if<span class="error">&gt;</span>
+    <span class="tag">&lt;/</span>#list<span class="error">&gt;</span>
+<span class="tag">&lt;/</span>#if<span class="error">&gt;</span></code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="inclusion-in-freemarker-templates"><a class="anchor" href="#inclusion-in-freemarker-templates"></a><a class="link" href="#inclusion-in-freemarker-templates">10.4.1. Inclusion in Freemarker Templates</a></h4>
+<div class="paragraph">
+<p>As mentioned in the <a href="#script-resource-extensions">Script Resource Extensions</a> section, Freemarker templates are persisted in the
+database, and may include other Freemarker templates.</p>
+</div>
+<div class="paragraph">
+<p>Hence, the "templates/tmpl/common.ftl" and "templates/messages/message-support.ftl" Freemarker templates
+contain a collection of common Freemarker functions and macros used by other Freemarker templates,
+using the syntax:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="comment">&lt;!-- From same path level --&gt;</span>
+<span class="error">&lt;</span>#include &quot;common.ftl&quot;/<span class="error">&gt;</span>
+
+<span class="comment">&lt;!-- Include from a different path level --&gt;</span>
+<span class="error">&lt;</span>#include &quot;../tmpl/common.ftl&quot;/<span class="error">&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="language-specific-freemarker-templates"><a class="anchor" href="#language-specific-freemarker-templates"></a><a class="link" href="#language-specific-freemarker-templates">10.4.2. Language-Specific Freemarker Templates</a></h4>
+<div class="paragraph">
+<p>When loading the main Freemarker template path, or any of the included templates (see above),
+the actual template path loaded is subject to a language-specific selection.</p>
+</div>
+<div class="paragraph">
+<p>If e.g. "templates/aton/light-character.ftl" is loaded in the context of a Danish locale,
+then the actual template being loaded is the "templates/aton/light-character_da.ftl" template
+(if it exists).</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="dictionaries-in-freemarker-templates"><a class="anchor" href="#dictionaries-in-freemarker-templates"></a><a class="link" href="#dictionaries-in-freemarker-templates">10.4.3. Dictionaries in Freemarker Templates</a></h4>
+<div class="paragraph">
+<p>As described in the <a href="#dictionaries">Dictionaries</a> chapter, dictionaries are also used in Freemarker Templates.
+As an example, the "message" and "mail" dictionaries are available to mailing-list Freemarker
+templates, the "message" and "pdf" are available to print report Freemarker templates, and so
+forth. The following examples demonstrate how to emit a dictionary term:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="comment">&lt;!-- Emitting the &quot;pdf.toc&quot; dictionary entry --&gt;</span>
+<span class="tag">&lt;h2&gt;</span>${text(&quot;pdf.toc&quot;)}<span class="tag">&lt;/h2&gt;</span>
+
+<span class="comment">&lt;!-- Emitting a parameterized dictionary entry which contains a {0} placeholder --&gt;</span>
+${text('cancellation.this_message',cancelDate)}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="intermediate-message-template-format"><a class="anchor" href="#intermediate-message-template-format"></a><a class="link" href="#intermediate-message-template-format">10.5. Intermediate Message Template Format</a></h3>
+<div class="paragraph">
+<p>Freemarker templates are used for generating an intermediate XML-based <em>Message Template Format</em>.
+Message templates are used so extensively, that the format merits its own description below.
+Please also refer to the <a href="#Categories">[Categories]</a> and
+<a href="http://docs.niord.org/editor-manual/manual.html#message-template-execution">Message Template Execution</a>
+chapters.</p>
+</div>
+<div class="paragraph">
+<p>The data passed along to the Freemarker template being executed is</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Data</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">message</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A template NW or NM message instantiated from input fields in the template execution dialog.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">params</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A map of other parameters instantiated from input fields in the template execution dialog.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">template</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The message template (executable category) being executed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">languages</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The list of model languages to generate data for.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The output of the Freemarker templates should be an intermediate XML format, which contain a list
+of &lt;field-template&gt; elements for each field that should be updated of the message.
+The snippet below illustrates what the resulting XML may look like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;field-template</span> <span class="attribute-name">field</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">part.getDesc('en').subject</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">format</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">text</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+    Denmark. Kattegat. Randers Fiord. Light unlit.
+<span class="tag">&lt;/field-template&gt;</span>
+
+<span class="tag">&lt;field-template</span> <span class="attribute-name">field</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">part.getDesc('da').subject</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">format</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">text</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+    Danmark. Kattegat. Randers Fjord. Fyr slukket.
+<span class="tag">&lt;/field-template&gt;</span>
+
+<span class="tag">&lt;field-template</span> <span class="attribute-name">field</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">part.getDesc('en').details</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">format</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">html</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+    <span class="tag">&lt;p&gt;</span>The light Voer Brohoved in pos. 56<span class="entity">&amp;deg;</span> 31.2'N - 010<span class="entity">&amp;deg;</span> 13.8'E is unlit.<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;/field-template&gt;</span>
+
+<span class="tag">&lt;field-template</span> <span class="attribute-name">field</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">part.getDesc('da').details</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">format</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">html</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+    <span class="tag">&lt;p&gt;</span>Fyret Voer Brohoved p<span class="entity">&amp;aring;</span> pos. 56<span class="entity">&amp;deg;</span> 31,2'N - 010<span class="entity">&amp;deg;</span> 13,8'E er slukket.<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;/field-template&gt;</span>
+
+<span class="tag">&lt;field-template</span> <span class="attribute-name">field</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">message.promulgation('audio').text</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">update</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">append</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+    Fyret Voer Brohoved på position 56 grader 31,2 min. nord 10 grader 13,8 min. øst er slukket.
+<span class="tag">&lt;/field-template&gt;</span>
+
+<span class="tag">&lt;field-template</span> <span class="attribute-name">field</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">message.promulgation('navtex').text</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">update</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">append</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+    LIGHT VOER BROHOVED 56-31.2N 010-13.8E
+    UNLIT.
+<span class="tag">&lt;/field-template&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The "field" attribute (which is actually a JavaScript expression), is used to point out
+which message attribute to update with the contents of the &lt;field-template&gt;.</p>
+</div>
+<div class="paragraph">
+<p>The "update" attribute indicates whether to replace or append the content to the attribute.</p>
+</div>
+<div class="paragraph">
+<p>The "format" attribute indicates the format of the &lt;field-template&gt; contents. If the format is e.g.
+"text", then the contents is cleaned up as a single line of text.</p>
+</div>
+<div class="paragraph">
+<p>Unlike most other types of script resources, which gets instantiated with a specific language and
+locale, the ones used for message templates should handle multiple languages themselves.
+The currently used language can be changed using the following snippet:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="error">&lt;</span>#setting locale='da'<span class="error">&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-or-editing-a-script-resource"><a class="anchor" href="#adding-or-editing-a-script-resource"></a><a class="link" href="#adding-or-editing-a-script-resource">10.6. Adding or Editing a Script Resource</a></h3>
+<div class="paragraph">
+<p>The sysadmin can add a new Freemarker Template or JavaScript file by clicking the "Add Script Resource"
+button, and select the type to add:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ScriptResourcesAddBtn.png" alt="Add Script Resource Button" width="120">
+</div>
+</div>
+<div class="paragraph">
+<p>Similarly, the sysadmin may edit an existing script resource by clicking the pencil icon next to the
+script resource.</p>
+</div>
+<div class="paragraph">
+<p>The editor for the script being added or edited, contains two fields; the script resource path and
+the actual script:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ScriptResourceEditor.png" alt="Script Resource Editor" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>The script editor has syntax coloring to aid and facilitate the editing process.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="script-resource-revisions"><a class="anchor" href="#script-resource-revisions"></a><a class="link" href="#script-resource-revisions">10.7. Script Resource Revisions</a></h3>
+<div class="paragraph">
+<p>Script resources are versioned, in the sense that every time the sysadmin edits and saves a script
+resource, a new revision is stored.
+The revisions of a script resource can be inspected by clicking the "History" button, which opens the
+<em>Script Resource History</em> dialog:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ScriptResourceHistory.png" alt="Script Resource History Dialog" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>An earlier revision of the script can be inspected by clicking the checkbox next to the revision.
+If two revisions are selected (as above), the dialog will display the differences using color coding.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-script-resource"><a class="anchor" href="#deleting-a-script-resource"></a><a class="link" href="#deleting-a-script-resource">10.8. Deleting a Script Resource</a></h3>
+<div class="paragraph">
+<p>A script resource can be deleted by clicking the trash icon next to them.
+However, the sysadmin should first carefully check if the script resource is referenced in mailing lists,
+print reports, message templates, or indeed included in other script resources.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="reloading-script-resources"><a class="anchor" href="#reloading-script-resources"></a><a class="link" href="#reloading-script-resources">10.9. Reloading Script Resources</a></h3>
+<div class="paragraph">
+<p>As described in the <a href="#script-resource-extensions">Script Resource Extensions</a> chapter, script resources may originate from files
+in the Niord class-path, before being loaded into the database.
+Any subsequent changes to a script resources will (naturally) only update the version in the database,
+which may thus come out of sync with the class-path file.</p>
+</div>
+<div class="paragraph">
+<p>If the sysadmin enacts the "Reload files" function from the action menu, all script resources in the
+database will be overridden with any corresponding version in the class-path.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="importing-and-exporting-script-resource"><a class="anchor" href="#importing-and-exporting-script-resource"></a><a class="link" href="#importing-and-exporting-script-resource">10.10. Importing and Exporting Script Resource</a></h3>
+<div class="paragraph">
+<p>The system administrator can export and import script resources from the action menu.</p>
+</div>
+<div class="paragraph">
+<p>The export/import file format is based on a JSON representation of the
+<a href="https://github.com/NiordOrg/niord/blob/master/niord-core/src/main/java/org/niord/core/script/vo/ScriptResourceVo.java">ScriptResourceVo</a>
+class.</p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="json">[
+  {
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">content</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="char">\n</span><span class="content">&lt;#macro formatLightCharacterPhase phase multiple=false &gt;</span><span class="char">\n</span><span class="content">   ...</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">path</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">templates/aton/light-character.ftl</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">FM</span><span class="delimiter">&quot;</span></span>
+  },
+  <span class="error">.</span><span class="error">.</span><span class="error">.</span>
+]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Importing a script resource JSON file will trigger the <em>script-resource-import</em> batch job.
+Batch jobs can be monitored and managed by system administrators.</p>
+</div>
+<div class="paragraph">
+<p>As an alternative to manually uploading a script resource import JSON file on the <em>Script Resource</em>
+sysadmin page, the file can be copied to the <em>$NIORD_HOME/batch-jobs/script-resource-import/in</em> folder.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="keycloak-integration"><a class="anchor" href="#keycloak-integration"></a><a class="link" href="#keycloak-integration">11. Keycloak Integration</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Keycloak is an open source identity and access management middleware product, which is documented
@@ -1902,7 +2346,7 @@ to use Keycloak directly.</p>
 somewhat familiar with Keycloak before reading this.</p>
 </div>
 <div class="sect2">
-<h3 id="niord-domains"><a class="anchor" href="#niord-domains"></a><a class="link" href="#niord-domains">10.1. Niord Domains</a></h3>
+<h3 id="niord-domains"><a class="anchor" href="#niord-domains"></a><a class="link" href="#niord-domains">11.1. Niord Domains</a></h3>
 <div class="paragraph">
 <p>Domains in Niord are detailed in the <a href="#domains">Domains</a> chapter.
 For each domain in Niord, there will be <em>bearer only</em> application client in Keycloak.</p>
@@ -1920,7 +2364,7 @@ in Keycloak.</p>
 <p>Also, there is a single <em>public</em> application client for the actual Niord web application.</p>
 </div>
 <div class="sect3">
-<h4 id="roles"><a class="anchor" href="#roles"></a><a class="link" href="#roles">10.1.1. Roles</a></h4>
+<h4 id="roles"><a class="anchor" href="#roles"></a><a class="link" href="#roles">11.1.1. Roles</a></h4>
 <div class="paragraph">
 <p>As described in the <a href="#system-administrators-manual">System Administrators Manual</a> chapter, a user may have either the <em>User</em>,
 <em>Editor</em>, <em>Admin</em> or <em>Sysadmin</em> role in each of the Niord domains.</p>
@@ -1945,7 +2389,7 @@ roles mentioned above, are created automatically in Keycloak.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="niord-users"><a class="anchor" href="#niord-users"></a><a class="link" href="#niord-users">10.2. Niord Users</a></h3>
+<h3 id="niord-users"><a class="anchor" href="#niord-users"></a><a class="link" href="#niord-users">11.2. Niord Users</a></h3>
 <div class="paragraph">
 <p>All users in Niord are created and maintained in Keycloak, although Niord also provides a UI for
 managing users on top of Keycloak, as detailed in the
@@ -1968,7 +2412,7 @@ a user in Keycloak.</p>
 <p>Keycloak can also be integrated with other Keycloak services, Active Directory or other LDAP provides, etc.</p>
 </div>
 <div class="sect3">
-<h4 id="user-groups"><a class="anchor" href="#user-groups"></a><a class="link" href="#user-groups">10.2.1. User Groups</a></h4>
+<h4 id="user-groups"><a class="anchor" href="#user-groups"></a><a class="link" href="#user-groups">11.2.1. User Groups</a></h4>
 <div class="paragraph">
 <p>Instead of assigning domain roles (i.e. Keycloak application client roles) directly to users, which would
 be a tedious task, Niord instead rely on Keycloak <em>Groups</em>.</p>
@@ -2025,7 +2469,7 @@ chapter.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="user-specific-editor-fields"><a class="anchor" href="#user-specific-editor-fields"></a><a class="link" href="#user-specific-editor-fields">10.3. User-Specific Editor-Fields</a></h3>
+<h3 id="user-specific-editor-fields"><a class="anchor" href="#user-specific-editor-fields"></a><a class="link" href="#user-specific-editor-fields">11.3. User-Specific Editor-Fields</a></h3>
 <div class="paragraph">
 <p>The list of editor fields being displayed when a user edits a message in Niord is highly configurable.
 There are settings to define a base set of fields, a message main-type (NW,NM) specific set,
@@ -2059,7 +2503,7 @@ editor fields. Example:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="niord-security"><a class="anchor" href="#niord-security"></a><a class="link" href="#niord-security">10.4. Niord Security</a></h3>
+<h3 id="niord-security"><a class="anchor" href="#niord-security"></a><a class="link" href="#niord-security">11.4. Niord Security</a></h3>
 <div class="paragraph">
 <p>All access to the Niord backend happens via calls to REST endpoints. The obvious example is the
 actual Niord web application which makes Ajax calls to the Niord backend.</p>
@@ -2093,7 +2537,7 @@ will validate that the user has the <em>Admin</em> role in the current domain, o
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-06-21 10:57:41 CEST
+Last updated 2017-06-23 07:39:18 CEST
 </div>
 </div>
 <script type="text/x-mathjax-config">

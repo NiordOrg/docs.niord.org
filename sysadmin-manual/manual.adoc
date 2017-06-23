@@ -68,4 +68,8 @@ include::08-ParameterTypes.adoc[]
 
 <<<
 
+include::09-ScriptResources.adoc[]
+
+<<<
+
 include::A1-KeycloakIntegration.adoc[]

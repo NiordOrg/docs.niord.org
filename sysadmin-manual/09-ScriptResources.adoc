@@ -1,0 +1,338 @@
+
+:imagesdir: images
+
+== Script Resources
+
+The _Script Resources_ page allows a system administrator to manage the list of _script resources_
+in Niord.
+
+image::ScriptResourcesPage.png[Script Resources, 800]
+
+Script resources are always associated with a path, and come in two flavours; _Freemarker templates_
+(with an ".ftl" path extension) and server-side Nashorn _JavaScript_ files (with a ".js" path extension).
+
+System administrators wishing to work with script resources, should acquaint themselves with these
+technologies, which are detailed further in the <<Server-Side JavaScript>> and <<Freemarker Templates>>
+sections.
+
+The Freemarker templates are typically, but not exclusively, used for generating HTML, whereas the
+server-side JavaScript files are typically used for looking up or manipulating data.
+
+The _Script Resources Page_ displays the list of script resources currently persisted to the database.
+The system administrator can type a term into the _Filter_ input field above the list, to filter
+the script resources by their paths.
+
+=== Script Resource Usage
+
+The script resources are used throughout Niord for operations such as generating PDF print reports,
+generating mails, etc. An overview of functions using script resources is found in the table below:
+
+[ cols="30,70", options="header" ]
+|===
+| Function
+| Description
+
+| Print Reports
+| Print Reports are maintained on the <<Print Reports>> sysadmin page. There are a couple of standard
+  and draft reports, along with domain-specific reports, such as the weekly Notices to Mariners digest.
+  In order to generate PDF files, Niord will first use Freemarker templates to generate HTML, and then
+  convert the HTML into PDF (CSS 2 has extensions for _paged media_).
+  Print Report Freemarker templates are typically found under the "templates/messages/" sub-path.
+
+| Message Templates
+| The single most extensive usage of script resources is for _Message Templates_ -  please refer to
+  the subsequent <<Intermediate Message Template Format>> section.
+  Message Templates use JavaScript file for data-manipulation and Freemarker templates for generating
+  an intermediate template XML-format, used for generating messages.
+  Message Template script resources are typically found under the "templates/tmpl/" sub-path.
+
+| Mailing Lists
+| Mailing lists also use script resources for generating the actual HTML e-mails - please refer to the
+  <<Mailing Lists>> chapter.
+  Mailing List script resources are typically found under the "templates/mailinglist/" sub-path.
+
+| Miscellaneous
+| Freemarker templates are used for quite a few discrete functions, such as formatting a light
+  character (e.g. "Al.Bu.Y 3s") as human text, and formatting message positions in various formats
+  - please see the http://docs.niord.org/editor-manual/manual.html#insert-locations[Insert Locations]
+  section of the Editors manual.
+
+|===
+
+=== Script Resource Extensions
+
+Niord has added some extensions to both types of the script resources.
+
+Firstly, the script resources are _always_ loaded from the database, not the file system.
+However, if a script resource, as given by its path, does not exist in the database, then
+Niord will check to see if the resource can be loaded from the class-path and persisted
+to the database, thence commencing operations.
+
+This means that Niord developers can develop and maintain the initial batch of script resources
+as project files and use a professional code editor for editing the scripts.
+
+Another Niord extension has to do with _script resource inclusion_. File system-based Freemarker Templates
+can  include other Freemarker templates, and similarly for JavaScript files; a trait that facilitates
+code reuse and libraries.
+Niord has extended the _script resource inclusion_ concept, so that it works with the database-backed
+scripts as well. Subsequent sections will give examples of script resource inclusion.
+
+=== Server-Side JavaScript
+
+An introduction to Nashorn JavaScript can be found at
+http://winterbe.com/posts/2014/04/05/java8-nashorn-tutorial/.
+
+The scripts are executed server-side, which means that you can e.g. call Java Enterprise Beans and
+load and manipulate data.
+
+WARNING: Executing JavaScripts server-side is clearly a security issue, since you can e.g. create
+a script that deletes data. However, all access to create and update JavaScripts is strictly
+restricted to system administrators, a role reserved to the person(s) that set up and configure
+the entire system, and who can wreck it anyway, should they so decide...
+
+The following example illustrates how to perform a message search for published firing exercises:
+
+[source,javascript]
+----
+var messageService = CdiUtils.getBean(org.niord.core.message.MessageService.class);
+var seriesIds = java.util.Collections.singleton('dma-fe');
+var statuses = java.util.Collections.singleton(org.niord.model.message.Status.PUBLISHED);
+var searchParams = new org.niord.core.message.MessageSearchParams();
+searchParams.seriesIds(seriesIds)
+    .statuses(statuses);
+var searchResult = messageService.search(searchParams);
+----
+
+==== Inclusion in JavaScript
+
+As mentioned in the <<Script Resource Extensions>> section, JavaScript files are persisted in the
+database, and may include other JavaScript files.
+
+Hence, the "templates/tmpl/common.js" JavaScript file contains a collection of common JavaScript functions
+which is often included by other JavaScript files using the syntax:
+
+[source,javascript]
+----
+/** Always load using full path and a "niord:" prefix **/
+load('niord:templates/tmpl/common.js');
+----
+
+=== Freemarker Templates
+
+The documentation for Freemarker templates are found at http://freemarker.org.
+
+The Freemarker Templates are typically used to convert a data model, such as a message list,
+into HTML, and sometimes into plain text or XML.
+
+The following simple example, "templates/geometry/text.ftl", is instantiated with a "geometry"
+(position list) and a "format", and formats the positions as a comma-separated list of lat-lon positions.
+
+[source,xml]
+----
+<#assign formatPos = "org.niord.core.script.directive.LatLonDirective"?new()>
+
+<#if geometry?has_content>
+    <#list geometry as feature>
+        <#if feature.coordinates?has_content>
+            <#list feature.coordinates as coord>
+                <@formatPos lat=coord.coordinates[1] lon=coord.coordinates[0] format=format />
+                <#if coord?has_next>,&nbsp;</#if>
+            </#list>
+        </#if>
+        <#if feature?has_next>,&nbsp;</#if>
+    </#list>
+</#if>
+----
+
+==== Inclusion in Freemarker Templates
+
+As mentioned in the <<Script Resource Extensions>> section, Freemarker templates are persisted in the
+database, and may include other Freemarker templates.
+
+Hence, the "templates/tmpl/common.ftl" and "templates/messages/message-support.ftl" Freemarker templates
+contain a collection of common Freemarker functions and macros used by other Freemarker templates,
+using the syntax:
+
+[source,xml]
+----
+<!-- From same path level -->
+<#include "common.ftl"/>
+
+<!-- Include from a different path level -->
+<#include "../tmpl/common.ftl"/>
+----
+
+==== Language-Specific Freemarker Templates
+
+When loading the main Freemarker template path, or any of the included templates (see above),
+the actual template path loaded is subject to a language-specific selection.
+
+If e.g. "templates/aton/light-character.ftl" is loaded in the context of a Danish locale,
+then the actual template being loaded is the "templates/aton/light-character_da.ftl" template
+(if it exists).
+
+==== Dictionaries in Freemarker Templates
+
+As described in the <<Dictionaries>> chapter, dictionaries are also used in Freemarker Templates.
+As an example, the "message" and "mail" dictionaries are available to mailing-list Freemarker
+templates, the "message" and "pdf" are available to print report Freemarker templates, and so
+forth. The following examples demonstrate how to emit a dictionary term:
+
+[source,xml]
+----
+<!-- Emitting the "pdf.toc" dictionary entry -->
+<h2>${text("pdf.toc")}</h2>
+
+<!-- Emitting a parameterized dictionary entry which contains a {0} placeholder -->
+${text('cancellation.this_message',cancelDate)}
+----
+
+=== Intermediate Message Template Format
+
+Freemarker templates are used for generating an intermediate XML-based _Message Template Format_.
+Message templates are used so extensively, that the format merits its own description below.
+Please also refer to the <<Categories>> and
+http://docs.niord.org/editor-manual/manual.html#message-template-execution[Message Template Execution]
+chapters.
+
+The data passed along to the Freemarker template being executed is
+
+[ cols="30,70", options="header" ]
+|===
+| Data
+| Description
+
+| message
+| A template NW or NM message instantiated from input fields in the template execution dialog.
+
+| params
+| A map of other parameters instantiated from input fields in the template execution dialog.
+
+| template
+| The message template (executable category) being executed.
+
+| languages
+| The list of model languages to generate data for.
+
+|===
+
+The output of the Freemarker templates should be an intermediate XML format, which contain a list
+of <field-template> elements for each field that should be updated of the message.
+The snippet below illustrates what the resulting XML may look like:
+
+[source,xml]
+----
+<field-template field="part.getDesc('en').subject" format="text">
+    Denmark. Kattegat. Randers Fiord. Light unlit.
+</field-template>
+
+<field-template field="part.getDesc('da').subject" format="text">
+    Danmark. Kattegat. Randers Fjord. Fyr slukket.
+</field-template>
+
+<field-template field="part.getDesc('en').details" format="html">
+    <p>The light Voer Brohoved in pos. 56&deg; 31.2'N - 010&deg; 13.8'E is unlit.</p>
+</field-template>
+
+<field-template field="part.getDesc('da').details" format="html">
+    <p>Fyret Voer Brohoved p&aring; pos. 56&deg; 31,2'N - 010&deg; 13,8'E er slukket.</p>
+</field-template>
+
+<field-template field="message.promulgation('audio').text" update="append">
+    Fyret Voer Brohoved på position 56 grader 31,2 min. nord 10 grader 13,8 min. øst er slukket.
+</field-template>
+
+<field-template field="message.promulgation('navtex').text" update="append">
+    LIGHT VOER BROHOVED 56-31.2N 010-13.8E
+    UNLIT.
+</field-template>
+----
+
+The "field" attribute (which is actually a JavaScript expression), is used to point out
+which message attribute to update with the contents of the <field-template>.
+
+The "update" attribute indicates whether to replace or append the content to the attribute.
+
+The "format" attribute indicates the format of the <field-template> contents. If the format is e.g.
+"text", then the contents is cleaned up as a single line of text.
+
+Unlike most other types of script resources, which gets instantiated with a specific language and
+locale, the ones used for message templates should handle multiple languages themselves.
+The currently used language can be changed using the following snippet:
+
+[source,xml]
+----
+<#setting locale='da'>
+----
+
+=== Adding or Editing a Script Resource
+
+The sysadmin can add a new Freemarker Template or JavaScript file by clicking the "Add Script Resource"
+button, and select the type to add:
+
+image::ScriptResourcesAddBtn.png[Add Script Resource Button, 120]
+
+Similarly, the sysadmin may edit an existing script resource by clicking the pencil icon next to the
+script resource.
+
+The editor for the script being added or edited, contains two fields; the script resource path and
+the actual script:
+
+image::ScriptResourceEditor.png[Script Resource Editor, 500]
+
+The script editor has syntax coloring to aid and facilitate the editing process.
+
+=== Script Resource Revisions
+
+Script resources are versioned, in the sense that every time the sysadmin edits and saves a script
+resource, a new revision is stored.
+The revisions of a script resource can be inspected by clicking the "History" button, which opens the
+_Script Resource History_ dialog:
+
+image::ScriptResourceHistory.png[Script Resource History Dialog, 500]
+
+An earlier revision of the script can be inspected by clicking the checkbox next to the revision.
+If two revisions are selected (as above), the dialog will display the differences using color coding.
+
+=== Deleting a Script Resource
+
+A script resource can be deleted by clicking the trash icon next to them.
+However, the sysadmin should first carefully check if the script resource is referenced in mailing lists,
+print reports, message templates, or indeed included in other script resources.
+
+=== Reloading Script Resources
+
+As described in the <<Script Resource Extensions>> chapter, script resources may originate from files
+in the Niord class-path, before being loaded into the database.
+Any subsequent changes to a script resources will (naturally) only update the version in the database,
+which may thus come out of sync with the class-path file.
+
+If the sysadmin enacts the "Reload files" function from the action menu, all script resources in the
+database will be overridden with any corresponding version in the class-path.
+
+=== Importing and Exporting Script Resource
+
+The system administrator can export and import script resources from the action menu.
+
+The export/import file format is based on a JSON representation of the
+https://github.com/NiordOrg/niord/blob/master/niord-core/src/main/java/org/niord/core/script/vo/ScriptResourceVo.java[ScriptResourceVo]
+class.
+
+Example:
+[source,json]
+----
+[
+  {
+    "content": "\n<#macro formatLightCharacterPhase phase multiple=false >\n   ...",
+    "path": "templates/aton/light-character.ftl",
+    "type": "FM"
+  },
+  ...
+]
+----
+
+Importing a script resource JSON file will trigger the _script-resource-import_ batch job.
+Batch jobs can be monitored and managed by system administrators.
+
+As an alternative to manually uploading a script resource import JSON file on the _Script Resource_
+sysadmin page, the file can be copied to the _$NIORD_HOME/batch-jobs/script-resource-import/in_ folder.
