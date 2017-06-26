@@ -1,0 +1,51 @@
+
+:imagesdir: images
+
+== Integration
+
+By default, the _Integration_ sysadmin page is blank, and serves as a place-holder for system-specific
+integration management pages.
+
+Hence, this chapter will use the _Danish_ Niord system as an example for how to add integration functionality.
+All functionality and UI resources for the Danish _Integration_ page is included in the
+https://github.com/NiordOrg/niord-dk[niord-dk] Github project.
+
+IMPORTANT: The functionality detailed in this chapter is specifically from the _Danish_ Niord system,
+and thus, it is _not_ standard Niord functionality.
+
+=== DK Legacy NW Import
+
+The _Legacy NW Import_ integration tab will only be present when the currently selected domain is "Legacy NW".
+It supports importing NWs from the current Danish NW production system (until Niord takes over this role
+completely, that is).
+
+image::IntegrationNwImport.png[Legacy NW Import, 500]
+
+The panel allows the system administrator to specify the target message series to use for local and
+coastal legacy NW messages, and also to specify the date from which to import old legacy NW messages,
+and whether to auto-import NW messages from the legacy system or not.
+
+=== DK Legacy Firing Area Import
+
+The _Legacy Firing Area Import_ integration tab will only be present when the currently selected domain
+is "Firing Areas".
+It supports importing firing areas from the current Danish NW production system (until Niord takes
+over this role completely, that is).
+
+image::IntegrationFaImport.png[Legacy Firing Area Import, 500]
+
+The tab also supports importing the firing schedules associated with the firing areas from the legacy NW
+system, and there is a function for generating firing area template messages from the firing areas.
+
+Please refer to the <<Firing Schedules>> chapter for a discussion of firing areas and schedules in Niord.
+
+=== DK Legacy AtoN Import
+
+The _Legacy AtoN Import_ integration tab supports importing Danish Aids to Navigation seamarks.
+The files to upload must be Excel sheets generated from the Danish _Afmærkningsregister_ system.
+
+image::IntegrationAtonImport.png[Legacy AtoN Import, 500]
+
+Please note, the AtoNs Niord module is currently not enabled in production, since the quality of
+the AtoN data is not good enough.
+However, in the future it is hoped that a more extensive AtoN integration will be implemented.

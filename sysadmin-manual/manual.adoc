@@ -84,4 +84,8 @@ include::12-MailQueue.adoc[]
 
 <<<
 
+include::13-Integration.adoc[]
+
+<<<
+
 include::A1-KeycloakIntegration.adoc[]

@@ -529,7 +529,8 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#categories">11. Categories</a></li>
 <li><a href="#print-reports">12. Print Reports</a></li>
 <li><a href="#mail-queue">13. Mail Queue</a></li>
-<li><a href="#keycloak-integration">14. Keycloak Integration</a></li>
+<li><a href="#integration">14. Integration</a></li>
+<li><a href="#keycloak-integration">15. Keycloak Integration</a></li>
 </ul>
 </div>
 </div>
@@ -3043,7 +3044,91 @@ per page.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="keycloak-integration"><a class="anchor" href="#keycloak-integration"></a><a class="link" href="#keycloak-integration">14. Keycloak Integration</a></h2>
+<h2 id="integration"><a class="anchor" href="#integration"></a><a class="link" href="#integration">14. Integration</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>By default, the <em>Integration</em> sysadmin page is blank, and serves as a place-holder for system-specific
+integration management pages.</p>
+</div>
+<div class="paragraph">
+<p>Hence, this chapter will use the <em>Danish</em> Niord system as an example for how to add integration functionality.
+All functionality and UI resources for the Danish <em>Integration</em> page is included in the
+<a href="https://github.com/NiordOrg/niord-dk">niord-dk</a> Github project.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The functionality detailed in this chapter is specifically from the <em>Danish</em> Niord system,
+and thus, it is <em>not</em> standard Niord functionality.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="dk-legacy-nw-import"><a class="anchor" href="#dk-legacy-nw-import"></a><a class="link" href="#dk-legacy-nw-import">14.1. DK Legacy NW Import</a></h3>
+<div class="paragraph">
+<p>The <em>Legacy NW Import</em> integration tab will only be present when the currently selected domain is "Legacy NW".
+It supports importing NWs from the current Danish NW production system (until Niord takes over this role
+completely, that is).</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/IntegrationNwImport.png" alt="Legacy NW Import" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>The panel allows the system administrator to specify the target message series to use for local and
+coastal legacy NW messages, and also to specify the date from which to import old legacy NW messages,
+and whether to auto-import NW messages from the legacy system or not.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="dk-legacy-firing-area-import"><a class="anchor" href="#dk-legacy-firing-area-import"></a><a class="link" href="#dk-legacy-firing-area-import">14.2. DK Legacy Firing Area Import</a></h3>
+<div class="paragraph">
+<p>The <em>Legacy Firing Area Import</em> integration tab will only be present when the currently selected domain
+is "Firing Areas".
+It supports importing firing areas from the current Danish NW production system (until Niord takes
+over this role completely, that is).</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/IntegrationFaImport.png" alt="Legacy Firing Area Import" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>The tab also supports importing the firing schedules associated with the firing areas from the legacy NW
+system, and there is a function for generating firing area template messages from the firing areas.</p>
+</div>
+<div class="paragraph">
+<p>Please refer to the <a href="#firing-schedules">Firing Schedules</a> chapter for a discussion of firing areas and schedules in Niord.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="dk-legacy-aton-import"><a class="anchor" href="#dk-legacy-aton-import"></a><a class="link" href="#dk-legacy-aton-import">14.3. DK Legacy AtoN Import</a></h3>
+<div class="paragraph">
+<p>The <em>Legacy AtoN Import</em> integration tab supports importing Danish Aids to Navigation seamarks.
+The files to upload must be Excel sheets generated from the Danish <em>Afmærkningsregister</em> system.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/IntegrationAtonImport.png" alt="Legacy AtoN Import" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>Please note, the AtoNs Niord module is currently not enabled in production, since the quality of
+the AtoN data is not good enough.
+However, in the future it is hoped that a more extensive AtoN integration will be implemented.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="keycloak-integration"><a class="anchor" href="#keycloak-integration"></a><a class="link" href="#keycloak-integration">15. Keycloak Integration</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Keycloak is an open source identity and access management middleware product, which is documented
@@ -3058,7 +3143,7 @@ to use Keycloak directly.</p>
 somewhat familiar with Keycloak before reading this.</p>
 </div>
 <div class="sect2">
-<h3 id="niord-domains"><a class="anchor" href="#niord-domains"></a><a class="link" href="#niord-domains">14.1. Niord Domains</a></h3>
+<h3 id="niord-domains"><a class="anchor" href="#niord-domains"></a><a class="link" href="#niord-domains">15.1. Niord Domains</a></h3>
 <div class="paragraph">
 <p>Domains in Niord are detailed in the <a href="#domains">Domains</a> chapter.
 For each domain in Niord, there will be <em>bearer only</em> application client in Keycloak.</p>
@@ -3076,7 +3161,7 @@ in Keycloak.</p>
 <p>Also, there is a single <em>public</em> application client for the actual Niord web application.</p>
 </div>
 <div class="sect3">
-<h4 id="roles"><a class="anchor" href="#roles"></a><a class="link" href="#roles">14.1.1. Roles</a></h4>
+<h4 id="roles"><a class="anchor" href="#roles"></a><a class="link" href="#roles">15.1.1. Roles</a></h4>
 <div class="paragraph">
 <p>As described in the <a href="#system-administrators-manual">System Administrators Manual</a> chapter, a user may have either the <em>User</em>,
 <em>Editor</em>, <em>Admin</em> or <em>Sysadmin</em> role in each of the Niord domains.</p>
@@ -3101,7 +3186,7 @@ roles mentioned above, are created automatically in Keycloak.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="niord-users"><a class="anchor" href="#niord-users"></a><a class="link" href="#niord-users">14.2. Niord Users</a></h3>
+<h3 id="niord-users"><a class="anchor" href="#niord-users"></a><a class="link" href="#niord-users">15.2. Niord Users</a></h3>
 <div class="paragraph">
 <p>All users in Niord are created and maintained in Keycloak, although Niord also provides a UI for
 managing users on top of Keycloak, as detailed in the
@@ -3124,7 +3209,7 @@ a user in Keycloak.</p>
 <p>Keycloak can also be integrated with other Keycloak services, Active Directory or other LDAP provides, etc.</p>
 </div>
 <div class="sect3">
-<h4 id="user-groups"><a class="anchor" href="#user-groups"></a><a class="link" href="#user-groups">14.2.1. User Groups</a></h4>
+<h4 id="user-groups"><a class="anchor" href="#user-groups"></a><a class="link" href="#user-groups">15.2.1. User Groups</a></h4>
 <div class="paragraph">
 <p>Instead of assigning domain roles (i.e. Keycloak application client roles) directly to users, which would
 be a tedious task, Niord instead rely on Keycloak <em>Groups</em>.</p>
@@ -3181,7 +3266,7 @@ chapter.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="user-specific-editor-fields"><a class="anchor" href="#user-specific-editor-fields"></a><a class="link" href="#user-specific-editor-fields">14.3. User-Specific Editor-Fields</a></h3>
+<h3 id="user-specific-editor-fields"><a class="anchor" href="#user-specific-editor-fields"></a><a class="link" href="#user-specific-editor-fields">15.3. User-Specific Editor-Fields</a></h3>
 <div class="paragraph">
 <p>The list of editor fields being displayed when a user edits a message in Niord is highly configurable.
 There are settings to define a base set of fields, a message main-type (NW,NM) specific set,
@@ -3215,7 +3300,7 @@ editor fields. Example:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="niord-security"><a class="anchor" href="#niord-security"></a><a class="link" href="#niord-security">14.4. Niord Security</a></h3>
+<h3 id="niord-security"><a class="anchor" href="#niord-security"></a><a class="link" href="#niord-security">15.4. Niord Security</a></h3>
 <div class="paragraph">
 <p>All access to the Niord backend happens via calls to REST endpoints. The obvious example is the
 actual Niord web application which makes Ajax calls to the Niord backend.</p>
@@ -3249,7 +3334,7 @@ will validate that the user has the <em>Admin</em> role in the current domain, o
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-06-26 10:13:04 CEST
+Last updated 2017-06-26 10:28:25 CEST
 </div>
 </div>
 <script type="text/x-mathjax-config">
