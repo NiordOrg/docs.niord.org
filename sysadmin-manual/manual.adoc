@@ -80,4 +80,8 @@ include::11-PrintReports.adoc[]
 
 <<<
 
+include::12-MailQueue.adoc[]
+
+<<<
+
 include::A1-KeycloakIntegration.adoc[]

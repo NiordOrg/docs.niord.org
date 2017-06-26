@@ -528,7 +528,8 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#script-resources">10. Script Resources</a></li>
 <li><a href="#categories">11. Categories</a></li>
 <li><a href="#print-reports">12. Print Reports</a></li>
-<li><a href="#keycloak-integration">13. Keycloak Integration</a></li>
+<li><a href="#mail-queue">13. Mail Queue</a></li>
+<li><a href="#keycloak-integration">14. Keycloak Integration</a></li>
 </ul>
 </div>
 </div>
@@ -2930,7 +2931,119 @@ the file can be copied to the <em>$NIORD_HOME/batch-jobs/report-import/in</em> f
 </div>
 </div>
 <div class="sect1">
-<h2 id="keycloak-integration"><a class="anchor" href="#keycloak-integration"></a><a class="link" href="#keycloak-integration">13. Keycloak Integration</a></h2>
+<h2 id="mail-queue"><a class="anchor" href="#mail-queue"></a><a class="link" href="#mail-queue">13. Mail Queue</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <em>Mail Queue</em> page allows a system administrator to inspect all mails sent by the Niord system.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/MailQueuePage.png" alt="Mail Queue" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Mails in Niord originate from a few places:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Users can send mails based on a message selection on the <em>Messages</em> page. Please refer to the
+<a href="http://docs.niord.org/editor-manual/manual.html#e-mail-selection-action">E-mail Selection Action</a> chapter.</p>
+</li>
+<li>
+<p>Similarly, when a user submits a new comment to a message, they can add mail recipients, as described in
+the <a href="http://docs.niord.org/editor-manual/manual.html#comments-editor-page">Comments Editor Page</a> chapter.</p>
+</li>
+<li>
+<p>By far, the most mails will have been sent by mailing lists, as described in the
+<a href="http://docs.niord.org/admin-manual/manual.html#mailing-lists">Mailing Lists</a> chapter.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Niord has a system setting, "mailDeleteAfterDays", that defines for how many days a message should be
+preserved in the <em>Mail Queue</em>. After that, the mails will be deleted.</p>
+</div>
+<div class="sect2">
+<h3 id="sending-mails"><a class="anchor" href="#sending-mails"></a><a class="link" href="#sending-mails">13.1. Sending Mails</a></h3>
+<div class="paragraph">
+<p>When a mail is submitted to the mail queue, it will have a <em>pending</em> status. Every minute, Niord will
+process pending mails and attempt to send them.
+If a mail is successfully sent to the SMTP-server, it will be assigned the <em>sent</em> status.
+If an error occurs, however, the error message will be stored in the mail, and it will be re-scheduled
+to be sent after a set number of minutes (which increases with each attempt).
+After 5 failed attempts to send a mail, it will be be assigned the <em>error</em> status, after which,
+no more attempts will be made to send the mail.</p>
+</div>
+<div class="paragraph">
+<p>A system administrator should thus periodically check for error-status mails in the <em>Mail Queue</em>, and
+take appropriate actions (such as updating an invalid user mail address, etc).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="mail-filtering"><a class="anchor" href="#mail-filtering"></a><a class="link" href="#mail-filtering">13.2. Mail Filtering</a></h3>
+<div class="paragraph">
+<p>The mail queue may contain thousands of mails. Hence the list of mails is paginated with 10 mails
+per page.</p>
+</div>
+<div class="paragraph">
+<p>The fields above the mail list are used for filtering the mail list. The available filter fields are:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Mail Filter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Recipient</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Matches the e-mail address of the recipients</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sender</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Matches the e-mail address of the sender</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Subject</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Matches the subject of the mails</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Filters the mails by their status, either <em>pending</em>, <em>sent</em> or <em>error</em> (or all of these).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date Interval</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A possibly open-ended date-interval that can be used to filter mails by the date they
+  were submitted to the mail queue.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="mail-details"><a class="anchor" href="#mail-details"></a><a class="link" href="#mail-details">13.3. Mail Details</a></h3>
+<div class="paragraph">
+<p>Clicking the letter-icon next to a mail, will open the <em>Mail Details</em> dialog:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/MailQueueDetails.png" alt="Mail Details Dialog" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>This will display the mail in its entirety, including the date, address fields, subject and mail body.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="keycloak-integration"><a class="anchor" href="#keycloak-integration"></a><a class="link" href="#keycloak-integration">14. Keycloak Integration</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Keycloak is an open source identity and access management middleware product, which is documented
@@ -2945,7 +3058,7 @@ to use Keycloak directly.</p>
 somewhat familiar with Keycloak before reading this.</p>
 </div>
 <div class="sect2">
-<h3 id="niord-domains"><a class="anchor" href="#niord-domains"></a><a class="link" href="#niord-domains">13.1. Niord Domains</a></h3>
+<h3 id="niord-domains"><a class="anchor" href="#niord-domains"></a><a class="link" href="#niord-domains">14.1. Niord Domains</a></h3>
 <div class="paragraph">
 <p>Domains in Niord are detailed in the <a href="#domains">Domains</a> chapter.
 For each domain in Niord, there will be <em>bearer only</em> application client in Keycloak.</p>
@@ -2963,7 +3076,7 @@ in Keycloak.</p>
 <p>Also, there is a single <em>public</em> application client for the actual Niord web application.</p>
 </div>
 <div class="sect3">
-<h4 id="roles"><a class="anchor" href="#roles"></a><a class="link" href="#roles">13.1.1. Roles</a></h4>
+<h4 id="roles"><a class="anchor" href="#roles"></a><a class="link" href="#roles">14.1.1. Roles</a></h4>
 <div class="paragraph">
 <p>As described in the <a href="#system-administrators-manual">System Administrators Manual</a> chapter, a user may have either the <em>User</em>,
 <em>Editor</em>, <em>Admin</em> or <em>Sysadmin</em> role in each of the Niord domains.</p>
@@ -2988,7 +3101,7 @@ roles mentioned above, are created automatically in Keycloak.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="niord-users"><a class="anchor" href="#niord-users"></a><a class="link" href="#niord-users">13.2. Niord Users</a></h3>
+<h3 id="niord-users"><a class="anchor" href="#niord-users"></a><a class="link" href="#niord-users">14.2. Niord Users</a></h3>
 <div class="paragraph">
 <p>All users in Niord are created and maintained in Keycloak, although Niord also provides a UI for
 managing users on top of Keycloak, as detailed in the
@@ -3011,7 +3124,7 @@ a user in Keycloak.</p>
 <p>Keycloak can also be integrated with other Keycloak services, Active Directory or other LDAP provides, etc.</p>
 </div>
 <div class="sect3">
-<h4 id="user-groups"><a class="anchor" href="#user-groups"></a><a class="link" href="#user-groups">13.2.1. User Groups</a></h4>
+<h4 id="user-groups"><a class="anchor" href="#user-groups"></a><a class="link" href="#user-groups">14.2.1. User Groups</a></h4>
 <div class="paragraph">
 <p>Instead of assigning domain roles (i.e. Keycloak application client roles) directly to users, which would
 be a tedious task, Niord instead rely on Keycloak <em>Groups</em>.</p>
@@ -3068,7 +3181,7 @@ chapter.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="user-specific-editor-fields"><a class="anchor" href="#user-specific-editor-fields"></a><a class="link" href="#user-specific-editor-fields">13.3. User-Specific Editor-Fields</a></h3>
+<h3 id="user-specific-editor-fields"><a class="anchor" href="#user-specific-editor-fields"></a><a class="link" href="#user-specific-editor-fields">14.3. User-Specific Editor-Fields</a></h3>
 <div class="paragraph">
 <p>The list of editor fields being displayed when a user edits a message in Niord is highly configurable.
 There are settings to define a base set of fields, a message main-type (NW,NM) specific set,
@@ -3102,7 +3215,7 @@ editor fields. Example:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="niord-security"><a class="anchor" href="#niord-security"></a><a class="link" href="#niord-security">13.4. Niord Security</a></h3>
+<h3 id="niord-security"><a class="anchor" href="#niord-security"></a><a class="link" href="#niord-security">14.4. Niord Security</a></h3>
 <div class="paragraph">
 <p>All access to the Niord backend happens via calls to REST endpoints. The obvious example is the
 actual Niord web application which makes Ajax calls to the Niord backend.</p>
@@ -3136,7 +3249,7 @@ will validate that the user has the <em>Admin</em> role in the current domain, o
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-06-26 08:09:44 CEST
+Last updated 2017-06-26 10:13:04 CEST
 </div>
 </div>
 <script type="text/x-mathjax-config">

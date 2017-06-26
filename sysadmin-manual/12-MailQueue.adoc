@@ -1,0 +1,71 @@
+
+:imagesdir: images
+
+== Mail Queue
+
+The _Mail Queue_ page allows a system administrator to inspect all mails sent by the Niord system.
+
+image::MailQueuePage.png[Mail Queue, 800]
+
+Mails in Niord originate from a few places:
+
+. Users can send mails based on a message selection on the _Messages_ page. Please refer to the
+  http://docs.niord.org/editor-manual/manual.html#e-mail-selection-action[E-mail Selection Action] chapter.
+. Similarly, when a user submits a new comment to a message, they can add mail recipients, as described in
+  the http://docs.niord.org/editor-manual/manual.html#comments-editor-page[Comments Editor Page] chapter.
+. By far, the most mails will have been sent by mailing lists, as described in the
+  http://docs.niord.org/admin-manual/manual.html#mailing-lists[Mailing Lists] chapter.
+
+Niord has a system setting, "mailDeleteAfterDays", that defines for how many days a message should be
+preserved in the _Mail Queue_. After that, the mails will be deleted.
+
+=== Sending Mails
+
+When a mail is submitted to the mail queue, it will have a _pending_ status. Every minute, Niord will
+process pending mails and attempt to send them.
+If a mail is successfully sent to the SMTP-server, it will be assigned the _sent_ status.
+If an error occurs, however, the error message will be stored in the mail, and it will be re-scheduled
+to be sent after a set number of minutes (which increases with each attempt).
+After 5 failed attempts to send a mail, it will be be assigned the _error_ status, after which,
+no more attempts will be made to send the mail.
+
+A system administrator should thus periodically check for error-status mails in the _Mail Queue_, and
+take appropriate actions (such as updating an invalid user mail address, etc).
+
+=== Mail Filtering
+
+The mail queue may contain thousands of mails. Hence the list of mails is paginated with 10 mails
+per page.
+
+The fields above the mail list are used for filtering the mail list. The available filter fields are:
+
+[ cols="30,70", options="header" ]
+|===
+| Mail Filter
+| Description
+
+| Recipient
+| Matches the e-mail address of the recipients
+
+| Sender
+| Matches the e-mail address of the sender
+
+| Subject
+| Matches the subject of the mails
+
+| Status
+| Filters the mails by their status, either _pending_, _sent_ or _error_ (or all of these).
+
+| Date Interval
+| A possibly open-ended date-interval that can be used to filter mails by the date they
+  were submitted to the mail queue.
+
+|===
+
+=== Mail Details
+
+Clicking the letter-icon next to a mail, will open the _Mail Details_ dialog:
+
+image::MailQueueDetails.png[Mail Details Dialog, 500]
+
+This will display the mail in its entirety, including the date, address fields, subject and mail body.
