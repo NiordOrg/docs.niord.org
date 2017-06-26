@@ -105,7 +105,7 @@ image::DictionaryEntryExtendedEditPage.png[Dictionary Entry Extended Editor Page
   data.
   The _AtoN filter_ attribute can be used to facilitate pre-selection of the correct parameters in the
   message templates. For instance, in the example above the "north cardinal buoy" entry matches AtoNs according
-  to the filter: "aton.kv('seamark:buoy_cardinal:category', 'north') && !aton.k('seamark:light.*')".
+  to the filter: "aton.kv(''seamark:buoy_cardinal:category'', ''north'') && !aton.k(''seamark:light.*'')".
   AtoNs are defined in an
   http://wiki.openstreetmap.org/wiki/Seamarks/Seamark_Objects[OpenStreetmap (OSM) Seamark] format, and thus,
   the filter states that the AtoN should be a north cardinal buoy, but not a light buoy.

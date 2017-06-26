@@ -8,7 +8,7 @@ categories in Niord.
 Lists of categories may be associated with notices to mariners and navigational warnings,
 and can be used for filtering message search results.
 
-Furthermore, categories may be executable, in which case the can be used to generate message
+Furthermore, categories may be executable, in which case they can be used to generate messages
 from user input, as described in the
 http://docs.niord.org/editor-manual/manual.html#message-template-execution[Message Template Execution]
 chapter.
@@ -62,7 +62,7 @@ The common editable attributes for both types of categories are listed below:
   The _AtoN filter_ category attribute can be used to filter which templates should be available for
   a given AtoN. For instance, in the example above the "Light Buoy" category and all its sub-categories,
   are only availble to AtoNs matching the filter:
-  "aton.kv('seamark:type', 'buoy.*') && aton.k('seamark:light.*')".
+  "aton.kv(''seamark:type'', ''buoy.\*'') && aton.k(''seamark:light.*'')".
 
   AtoNs are defined in an
   http://wiki.openstreetmap.org/wiki/Seamarks/Seamark_Objects[OpenStreetMap (OSM) Seamark] format, and thus,
@@ -88,7 +88,7 @@ image::CategoryEditorPanel.png[Category Editor Page, 500]
 
 ==== Domains Attribute
 
-Most of the executable templates only really makes sense for Navigational Warnings (NW), not e.g.
+Most of the executable templates only really make sense for Navigational Warnings (NW), not e.g.
 Notices to Mariners (NM), since NWs tend to be short and concise and must follow various international
 standards. NMs on the other hand, tend to be more _free style_ messages, not easily handled by
 a template system.
@@ -99,7 +99,7 @@ The _Domains_ attribute can thus be used to restrict templates to specific NW-re
 
 The _Standard Template Fields_ attributes can be use to specify a list of standard template
 editor fields, which mostly constitutes simplified versions of the corresponding message editor
-fields.
+fields - see the http://docs.niord.org/editor-manual/manual.html#edit-editor-page[Editor Page] chapter.
 The supported template fields are:
 
 [ cols="30,70", options="header" ]
@@ -143,17 +143,53 @@ image::CategoryStdTemplateFields.png[Standard Template Fields, 800]
 
 ==== Template Parameters Attribute
 
-TBD
+For most message templates, just using _standard template fields_ for user input is not sufficient.
+Rather, the user executing the template will need to input template-specific data as well,
+such as the buoy function in the "Light buoy unlit" template.
+
+The _Template Parameters_ field is used for defining the additional parameters of a template.
+The field defines of a list of parameters, using the _Parameter Types_ defined on the
+<<Parameter Types>> sysadmin page.
+Indeed, defining the parameters is analogous to the way _composite_ parameter types are defined, as
+detailed in the http://docs.niord.org/sysadmin-manual/manual.html#composite-parameter-type-edit-page[Composite Parameter Type Edit Page].
+
+As an example, the "light buoy unlit" message template use the "light_buoy_by_function" _composite_
+parameter type to query the end user about the light buoy function and name:
 
 image::CategoryTemplateParams.png[Category Template Parameters, 800]
 
 ==== Script Resources Attribute
 
-TBD
+The _Script Resources_ attribute is used to define the actual list of script resources, i.e.
+server-side JavaScript and Freemarker templates, that get executed, when a message template
+is run.
+
+The functionality of _script resources_ is detailed in the <<Script Resources>> chapter.
+The Freemarker templates are used to generate an <<Intermediate Message Template Format>> that defines
+how a message is constructed when a message template is executed.
+The JavaScript resources can be used to modify data. In the "Light buoy unlit" example, a
+"compute-affected-radius.js" script is run, that will attempt to add an affected radius to the
+geometry of the constructed message based on the range to the light (only works if the message template
+is run from the AtoN module page).
+
+The path specified for a script resource must match an actual script resource defined on the
+<<Script Resources>> sysadmin page.
+Indeed, clicking the pencil button of the _script resource_ input field will open the specified script
+resource for editing on the <<Script Resources>> page.
+Clicking the magnifying glass button will open a dialog for easy script resource selection.
+Clicking the plus-sign button will add another blank script resource field to the list, and clicking
+the trash-icon button will clear the script resource path.
+Finally, the order of execution can be controlled by dragging a script resource its proper position using
+the image:DragHandle.png[Drag Handle, 16] drag handle.
 
 ==== Example Template Message Attribute
 
-TBD
+With a large collection of message template, it may not be easy for a non-expert user to guess
+which template to execute in a particular situation.
+
+The system administrator can define an _example template message_ to each template, to aid the user.
+This message will be displayed for guidance, whenever the template is selected in the
+http://docs.niord.org/editor-manual/manual.html#template-selection-dialog[Template Selection Dialog].
 
 === Reorganizing Categories
 
@@ -190,7 +226,6 @@ is used to search for existing matches.
 Example:
 [source,json]
 ----
-[
 [
   {
     "active": true,

@@ -1578,7 +1578,7 @@ chapter.</p>
   data.
   The <em>AtoN filter</em> attribute can be used to facilitate pre-selection of the correct parameters in the
   message templates. For instance, in the example above the "north cardinal buoy" entry matches AtoNs according
-  to the filter: "aton.kv(<em>seamark:buoy_cardinal:category</em>, <em>north</em>) &amp;&amp; !aton.k(<em>seamark:light.*</em>)".
+  to the filter: "aton.kv(<em>'seamark:buoy_cardinal:category</em>', <em>'north</em>') &amp;&amp; !aton.k(<em>'seamark:light.*</em>')".
   AtoNs are defined in an
   <a href="http://wiki.openstreetmap.org/wiki/Seamarks/Seamark_Objects">OpenStreetmap (OSM) Seamark</a> format, and thus,
   the filter states that the AtoN should be a north cardinal buoy, but not a light buoy.</p></td>
@@ -2341,7 +2341,7 @@ Lists of categories may be associated with notices to mariners and navigational 
 and can be used for filtering message search results.</p>
 </div>
 <div class="paragraph">
-<p>Furthermore, categories may be executable, in which case the can be used to generate message
+<p>Furthermore, categories may be executable, in which case they can be used to generate messages
 from user input, as described in the
 <a href="http://docs.niord.org/editor-manual/manual.html#message-template-execution">Message Template Execution</a>
 chapter.
@@ -2415,7 +2415,7 @@ category tree (see screenshot above).</p>
   The <em>AtoN filter</em> category attribute can be used to filter which templates should be available for
   a given AtoN. For instance, in the example above the "Light Buoy" category and all its sub-categories,
   are only availble to AtoNs matching the filter:
-  "aton.kv(<em>seamark:type</em>, <em>buoy.<strong></em>) &amp;&amp; aton.k(<em>seamark:light.</strong></em>)".
+  "aton.kv(<em>'seamark:type</em>', <em>'buoy.*</em>') &amp;&amp; aton.k(<em>'seamark:light.*</em>')".
 </p><p class="tableblock">  AtoNs are defined in an
   <a href="http://wiki.openstreetmap.org/wiki/Seamarks/Seamark_Objects">OpenStreetMap (OSM) Seamark</a> format, and thus,
   the filter states that the AtoN should be of type "buoy" and also have an associated light.</p></td>
@@ -2448,7 +2448,7 @@ attributes editable for all categories and detailed in the previous section.</p>
 <div class="sect3">
 <h4 id="domains-attribute"><a class="anchor" href="#domains-attribute"></a><a class="link" href="#domains-attribute">11.2.1. Domains Attribute</a></h4>
 <div class="paragraph">
-<p>Most of the executable templates only really makes sense for Navigational Warnings (NW), not e.g.
+<p>Most of the executable templates only really make sense for Navigational Warnings (NW), not e.g.
 Notices to Mariners (NM), since NWs tend to be short and concise and must follow various international
 standards. NMs on the other hand, tend to be more <em>free style</em> messages, not easily handled by
 a template system.</p>
@@ -2462,7 +2462,7 @@ a template system.</p>
 <div class="paragraph">
 <p>The <em>Standard Template Fields</em> attributes can be use to specify a list of standard template
 editor fields, which mostly constitutes simplified versions of the corresponding message editor
-fields.
+fields - see the <a href="http://docs.niord.org/editor-manual/manual.html#edit-editor-page">Editor Page</a> chapter.
 The supported template fields are:</p>
 </div>
 <table class="tableblock frame-all grid-all spread">
@@ -2528,7 +2528,20 @@ The supported template fields are:</p>
 <div class="sect3">
 <h4 id="template-parameters-attribute"><a class="anchor" href="#template-parameters-attribute"></a><a class="link" href="#template-parameters-attribute">11.2.3. Template Parameters Attribute</a></h4>
 <div class="paragraph">
-<p>TBD</p>
+<p>For most message templates, just using <em>standard template fields</em> for user input is not sufficient.
+Rather, the user executing the template will need to input template-specific data as well,
+such as the buoy function in the "Light buoy unlit" template.</p>
+</div>
+<div class="paragraph">
+<p>The <em>Template Parameters</em> field is used for defining the additional parameters of a template.
+The field defines of a list of parameters, using the <em>Parameter Types</em> defined on the
+<a href="#parameter-types">Parameter Types</a> sysadmin page.
+Indeed, defining the parameters is analogous to the way <em>composite</em> parameter types are defined, as
+detailed in the <a href="http://docs.niord.org/sysadmin-manual/manual.html#composite-parameter-type-edit-page">Composite Parameter Type Edit Page</a>.</p>
+</div>
+<div class="paragraph">
+<p>As an example, the "light buoy unlit" message template use the "light_buoy_by_function" <em>composite</em>
+parameter type to query the end user about the light buoy function and name:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -2539,13 +2552,41 @@ The supported template fields are:</p>
 <div class="sect3">
 <h4 id="script-resources-attribute"><a class="anchor" href="#script-resources-attribute"></a><a class="link" href="#script-resources-attribute">11.2.4. Script Resources Attribute</a></h4>
 <div class="paragraph">
-<p>TBD</p>
+<p>The <em>Script Resources</em> attribute is used to define the actual list of script resources, i.e.
+server-side JavaScript and Freemarker templates, that get executed, when a message template
+is run.</p>
+</div>
+<div class="paragraph">
+<p>The functionality of <em>script resources</em> is detailed in the <a href="#script-resources">Script Resources</a> chapter.
+The Freemarker templates are used to generate an <a href="#intermediate-message-template-format">Intermediate Message Template Format</a> that defines
+how a message is constructed when a message template is executed.
+The JavaScript resources can be used to modify data. In the "Light buoy unlit" example, a
+"compute-affected-radius.js" script is run, that will attempt to add an affected radius to the
+geometry of the constructed message based on the range to the light (only works if the message template
+is run from the AtoN module page).</p>
+</div>
+<div class="paragraph">
+<p>The path specified for a script resource must match an actual script resource defined on the
+<a href="#script-resources">Script Resources</a> sysadmin page.
+Indeed, clicking the pencil button of the <em>script resource</em> input field will open the specified script
+resource for editing on the <a href="#script-resources">Script Resources</a> page.
+Clicking the magnifying glass button will open a dialog for easy script resource selection.
+Clicking the plus-sign button will add another blank script resource field to the list, and clicking
+the trash-icon button will clear the script resource path.
+Finally, the order of execution can be controlled by dragging a script resource its proper position using
+the <span class="image"><img src="images/DragHandle.png" alt="Drag Handle" width="16"></span> drag handle.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="example-template-message-attribute"><a class="anchor" href="#example-template-message-attribute"></a><a class="link" href="#example-template-message-attribute">11.2.5. Example Template Message Attribute</a></h4>
 <div class="paragraph">
-<p>TBD</p>
+<p>With a large collection of message template, it may not be easy for a non-expert user to guess
+which template to execute in a particular situation.</p>
+</div>
+<div class="paragraph">
+<p>The system administrator can define an <em>example template message</em> to each template, to aid the user.
+This message will be displayed for guidance, whenever the template is selected in the
+<a href="http://docs.niord.org/editor-manual/manual.html#template-selection-dialog">Template Selection Dialog</a>.</p>
 </div>
 </div>
 </div>
@@ -2602,7 +2643,6 @@ is used to search for existing matches.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="json">[
-[
   {
     <span class="key"><span class="delimiter">&quot;</span><span class="content">active</span><span class="delimiter">&quot;</span></span>: <span class="value">true</span>,
     <span class="key"><span class="delimiter">&quot;</span><span class="content">descs</span><span class="delimiter">&quot;</span></span>: [
