@@ -1,0 +1,160 @@
+
+:imagesdir: images
+
+== Settings
+
+The _Settings_ page allows a system administrator to manage system settings in Niord.
+
+image::SettingsPage.png[Settings, 800]
+
+Settings are ultimately persisted to the database, and this is the incarnation of the settings that you
+get to view and modify on the _Settings_ page.
+
+However, the settings originate from various sources before being persisted to the database. These options
+are detailed later in this chapter.
+
+=== Settings Model
+
+A setting in Niord is more that just a key-value pair. It is comprised of the following attributes:
+
+[ cols="20,80", options="header" ]
+|===
+| Setting Attribute
+| Description
+
+| Key
+| A unique key for the setting.
+
+| Value
+| The _value_ of the setting. The format of the value depends on the _type_ of the setting.
+
+| Type
+| The _type_ of a setting can be one of "String", "Password", "Integer", "Long", "Float", "Double",
+  "Date", "Boolean", "Path" and "json".
+
+| Description
+| A textual description of the setting.
+
+| Cached
+| Dictates if the setting may be cached (for a few minutes) in Niord. This reduces load on the database.
+
+| Web
+| If this flag is set, the setting is passed along to the Niord web-application via a JavaScript
+  file, and becomes available to the Angular code as a $rootScope variable.
+
+| Editable
+| If this flag is set, the setting is editable and included in the settings list on the _Settings_ page.
+
+|===
+
+Note that for settings of type "Password", the associated value _never_ leaves the Niord backend.
+If the _Editable_ flag is set, the sysadmin can set a new password on the _Settings_ page, but she can never
+view the old password.
+
+=== Settings from niord.json
+
+Whenever Niord starts up, it will look for a "niord.json" file in Niords home folder (itself
+controlled with a settings).
+
+Example:
+[source,json]
+----
+[
+  {
+    "key"         : "baseUri",
+    "description" : "The base application server URI",
+    "value"       : "https://niord.e-navigation.net",
+    "web"         : false,
+    "editable"    : true
+  },
+  {
+    "key"         : "authServerUrl",
+    "description" : "The Keycloak URL",
+    "value"       : "https://niord-keycloak.e-navigation.net/auth",
+    "web"         : false,
+    "editable"    : true
+  },
+  ...
+]
+----
+
+=== Settings from Environment Variables
+
+When the Niord application server (Wildfly) starts up, settings may be instantiated using
+environment variables.
+
+Example: In order to specify the "niord.home" system setting, instantiate Wildfly with the argument
+"-Dniord.home=/home/enav/niord".
+
+If settings are defined from environment variables, they are essentially read-only. A sysadmin
+cannot override these settings on the _Settings_ page.
+
+=== Settings from Code
+
+Settings can also be defined and instantiated with default values directly in Niord java code.
+
+Example:
+[source,java]
+----
+public class RepositoryService {
+
+    @Inject
+    @Setting(value="repoRootPath", defaultValue="${niord.home}/repo",
+             description="The root directory of the Niord repository")
+    Path repoRoot;
+
+    @Inject
+    @Setting(value="repoCacheTimeout", defaultValue="5",
+             description="Cache timeout of repo files in minutes", type=Type.Integer)
+    Integer cacheTimeout;
+
+    ...
+}
+----
+
+
+=== Editing a System Setting
+
+The sysadmin can edit a system setting by clicking the pencil symbol next to the setting.
+
+This will open the _Setting Editor Page_:
+
+image::SettingEditPage.png[Setting Editor Page, 500]
+
+The only setting attribute that can be edited is the _value_ of the setting.
+The editor widget used for editing the value depends on the _type_ of the setting, with checkboxes used
+for "boolean" settings, a date picker used for settings of type "Date", etc.
+
+=== Importing and Exporting Settings
+
+The system administrator can export and import system settings from the action menu.
+
+The export/import file format is based on a JSON representation of the
+https://github.com/NiordOrg/niord/blob/master/niord-web/src/main/java/org/niord/web/SettingsRestService.java[SettingVo]
+class.
+
+Example:
+[source,json]
+----
+[
+  {
+    "description": "The Keycloak URL",
+    "key": "authServerUrl",
+    "type": "String",
+    "value": "https://localhost-kc.e-navigation.net/auth"
+  },
+  {
+    "description": "The base application server URI",
+    "key": "baseUri",
+    "type": "String",
+    "value": "https://localhost.e-navigation.net"
+  },
+  ...
+]
+----
+
+Importing a settings JSON file will trigger the _settings-import_ batch job.
+Batch jobs can be monitored and managed by system administrators.
+
+As an alternative to manually uploading a settings import JSON file on the _Settings_ sysadmin page,
+the file can be copied to the _$NIORD_HOME/batch-jobs/settings-import/in_ folder.

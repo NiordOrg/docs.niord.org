@@ -88,4 +88,8 @@ include::13-Integration.adoc[]
 
 <<<
 
+include::14-Settings.adoc[]
+
+<<<
+
 include::A1-KeycloakIntegration.adoc[]

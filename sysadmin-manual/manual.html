@@ -530,7 +530,8 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#print-reports">12. Print Reports</a></li>
 <li><a href="#mail-queue">13. Mail Queue</a></li>
 <li><a href="#integration">14. Integration</a></li>
-<li><a href="#keycloak-integration">15. Keycloak Integration</a></li>
+<li><a href="#settings">15. Settings</a></li>
+<li><a href="#keycloak-integration">16. Keycloak Integration</a></li>
 </ul>
 </div>
 </div>
@@ -3128,7 +3129,217 @@ However, in the future it is hoped that a more extensive AtoN integration will b
 </div>
 </div>
 <div class="sect1">
-<h2 id="keycloak-integration"><a class="anchor" href="#keycloak-integration"></a><a class="link" href="#keycloak-integration">15. Keycloak Integration</a></h2>
+<h2 id="settings"><a class="anchor" href="#settings"></a><a class="link" href="#settings">15. Settings</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <em>Settings</em> page allows a system administrator to manage system settings in Niord.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SettingsPage.png" alt="Settings" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Settings are ultimately persisted to the database, and this is the incarnation of the settings that you
+get to view and modify on the <em>Settings</em> page.</p>
+</div>
+<div class="paragraph">
+<p>However, the settings originate from various sources before being persisted to the database. These options
+are detailed later in this chapter.</p>
+</div>
+<div class="sect2">
+<h3 id="settings-model"><a class="anchor" href="#settings-model"></a><a class="link" href="#settings-model">15.1. Settings Model</a></h3>
+<div class="paragraph">
+<p>A setting in Niord is more that just a key-value pair. It is comprised of the following attributes:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Setting Attribute</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A unique key for the setting.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <em>value</em> of the setting. The format of the value depends on the <em>type</em> of the setting.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <em>type</em> of a setting can be one of "String", "Password", "Integer", "Long", "Float", "Double",
+  "Date", "Boolean", "Path" and "json".</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A textual description of the setting.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cached</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dictates if the setting may be cached (for a few minutes) in Niord. This reduces load on the database.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Web</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If this flag is set, the setting is passed along to the Niord web-application via a JavaScript
+  file, and becomes available to the Angular code as a $rootScope variable.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Editable</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If this flag is set, the setting is editable and included in the settings list on the <em>Settings</em> page.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Note that for settings of type "Password", the associated value <em>never</em> leaves the Niord backend.
+If the <em>Editable</em> flag is set, the sysadmin can set a new password on the <em>Settings</em> page, but she can never
+view the old password.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="settings-from-niord-json"><a class="anchor" href="#settings-from-niord-json"></a><a class="link" href="#settings-from-niord-json">15.2. Settings from niord.json</a></h3>
+<div class="paragraph">
+<p>Whenever Niord starts up, it will look for a "niord.json" file in Niords home folder (itself
+controlled with a settings).</p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="json">[
+  {
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">key</span><span class="delimiter">&quot;</span></span>         : <span class="string"><span class="delimiter">&quot;</span><span class="content">baseUri</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">The base application server URI</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">value</span><span class="delimiter">&quot;</span></span>       : <span class="string"><span class="delimiter">&quot;</span><span class="content">https://niord.e-navigation.net</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">web</span><span class="delimiter">&quot;</span></span>         : <span class="value">false</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">editable</span><span class="delimiter">&quot;</span></span>    : <span class="value">true</span>
+  },
+  {
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">key</span><span class="delimiter">&quot;</span></span>         : <span class="string"><span class="delimiter">&quot;</span><span class="content">authServerUrl</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">The Keycloak URL</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">value</span><span class="delimiter">&quot;</span></span>       : <span class="string"><span class="delimiter">&quot;</span><span class="content">https://niord-keycloak.e-navigation.net/auth</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">web</span><span class="delimiter">&quot;</span></span>         : <span class="value">false</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">editable</span><span class="delimiter">&quot;</span></span>    : <span class="value">true</span>
+  },
+  <span class="error">.</span><span class="error">.</span><span class="error">.</span>
+]</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="settings-from-environment-variables"><a class="anchor" href="#settings-from-environment-variables"></a><a class="link" href="#settings-from-environment-variables">15.3. Settings from Environment Variables</a></h3>
+<div class="paragraph">
+<p>When the Niord application server (Wildfly) starts up, settings may be instantiated using
+environment variables.</p>
+</div>
+<div class="paragraph">
+<p>Example: In order to specify the "niord.home" system setting, instantiate Wildfly with the argument
+"-Dniord.home=/home/enav/niord".</p>
+</div>
+<div class="paragraph">
+<p>If settings are defined from environment variables, they are essentially read-only. A sysadmin
+cannot override these settings on the <em>Settings</em> page.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="settings-from-code"><a class="anchor" href="#settings-from-code"></a><a class="link" href="#settings-from-code">15.4. Settings from Code</a></h3>
+<div class="paragraph">
+<p>Settings can also be defined and instantiated with default values directly in Niord java code.</p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">RepositoryService</span> {
+
+    <span class="annotation">@Inject</span>
+    <span class="annotation">@Setting</span>(value=<span class="string"><span class="delimiter">&quot;</span><span class="content">repoRootPath</span><span class="delimiter">&quot;</span></span>, defaultValue=<span class="string"><span class="delimiter">&quot;</span><span class="content">${niord.home}/repo</span><span class="delimiter">&quot;</span></span>,
+             description=<span class="string"><span class="delimiter">&quot;</span><span class="content">The root directory of the Niord repository</span><span class="delimiter">&quot;</span></span>)
+    Path repoRoot;
+
+    <span class="annotation">@Inject</span>
+    <span class="annotation">@Setting</span>(value=<span class="string"><span class="delimiter">&quot;</span><span class="content">repoCacheTimeout</span><span class="delimiter">&quot;</span></span>, defaultValue=<span class="string"><span class="delimiter">&quot;</span><span class="content">5</span><span class="delimiter">&quot;</span></span>,
+             description=<span class="string"><span class="delimiter">&quot;</span><span class="content">Cache timeout of repo files in minutes</span><span class="delimiter">&quot;</span></span>, type=<span class="predefined-type">Type</span>.Integer)
+    <span class="predefined-type">Integer</span> cacheTimeout;
+
+    ...
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="editing-a-system-setting"><a class="anchor" href="#editing-a-system-setting"></a><a class="link" href="#editing-a-system-setting">15.5. Editing a System Setting</a></h3>
+<div class="paragraph">
+<p>The sysadmin can edit a system setting by clicking the pencil symbol next to the setting.</p>
+</div>
+<div class="paragraph">
+<p>This will open the <em>Setting Editor Page</em>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SettingEditPage.png" alt="Setting Editor Page" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>The only setting attribute that can be edited is the <em>value</em> of the setting.
+The editor widget used for editing the value depends on the <em>type</em> of the setting, with checkboxes used
+for "boolean" settings, a date picker used for settings of type "Date", etc.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="importing-and-exporting-settings"><a class="anchor" href="#importing-and-exporting-settings"></a><a class="link" href="#importing-and-exporting-settings">15.6. Importing and Exporting Settings</a></h3>
+<div class="paragraph">
+<p>The system administrator can export and import system settings from the action menu.</p>
+</div>
+<div class="paragraph">
+<p>The export/import file format is based on a JSON representation of the
+<a href="https://github.com/NiordOrg/niord/blob/master/niord-web/src/main/java/org/niord/web/SettingsRestService.java">SettingVo</a>
+class.</p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="json">[
+  {
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">The Keycloak URL</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">key</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">authServerUrl</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">String</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">value</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://localhost-kc.e-navigation.net/auth</span><span class="delimiter">&quot;</span></span>
+  },
+  {
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">The base application server URI</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">key</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">baseUri</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">String</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">value</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://localhost.e-navigation.net</span><span class="delimiter">&quot;</span></span>
+  },
+  <span class="error">.</span><span class="error">.</span><span class="error">.</span>
+]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Importing a settings JSON file will trigger the <em>settings-import</em> batch job.
+Batch jobs can be monitored and managed by system administrators.</p>
+</div>
+<div class="paragraph">
+<p>As an alternative to manually uploading a settings import JSON file on the <em>Settings</em> sysadmin page,
+the file can be copied to the <em>$NIORD_HOME/batch-jobs/settings-import/in</em> folder.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="keycloak-integration"><a class="anchor" href="#keycloak-integration"></a><a class="link" href="#keycloak-integration">16. Keycloak Integration</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Keycloak is an open source identity and access management middleware product, which is documented
@@ -3143,7 +3354,7 @@ to use Keycloak directly.</p>
 somewhat familiar with Keycloak before reading this.</p>
 </div>
 <div class="sect2">
-<h3 id="niord-domains"><a class="anchor" href="#niord-domains"></a><a class="link" href="#niord-domains">15.1. Niord Domains</a></h3>
+<h3 id="niord-domains"><a class="anchor" href="#niord-domains"></a><a class="link" href="#niord-domains">16.1. Niord Domains</a></h3>
 <div class="paragraph">
 <p>Domains in Niord are detailed in the <a href="#domains">Domains</a> chapter.
 For each domain in Niord, there will be <em>bearer only</em> application client in Keycloak.</p>
@@ -3161,7 +3372,7 @@ in Keycloak.</p>
 <p>Also, there is a single <em>public</em> application client for the actual Niord web application.</p>
 </div>
 <div class="sect3">
-<h4 id="roles"><a class="anchor" href="#roles"></a><a class="link" href="#roles">15.1.1. Roles</a></h4>
+<h4 id="roles"><a class="anchor" href="#roles"></a><a class="link" href="#roles">16.1.1. Roles</a></h4>
 <div class="paragraph">
 <p>As described in the <a href="#system-administrators-manual">System Administrators Manual</a> chapter, a user may have either the <em>User</em>,
 <em>Editor</em>, <em>Admin</em> or <em>Sysadmin</em> role in each of the Niord domains.</p>
@@ -3186,7 +3397,7 @@ roles mentioned above, are created automatically in Keycloak.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="niord-users"><a class="anchor" href="#niord-users"></a><a class="link" href="#niord-users">15.2. Niord Users</a></h3>
+<h3 id="niord-users"><a class="anchor" href="#niord-users"></a><a class="link" href="#niord-users">16.2. Niord Users</a></h3>
 <div class="paragraph">
 <p>All users in Niord are created and maintained in Keycloak, although Niord also provides a UI for
 managing users on top of Keycloak, as detailed in the
@@ -3209,7 +3420,7 @@ a user in Keycloak.</p>
 <p>Keycloak can also be integrated with other Keycloak services, Active Directory or other LDAP provides, etc.</p>
 </div>
 <div class="sect3">
-<h4 id="user-groups"><a class="anchor" href="#user-groups"></a><a class="link" href="#user-groups">15.2.1. User Groups</a></h4>
+<h4 id="user-groups"><a class="anchor" href="#user-groups"></a><a class="link" href="#user-groups">16.2.1. User Groups</a></h4>
 <div class="paragraph">
 <p>Instead of assigning domain roles (i.e. Keycloak application client roles) directly to users, which would
 be a tedious task, Niord instead rely on Keycloak <em>Groups</em>.</p>
@@ -3266,7 +3477,7 @@ chapter.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="user-specific-editor-fields"><a class="anchor" href="#user-specific-editor-fields"></a><a class="link" href="#user-specific-editor-fields">15.3. User-Specific Editor-Fields</a></h3>
+<h3 id="user-specific-editor-fields"><a class="anchor" href="#user-specific-editor-fields"></a><a class="link" href="#user-specific-editor-fields">16.3. User-Specific Editor-Fields</a></h3>
 <div class="paragraph">
 <p>The list of editor fields being displayed when a user edits a message in Niord is highly configurable.
 There are settings to define a base set of fields, a message main-type (NW,NM) specific set,
@@ -3300,7 +3511,7 @@ editor fields. Example:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="niord-security"><a class="anchor" href="#niord-security"></a><a class="link" href="#niord-security">15.4. Niord Security</a></h3>
+<h3 id="niord-security"><a class="anchor" href="#niord-security"></a><a class="link" href="#niord-security">16.4. Niord Security</a></h3>
 <div class="paragraph">
 <p>All access to the Niord backend happens via calls to REST endpoints. The obvious example is the
 actual Niord web application which makes Ajax calls to the Niord backend.</p>
@@ -3334,7 +3545,7 @@ will validate that the user has the <em>Admin</em> role in the current domain, o
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-06-26 10:28:25 CEST
+Last updated 2017-06-26 11:01:19 CEST
 </div>
 </div>
 <script type="text/x-mathjax-config">
