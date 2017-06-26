@@ -92,4 +92,8 @@ include::14-Settings.adoc[]
 
 <<<
 
+include::15-BatchJobs.adoc[]
+
+<<<
+
 include::A1-KeycloakIntegration.adoc[]
