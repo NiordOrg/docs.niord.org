@@ -9,8 +9,9 @@ image::MailingListsPage.png[Mailing Lists, 800]
 
 IMPORTANT: The _Mailing Lists_ page has a lot more functionality for _system administrators_, who can create
 and manage the mailing lists, define the _triggers_ that cause mailing lists to execute,
-and create the reports that generate the actual mail contents. This is detailed in the _User Manual for Sysadmins_,
-whereas this chapter only details the functionality for normal administrators.
+and create the reports that generate the actual mail contents. This is detailed in the
+http://docs.niord.org/sysadmin-manual/manual.html#mailing-lists[Mailing Lists] chapter of the system
+administration manual, whereas this chapter only details the functionality for normal administrators.
 
 === Manage Mailing List Recipients
 
