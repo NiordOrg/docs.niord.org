@@ -96,4 +96,8 @@ include::15-BatchJobs.adoc[]
 
 <<<
 
+include::16-MailingLists.adoc[]
+
+<<<
+
 include::A1-KeycloakIntegration.adoc[]

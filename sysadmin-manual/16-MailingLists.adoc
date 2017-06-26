@@ -1,0 +1,216 @@
+
+:imagesdir: images
+
+== Mailing Lists
+
+The _Mailing Lists_ page allows a system administrator to manage the mailing lists of Niord.
+
+IMPORTANT: The _Mailing Lists_ page is actually placed under the _Admin_ main menu page.
+This is because mere administrators can manage mailing list subscriptions, but not create or modify the
+mailing lists themselves. Hence, mailing list subscription is detailed in the
+http://docs.niord.org/admin-manual/manual.html#mailing-lists[Mailing Lists] chapter of the
+administrator manual.
+
+When a system administrator accesses the _Mailing Lists_ page, it has the following functionality:
+
+image::MailingListsPage.png[Mailing Lists, 600]
+
+=== Managing Mailing List Recipients
+
+As mentioned above, subscription of the mailing lists is detailed in the
+http://docs.niord.org/admin-manual/manual.html#mailing-lists[Mailing Lists] chapter of the
+administrator manual.
+
+=== Adding or Editing a Mailing List
+
+The sysadmin can add a new mailing list by clicking the "New mailing list" button, or edit an existing
+mailing list by clicking the pencil symbol next to the mailing list.
+
+This will open the _Mailing List Edit Page_:
+
+image::MailingListEditPage.png[Mailing List Editor Page, 600]
+
+The basic mailing list attributes:
+
+[ cols="30,70", options="header" ]
+|===
+| Mailing List Attribute
+| Description
+
+| Mailing List ID
+| A unique ID for the mailing list.
+
+| Active
+| Only active mailing lists will actually execute and send out mails.
+
+| Name
+| A human readable name of the mailing list in all supported languages.
+
+| Description
+| A human readable description of the mailing list in all supported languages.
+
+|===
+
+Mailing list triggers are described separately below.
+
+==== Mailing List Triggers
+
+Mailing lists should be associated with one or more _mailing list triggers_. The triggers define
+the criteria that will cause the mailing list to execute, and they define the format of the
+actual  mails.
+
+A new trigger is added by clicking the "Add Trigger" button. Similarly, a trigger is edited by clicking
+the "Show Details" button in the trigger bar, and deleted again by clicking the "Delete" button.
+
+The common trigger attributes are:
+
+[ cols="30,70", options="header" ]
+|===
+| Trigger Attribute
+| Description
+
+| Trigger Type
+| A trigger can either be a _Scheduled Triggers_ or a _Status Change Triggers_.
+  These types are described in more detail below.
+
+| Mail Subject
+| The subject used for the mails being sent in all supported languages.
+  Each subject field has a checkbox to enable or disable that particular language variant.
+  The subject can contain _replacement tokens_ such as "${short-id}" and "${number-year-id}"
+  (for status driven - i.e. single message - mails).
+
+| Mail Body
+| The list of script resources used for generating the mail HTML body. Typically, this will be
+  a single Freemarker template. However, the list might also contain a JavaScript for looking up
+  additional data used in the mail.
+
+|===
+
+===== Scheduled Triggers
+
+image::MailingListScheduledTrigger.png[Scheduled Mailing List Trigger, 600]
+
+The scheduled triggers will execute periodically, and base their generated mails on a list of messages
+matching a certain message query.
+
+[ cols="30,70", options="header" ]
+|===
+| Trigger Attribute
+| Description
+
+| Schedule
+| The schedule for when a trigger is executed. Either daily or a specific weekday, at a certain time.
+
+| Message Query
+| The _Message Query_ will be used as a filter for the list of messages passed along as data to the
+  script resources.
+  The example above will fetch all published coastal navigational warnings of the "dma-nw" message series,
+  that also have an associated "audio" promulgation.
+
+| Public Report
+| If this option is checked the mailing list trigger can also be executed (with no mails generated) as
+  a report in the action menu of the _Messages_ page - please refer to the
+  http://docs.niord.org/editor-manual/manual.html#report-action[Report Action] chapter.
+
+|===
+
+===== Status Change Triggers
+
+image::MailingListStatusChangeTrigger.png[Status Change Mailing List Trigger, 600]
+
+The status change triggers will execute whenever a message changes status in Niord, and if the
+updated message matches the specified status and filter, it will cause the mailing list to send mails.
+
+[ cols="30,70", options="header" ]
+|===
+| Trigger Attribute
+| Description
+
+| Statuses
+| The new status of the messages that will cause the trigger to execute.
+
+| Message Filter
+| The _Message Filter_ defines an additional filter that the message must match, before the trigger
+  executes. The filter is strictly speaking a server-side JavaScript expression.
+  The example above will match coastal navigational warnings that are published and whose message series
+  is "dma-nw".
+
+|===
+
+==== Testing Triggers
+
+All mailing list triggers can be tested by clicking the "Test" button in the trigger bar.
+This opens the _Test Trigger Execution_ dialog:
+
+image::MailingListTest.png[Mailing List Test, 600]
+
+For status-change triggers, the system administrator must also specify the short ID of the message
+to test the trigger with.
+
+Upon clicking the "Execute" button, the mailing list trigger will be executed, but no mails are
+actually sent out. Instead the dialog will list all generated mails, and, upon selecting one of
+these mails, the contents will be displayed in the dialog.
+
+=== Deleting a Mailing List
+
+A mailing list can be deleted by clicking the trash icon next to them.
+
+As an alternative, the system administrator can choose to in-activate the mailing list.
+
+
+=== Importing and Exporting Mailing List
+
+The system administrator can export and import mailing lists from the action menu.
+
+The export/import file format is based on a JSON representation of the
+https://github.com/NiordOrg/niord/blob/master/niord-core/src/main/java/org/niord/core/mailinglist/vo/MailingListVo.java[MailingListVo]
+class.
+
+Example:
+[source,json]
+----
+[
+  {
+    "mailingListId": "audio-broadcast",
+    "active": false,
+    "descs": [
+      {
+        "lang": "da",
+        "name": "Farvandsefterretninger til oplæsning",
+        "description": "Farvandsefterretninger og skydeøvelser til oplæsning på DR"
+      },
+      {
+        "lang": "en",
+        "name": "Navigational Warnings for Voice Broadcast",
+        "description": "Navigational Warnings and Firing Exercises for voice broadcast on Danish Radio"
+      }
+    ],
+    "triggers": [
+      {
+        "type": "SCHEDULED",
+        "scheduleType": "DAILY",
+        "scheduledExecutionTime":"15:55",
+        "scheduledExecutionTimeZone":"Europe/Copenhagen",
+        "messageQuery": "messageSeries=dma-nw&messageSeries=dma-nw-local&status=PUBLISHED&promulgationType=audio",
+        "scriptResourcePaths": [
+          "templates/mailinglist/fetch-firing-exercises.js",
+          "templates/mailinglist/audio-broadcast.ftl"
+        ],
+        "descs": [
+          {
+            "lang": "da",
+            "subject": "Farvandsefterretninger til oplæsning ${date-short}"
+          }
+        ]
+      }
+    ]
+  },
+  ...
+]
+----
+
+Importing a mailing list JSON file will trigger the _mailing-list-import_ batch job.
+Batch jobs can be monitored and managed by system administrators.
+
+As an alternative to manually uploading a mailing list import JSON file on the _Mailing Lists_ sysadmin
+page, the file can be copied to the _$NIORD_HOME/batch-jobs/mailing-list-import/in_ folder.

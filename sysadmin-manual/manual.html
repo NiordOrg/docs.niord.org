@@ -532,7 +532,8 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#integration">14. Integration</a></li>
 <li><a href="#settings">15. Settings</a></li>
 <li><a href="#batch-jobs">16. Batch Jobs</a></li>
-<li><a href="#keycloak-integration">17. Keycloak Integration</a></li>
+<li><a href="#mailing-lists">17. Mailing Lists</a></li>
+<li><a href="#keycloak-integration">18. Keycloak Integration</a></li>
 </ul>
 </div>
 </div>
@@ -1960,7 +1961,7 @@ generating mails, etc. An overview of functions using script resources is found 
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Mailing Lists</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Mailing lists also use script resources for generating the actual HTML e-mails - please refer to the
-  <a href="#Mailing Lists">[Mailing Lists]</a> chapter.
+  <a href="#mailing-lists">Mailing Lists</a> chapter.
   Mailing List script resources are typically found under the "templates/mailinglist/" sub-path.</p></td>
 </tr>
 <tr>
@@ -3366,7 +3367,7 @@ Danish <a href="#integration">Integration</a> sysadmin page), or by copying the 
 </div>
 <div class="paragraph">
 <p>The path to the batch job file system folder is: <em>$NIORD_HOME/batch-jobs/batch-job-type/in</em>.
-The screen-shot below shows the batch job folder structure, with the folders of the "dk-aton-import"
+The screenshot below shows the batch job folder structure, with the folders of the "dk-aton-import"
 batch job fully expanded:</p>
 </div>
 <div class="imageblock">
@@ -3388,7 +3389,7 @@ This means that the batch jobs are typically divided into three sub-tasks for <e
 </div>
 <div class="paragraph">
 <p>Also, each batch job processes a certain batch job-specific number of records in each transaction, which
-means that the batch job can be stopped, restarted or abandoned.</p>
+means that the batch job can be stopped during execution, restarted or abandoned.</p>
 </div>
 <div class="paragraph">
 <p>As an example, the "dk-aton-import", which is a fairly long-running batch job, will first
@@ -3437,7 +3438,7 @@ can be inspected by clicking on the associated log file name.</p>
 administrator to upload a zip-archive containing multiple batch job files.</p>
 </div>
 <div class="paragraph">
-<p>The zip archive must also contain a special file, <em>batch-set.json</em> which enlists and schedules
+<p>The zip archive must also contain a special file, <em>batch-set.json</em>, which enlists and schedules
 all included batch jobs.</p>
 </div>
 <div class="paragraph">
@@ -3488,7 +3489,320 @@ by the "batchFileExpiryDays" system setting.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="keycloak-integration"><a class="anchor" href="#keycloak-integration"></a><a class="link" href="#keycloak-integration">17. Keycloak Integration</a></h2>
+<h2 id="mailing-lists"><a class="anchor" href="#mailing-lists"></a><a class="link" href="#mailing-lists">17. Mailing Lists</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <em>Mailing Lists</em> page allows a system administrator to manage the mailing lists of Niord.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The <em>Mailing Lists</em> page is actually placed under the <em>Admin</em> main menu page.
+This is because mere administrators can manage mailing list subscriptions, but not create or modify the
+mailing lists themselves. Hence, mailing list subscription is detailed in the
+<a href="http://docs.niord.org/admin-manual/manual.html#mailing-lists">Mailing Lists</a> chapter of the
+administrator manual.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>When a system administrator accesses the <em>Mailing Lists</em> page, it has the following functionality:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/MailingListsPage.png" alt="Mailing Lists" width="600">
+</div>
+</div>
+<div class="sect2">
+<h3 id="managing-mailing-list-recipients"><a class="anchor" href="#managing-mailing-list-recipients"></a><a class="link" href="#managing-mailing-list-recipients">17.1. Managing Mailing List Recipients</a></h3>
+<div class="paragraph">
+<p>As mentioned above, subscription of the mailing lists is detailed in the
+<a href="http://docs.niord.org/admin-manual/manual.html#mailing-lists">Mailing Lists</a> chapter of the
+administrator manual.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-or-editing-a-mailing-list"><a class="anchor" href="#adding-or-editing-a-mailing-list"></a><a class="link" href="#adding-or-editing-a-mailing-list">17.2. Adding or Editing a Mailing List</a></h3>
+<div class="paragraph">
+<p>The sysadmin can add a new mailing list by clicking the "New mailing list" button, or edit an existing
+mailing list by clicking the pencil symbol next to the mailing list.</p>
+</div>
+<div class="paragraph">
+<p>This will open the <em>Mailing List Edit Page</em>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/MailingListEditPage.png" alt="Mailing List Editor Page" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The basic mailing list attributes:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Mailing List Attribute</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mailing List ID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A unique ID for the mailing list.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Active</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Only active mailing lists will actually execute and send out mails.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A human readable name of the mailing list in all supported languages.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A human readable description of the mailing list in all supported languages.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Mailing list triggers are described separately below.</p>
+</div>
+<div class="sect3">
+<h4 id="mailing-list-triggers"><a class="anchor" href="#mailing-list-triggers"></a><a class="link" href="#mailing-list-triggers">17.2.1. Mailing List Triggers</a></h4>
+<div class="paragraph">
+<p>Mailing lists should be associated with one or more <em>mailing list triggers</em>. The triggers define
+the criteria that will cause the mailing list to execute, and they define the format of the
+actual  mails.</p>
+</div>
+<div class="paragraph">
+<p>A new trigger is added by clicking the "Add Trigger" button. Similarly, a trigger is edited by clicking
+the "Show Details" button in the trigger bar, and deleted again by clicking the "Delete" button.</p>
+</div>
+<div class="paragraph">
+<p>The common trigger attributes are:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Trigger Attribute</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Trigger Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A trigger can either be a <em>Scheduled Triggers</em> or a <em>Status Change Triggers</em>.
+  These types are described in more detail below.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mail Subject</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The subject used for the mails being sent in all supported languages.
+  Each subject field has a checkbox to enable or disable that particular language variant.
+  The subject can contain <em>replacement tokens</em> such as "${short-id}" and "${number-year-id}"
+  (for status driven - i.e. single message - mails).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mail Body</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The list of script resources used for generating the mail HTML body. Typically, this will be
+  a single Freemarker template. However, the list might also contain a JavaScript for looking up
+  additional data used in the mail.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect4">
+<h5 id="scheduled-triggers"><a class="anchor" href="#scheduled-triggers"></a><a class="link" href="#scheduled-triggers">Scheduled Triggers</a></h5>
+<div class="imageblock">
+<div class="content">
+<img src="images/MailingListScheduledTrigger.png" alt="Scheduled Mailing List Trigger" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The scheduled triggers will execute periodically, and base their generated mails on a list of messages
+matching a certain message query.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Trigger Attribute</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Schedule</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The schedule for when a trigger is executed. Either daily or a specific weekday, at a certain time.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Message Query</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <em>Message Query</em> will be used as a filter for the list of messages passed along as data to the
+  script resources.
+  The example above will fetch all published coastal navigational warnings of the "dma-nw" message series,
+  that also have an associated "audio" promulgation.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Public Report</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If this option is checked the mailing list trigger can also be executed (with no mails generated) as
+  a report in the action menu of the <em>Messages</em> page - please refer to the
+  <a href="http://docs.niord.org/editor-manual/manual.html#report-action">Report Action</a> chapter.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="status-change-triggers"><a class="anchor" href="#status-change-triggers"></a><a class="link" href="#status-change-triggers">Status Change Triggers</a></h5>
+<div class="imageblock">
+<div class="content">
+<img src="images/MailingListStatusChangeTrigger.png" alt="Status Change Mailing List Trigger" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The status change triggers will execute whenever a message changes status in Niord, and if the
+updated message matches the specified status and filter, it will cause the mailing list to send mails.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Trigger Attribute</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Statuses</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The new status of the messages that will cause the trigger to execute.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Message Filter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <em>Message Filter</em> defines an additional filter that the message must match, before the trigger
+  executes. The filter is strictly speaking a server-side JavaScript expression.
+  The example above will match coastal navigational warnings that are published and whose message series
+  is "dma-nw".</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="testing-triggers"><a class="anchor" href="#testing-triggers"></a><a class="link" href="#testing-triggers">17.2.2. Testing Triggers</a></h4>
+<div class="paragraph">
+<p>All mailing list triggers can be tested by clicking the "Test" button in the trigger bar.
+This opens the <em>Test Trigger Execution</em> dialog:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/MailingListTest.png" alt="Mailing List Test" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>For status-change triggers, the system administrator must also specify the short ID of the message
+to test the trigger with.</p>
+</div>
+<div class="paragraph">
+<p>Upon clicking the "Execute" button, the mailing list trigger will be executed, but no mails are
+actually sent out. Instead the dialog will list all generated mails, and, upon selecting one of
+these mails, the contents will be displayed in the dialog.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-mailing-list"><a class="anchor" href="#deleting-a-mailing-list"></a><a class="link" href="#deleting-a-mailing-list">17.3. Deleting a Mailing List</a></h3>
+<div class="paragraph">
+<p>A mailing list can be deleted by clicking the trash icon next to them.</p>
+</div>
+<div class="paragraph">
+<p>As an alternative, the system administrator can choose to in-activate the mailing list.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="importing-and-exporting-mailing-list"><a class="anchor" href="#importing-and-exporting-mailing-list"></a><a class="link" href="#importing-and-exporting-mailing-list">17.4. Importing and Exporting Mailing List</a></h3>
+<div class="paragraph">
+<p>The system administrator can export and import mailing lists from the action menu.</p>
+</div>
+<div class="paragraph">
+<p>The export/import file format is based on a JSON representation of the
+<a href="https://github.com/NiordOrg/niord/blob/master/niord-core/src/main/java/org/niord/core/mailinglist/vo/MailingListVo.java">MailingListVo</a>
+class.</p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="json">[
+  {
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">mailingListId</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">audio-broadcast</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">active</span><span class="delimiter">&quot;</span></span>: <span class="value">false</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">descs</span><span class="delimiter">&quot;</span></span>: [
+      {
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">lang</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">da</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Farvandsefterretninger til oplæsning</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Farvandsefterretninger og skydeøvelser til oplæsning på DR</span><span class="delimiter">&quot;</span></span>
+      },
+      {
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">lang</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">en</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Navigational Warnings for Voice Broadcast</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Navigational Warnings and Firing Exercises for voice broadcast on Danish Radio</span><span class="delimiter">&quot;</span></span>
+      }
+    ],
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">triggers</span><span class="delimiter">&quot;</span></span>: [
+      {
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">SCHEDULED</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">scheduleType</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">DAILY</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">scheduledExecutionTime</span><span class="delimiter">&quot;</span></span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">15:55</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">scheduledExecutionTimeZone</span><span class="delimiter">&quot;</span></span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">Europe/Copenhagen</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">messageQuery</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">messageSeries=dma-nw&amp;messageSeries=dma-nw-local&amp;status=PUBLISHED&amp;promulgationType=audio</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">scriptResourcePaths</span><span class="delimiter">&quot;</span></span>: [
+          <span class="string"><span class="delimiter">&quot;</span><span class="content">templates/mailinglist/fetch-firing-exercises.js</span><span class="delimiter">&quot;</span></span>,
+          <span class="string"><span class="delimiter">&quot;</span><span class="content">templates/mailinglist/audio-broadcast.ftl</span><span class="delimiter">&quot;</span></span>
+        ],
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">descs</span><span class="delimiter">&quot;</span></span>: [
+          {
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">lang</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">da</span><span class="delimiter">&quot;</span></span>,
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">subject</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Farvandsefterretninger til oplæsning ${date-short}</span><span class="delimiter">&quot;</span></span>
+          }
+        ]
+      }
+    ]
+  },
+  <span class="error">.</span><span class="error">.</span><span class="error">.</span>
+]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Importing a mailing list JSON file will trigger the <em>mailing-list-import</em> batch job.
+Batch jobs can be monitored and managed by system administrators.</p>
+</div>
+<div class="paragraph">
+<p>As an alternative to manually uploading a mailing list import JSON file on the <em>Mailing Lists</em> sysadmin
+page, the file can be copied to the <em>$NIORD_HOME/batch-jobs/mailing-list-import/in</em> folder.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="keycloak-integration"><a class="anchor" href="#keycloak-integration"></a><a class="link" href="#keycloak-integration">18. Keycloak Integration</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Keycloak is an open source identity and access management middleware product, which is documented
@@ -3503,7 +3817,7 @@ to use Keycloak directly.</p>
 somewhat familiar with Keycloak before reading this.</p>
 </div>
 <div class="sect2">
-<h3 id="niord-domains"><a class="anchor" href="#niord-domains"></a><a class="link" href="#niord-domains">17.1. Niord Domains</a></h3>
+<h3 id="niord-domains"><a class="anchor" href="#niord-domains"></a><a class="link" href="#niord-domains">18.1. Niord Domains</a></h3>
 <div class="paragraph">
 <p>Domains in Niord are detailed in the <a href="#domains">Domains</a> chapter.
 For each domain in Niord, there will be <em>bearer only</em> application client in Keycloak.</p>
@@ -3521,7 +3835,7 @@ in Keycloak.</p>
 <p>Also, there is a single <em>public</em> application client for the actual Niord web application.</p>
 </div>
 <div class="sect3">
-<h4 id="roles"><a class="anchor" href="#roles"></a><a class="link" href="#roles">17.1.1. Roles</a></h4>
+<h4 id="roles"><a class="anchor" href="#roles"></a><a class="link" href="#roles">18.1.1. Roles</a></h4>
 <div class="paragraph">
 <p>As described in the <a href="#system-administrators-manual">System Administrators Manual</a> chapter, a user may have either the <em>User</em>,
 <em>Editor</em>, <em>Admin</em> or <em>Sysadmin</em> role in each of the Niord domains.</p>
@@ -3546,7 +3860,7 @@ roles mentioned above, are created automatically in Keycloak.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="niord-users"><a class="anchor" href="#niord-users"></a><a class="link" href="#niord-users">17.2. Niord Users</a></h3>
+<h3 id="niord-users"><a class="anchor" href="#niord-users"></a><a class="link" href="#niord-users">18.2. Niord Users</a></h3>
 <div class="paragraph">
 <p>All users in Niord are created and maintained in Keycloak, although Niord also provides a UI for
 managing users on top of Keycloak, as detailed in the
@@ -3569,7 +3883,7 @@ a user in Keycloak.</p>
 <p>Keycloak can also be integrated with other Keycloak services, Active Directory or other LDAP provides, etc.</p>
 </div>
 <div class="sect3">
-<h4 id="user-groups"><a class="anchor" href="#user-groups"></a><a class="link" href="#user-groups">17.2.1. User Groups</a></h4>
+<h4 id="user-groups"><a class="anchor" href="#user-groups"></a><a class="link" href="#user-groups">18.2.1. User Groups</a></h4>
 <div class="paragraph">
 <p>Instead of assigning domain roles (i.e. Keycloak application client roles) directly to users, which would
 be a tedious task, Niord instead rely on Keycloak <em>Groups</em>.</p>
@@ -3626,7 +3940,7 @@ chapter.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="user-specific-editor-fields"><a class="anchor" href="#user-specific-editor-fields"></a><a class="link" href="#user-specific-editor-fields">17.3. User-Specific Editor-Fields</a></h3>
+<h3 id="user-specific-editor-fields"><a class="anchor" href="#user-specific-editor-fields"></a><a class="link" href="#user-specific-editor-fields">18.3. User-Specific Editor-Fields</a></h3>
 <div class="paragraph">
 <p>The list of editor fields being displayed when a user edits a message in Niord is highly configurable.
 There are settings to define a base set of fields, a message main-type (NW,NM) specific set,
@@ -3660,7 +3974,7 @@ editor fields. Example:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="niord-security"><a class="anchor" href="#niord-security"></a><a class="link" href="#niord-security">17.4. Niord Security</a></h3>
+<h3 id="niord-security"><a class="anchor" href="#niord-security"></a><a class="link" href="#niord-security">18.4. Niord Security</a></h3>
 <div class="paragraph">
 <p>All access to the Niord backend happens via calls to REST endpoints. The obvious example is the
 actual Niord web application which makes Ajax calls to the Niord backend.</p>
@@ -3694,7 +4008,7 @@ will validate that the user has the <em>Admin</em> role in the current domain, o
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-06-26 12:27:14 CEST
+Last updated 2017-06-26 13:54:20 CEST
 </div>
 </div>
 <script type="text/x-mathjax-config">
