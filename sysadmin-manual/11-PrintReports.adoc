@@ -1,0 +1,156 @@
+
+:imagesdir: images
+
+== Print Reports
+
+The _Print Reports_ page allows a system administrator to manage the list of PDF print reports in Niord.
+
+image::PrintReportsPage.png[Print Reports Page, 800]
+
+The sysadmin may filter the list of print reports by typing a term into the _Filter_ input field above the
+print report list. The term is matched against the ID and name of the print reports.
+
+Whenever a user selects to print a list of messages, as described in the
+http://docs.niord.org/editor-manual/manual.html#print-messages[Print Action] chapter of the editors manual,
+she gets to chose which _Print Report_ to use.
+
+image::PrintDialog.png[Print Dialog, 180]
+
+The available list of print reports are domain specific, and each print report may query the end user
+for a list of input parameters, such as the "Week" and "Year" for the "NM Report" above.
+These parameters may in turn be used on the generated PDF, as demonstrated below:
+
+image::PrintReportExample.png[Sample Print Report, 500]
+
+=== Standard Reports
+
+Niord will always ensure the availability of two standard reports available to all domains.
+
+[ cols="30,70", options="header" ]
+|===
+| Standard Report
+| Description
+
+| Standard
+| The _Standard_ report prints out the details of the current message list in the currently
+  selected language. It also sports a front page with a _Table of Contents_ section and
+  information about the currently applied message filter.
+
+| Draft
+| The _Draft_ report is similar to the _Standard_ report, except that it includes all language
+  versions of each message, and a few extra fields like message _type_ and _status_ that are not normally
+  included. This makes the _Draft_ report very usable for proof-reading messages.
+
+|===
+
+=== Generating PDFs
+
+Generating PDFs using print reports is actually a two-phase process. First, the Freemarker template
+associated with the print report is used to convert a list of message into a HTML representation.
+Then, the HTML is converted into a PDF and returned to the user.
+
+When creating and editing print reports, is important to understand how _CSS Paged Media_ can be
+used to control such things as page size, pagination, headers and footers in the resulting PDF.
+Thus, the sysadmin is advised to acquaint herself with relevant documentation, such as:
+
+* https://www.w3.org/TR/css3-page/ - CSS Paged Media specification.
+* https://www.smashingmagazine.com/2015/01/designing-for-print-with-css/ - Introduction to using paged media.
+
+=== Adding or Editing a Print Report
+
+The sysadmin can add a new print report by clicking the "New Report" button, or edit an existing
+print report by clicking the pencil symbol next to the domain.
+
+This will open the _Print Report Edit Page_:
+
+image::PrintReportEditPage.png[Print Report Editor Page, 500]
+
+The print report attributes:
+
+[ cols="30,70", options="header" ]
+|===
+| Report Attribute
+| Description
+
+| Report ID
+| A unique ID for the report.
+
+| Name
+| A human readable name of the report.
+
+| Sort Order
+| Defines the order of the print reports as used in the Print Dialog.
+
+| Template
+| The Freemarker template used to generate HTML. The specified path must be the path of an existing
+  script resource, as defined in the <<Script Resources>> chapter.
+  Clicking the pencil button next to the path input field will indeed open the report on the
+  <<Script Resources>> sysadmin page. Clicking the magnifying glass icon will open a dialog for
+  easy script resource selection.
+
+| Domains
+| The domains for which the print report will be made available.
+
+| Read-only Properties
+| A JSON property object that may be used in the Freemarker template. In the "NM Report" example
+  screenshots above, the "volume" value, "133", and "ISSN" value, "1397-999X", come from these
+  read-only properties.
+
+| Parameters
+| The _Parameters_ field is exactly like the _Read-only Properties_, except that the properties will
+  be displayed in the Print dialog, and may thus be edited by the user per print.
+  The _Parameter_ values may be instantiated with default values containing _replacement tokens_, such
+  as "${year-2-digits}", "${year}", "${week-2-digits}" and "${week}".
+  In the "NM Report" example screenshots above, the effect of specifying "week" and "year" parameters
+  can be seen.
+
+| Test
+| The _Test_ field is not actually a print report attribute. The sysadmin can specify a message tag
+  and test-execute the print report in this section.
+
+|===
+
+
+=== Deleting a Print Report
+
+A print report can be deleted by clicking the trash icon next to them.
+
+=== Importing and Exporting Print Reports
+
+The system administrator can export and import print reports from the action menu.
+
+The export/import file format is based on a JSON representation of the
+https://github.com/NiordOrg/niord/blob/master/niord-core/src/main/java/org/niord/core/report/vo/FmReportVo.java[FmReportVo]
+class.
+
+Example:
+[source,json]
+----
+[
+  {
+    "reportId": "nm-report",
+    "name": "NM report",
+    "sortOrder": 2,
+    "templatePath": "templates/messages/nm-report-pdf.ftl",
+    "domains": [
+      { "domainId": "niord-nm" }
+    ],
+    "properties": {
+      "mapThumbnails": false,
+      "ISSN": "1397-999X",
+      "volume": "133"
+    },
+    "params": {
+      "week": "${week}",
+      "year": "${year}"
+    }
+  },
+  ...
+]
+----
+
+Importing a print report JSON file will trigger the _report-import_ batch job.
+Batch jobs can be monitored and managed by system administrators.
+
+As an alternative to manually uploading a report import JSON file on the _Print Reports_ sysadmin page,
+the file can be copied to the _$NIORD_HOME/batch-jobs/report-import/in_ folder.

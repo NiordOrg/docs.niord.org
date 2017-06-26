@@ -527,7 +527,8 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#parameter-types">9. Parameter Types</a></li>
 <li><a href="#script-resources">10. Script Resources</a></li>
 <li><a href="#categories">11. Categories</a></li>
-<li><a href="#keycloak-integration">12. Keycloak Integration</a></li>
+<li><a href="#print-reports">12. Print Reports</a></li>
+<li><a href="#keycloak-integration">13. Keycloak Integration</a></li>
 </ul>
 </div>
 </div>
@@ -1938,7 +1939,7 @@ generating mails, etc. An overview of functions using script resources is found 
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Print Reports</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Print Reports are maintained on the <a href="#Print Reports">[Print Reports]</a> sysadmin page. There are a couple of standard
+<td class="tableblock halign-left valign-top"><p class="tableblock">Print Reports are maintained on the <a href="#print-reports">Print Reports</a> sysadmin page. There are a couple of standard
   and draft reports, along with domain-specific reports, such as the weekly Notices to Mariners digest.
   In order to generate PDF files, Niord will first use Freemarker templates to generate HTML, and then
   convert the HTML into PDF (CSS 2 has extensions for <em>paged media</em>).
@@ -2707,7 +2708,229 @@ the file can be copied to the <em>$NIORD_HOME/batch-jobs/category-import/in</em>
 </div>
 </div>
 <div class="sect1">
-<h2 id="keycloak-integration"><a class="anchor" href="#keycloak-integration"></a><a class="link" href="#keycloak-integration">12. Keycloak Integration</a></h2>
+<h2 id="print-reports"><a class="anchor" href="#print-reports"></a><a class="link" href="#print-reports">12. Print Reports</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <em>Print Reports</em> page allows a system administrator to manage the list of PDF print reports in Niord.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/PrintReportsPage.png" alt="Print Reports Page" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>The sysadmin may filter the list of print reports by typing a term into the <em>Filter</em> input field above the
+print report list. The term is matched against the ID and name of the print reports.</p>
+</div>
+<div class="paragraph">
+<p>Whenever a user selects to print a list of messages, as described in the
+<a href="http://docs.niord.org/editor-manual/manual.html#print-messages">Print Action</a> chapter of the editors manual,
+she gets to chose which <em>Print Report</em> to use.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/PrintDialog.png" alt="Print Dialog" width="180">
+</div>
+</div>
+<div class="paragraph">
+<p>The available list of print reports are domain specific, and each print report may query the end user
+for a list of input parameters, such as the "Week" and "Year" for the "NM Report" above.
+These parameters may in turn be used on the generated PDF, as demonstrated below:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/PrintReportExample.png" alt="Sample Print Report" width="500">
+</div>
+</div>
+<div class="sect2">
+<h3 id="standard-reports"><a class="anchor" href="#standard-reports"></a><a class="link" href="#standard-reports">12.1. Standard Reports</a></h3>
+<div class="paragraph">
+<p>Niord will always ensure the availability of two standard reports available to all domains.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Standard Report</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Standard</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <em>Standard</em> report prints out the details of the current message list in the currently
+  selected language. It also sports a front page with a <em>Table of Contents</em> section and
+  information about the currently applied message filter.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Draft</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <em>Draft</em> report is similar to the <em>Standard</em> report, except that it includes all language
+  versions of each message, and a few extra fields like message <em>type</em> and <em>status</em> that are not normally
+  included. This makes the <em>Draft</em> report very usable for proof-reading messages.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="generating-pdfs"><a class="anchor" href="#generating-pdfs"></a><a class="link" href="#generating-pdfs">12.2. Generating PDFs</a></h3>
+<div class="paragraph">
+<p>Generating PDFs using print reports is actually a two-phase process. First, the Freemarker template
+associated with the print report is used to convert a list of message into a HTML representation.
+Then, the HTML is converted into a PDF and returned to the user.</p>
+</div>
+<div class="paragraph">
+<p>When creating and editing print reports, is important to understand how <em>CSS Paged Media</em> can be
+used to control such things as page size, pagination, headers and footers in the resulting PDF.
+Thus, the sysadmin is advised to acquaint herself with relevant documentation, such as:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.w3.org/TR/css3-page/" class="bare">https://www.w3.org/TR/css3-page/</a> - CSS Paged Media specification.</p>
+</li>
+<li>
+<p><a href="https://www.smashingmagazine.com/2015/01/designing-for-print-with-css/" class="bare">https://www.smashingmagazine.com/2015/01/designing-for-print-with-css/</a> - Introduction to using paged media.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-or-editing-a-print-report"><a class="anchor" href="#adding-or-editing-a-print-report"></a><a class="link" href="#adding-or-editing-a-print-report">12.3. Adding or Editing a Print Report</a></h3>
+<div class="paragraph">
+<p>The sysadmin can add a new print report by clicking the "New Report" button, or edit an existing
+print report by clicking the pencil symbol next to the domain.</p>
+</div>
+<div class="paragraph">
+<p>This will open the <em>Print Report Edit Page</em>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/PrintReportEditPage.png" alt="Print Report Editor Page" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>The print report attributes:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Report Attribute</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Report ID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A unique ID for the report.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A human readable name of the report.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sort Order</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines the order of the print reports as used in the Print Dialog.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Template</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Freemarker template used to generate HTML. The specified path must be the path of an existing
+  script resource, as defined in the <a href="#script-resources">Script Resources</a> chapter.
+  Clicking the pencil button next to the path input field will indeed open the report on the
+  <a href="#script-resources">Script Resources</a> sysadmin page. Clicking the magnifying glass icon will open a dialog for
+  easy script resource selection.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Domains</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The domains for which the print report will be made available.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Read-only Properties</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A JSON property object that may be used in the Freemarker template. In the "NM Report" example
+  screenshots above, the "volume" value, "133", and "ISSN" value, "1397-999X", come from these
+  read-only properties.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <em>Parameters</em> field is exactly like the <em>Read-only Properties</em>, except that the properties will
+  be displayed in the Print dialog, and may thus be edited by the user per print.
+  The <em>Parameter</em> values may be instantiated with default values containing <em>replacement tokens</em>, such
+  as "${year-2-digits}", "${year}", "${week-2-digits}" and "${week}".
+  In the "NM Report" example screenshots above, the effect of specifying "week" and "year" parameters
+  can be seen.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Test</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <em>Test</em> field is not actually a print report attribute. The sysadmin can specify a message tag
+  and test-execute the print report in this section.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-print-report"><a class="anchor" href="#deleting-a-print-report"></a><a class="link" href="#deleting-a-print-report">12.4. Deleting a Print Report</a></h3>
+<div class="paragraph">
+<p>A print report can be deleted by clicking the trash icon next to them.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="importing-and-exporting-print-reports"><a class="anchor" href="#importing-and-exporting-print-reports"></a><a class="link" href="#importing-and-exporting-print-reports">12.5. Importing and Exporting Print Reports</a></h3>
+<div class="paragraph">
+<p>The system administrator can export and import print reports from the action menu.</p>
+</div>
+<div class="paragraph">
+<p>The export/import file format is based on a JSON representation of the
+<a href="https://github.com/NiordOrg/niord/blob/master/niord-core/src/main/java/org/niord/core/report/vo/FmReportVo.java">FmReportVo</a>
+class.</p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="json">[
+  {
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">reportId</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">nm-report</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">NM report</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">sortOrder</span><span class="delimiter">&quot;</span></span>: <span class="integer">2</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">templatePath</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">templates/messages/nm-report-pdf.ftl</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">domains</span><span class="delimiter">&quot;</span></span>: [
+      { <span class="key"><span class="delimiter">&quot;</span><span class="content">domainId</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">niord-nm</span><span class="delimiter">&quot;</span></span> }
+    ],
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">properties</span><span class="delimiter">&quot;</span></span>: {
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">mapThumbnails</span><span class="delimiter">&quot;</span></span>: <span class="value">false</span>,
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">ISSN</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">1397-999X</span><span class="delimiter">&quot;</span></span>,
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">volume</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">133</span><span class="delimiter">&quot;</span></span>
+    },
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">params</span><span class="delimiter">&quot;</span></span>: {
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">week</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">${week}</span><span class="delimiter">&quot;</span></span>,
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">year</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">${year}</span><span class="delimiter">&quot;</span></span>
+    }
+  },
+  <span class="error">.</span><span class="error">.</span><span class="error">.</span>
+]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Importing a print report JSON file will trigger the <em>report-import</em> batch job.
+Batch jobs can be monitored and managed by system administrators.</p>
+</div>
+<div class="paragraph">
+<p>As an alternative to manually uploading a report import JSON file on the <em>Print Reports</em> sysadmin page,
+the file can be copied to the <em>$NIORD_HOME/batch-jobs/report-import/in</em> folder.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="keycloak-integration"><a class="anchor" href="#keycloak-integration"></a><a class="link" href="#keycloak-integration">13. Keycloak Integration</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Keycloak is an open source identity and access management middleware product, which is documented
@@ -2722,7 +2945,7 @@ to use Keycloak directly.</p>
 somewhat familiar with Keycloak before reading this.</p>
 </div>
 <div class="sect2">
-<h3 id="niord-domains"><a class="anchor" href="#niord-domains"></a><a class="link" href="#niord-domains">12.1. Niord Domains</a></h3>
+<h3 id="niord-domains"><a class="anchor" href="#niord-domains"></a><a class="link" href="#niord-domains">13.1. Niord Domains</a></h3>
 <div class="paragraph">
 <p>Domains in Niord are detailed in the <a href="#domains">Domains</a> chapter.
 For each domain in Niord, there will be <em>bearer only</em> application client in Keycloak.</p>
@@ -2740,7 +2963,7 @@ in Keycloak.</p>
 <p>Also, there is a single <em>public</em> application client for the actual Niord web application.</p>
 </div>
 <div class="sect3">
-<h4 id="roles"><a class="anchor" href="#roles"></a><a class="link" href="#roles">12.1.1. Roles</a></h4>
+<h4 id="roles"><a class="anchor" href="#roles"></a><a class="link" href="#roles">13.1.1. Roles</a></h4>
 <div class="paragraph">
 <p>As described in the <a href="#system-administrators-manual">System Administrators Manual</a> chapter, a user may have either the <em>User</em>,
 <em>Editor</em>, <em>Admin</em> or <em>Sysadmin</em> role in each of the Niord domains.</p>
@@ -2765,7 +2988,7 @@ roles mentioned above, are created automatically in Keycloak.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="niord-users"><a class="anchor" href="#niord-users"></a><a class="link" href="#niord-users">12.2. Niord Users</a></h3>
+<h3 id="niord-users"><a class="anchor" href="#niord-users"></a><a class="link" href="#niord-users">13.2. Niord Users</a></h3>
 <div class="paragraph">
 <p>All users in Niord are created and maintained in Keycloak, although Niord also provides a UI for
 managing users on top of Keycloak, as detailed in the
@@ -2788,7 +3011,7 @@ a user in Keycloak.</p>
 <p>Keycloak can also be integrated with other Keycloak services, Active Directory or other LDAP provides, etc.</p>
 </div>
 <div class="sect3">
-<h4 id="user-groups"><a class="anchor" href="#user-groups"></a><a class="link" href="#user-groups">12.2.1. User Groups</a></h4>
+<h4 id="user-groups"><a class="anchor" href="#user-groups"></a><a class="link" href="#user-groups">13.2.1. User Groups</a></h4>
 <div class="paragraph">
 <p>Instead of assigning domain roles (i.e. Keycloak application client roles) directly to users, which would
 be a tedious task, Niord instead rely on Keycloak <em>Groups</em>.</p>
@@ -2845,7 +3068,7 @@ chapter.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="user-specific-editor-fields"><a class="anchor" href="#user-specific-editor-fields"></a><a class="link" href="#user-specific-editor-fields">12.3. User-Specific Editor-Fields</a></h3>
+<h3 id="user-specific-editor-fields"><a class="anchor" href="#user-specific-editor-fields"></a><a class="link" href="#user-specific-editor-fields">13.3. User-Specific Editor-Fields</a></h3>
 <div class="paragraph">
 <p>The list of editor fields being displayed when a user edits a message in Niord is highly configurable.
 There are settings to define a base set of fields, a message main-type (NW,NM) specific set,
@@ -2879,7 +3102,7 @@ editor fields. Example:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="niord-security"><a class="anchor" href="#niord-security"></a><a class="link" href="#niord-security">12.4. Niord Security</a></h3>
+<h3 id="niord-security"><a class="anchor" href="#niord-security"></a><a class="link" href="#niord-security">13.4. Niord Security</a></h3>
 <div class="paragraph">
 <p>All access to the Niord backend happens via calls to REST endpoints. The obvious example is the
 actual Niord web application which makes Ajax calls to the Niord backend.</p>
@@ -2913,7 +3136,7 @@ will validate that the user has the <em>Admin</em> role in the current domain, o
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-06-23 11:58:45 CEST
+Last updated 2017-06-26 08:09:44 CEST
 </div>
 </div>
 <script type="text/x-mathjax-config">

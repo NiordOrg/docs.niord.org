@@ -76,4 +76,8 @@ include::10-Categories.adoc[]
 
 <<<
 
+include::11-PrintReports.adoc[]
+
+<<<
+
 include::A1-KeycloakIntegration.adoc[]
