@@ -46,9 +46,11 @@ All editable attributes, except the bottom-most one, are common to all promulgat
 | Active
 | Only active promulgation types are used when creating a new message.
 
-| Promulgate by Default
-| Use this checkbox to flag if the promulgation type should be turned on by default for qualifying
-  messages.
+| Requirement
+| Select the promulgation type requirements for qualifying messages.
+The _Optional_ requirement means that message promulgations of this type are not turned on by default.
+The _Default_ requirement means that message promulgations of this type are turned on by default.
+The _Mandatory_ requirement means that message promulgations of this type are always turned on.
 
 | Type ID
 | The unique ID of the promulgation type.
