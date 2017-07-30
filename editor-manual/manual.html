@@ -520,9 +520,10 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#editors-manual">2. Editors Manual</a></li>
 <li><a href="#home">3. Home</a>
 <ul class="sectlevel2">
-<li><a href="#login">3.1. Login</a></li>
-<li><a href="#domain-selection">3.2. Domain Selection</a></li>
-<li><a href="#language-selection">3.3. Language Selection</a></li>
+<li><a href="#out-of-date-warning">3.1. Out-of-Date Warning</a></li>
+<li><a href="#login">3.2. Login</a></li>
+<li><a href="#domain-selection">3.3. Domain Selection</a></li>
+<li><a href="#language-selection">3.4. Language Selection</a></li>
 </ul>
 </li>
 <li><a href="#messages">4. Messages</a>
@@ -681,7 +682,29 @@ domain and language selection; all accessible via the main menu.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="login"><a class="anchor" href="#login"></a><a class="link" href="#login">3.1. Login</a></h3>
+<h3 id="out-of-date-warning"><a class="anchor" href="#out-of-date-warning"></a><a class="link" href="#out-of-date-warning">3.1. Out-of-Date Warning</a></h3>
+<div class="paragraph">
+<p>To provide a better user experience, Niord make use of the
+<a href="https://en.wikipedia.org/wiki/Cache_manifest_in_HTML5">HTML 5 Application Cache</a> to store a local copy
+of the Niord web application in the browser.</p>
+</div>
+<div class="paragraph">
+<p>If Niord has been updated, and the locally cached version of the web application is out-of-date, the user
+will see the following error message on the <em>Home</em> page:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/NiordOutOfDate.png" alt="Out-of-date Warning" width="300">
+</div>
+</div>
+<div class="paragraph">
+<p>Depending on the type of web browser, the user should clear her local browser cache and reload the Niord website.
+In e.g. Chrome, use Ctrl-F5 and restart Chrome. In Firefox, you can remove the out-dated local copy under
+Preferences &#8594; Advanced &#8594; Network &#8594; Offline Web Content and User Data.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="login"><a class="anchor" href="#login"></a><a class="link" href="#login">3.2. Login</a></h3>
 <div class="paragraph">
 <p>Prior to logging in to Niord, the user should contact a Niord administrator to ensure
 that she is a registered user and has the proper roles assigned for the respective domains.</p>
@@ -727,7 +750,7 @@ a new password.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="domain-selection"><a class="anchor" href="#domain-selection"></a><a class="link" href="#domain-selection">3.2. Domain Selection</a></h3>
+<h3 id="domain-selection"><a class="anchor" href="#domain-selection"></a><a class="link" href="#domain-selection">3.3. Domain Selection</a></h3>
 <div class="paragraph">
 <p>As described in the <a href="#editors-manual">Editors Manual</a> section, you always work within a current <em>domain</em> in Niord.
 The current domain is selected from the domain menu:</p>
@@ -751,7 +774,7 @@ that is displayed in the main menu (green for NM in this example).</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="language-selection"><a class="anchor" href="#language-selection"></a><a class="link" href="#language-selection">3.3. Language Selection</a></h3>
+<h3 id="language-selection"><a class="anchor" href="#language-selection"></a><a class="link" href="#language-selection">3.4. Language Selection</a></h3>
 <div class="paragraph">
 <p>Niord can be configured to support any number of website languages (i.e. the language used for
 menus, text and labels in the Niord website) and any number of NW-NM message
@@ -2908,6 +2931,24 @@ The user must double-click at the map to place the last vertex and complete the 
 </div>
 </div>
 <div class="sect4">
+<h5 id="span-class-image-img-src-images-positioneditormeasuretool-png-alt-measure-tool-width-18-span-measure-tool"><a class="anchor" href="#span-class-image-img-src-images-positioneditormeasuretool-png-alt-measure-tool-width-18-span-measure-tool"></a><a class="link" href="#span-class-image-img-src-images-positioneditormeasuretool-png-alt-measure-tool-width-18-span-measure-tool"><span class="image"><img src="images/PositionEditorMeasureTool.png" alt="Measure Tool" width="18"></span> Measure Tool</a></h5>
+<div class="paragraph">
+<p>When the <em>Measure Tool</em> is selected, the user can insert a temporary measurement path, similarly to the way
+a normal path is created using the <em>Path Tool</em>.
+Whilst adding the measurement path, the total length of the path (in meters, kilometers and nautical miles)
+will continually be displayed in a tooltip:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/PositionEditorMeasurement.png" alt="Measurement" width="300">
+</div>
+</div>
+<div class="paragraph">
+<p>The measurement paths are not persisted and will disappear whenever the editor is closed or if another
+graphical editor tool is selected.</p>
+</div>
+</div>
+<div class="sect4">
 <h5 id="span-class-image-img-src-images-positioneditormodifytool-png-alt-modify-tool-width-18-span-modify-tool"><a class="anchor" href="#span-class-image-img-src-images-positioneditormodifytool-png-alt-modify-tool-width-18-span-modify-tool"></a><a class="link" href="#span-class-image-img-src-images-positioneditormodifytool-png-alt-modify-tool-width-18-span-modify-tool"><span class="image"><img src="images/PositionEditorModifyTool.png" alt="Modify Tool" width="18"></span> Modify Tool</a></h5>
 <div class="paragraph">
 <p>When the <em>Modify Tool</em> is selected, the user can select and manipulate existing features directly
@@ -3356,7 +3397,7 @@ editor field described in the <a href="#edit-editor-page">Edit Editor Page</a> c
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-05-30 08:16:41 CEST
+Last updated 2017-05-31 13:12:49 CEST
 </div>
 </div>
 <script type="text/x-mathjax-config">

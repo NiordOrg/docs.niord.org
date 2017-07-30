@@ -160,6 +160,18 @@ user clicks the map. The first click will place the first position of the polygo
 clicks will add a new segment to the polygon.
 The user must double-click at the map to place the last vertex and complete the polygon.
 
+===== image:PositionEditorMeasureTool.png[Measure Tool, 18] Measure Tool
+
+When the _Measure Tool_ is selected, the user can insert a temporary measurement path, similarly to the way
+a normal path is created using the _Path Tool_.
+Whilst adding the measurement path, the total length of the path (in meters, kilometers and nautical miles)
+will continually be displayed in a tooltip:
+
+image::PositionEditorMeasurement.png[Measurement, 300]
+
+The measurement paths are not persisted and will disappear whenever the editor is closed or if another
+graphical editor tool is selected.
+
 ===== image:PositionEditorModifyTool.png[Modify Tool, 18] Modify Tool
 
 When the _Modify Tool_ is selected, the user can select and manipulate existing features directly

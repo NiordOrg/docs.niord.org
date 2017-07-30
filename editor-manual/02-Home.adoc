@@ -12,6 +12,22 @@ domain and language selection; all accessible via the main menu.
 
 image::Home.png[Home, 600]
 
+=== Out-of-Date Warning
+
+To provide a better user experience, Niord make use of the
+https://en.wikipedia.org/wiki/Cache_manifest_in_HTML5[HTML 5 Application Cache] to store a local copy
+of the Niord web application in the browser.
+
+If Niord has been updated, and the locally cached version of the web application is out-of-date, the user
+will see the following error message on the _Home_ page:
+
+image::NiordOutOfDate.png[Out-of-date Warning, 300]
+
+Depending on the type of web browser, the user should clear her local browser cache and reload the Niord website.
+In e.g. Chrome, use Ctrl-F5 and restart Chrome. In Firefox, you can remove the out-dated local copy under
+Preferences -> Advanced -> Network -> Offline Web Content and User Data.
+
+
 === Login
 
 Prior to logging in to Niord, the user should contact a Niord administrator to ensure
