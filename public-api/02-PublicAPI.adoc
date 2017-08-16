@@ -13,17 +13,12 @@ Currently, there are three live Niord systems that may be used for accessing the
 |System |Base URL |Description
 
 |DMA Alpha Site
-|https://niord.e-navigation.net[niord.e-navigation.net^]
+|https://niord.e-navigation.net[niord.e-navigation.net]
 |Used for alpha testing the Niord system. Contains junk data as well as production data
 from the Danish Maritime Authority.
 
-|DMA Beta Site
-|https://niord-beta.e-navigation.net[niord-beta.e-navigation.net^]
-|Used for beta testing the Niord system. Updated each night with production data
-from the Danish Maritime Authority.
-
 |DMA Prod Site
-|https://niord-dma.e-navigation.net[niord-dma.e-navigation.net^]
+|https://niord.dma.dk[niord.dma.dk]
 |Used in production by the the Danish Maritime Authority.
 |===
 
@@ -163,15 +158,14 @@ The DMA Niord production system currently use the following domains (among other
 |===
 |Domain ID | Description
 
-|niord-legacy-nw
-|Currently Danish NW's are imported to, but not created in, the DMA Niord production system. +
-They are imported in the "niord-legacy-nw" domain.
+|niord-nw
+|All Danish navigational warnings are produced in the "niord-nw" domain.
 
 |niord-nm
-|All Danish Notices to Mariners area now produced in the "niord-nm" domain.
+|All Danish Notices to Mariners are produced in the "niord-nm" domain.
 
 |niord-fa
-|All Danish firing areas area defined as miscellaneous Notices to Mariners in the "niord-fa" domain.
+|All Danish firing areas are defined as miscellaneous Notices to Mariners in the "niord-fa" domain.
 
 |niord-fe
 |The actual firing exercises are maintained as local navigational warnings in the "niord-fe" domain.
@@ -183,7 +177,7 @@ Fetch all in-force Danish NM's - only return English translation:
 [source,bash]
 ----
 curl -X GET --header 'Accept: application/json' \
-   'https://niord-dma.e-navigation.net/rest/public/v1/messages?lang=en&domain=niord-nm'
+   'https://niord.dma.dk/rest/public/v1/messages?lang=en&domain=niord-nm'
 ----
 
 Fetch all in-force Danish NW's, including firing exercises. Return all translations of the messages:
@@ -191,5 +185,5 @@ Fetch all in-force Danish NW's, including firing exercises. Return all translati
 [source,bash]
 ----
 curl -X GET --header 'Accept: application/json' \
-   'https://niord-dma.e-navigation.net/rest/public/v1/messages?domain=niord-nm&domain=niord-fe'
+   'https://niord.dma.dk/rest/public/v1/messages?domain=niord-nw&domain=niord-fe'
 ----

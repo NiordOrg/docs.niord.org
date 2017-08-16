@@ -598,19 +598,13 @@ messages that are currently - or has been - published (in-force).<br></p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DMA Alpha Site</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://niord.e-navigation.net" target="_blank">niord.e-navigation.net</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://niord.e-navigation.net">niord.e-navigation.net</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Used for alpha testing the Niord system. Contains junk data as well as production data
 from the Danish Maritime Authority.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">DMA Beta Site</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://niord-beta.e-navigation.net" target="_blank">niord-beta.e-navigation.net</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Used for beta testing the Niord system. Updated each night with production data
-from the Danish Maritime Authority.</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DMA Prod Site</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://niord-dma.e-navigation.net" target="_blank">niord-dma.e-navigation.net</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://niord.dma.dk">niord.dma.dk</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Used in production by the the Danish Maritime Authority.</p></td>
 </tr>
 </tbody>
@@ -831,17 +825,16 @@ Default value is <em>true</em>.</p></td>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">niord-legacy-nw</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Currently Danish NW&#8217;s are imported to, but not created in, the DMA Niord production system.<br>
-They are imported in the "niord-legacy-nw" domain.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">niord-nw</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All Danish navigational warnings are produced in the "niord-nw" domain.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">niord-nm</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All Danish Notices to Mariners area now produced in the "niord-nm" domain.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All Danish Notices to Mariners are produced in the "niord-nm" domain.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">niord-fa</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All Danish firing areas area defined as miscellaneous Notices to Mariners in the "niord-fa" domain.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All Danish firing areas are defined as miscellaneous Notices to Mariners in the "niord-fa" domain.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">niord-fe</p></td>
@@ -855,7 +848,7 @@ They are imported in the "niord-legacy-nw" domain.</p></td>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="bash">curl -X GET --header 'Accept: application/json' \
-   'https://niord-dma.e-navigation.net/rest/public/v1/messages?lang=en&amp;domain=niord-nm'</code></pre>
+   'https://niord.dma.dk/rest/public/v1/messages?lang=en&amp;domain=niord-nm'</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -864,7 +857,7 @@ They are imported in the "niord-legacy-nw" domain.</p></td>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="bash">curl -X GET --header 'Accept: application/json' \
-   'https://niord-dma.e-navigation.net/rest/public/v1/messages?domain=niord-nm&amp;domain=niord-fe'</code></pre>
+   'https://niord.dma.dk/rest/public/v1/messages?domain=niord-nw&amp;domain=niord-fe'</code></pre>
 </div>
 </div>
 </div>
@@ -873,7 +866,7 @@ They are imported in the "niord-legacy-nw" domain.</p></td>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-05-12 13:01:06 CEST
+Last updated 2017-01-16 08:00:43 CET
 </div>
 </div>
 <script type="text/x-mathjax-config">
