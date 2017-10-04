@@ -452,8 +452,8 @@ to external channels. The availability of these _promulgations_ is configured by
 administrators on a per-domain basis.
 
 Niord has a plug-in architecture for adding new promulgation types. By default, it supports
-distributing _NAVTEX_ versions of navigational warnings via mailing lists, and support for posting
-messages at Twitter upon publication.
+distributing _NAVTEX_ and _SafetyNET_ versions of navigational warnings via mailing lists,
+and support for posting messages at Twitter upon publication.
 
 Furthermore, the Danish version of Niord supports generating an _Audio_ promulgation for
 navigational warnings. This will promulgate a verbose textual version of the messages,
@@ -478,6 +478,9 @@ This will create a crude starting point, that must subsequently be edited and po
 The NAVTEX promulgation also contains a read-only field for the NAVTEX preamble. This may contain
 _replacement tokens_ such as "${publish-date}" and "${number-year-id}" that will automatically be
 substituted upon publication of the message.
+
+For any _SafetyNET_ promulgation, ensure that _Priority_ and _Area_
+selection is correct, and that the text adheres to MSI standards.
 
 ==== Charts Editor Field ====
 
