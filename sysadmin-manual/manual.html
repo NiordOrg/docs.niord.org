@@ -1005,8 +1005,8 @@ in Niord.</p>
 <p>For Navigational Warnings in particular, there may be a need to promulgate specialized versions of
 a message to external channels.
 Niord has a plug-in architecture for adding new promulgation types. By default, it supports
-distributing <em>NAVTEX</em> versions of navigational warnings via mailing lists, and support for posting
-messages at Twitter upon publication.</p>
+distributing <em>NAVTEX</em> and <em>SafetyNET</em> versions of navigational warnings via mailing lists,
+and support for posting messages at Twitter upon publication.</p>
 </div>
 <div class="paragraph">
 <p>Furthermore, the Danish version of Niord supports generating an <em>Audio</em> promulgation for
@@ -1127,6 +1127,27 @@ Clicking the button will open the <em>Transmitters</em> dialog:</p>
 <p>For each transmitter added via this dialog, the sysadmin can specify which areas the transmitter covers.
 This will facility automatic selection of the correct transmitters when a new message is created
 by executing a message template.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="safetynet"><a class="anchor" href="#safetynet"></a><a class="link" href="#safetynet">SafetyNET</a></h5>
+<div class="paragraph">
+<p>The SafetyNET promulgation type has a button for managing the available distribution areas.
+Clicking the button will open the <em>Areas</em> dialog:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SafetyNetAreaDialog.png" alt="SafetyNET Areas Dialog" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>Here, you can add either circular, rectangular, coastal or NAVAREA areas, as defined in the
+<em>IMO International SafetyNET Manual</em>. Rather than typing in the C-codes of the SafetyNET
+standard, the format used is that of the Inmarsat MMS system, which is e.g. used by
+SHOM (NAVAREA II coordinator) to promulgate SafetyNET.</p>
+</div>
+<div class="paragraph">
+<p>The defined (active) SafetyNET areas will be available for selection in the message promulgations.</p>
 </div>
 </div>
 <div class="sect4">

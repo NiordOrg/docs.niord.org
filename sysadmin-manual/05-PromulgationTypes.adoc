@@ -11,8 +11,8 @@ image::PromulgationTypesPage.png[Promulgation Types, 600]
 For Navigational Warnings in particular, there may be a need to promulgate specialized versions of
 a message to external channels.
 Niord has a plug-in architecture for adding new promulgation types. By default, it supports
-distributing _NAVTEX_ versions of navigational warnings via mailing lists, and support for posting
-messages at Twitter upon publication.
+distributing _NAVTEX_ and _SafetyNET_ versions of navigational warnings via mailing lists,
+and support for posting messages at Twitter upon publication.
 
 Furthermore, the Danish version of Niord supports generating an _Audio_ promulgation for
 navigational warnings. This will promulgate a verbose textual version of the messages,
@@ -98,6 +98,19 @@ image::NavtexTransmitterDialog.png[NAVTEX Transmitter Dialog, 400]
 For each transmitter added via this dialog, the sysadmin can specify which areas the transmitter covers.
 This will facility automatic selection of the correct transmitters when a new message is created
 by executing a message template.
+
+===== SafetyNET
+The SafetyNET promulgation type has a button for managing the available distribution areas.
+Clicking the button will open the _Areas_ dialog:
+
+image::SafetyNetAreaDialog.png[SafetyNET Areas Dialog, 400]
+
+Here, you can add either circular, rectangular, coastal or NAVAREA areas, as defined in the
+_IMO International SafetyNET Manual_. Rather than typing in the C-codes of the SafetyNET
+standard, the format used is that of the Inmarsat MMS system, which is e.g. used by
+SHOM (NAVAREA II coordinator) to promulgate SafetyNET.
+
+The defined (active) SafetyNET areas will be available for selection in the message promulgations.
 
 ===== Twitter Settings
 The Twitter promulgation type has an "Update Settings" button that opens a dialog used for managing the
