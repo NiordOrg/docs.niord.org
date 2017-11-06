@@ -12,18 +12,63 @@ http://www.dma.dk/[Danish Maritime Authority].
 
 image::EfficienSea2.png[EfficienSea2, 200]
 
+This guide should be read by developers of Niord. It will use the Danish Niord system as a use case.
 
-Some of the main features of Niord area:
+The guide will cover the following topics:
 
-* Niord provides an advanced and highly customizable production system for NW and NM T&P.
-* It includes a plug-in architecture for NW and NM message promulgation via e.g. mailing lists
-  and Twitter.
-* Niord also integrates with the http://maritimecloud.net[Maritime Cloud] by defining a
-  Maritime Cloud Service Specification and making NW & NM messages accessible via a
-  link:../public-api/api.html[Public REST API]
-* The link:../public-model/model.html[combined NW & NM message model] adopted by Niord has
-  been devised to make data future-compatible with the upcoming IHO S-124 specification.
+* How to set up a development environment
+* Coding conventions, etc.
 
-This guide should be read by developers of Niord.
-It will detail how to set up a development environment, coding conventions, etc.
+=== Developer Profile
+
+For the development process to be effective, the developer sshould preferably have a thorough knowledge
+of the following technologies:
+
+* Java 8
+* Java EE 7: Niord uses the entire Java EE 7 stack, specially EJB, JPA, JAX-RS, Servlets, Batch API,
+             CDI, etc.
+* AngularJS + Bootstrap
+* MySQL
+* Docker
+
+It would also be advantageous, if the developer has some knowledge of the following technologies:
+
+* OpenLayers
+* Wildfly 10
+* JBOSS Keycloak
+* Freemarker
+* Maven
+* Git(hub)
+
+Furthermore, the actual Niord source code also has a certain learning curve.
+
+=== Resources
+
+[cols="30,70",options="header"]
+|===
+|Projects|Description
+
+|https://github.com/NiordOrg/niord[niord] | Main project for the Niord production system.
+
+|https://github.com/NiordOrg/niord-dk[niord-dk] | Extensions for the Danish Niord production system.
+
+|https://github.com/NiordOrg/niord-proxy[niord-proxy] | Simple end-user facing website that displays
+the active messages from the Niord production system.
+
+|https://github.com/GhanaNauticalnfo/niord-gh[niord-gh] | Extensions for the Ghanaian Niord production
+system (i.e. alternative to niord-dk).
+
+|https://github.com/NiordOrg/niord-appsrv[niord-appsrv] | Resources for installing and configuring the
+middleware used by the Niord production system, i.e. MySQL, Wildfly and Keycloak.
+
+|https://github.com/NiordOrg/niord-docker[niord-docker] | Scripts and configuration files for creating
+and pushing all Docker-containers needed for running a Niord production system.
+
+|===
+
+
+The main GitHub repository for Niord is found at https://github.com/niordorg.
+
+
+
 

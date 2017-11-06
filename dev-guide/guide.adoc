@@ -42,3 +42,7 @@ include::01-Introduction.adoc[]
 
 include::02-DevelopmentEnvironment.adoc[]
 
+<<<
+
+include::03-CodingConventions.adoc[]
+
