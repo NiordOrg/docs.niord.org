@@ -1,0 +1,29 @@
+
+:imagesdir: images
+
+== Introduction
+
+Niord (Nautical Information Directory) is a system for producing and publishing
+Navigational Warnings (_NW_) and Notices to Mariners T&P (_NM_).
+
+It was originally developed as part of the http://efficiensea2.org[EfficienSea2] EU project
+and subsequently implemented as a production system for the
+http://www.dma.dk/[Danish Maritime Authority].
+
+image::EfficienSea2.png[EfficienSea2, 200]
+
+
+Some of the main features of Niord area:
+
+* Niord provides an advanced and highly customizable production system for NW and NM T&P.
+* It includes a plug-in architecture for NW and NM message promulgation via e.g. mailing lists
+  and Twitter.
+* Niord also integrates with the http://maritimecloud.net[Maritime Cloud] by defining a
+  Maritime Cloud Service Specification and making NW & NM messages accessible via a
+  link:../public-api/api.html[Public REST API]
+* The link:../public-model/model.html[combined NW & NM message model] adopted by Niord has
+  been devised to make data future-compatible with the upcoming IHO S-124 specification.
+
+This guide should be read by developers of Niord.
+It will detail how to set up a development environment, coding conventions, etc.
+
