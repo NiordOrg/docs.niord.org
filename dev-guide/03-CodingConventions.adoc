@@ -6,10 +6,33 @@
 Model classes
 
 
+
 image::PackageStructure.png[Package Structure, 300]
 
+The classes associated with the _Area_ entity, is typically spread across three niord sub-projects:
 
+[cols="20,80",options="header"]
+|===
+|Projects|Description
 
+| https://github.com/NiordOrg/niord/tree/master/niord-model[niord-model]
+| Contains the link:../model/model.html[Niord Message Model]. The message model is made up of
+  value objects (with a _Vo_ suffix) which are JSON-serializable. +
+  Third-party application can define a dependency on this project if they integrate with Niord via
+  the link:../public-api/api.html[Public REST API].
+
+| https://github.com/NiordOrg/niord/tree/master/niord-core[niord-core]
+| Contains the actual entity classes and business logic (session beans). +
+  May also define system model value objects, if these differ from the niord-model classes.
+
+| https://github.com/NiordOrg/niord/tree/master/niord-web[niord-web]
+| Contains the JAX-RS REST interface used by clients (such as the Niord web application) to access the
+  entities and execute business logic. +
+  The REST interface is typically a thin wrapper on top of the service interface defined in niord-core.
+  However, the REST interface also performs all the security and permission checks used to protect the
+  Niord system.
+
+|===
 
 
 

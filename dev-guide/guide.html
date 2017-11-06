@@ -629,8 +629,8 @@ CDI, etc.</p>
 <h3 id="resources"><a class="anchor" href="#resources"></a><a class="link" href="#resources">1.2. Resources</a></h3>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
-<col style="width: 30%;">
-<col style="width: 70%;">
+<col style="width: 20%;">
+<col style="width: 80%;">
 </colgroup>
 <thead>
 <tr>
@@ -696,6 +696,43 @@ and pushing all Docker-containers needed for running a Niord production system.<
 <img src="images/PackageStructure.png" alt="Package Structure" width="300">
 </div>
 </div>
+<div class="paragraph">
+<p>The classes associated with the <em>Area</em> entity, is typically spread across three niord sub-projects:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Projects</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/NiordOrg/niord/tree/master/niord-model">niord-model</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contains the <a href="../model/model.html">Niord Message Model</a>. The message model is made up of
+  value objects (with a <em>Vo</em> suffix) which are JSON-serializable.<br>
+  Third-party application can define a dependency on this project if they integrate with Niord via
+  the <a href="../public-api/api.html">Public REST API</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/NiordOrg/niord/tree/master/niord-core">niord-core</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contains the actual entity classes and business logic (session beans).<br>
+  May also define system model value objects, if these differ from the niord-model classes.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/NiordOrg/niord/tree/master/niord-web">niord-web</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contains the JAX-RS REST interface used by clients (such as the Niord web application) to access the
+  entities and execute business logic.<br>
+  The REST interface is typically a thin wrapper on top of the service interface defined in niord-core.
+  However, the REST interface also performs all the security and permission checks used to protect the
+  Niord system.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
