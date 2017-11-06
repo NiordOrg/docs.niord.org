@@ -3,5 +3,13 @@
 
 == Coding Conventions
 
+Model classes
+
+
+image::PackageStructure.png[Package Structure, 300]
+
+
+
+
 
 
