@@ -40,10 +40,14 @@ include::01-Introduction.adoc[]
 
 <<<
 
-include::02-CodingConventions.adoc[]
+include::02-JavaCodingConventions.adoc[]
 
 <<<
 
-include::03-DevelopmentEnvironment.adoc[]
+include::03-AngularCodingConventions.adoc[]
+
+<<<
+
+include::04-DevelopmentEnvironment.adoc[]
 
 

@@ -1,0 +1,25 @@
+
+:imagesdir: images
+
+== Angular Coding Conventions
+
+The other big chunk of code in Niord is the AngularJS and JavaScript-based web application.
+
+=== Organization of Angular Sources
+
+The web application is organized as follows:
+
+image::WebAppStructure.png[Package Structure, 240]
+
+All source files developed as part of Niord, is placed in the _app_ folder.
+All external dependencies, such as third-party AngularJS directives, are placed in the _ext_ folder.
+
+Under _app_, the angular sources, such as directives, controllers, services and partials (html),
+are primarily organized by _main page_.
+So, all sources for the _Messages_ page are in the _messages_ folder, etc.
+
+
+
+
+
+

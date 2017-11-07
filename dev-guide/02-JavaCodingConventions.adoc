@@ -1,7 +1,7 @@
 
 :imagesdir: images
 
-== Coding Conventions
+== Java Coding Conventions
 
 Niord is fairly consistent about using naming and coding conventions, and understanding these conventions
 makes it easier to read the code.
