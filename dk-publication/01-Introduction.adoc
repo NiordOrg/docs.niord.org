@@ -1,9 +1,0 @@
-== Introduktion
-
-IMPORTANT: This document is in Danish and targeted the staff of the Danish Maritime Authority only.
-
-Publikationer håndteres af Niord administratorer og er et ret komplekst tema. En generel teknisk gennemgang
-kan findes i http://docs.niord.org/admin-manual/manual.html#publications[Niords administrations-manual],
-mens dette dokument forholder sig til den specifikke brug af publikationer hos Søfartsstyrelsen, herunder
-den ugentlige udgivelse af Efterretninger for Søfarende, samt den årlige udgivelse af almanac, skydeområder, osv.
-
