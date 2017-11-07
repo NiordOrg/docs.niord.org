@@ -532,6 +532,7 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#angular-coding-conventions">3. Angular Coding Conventions</a>
 <ul class="sectlevel2">
 <li><a href="#organization-of-angular-sources">3.1. Organization of Angular Sources</a></li>
+<li><a href="#application-cache">3.2. Application Cache</a></li>
 </ul>
 </li>
 <li><a href="#development-set-up">4. Development Set-Up</a>
@@ -953,6 +954,48 @@ All external dependencies, such as third-party AngularJS directives, are placed 
 <p>Under <em>app</em>, the angular sources, such as directives, controllers, services and partials (html),
 are primarily organized by <em>main page</em>.
 So, all sources for the <em>Messages</em> page are in the <em>messages</em> folder, etc.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="application-cache"><a class="anchor" href="#application-cache"></a><a class="link" href="#application-cache">3.2. Application Cache</a></h3>
+<div class="paragraph">
+<p>The Niord web application use various HTML 5 features, such as <em>Local Storage</em> and <em>Application Cache</em>.
+The <em>Application Cache</em> in particular, makes day-to-day use of Niord substantially faster for end users.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Application Cache has supposedly been deprecated, and is to be replaced with a <em>Service Workers</em>
+mechanism. However, Service Workers are not yet supported by Safari (read: iOS).
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The niord-web project can be built using the "dist" profile:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>cd niord-web
+mvn -P dist clean install</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will perform the following modifications to the resulting war file:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>All Niord CSS and JavaScript files will be merged into single files.</p>
+</li>
+<li>
+<p>An HTML5 Application Cache file is generated to facilitate caching.</p>
+</li>
+</ul>
 </div>
 <div style="page-break-after: always;"></div>
 </div>

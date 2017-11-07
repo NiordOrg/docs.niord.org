@@ -18,8 +18,21 @@ Under _app_, the angular sources, such as directives, controllers, services and 
 are primarily organized by _main page_.
 So, all sources for the _Messages_ page are in the _messages_ folder, etc.
 
+=== Application Cache
 
+The Niord web application use various HTML 5 features, such as _Local Storage_ and _Application Cache_.
+The _Application Cache_ in particular, makes day-to-day use of Niord substantially faster for end users.
 
+WARNING: Application Cache has supposedly been deprecated, and is to be replaced with a _Service Workers_
+mechanism. However, Service Workers are not yet supported by Safari (read: iOS).
 
+The niord-web project can be built using the "dist" profile:
 
+    cd niord-web
+    mvn -P dist clean install
+
+This will perform the following modifications to the resulting war file:
+
+* All Niord CSS and JavaScript files will be merged into single files.
+* An HTML5 Application Cache file is generated to facilitate caching.
 
