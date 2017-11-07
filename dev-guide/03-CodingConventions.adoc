@@ -93,7 +93,7 @@ The classes are spread across three niord sub-projects:
 
 |===
 
-==== Serialization and De-serialization
+=== Serialization and De-serialization
 
 All Niord entities have methods for converting to and fro their _value object_ representation.
 
