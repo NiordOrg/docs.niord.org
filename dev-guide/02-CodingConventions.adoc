@@ -161,10 +161,9 @@ related entities, the fields can be prefixed with the entity name, as seen in th
 
 [source,java]
 ----
-DataFilter filter =
-   DataFilter.get()
-      .fields("Message.details", "Message.geometry", "Area.parent", "Category.parent")
-      .lang("en");
+DataFilter filter = DataFilter.get()
+    .fields("Message.details", "Message.geometry", "Area.parent", "Category.parent")
+    .lang("en");
 ----
 
 Hence, the resulting serialization code for +Area+ will thus be:

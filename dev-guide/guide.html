@@ -522,16 +522,16 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#resources">1.2. Resources</a></li>
 </ul>
 </li>
-<li><a href="#development-set-up">2. Development Set-Up</a>
+<li><a href="#coding-conventions">2. Coding Conventions</a>
 <ul class="sectlevel2">
-<li><a href="#prerequisites">2.1. Prerequisites</a></li>
+<li><a href="#area-example">2.1. Area Example</a></li>
+<li><a href="#localization">2.2. Localization</a></li>
+<li><a href="#serialization-and-de-serialization">2.3. Serialization and De-serialization</a></li>
 </ul>
 </li>
-<li><a href="#coding-conventions">3. Coding Conventions</a>
+<li><a href="#development-set-up">3. Development Set-Up</a>
 <ul class="sectlevel2">
-<li><a href="#area-example">3.1. Area Example</a></li>
-<li><a href="#localization">3.2. Localization</a></li>
-<li><a href="#serialization-and-de-serialization">3.3. Serialization and De-serialization</a></li>
+<li><a href="#prerequisites">3.1. Prerequisites</a></li>
 </ul>
 </li>
 </ul>
@@ -696,16 +696,7 @@ and pushing all Docker-containers needed for running a Niord production system.<
 </div>
 </div>
 <div class="sect1">
-<h2 id="development-set-up"><a class="anchor" href="#development-set-up"></a><a class="link" href="#development-set-up">2. Development Set-Up</a></h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="prerequisites"><a class="anchor" href="#prerequisites"></a><a class="link" href="#prerequisites">2.1. Prerequisites</a></h3>
-<div style="page-break-after: always;"></div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="coding-conventions"><a class="anchor" href="#coding-conventions"></a><a class="link" href="#coding-conventions">3. Coding Conventions</a></h2>
+<h2 id="coding-conventions"><a class="anchor" href="#coding-conventions"></a><a class="link" href="#coding-conventions">2. Coding Conventions</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Niord is fairly consistent about using naming and coding conventions, and understanding these conventions
@@ -717,7 +708,7 @@ implemented using JPA entities, JSON-serializable value objects, business logic,
 batch import classes.</p>
 </div>
 <div class="sect2">
-<h3 id="area-example"><a class="anchor" href="#area-example"></a><a class="link" href="#area-example">3.1. Area Example</a></h3>
+<h3 id="area-example"><a class="anchor" href="#area-example"></a><a class="link" href="#area-example">2.1. Area Example</a></h3>
 <div class="paragraph">
 <p>As an example, consider the <em>Area</em> entity, which represents a specific area in the Areas tree. The classes used
 to implement areas, can be seen below:</p>
@@ -762,7 +753,7 @@ to implement areas, can be seen below:</p>
 </tbody>
 </table>
 <div class="sect3">
-<h4 id="classes-and-naming-conventions"><a class="anchor" href="#classes-and-naming-conventions"></a><a class="link" href="#classes-and-naming-conventions">3.1.1. Classes and Naming Conventions</a></h4>
+<h4 id="classes-and-naming-conventions"><a class="anchor" href="#classes-and-naming-conventions"></a><a class="link" href="#classes-and-naming-conventions">2.1.1. Classes and Naming Conventions</a></h4>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 30%;">
@@ -831,7 +822,7 @@ to implement areas, can be seen below:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="localization"><a class="anchor" href="#localization"></a><a class="link" href="#localization">3.2. Localization</a></h3>
+<h3 id="localization"><a class="anchor" href="#localization"></a><a class="link" href="#localization">2.2. Localization</a></h3>
 <div class="paragraph">
 <p>Almost all entities in Niord are localizable to any number of languages.<br>
 As can be seen from the <a href="../model/model.html">Niord Message Model</a>, this is implemented by
@@ -855,7 +846,7 @@ and all localizable attributes.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="serialization-and-de-serialization"><a class="anchor" href="#serialization-and-de-serialization"></a><a class="link" href="#serialization-and-de-serialization">3.3. Serialization and De-serialization</a></h3>
+<h3 id="serialization-and-de-serialization"><a class="anchor" href="#serialization-and-de-serialization"></a><a class="link" href="#serialization-and-de-serialization">2.3. Serialization and De-serialization</a></h3>
 <div class="paragraph">
 <p>All Niord entities have methods for converting to and fro their <em>value object</em> representation.</p>
 </div>
@@ -907,10 +898,9 @@ related entities, the fields can be prefixed with the entity name, as seen in th
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">DataFilter filter =
-   DataFilter.get()
-      .fields(<span class="string"><span class="delimiter">&quot;</span><span class="content">Message.details</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Message.geometry</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Area.parent</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Category.parent</span><span class="delimiter">&quot;</span></span>)
-      .lang(<span class="string"><span class="delimiter">&quot;</span><span class="content">en</span><span class="delimiter">&quot;</span></span>);</code></pre>
+<pre class="CodeRay highlight"><code data-lang="java">DataFilter filter = DataFilter.get()
+    .fields(<span class="string"><span class="delimiter">&quot;</span><span class="content">Message.details</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Message.geometry</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Area.parent</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Category.parent</span><span class="delimiter">&quot;</span></span>)
+    .lang(<span class="string"><span class="delimiter">&quot;</span><span class="content">en</span><span class="delimiter">&quot;</span></span>);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -930,13 +920,23 @@ related entities, the fields can be prefixed with the entity name, as seen in th
 }</code></pre>
 </div>
 </div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="development-set-up"><a class="anchor" href="#development-set-up"></a><a class="link" href="#development-set-up">3. Development Set-Up</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="prerequisites"><a class="anchor" href="#prerequisites"></a><a class="link" href="#prerequisites">3.1. Prerequisites</a></h3>
+
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-06 13:05:28 CET
+Last updated 2017-11-07 11:15:53 CET
 </div>
 </div>
 <script type="text/x-mathjax-config">
