@@ -530,7 +530,8 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#coding-conventions">3. Coding Conventions</a>
 <ul class="sectlevel2">
 <li><a href="#area-example">3.1. Area Example</a></li>
-<li><a href="#serialization-and-de-serialization">3.2. Serialization and De-serialization</a></li>
+<li><a href="#localization">3.2. Localization</a></li>
+<li><a href="#serialization-and-de-serialization">3.3. Serialization and De-serialization</a></li>
 </ul>
 </li>
 </ul>
@@ -782,9 +783,7 @@ to implement areas, can be seen below:</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>AreaDescVo</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Almost all entities in Niord are localizable to any number of languages. As can be seen from the
-  <a href="../model/model.html">Niord Message Model</a>, this is implemented by associating an entity, such
-  as <code>AreaVo</code>, with a list of classes that contain a language code and all localizable attributes.
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contains a language code and all localizable attributes of <code>AreaVo</code>.
   These associated entities have a <code>Desc</code> suffix, as in <code>AreaDescVo</code>.</p></td>
 </tr>
 <tr>
@@ -832,7 +831,31 @@ to implement areas, can be seen below:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="serialization-and-de-serialization"><a class="anchor" href="#serialization-and-de-serialization"></a><a class="link" href="#serialization-and-de-serialization">3.2. Serialization and De-serialization</a></h3>
+<h3 id="localization"><a class="anchor" href="#localization"></a><a class="link" href="#localization">3.2. Localization</a></h3>
+<div class="paragraph">
+<p>Almost all entities in Niord are localizable to any number of languages.<br>
+As can be seen from the <a href="../model/model.html">Niord Message Model</a>, this is implemented by
+associating an entity with a list of classes that contain a language code
+and all localizable attributes.</p>
+</div>
+<div class="paragraph">
+<p>Area contains one localizable attributes; <em>name</em>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">AreaVo</span> <span class="directive">implements</span> ILocalizable&lt;AreaDescVo&gt;, IJsonSerializable {
+    <span class="predefined-type">List</span>&lt;AreaDescVo&gt; descs;
+}
+
+<span class="directive">public</span> <span class="type">class</span> <span class="class">AreaDescVo</span> <span class="directive">implements</span> ILocalizedDesc, IJsonSerializable {
+    <span class="predefined-type">String</span> lang;
+    <span class="predefined-type">String</span> name;
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="serialization-and-de-serialization"><a class="anchor" href="#serialization-and-de-serialization"></a><a class="link" href="#serialization-and-de-serialization">3.3. Serialization and De-serialization</a></h3>
 <div class="paragraph">
 <p>All Niord entities have methods for converting to and fro their <em>value object</em> representation.</p>
 </div>

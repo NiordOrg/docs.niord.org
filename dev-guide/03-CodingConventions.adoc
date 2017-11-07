@@ -52,9 +52,7 @@ The classes are spread across three niord sub-projects:
   versions of the real entities.
 
 | +AreaDescVo+
-| Almost all entities in Niord are localizable to any number of languages. As can be seen from the
-  link:../model/model.html[Niord Message Model], this is implemented by associating an entity, such
-  as +AreaVo+, with a list of classes that contain a language code and all localizable attributes.
+| Contains a language code and all localizable attributes of +AreaVo+.
   These associated entities have a +Desc+ suffix, as in +AreaDescVo+.
 
 | +Area+
@@ -93,6 +91,29 @@ The classes are spread across three niord sub-projects:
 
 |===
 
+
+=== Localization
+
+Almost all entities in Niord are localizable to any number of languages. +
+As can be seen from the link:../model/model.html[Niord Message Model], this is implemented by
+associating an entity with a list of classes that contain a language code
+and all localizable attributes.
+
+Area contains one localizable attributes; _name_:
+
+[source,java]
+----
+public class AreaVo implements ILocalizable<AreaDescVo>, IJsonSerializable {
+    List<AreaDescVo> descs;
+}
+
+public class AreaDescVo implements ILocalizedDesc, IJsonSerializable {
+    String lang;
+    String name;
+}
+----
+
+
 === Serialization and De-serialization
 
 All Niord entities have methods for converting to and fro their _value object_ representation.
@@ -114,7 +135,6 @@ public class Domain extends BaseEntity<Integer> {
     }
 }
 ----
-
 
 Sometimes, however, things are a little more complex, as is the case for +Area+.
 
