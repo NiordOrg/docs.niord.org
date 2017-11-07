@@ -730,7 +730,7 @@ to implement areas, can be seen below:</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/NiordOrg/niord/tree/master/niord-model">niord-model</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Contains the <a href="../model/model.html">Niord Message Model</a>. The message model is made up of
-  value objects (with a <em>Vo</em> suffix) which are JSON-serializable.<br>
+  value objects.<br>
   Third-party application can define a dependency on this project if they integrate with Niord via
   the <a href="../public-api/api.html">Public REST API</a>.</p></td>
 </tr>
@@ -742,9 +742,75 @@ to implement areas, can be seen below:</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/NiordOrg/niord/tree/master/niord-web">niord-web</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Contains the JAX-RS REST interface used by clients (such as the Niord web application) to access the
-  entities and execute business logic.<br>
-  The REST interface is typically a thin wrapper on top of the service interface defined in niord-core.
-  However, the REST interface also performs all the security and permission checks used to protect the
+  entities and execute business logic.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="classes-and-naming-conventions"><a class="anchor" href="#classes-and-naming-conventions"></a><a class="link" href="#classes-and-naming-conventions">3.1.1. Classes and Naming Conventions</a></h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Classes</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AreaVo</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <a href="../model/model.html">Niord Message Model</a> representation of an area.<br>
+  The <code>Vo</code> suffix is used for all <em>value objects</em>, which are essentially JSON-serializable
+  versions of the real entities.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AreaDescVo</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Almost all entities in Niord are localizable to any number of languages. As can be seen from the
+  <a href="../model/model.html">Niord Message Model</a>, this is implemented by associating an entity, such
+  as <code>AreaVo</code>, with a list of classes that contain a language code and all localizable attributes.
+  These associated entities have a <code>Desc</code> suffix, as in <code>AreaDescVo</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Area</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The JPA entity definition of an area.<br>
+  Whereas there will be a strong correlation between the attributes of the <code>Area</code> entity and the <code>AreaVo</code>
+  value object, the entity class may define additional attributes, which are not part of the
+  public niord-model class. The entity class thus constitutes a <em>system model</em>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AreaDesc</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The JPA entity definition of the area description entity, i.e. the localizable attributes of an area.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SystemAreaVo</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When a <em>system model</em> entity, such as <code>Area</code>, contains attributes not included in the value objects
+  of the <a href="../model/model.html">Niord Message Model</a>, then a value object with a <code>System</code> prefix
+  is introduced to capture the additional attributes.<br>
+  As such, <code>SystemAreaVo</code> will extend <code>AreaVo</code> and includes the additional attributes.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AreaService</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Each entity will have a companion stateless session bean or singleton EJB, with a <code>Service</code> suffix.
+  This class defines the business logic and life-cycle management functions of the entity.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>BatchAreaImportReader</code><br>
+  <code>BatchAreaImportProcessor</code><br>
+  <code>BatchAreaImportWriter</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Many of the Niord model entities have an associated batch job for importing the entities.<br>
+  The batch job is typically implemented using the Java EE batch API, and the three phases
+  will be implemented by classes that have a <code>Batch</code> prefix and the <code>Reader</code>, <code>Processor</code> and <code>Writer</code>
+  suffixes respectively.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AreaRestService</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Each Niord entity will also be associated with a JAX-RS REST interface.<br>
+  This interface is typically a thin wrapper on top of the service interface, and will have the
+  <code>RestService</code> suffix.<br>
+  The REST interface also performs all the security and permission checks used to protect the
   Niord system.</p></td>
 </tr>
 </tbody>
@@ -753,9 +819,10 @@ to implement areas, can be seen below:</p>
 </div>
 </div>
 </div>
+</div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-07 07:17:12 CET
+Last updated 2017-11-06 13:05:28 CET
 </div>
 </div>
 <script type="text/x-mathjax-config">
