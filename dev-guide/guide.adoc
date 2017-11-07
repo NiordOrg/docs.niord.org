@@ -44,7 +44,7 @@ include::02-JavaCodingConventions.adoc[]
 
 <<<
 
-include::03-AngularCodingConventions.adoc[]
+include::03-WebappCodingConventions.adoc[]
 
 <<<
 

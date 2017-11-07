@@ -1,7 +1,7 @@
 
 :imagesdir: images
 
-== Angular Coding Conventions
+== Webapp Coding Conventions
 
 The other big chunk of code in Niord is the AngularJS and JavaScript-based web application.
 
@@ -34,5 +34,38 @@ The niord-web project can be built using the "dist" profile:
 This will perform the following modifications to the resulting war file:
 
 * All Niord CSS and JavaScript files will be merged into single files.
-* An HTML5 Application Cache file is generated to facilitate caching.
+* An HTML5 Application Cache manifest file is generated to facilitate caching.
+
+=== Overlay Wars
+
+Another mightily important feature used by Niord, is the web-application overlay mechanism.
+
+In reality, the Niord project would not be used in production by itself.
+Rather, developers would create a country-specific version (such as niord-dk for Denmark,
+or niord-gh for Ghana) with all the customizations and legacy integration needed for that
+particular country.
+
+The main trick is to create a web application that functions as an _overlay_ of the Niord web application.
+This allows the developer to selectively replace individual files, such as AngularJS files, CSS files,
+resource bundles, etc.
+
+The pom.xml file of the new web application, should define the overlay as:
+
+[source,xml]
+----
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-war-plugin</artifactId>
+    <version>2.4</version>
+    <configuration>
+        <workDirectory>target/overlay</workDirectory>
+        <overlays>
+            <overlay>
+                <groupId>org.niord</groupId>
+                <artifactId>niord-web</artifactId>
+            </overlay>
+        </overlays>
+    </configuration>
+</plugin>
+----
 

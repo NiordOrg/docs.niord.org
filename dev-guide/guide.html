@@ -529,10 +529,11 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#serialization-and-de-serialization">2.3. Serialization and De-serialization</a></li>
 </ul>
 </li>
-<li><a href="#angular-coding-conventions">3. Angular Coding Conventions</a>
+<li><a href="#webapp-coding-conventions">3. Webapp Coding Conventions</a>
 <ul class="sectlevel2">
 <li><a href="#organization-of-angular-sources">3.1. Organization of Angular Sources</a></li>
 <li><a href="#application-cache">3.2. Application Cache</a></li>
+<li><a href="#overlay-wars">3.3. Overlay Wars</a></li>
 </ul>
 </li>
 <li><a href="#development-set-up">4. Development Set-Up</a>
@@ -931,7 +932,7 @@ related entities, the fields can be prefixed with the entity name, as seen in th
 </div>
 </div>
 <div class="sect1">
-<h2 id="angular-coding-conventions"><a class="anchor" href="#angular-coding-conventions"></a><a class="link" href="#angular-coding-conventions">3. Angular Coding Conventions</a></h2>
+<h2 id="webapp-coding-conventions"><a class="anchor" href="#webapp-coding-conventions"></a><a class="link" href="#webapp-coding-conventions">3. Webapp Coding Conventions</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The other big chunk of code in Niord is the AngularJS and JavaScript-based web application.</p>
@@ -993,9 +994,47 @@ mvn -P dist clean install</pre>
 <p>All Niord CSS and JavaScript files will be merged into single files.</p>
 </li>
 <li>
-<p>An HTML5 Application Cache file is generated to facilitate caching.</p>
+<p>An HTML5 Application Cache manifest file is generated to facilitate caching.</p>
 </li>
 </ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="overlay-wars"><a class="anchor" href="#overlay-wars"></a><a class="link" href="#overlay-wars">3.3. Overlay Wars</a></h3>
+<div class="paragraph">
+<p>Another mightily important feature used by Niord, is the web-application overlay mechanism.</p>
+</div>
+<div class="paragraph">
+<p>In reality, the Niord project would not be used in production by itself.
+Rather, developers would create a country-specific version (such as niord-dk for Denmark,
+or niord-gh for Ghana) with all the customizations and legacy integration needed for that
+particular country.</p>
+</div>
+<div class="paragraph">
+<p>The main trick is to create a web application that functions as an <em>overlay</em> of the Niord web application.
+This allows the developer to selectively replace individual files, such as AngularJS files, CSS files,
+resource bundles, etc.</p>
+</div>
+<div class="paragraph">
+<p>The pom.xml file of the new web application, should define the overlay as:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;plugin&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>maven-war-plugin<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>2.4<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;configuration&gt;</span>
+        <span class="tag">&lt;workDirectory&gt;</span>target/overlay<span class="tag">&lt;/workDirectory&gt;</span>
+        <span class="tag">&lt;overlays&gt;</span>
+            <span class="tag">&lt;overlay&gt;</span>
+                <span class="tag">&lt;groupId&gt;</span>org.niord<span class="tag">&lt;/groupId&gt;</span>
+                <span class="tag">&lt;artifactId&gt;</span>niord-web<span class="tag">&lt;/artifactId&gt;</span>
+            <span class="tag">&lt;/overlay&gt;</span>
+        <span class="tag">&lt;/overlays&gt;</span>
+    <span class="tag">&lt;/configuration&gt;</span>
+<span class="tag">&lt;/plugin&gt;</span></code></pre>
+</div>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -1013,7 +1052,7 @@ mvn -P dist clean install</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-07 11:21:16 CET
+Last updated 2017-11-07 12:44:49 CET
 </div>
 </div>
 <script type="text/x-mathjax-config">
