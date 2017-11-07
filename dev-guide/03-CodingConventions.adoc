@@ -93,3 +93,71 @@ The classes are spread across three niord sub-projects:
 
 |===
 
+==== Serialization and De-serialization
+
+All Niord entities have methods for converting to and fro their _value object_ representation.
+
+In the simplest form, the JPA entity model will define a constructor that takes the _value object_
+representation as a parameter, and it will have a +toVo()+ function that returns the _value object_
+representation of the entity. Example:
+
+[source,java]
+----
+@Entity
+public class Domain extends BaseEntity<Integer> {
+    public Domain() {}
+    public Domain(DomainVo domain) {
+        // Instantiate entity from value object
+    }
+    public DomainVo toVo() {
+        // instantiate and return a value object from entity
+    }
+}
+----
+
+
+Sometimes, however, things are a little more complex, as is the case for +Area+.
+
++Area+ has two _value object_ representations, +AreaVo+ and +SystemAreaVo+.
+When, say, a public REST API call returns a message with an associated area, then the +AreaVo+ should be
+returned. If, however, a system administrator edits an area via the Niord webapp, then the +SystemAreaVo+
+representation should be used. +
+So, +Area.toVo()+ actually takes the target value object class as a parameter, and leave it to the
+REST service to decide which representation to use.
+
+Another complexity in serializing an entity to its _value object_, is that often you wish to exact
+control over which fields to return. +
+One example is language control. Most of the REST API calls will only return the localizable entities
+(e.g. +AreaDescVo+) for the requested language. This preserves bandwidth and makes client code simpler. +
+Another good example is control over the hierarchical relationship of Areas.
+When a message with an associated area (say, "Kattegat") is returned from a REST call, then you want
+the _parent_ relationship of areas to be included ("Kattegat" should include a parent-reference
+to "Denmark). Alternatively, when editing the area tree on the _Areas_ admin page, then you want
+the REST call to return root areas with their _children_ relationship.
+
+To facilitate this type of serialization control, Niord use a +DataFilter+ helper class, which
+defines the fields and language to include. To control the serialization of an entire tree of
+related entities, the fields can be prefixed with the entity name, as seen in the example below:
+
+[source,java]
+----
+public static final DataFilter MESSAGE_DETAILS_FILTER =
+   DataFilter.get().fields("Message.details", "Message.geometry", "Area.parent", "Category.parent");
+----
+
+Hence, the resulting serialization code for +Area+ will thus be:
+
+[source,java]
+----
+@Entity
+public class Area extends TreeBaseEntity<Area> implements ILocalizable<AreaDesc> {
+    public Area() {}
+    public Area(AreaVo area, DataFilter filter) {
+        // Instantiate entity from value object
+    }
+    public <A extends AreaVo> A toVo(Class<A> clz, DataFilter filter) {
+        // instantiate and return a value object from entity
+    }
+}
+----
+

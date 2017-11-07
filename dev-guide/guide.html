@@ -829,6 +829,81 @@ to implement areas, can be seen below:</p>
 </tbody>
 </table>
 </div>
+<div class="sect3">
+<h4 id="serialization-and-de-serialization"><a class="anchor" href="#serialization-and-de-serialization"></a><a class="link" href="#serialization-and-de-serialization">3.1.2. Serialization and De-serialization</a></h4>
+<div class="paragraph">
+<p>All Niord entities have methods for converting to and fro their <em>value object</em> representation.</p>
+</div>
+<div class="paragraph">
+<p>In the simplest form, the JPA entity model will define a constructor that takes the <em>value object</em>
+representation as a parameter, and it will have a <code>toVo()</code> function that returns the <em>value object</em>
+representation of the entity. Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Entity</span>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">Domain</span> <span class="directive">extends</span> BaseEntity&lt;<span class="predefined-type">Integer</span>&gt; {
+    <span class="directive">public</span> Domain() {}
+    <span class="directive">public</span> Domain(DomainVo domain) {
+        <span class="comment">// Instantiate entity from value object</span>
+    }
+    <span class="directive">public</span> DomainVo toVo() {
+        <span class="comment">// instantiate and return a value object from entity</span>
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Sometimes, however, things are a little more complex, as is the case for <code>Area</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>Area</code> has two <em>value object</em> representations, <code>AreaVo</code> and <code>SystemAreaVo</code>.
+When, say, a public REST API call returns a message with an associated area, then the <code>AreaVo</code> should be
+returned. If, however, a system administrator edits an area via the Niord webapp, then the <code>SystemAreaVo</code>
+representation should be used.<br>
+So, <code>Area.toVo()</code> actually takes the target value object class as a parameter, and leave it to the
+REST service to decide which representation to use.</p>
+</div>
+<div class="paragraph">
+<p>Another complexity in serializing an entity to its <em>value object</em>, is that often you wish to exact
+control over which fields to return.<br>
+One example is language control. Most of the REST API calls will only return the localizable entities
+(e.g. <code>AreaDescVo</code>) for the requested language. This preserves bandwidth and makes client code simpler.<br>
+Another good example is control over the hierarchical relationship of Areas.
+When a message with an associated area (say, "Kattegat") is returned from a REST call, then you want
+the <em>parent</em> relationship of areas to be included ("Kattegat" should include a parent-reference
+to "Denmark). Alternatively, when editing the area tree on the <em>Areas</em> admin page, then you want
+the REST call to return root areas with their <em>children</em> relationship.</p>
+</div>
+<div class="paragraph">
+<p>To facilitate this type of serialization control, Niord use a <code>DataFilter</code> helper class, which
+defines the fields and language to include. To control the serialization of an entire tree of
+related entities, the fields can be prefixed with the entity name, as seen in the example below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">static</span> <span class="directive">final</span> DataFilter MESSAGE_DETAILS_FILTER =
+   DataFilter.get().fields(<span class="string"><span class="delimiter">&quot;</span><span class="content">Message.details</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Message.geometry</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Area.parent</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Category.parent</span><span class="delimiter">&quot;</span></span>);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Hence, the resulting serialization code for <code>Area</code> will thus be:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Entity</span>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">Area</span> <span class="directive">extends</span> TreeBaseEntity&lt;<span class="predefined-type">Area</span>&gt; <span class="directive">implements</span> ILocalizable&lt;AreaDesc&gt; {
+    <span class="directive">public</span> <span class="predefined-type">Area</span>() {}
+    <span class="directive">public</span> <span class="predefined-type">Area</span>(AreaVo area, DataFilter filter) {
+        <span class="comment">// Instantiate entity from value object</span>
+    }
+    <span class="directive">public</span> &lt;A <span class="directive">extends</span> AreaVo&gt; A toVo(<span class="predefined-type">Class</span>&lt;A&gt; clz, DataFilter filter) {
+        <span class="comment">// instantiate and return a value object from entity</span>
+    }
+}</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
