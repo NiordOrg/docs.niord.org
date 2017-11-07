@@ -3,13 +3,21 @@
 
 == Coding Conventions
 
-Model classes
+Niord is fairly consistent about using naming and coding conventions, and understanding these conventions
+makes it easier to read the code.
 
+Each _logical entity_ of Niord, such as an _area_, a _chart_, a _message_ or a _publication_, is
+implemented using JPA entities, JSON-serializable value objects, business logic, REST interfaces, and
+batch import classes.
 
+=== Area Example
+
+As an example, consider the _Area_ entity, which represents a specific area in the Areas tree. The classes used
+to implement areas, can be seen below:
 
 image::PackageStructure.png[Package Structure, 300]
 
-The classes associated with the _Area_ entity, is typically spread across three niord sub-projects:
+The classes are spread across three niord sub-projects:
 
 [cols="20,80",options="header"]
 |===
@@ -23,7 +31,7 @@ The classes associated with the _Area_ entity, is typically spread across three 
 
 | https://github.com/NiordOrg/niord/tree/master/niord-core[niord-core]
 | Contains the actual entity classes and business logic (session beans). +
-  May also define system model value objects, if these differ from the niord-model classes.
+  May also define system model value objects, in as much as these may extend the niord-model classes.
 
 | https://github.com/NiordOrg/niord/tree/master/niord-web[niord-web]
 | Contains the JAX-RS REST interface used by clients (such as the Niord web application) to access the
@@ -33,6 +41,7 @@ The classes associated with the _Area_ entity, is typically spread across three 
   Niord system.
 
 |===
+
 
 
 

@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.5">
-<title>Niord System Development Guide</title>
+<title>Publikationer i Niord</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -512,26 +512,11 @@ table.CodeRay td.code>pre{padding:0}
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
-<h1>Niord System Development Guide</h1>
+<h1>Publikationer i Niord</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#introduction">1. Introduction</a>
-<ul class="sectlevel2">
-<li><a href="#developer-profile">1.1. Developer Profile</a></li>
-<li><a href="#resources">1.2. Resources</a></li>
-</ul>
-</li>
-<li><a href="#development-set-up">2. Development Set-Up</a>
-<ul class="sectlevel2">
-<li><a href="#prerequisites">2.1. Prerequisites</a></li>
-</ul>
-</li>
-<li><a href="#coding-conventions">3. Coding Conventions</a>
-<ul class="sectlevel2">
-<li><a href="#area-example">3.1. Area Example</a></li>
-</ul>
-</li>
+<li><a href="#introduktion">1. Introduktion</a></li>
 </ul>
 </div>
 </div>
@@ -542,220 +527,32 @@ table.CodeRay td.code>pre{padding:0}
 </div>
 </div>
 <div class="sect1">
-<h2 id="introduction"><a class="anchor" href="#introduction"></a><a class="link" href="#introduction">1. Introduction</a></h2>
+<h2 id="introduktion"><a class="anchor" href="#introduktion"></a><a class="link" href="#introduktion">1. Introduktion</a></h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>Niord (Nautical Information Directory) is a system for producing and publishing
-Navigational Warnings (<em>NW</em>) and Notices to Mariners T&amp;P (<em>NM</em>).</p>
-</div>
-<div class="paragraph">
-<p>It was originally developed as part of the <a href="http://efficiensea2.org">EfficienSea2</a> EU project
-and subsequently implemented as a production system for the
-<a href="http://www.dma.dk/">Danish Maritime Authority</a>.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/EfficienSea2.png" alt="EfficienSea2" width="200">
-</div>
-</div>
-<div class="paragraph">
-<p>This guide should be read by developers of Niord. It will use the Danish Niord system as a use case.</p>
-</div>
-<div class="paragraph">
-<p>The guide will cover the following topics:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>How to set up a development environment</p>
-</li>
-<li>
-<p>Coding conventions, etc.</p>
-</li>
-</ul>
-</div>
-<div class="sect2">
-<h3 id="developer-profile"><a class="anchor" href="#developer-profile"></a><a class="link" href="#developer-profile">1.1. Developer Profile</a></h3>
-<div class="paragraph">
-<p>For the development process to be effective, the developer sshould preferably have a thorough knowledge
-of the following technologies:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Java 8</p>
-</li>
-<li>
-<p>Java EE 7: Niord uses the entire Java EE 7 stack, specially EJB, JPA, JAX-RS, Servlets, Batch API,
-CDI, etc.</p>
-</li>
-<li>
-<p>AngularJS + Bootstrap</p>
-</li>
-<li>
-<p>MySQL</p>
-</li>
-<li>
-<p>Docker</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>It would also be advantageous, if the developer has some knowledge of the following technologies:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>OpenLayers</p>
-</li>
-<li>
-<p>Wildfly 10</p>
-</li>
-<li>
-<p>JBOSS Keycloak</p>
-</li>
-<li>
-<p>Freemarker</p>
-</li>
-<li>
-<p>Maven</p>
-</li>
-<li>
-<p>Git(hub)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Furthermore, the actual Niord source code also has a certain learning curve.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="resources"><a class="anchor" href="#resources"></a><a class="link" href="#resources">1.2. Resources</a></h3>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 20%;">
-<col style="width: 80%;">
-</colgroup>
-<thead>
+<div class="admonitionblock important">
+<table>
 <tr>
-<th class="tableblock halign-left valign-top">Projects</th>
-<th class="tableblock halign-left valign-top">Description</th>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+This document is in Danish and targeted the staff of the Danish Maritime Authority only.
+</td>
 </tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/NiordOrg/niord">niord</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Main project for the Niord production system.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/NiordOrg/niord-dk">niord-dk</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Extensions for the Danish Niord production system.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/NiordOrg/niord-proxy">niord-proxy</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Simple end-user facing website that displays
-the active messages from the Niord production system.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/GhanaNauticalnfo/niord-gh">niord-gh</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Extensions for the Ghanaian Niord production
-system (i.e. alternative to niord-dk).</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/NiordOrg/niord-appsrv">niord-appsrv</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Resources for installing and configuring the
-middleware used by the Niord production system, i.e. MySQL, Wildfly and Keycloak.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/NiordOrg/niord-docker">niord-docker</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Scripts and configuration files for creating
-and pushing all Docker-containers needed for running a Niord production system.</p></td>
-</tr>
-</tbody>
 </table>
-<div class="paragraph">
-<p>The main GitHub repository for Niord is found at <a href="https://github.com/niordorg" class="bare">https://github.com/niordorg</a>.</p>
-</div>
-<div style="page-break-after: always;"></div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="development-set-up"><a class="anchor" href="#development-set-up"></a><a class="link" href="#development-set-up">2. Development Set-Up</a></h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="prerequisites"><a class="anchor" href="#prerequisites"></a><a class="link" href="#prerequisites">2.1. Prerequisites</a></h3>
-<div style="page-break-after: always;"></div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="coding-conventions"><a class="anchor" href="#coding-conventions"></a><a class="link" href="#coding-conventions">3. Coding Conventions</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Niord is fairly consistent about using naming and coding conventions, and understanding these conventions
-makes it easier to read the code.</p>
 </div>
 <div class="paragraph">
-<p>Each <em>logical entity</em> of Niord, such as an <em>area</em>, a <em>chart</em>, a <em>message</em> or a <em>publication</em>, is
-implemented using JPA entities, JSON-serializable value objects, business logic, REST interfaces, and
-batch import classes.</p>
-</div>
-<div class="sect2">
-<h3 id="area-example"><a class="anchor" href="#area-example"></a><a class="link" href="#area-example">3.1. Area Example</a></h3>
-<div class="paragraph">
-<p>As an example, consider the <em>Area</em> entity, which represents a specific area in the Areas tree. The classes used
-to implement areas, can be seen below:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/PackageStructure.png" alt="Package Structure" width="300">
-</div>
-</div>
-<div class="paragraph">
-<p>The classes are spread across three niord sub-projects:</p>
-</div>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 20%;">
-<col style="width: 80%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Projects</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/NiordOrg/niord/tree/master/niord-model">niord-model</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Contains the <a href="../model/model.html">Niord Message Model</a>. The message model is made up of
-  value objects (with a <em>Vo</em> suffix) which are JSON-serializable.<br>
-  Third-party application can define a dependency on this project if they integrate with Niord via
-  the <a href="../public-api/api.html">Public REST API</a>.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/NiordOrg/niord/tree/master/niord-core">niord-core</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Contains the actual entity classes and business logic (session beans).<br>
-  May also define system model value objects, in as much as these may extend the niord-model classes.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/NiordOrg/niord/tree/master/niord-web">niord-web</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Contains the JAX-RS REST interface used by clients (such as the Niord web application) to access the
-  entities and execute business logic.<br>
-  The REST interface is typically a thin wrapper on top of the service interface defined in niord-core.
-  However, the REST interface also performs all the security and permission checks used to protect the
-  Niord system.</p></td>
-</tr>
-</tbody>
-</table>
+<p>Publikationer håndteres af Niord administratorer og er et ret komplekst tema. En generel teknisk gennemgang
+kan findes i <a href="http://docs.niord.org/admin-manual/manual.html#publications">Niords administrations-manual</a>,
+mens dette dokument forholder sig til den specifikke brug af publikationer hos Søfartsstyrelsen, herunder
+den ugentlige udgivelse af Efterretninger for Søfarende, samt den årlige udgivelse af almanac, skydeområder, osv.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-07 07:17:12 CET
+Last updated 2017-07-27 08:15:37 CEST
 </div>
 </div>
 <script type="text/x-mathjax-config">
