@@ -15,11 +15,7 @@ http://www.dma.dk/[Danish Maritime Authority].
 image::EfficienSea2.png[EfficienSea2, 200]
 
 This guide should be read by developers of Niord. It will use the Danish Niord system as a use case.
-
-The guide will cover the following topics:
-
-* How to set up a development environment
-* Coding conventions, etc.
+The guide will cover topics, such as coding conventions, how to set up a development environment, etc.
 
 === Developer Profile
 
