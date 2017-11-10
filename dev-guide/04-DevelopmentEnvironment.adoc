@@ -49,6 +49,9 @@ Import the niord-dk project in IntelliJ via its pom.xml.
 Under the "Maven Projects" also import the parent niord project. This will allow you to work and debug
 both code-bases from within IntelliJ.
 
+The first time around, IntelliJ may have created a new unversioned directory, _niord-dk-web/overlays_.
+Just delete it and build again.
+
 === Starting MySQL and Keycloak
 
 Make sure your working directory is _niord-dk_.
