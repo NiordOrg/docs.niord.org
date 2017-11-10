@@ -3,10 +3,17 @@
 
 == Development Set-Up
 
+As described in the <<Overlay Wars>> section, a concrete implementation of the Niord system will almost
+always involve a country-specific customized project, such as the
+https://github.com/NiordOrg/niord-dk[niord-dk] project for Denmark, or the
+https://github.com/GhanaNauticalnfo/niord-gh[niord-gh] project for Ghana.
+
+The Development setup described in this section will be based on _niord-dk_.
+
 The https://github.com/NiordOrg/niord-appsrv[niord-appsrv] project contains scripts for
 setting up Wildfly, Keycloak, etc.
 
-However, the easiest way to get started developing on this project is to use Docker for the databases
+However, the easiest way to get started developing on the Niord project is to use Docker for the databases
 and Keycloak. This is the set-up described below.
 
 === Prerequisites
@@ -48,12 +55,12 @@ Next, create and configure a Wildfly installation using:
 
     ./dev/install-wildfly.sh
 
-Import or open the niord-dk project in your favorite IDE. Here we describe  the *IntelliJ* set-up:
+Import or open the niord-dk project in your favorite IDE. Here we describe  the _IntelliJ_ set-up:
 
 * Firstly, you may want to right-click the wildfly-10.1.0-Final folder and mark
   the folder as excluded.
 * From Github, also check out the niord-dk parent
-  [niord](https://github.com/NiordOrg/niord) projects.
+  https://github.com/NiordOrg/niord[niord] projects.
 * Import the niord-dk project in IntelliJ via its pom.xml.
 * Under the "Maven Projects" also import the parent niord project.
 * In Run -> Edit configuration..., configure a new local JBoss server based on the Wilfly
@@ -78,6 +85,7 @@ Import the Danish test base data into Niord:
 
 Withing a minute or so, this will import domains, areas, categories, etc. needed to run the Niord-DK project.
 First clean up a bit:
+
 * In Niord, under Sysadmin -> Domains, click the "Create in Keycloak" button for the "NW" and "NM" domains.
   This will create the two domains in Keycloak.
 * In Keycloak, edit the "Sysadmin" user group. Under "Role Mappings", select first "niord-nw" then "niord-nm" and assign
