@@ -1,7 +1,7 @@
 
 :imagesdir: images
 
-== Development Set-Up
+== Niord Development Set-Up
 
 As described in the <<Overlay Wars>> section, a concrete implementation of the Niord system will almost
 always involve a country-specific customized project, such as the

@@ -516,35 +516,11 @@ table.CodeRay td.code>pre{padding:0}
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#introduction">1. Introduction</a>
-<ul class="sectlevel2">
-<li><a href="#developer-profile">1.1. Developer Profile</a></li>
-<li><a href="#resources">1.2. Resources</a></li>
-</ul>
-</li>
-<li><a href="#java-coding-conventions">2. Java Coding Conventions</a>
-<ul class="sectlevel2">
-<li><a href="#area-example">2.1. Area Example</a></li>
-<li><a href="#localization">2.2. Localization</a></li>
-<li><a href="#serialization-and-de-serialization">2.3. Serialization and De-serialization</a></li>
-</ul>
-</li>
-<li><a href="#webapp-coding-conventions">3. Webapp Coding Conventions</a>
-<ul class="sectlevel2">
-<li><a href="#organization-of-angular-sources">3.1. Organization of Angular Sources</a></li>
-<li><a href="#application-cache">3.2. Application Cache</a></li>
-<li><a href="#overlay-wars">3.3. Overlay Wars</a></li>
-</ul>
-</li>
-<li><a href="#development-set-up">4. Development Set-Up</a>
-<ul class="sectlevel2">
-<li><a href="#prerequisites">4.1. Prerequisites</a></li>
-<li><a href="#check-out-niord-projects">4.2. Check out Niord Projects</a></li>
-<li><a href="#starting-mysql-and-keycloak">4.3. Starting MySQL and Keycloak</a></li>
-<li><a href="#configuring-wildfly">4.4. Configuring Wildfly</a></li>
-<li><a href="#finishing-touches">4.5. Finishing touches</a></li>
-</ul>
-</li>
+<li><a href="#introduction">1. Introduction</a></li>
+<li><a href="#java-coding-conventions">2. Java Coding Conventions</a></li>
+<li><a href="#webapp-coding-conventions">3. Webapp Coding Conventions</a></li>
+<li><a href="#niord-development-set-up">4. Niord Development Set-Up</a></li>
+<li><a href="#niord-proxy-development-set-up">5. Niord-Proxy Development Set-Up</a></li>
 </ul>
 </div>
 </div>
@@ -1033,7 +1009,7 @@ resource bundles, etc.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="development-set-up"><a class="anchor" href="#development-set-up"></a><a class="link" href="#development-set-up">4. Development Set-Up</a></h2>
+<h2 id="niord-development-set-up"><a class="anchor" href="#niord-development-set-up"></a><a class="link" href="#niord-development-set-up">4. Niord Development Set-Up</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>As described in the <a href="#overlay-wars">Overlay Wars</a> section, a concrete implementation of the Niord system will almost
@@ -1229,13 +1205,84 @@ appropriate.</p>
 </li>
 </ul>
 </div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="niord-proxy-development-set-up"><a class="anchor" href="#niord-proxy-development-set-up"></a><a class="link" href="#niord-proxy-development-set-up">5. Niord-Proxy Development Set-Up</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Niord-Proxy is a simple client-facing website that retrieves and renders messages from a
+Niord back-end server.</p>
+</div>
+<div class="sect2">
+<h3 id="prerequisites-2"><a class="anchor" href="#prerequisites-2"></a><a class="link" href="#prerequisites-2">5.1. Prerequisites</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Java 8+</p>
+</li>
+<li>
+<p>Maven 3.x</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>When setting up the development environment for the Niord-Proxy, you need to point it to an existing
+Niord service, from where it will fetch data, i.e. the active messages and publications.</p>
+</div>
+<div class="paragraph">
+<p>The set-up in this document will assume that you are running a development version of the Niord service,
+as described in the <a href="#niord-development-set-up">Niord Development Set-Up</a> section.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="check-out-niord-proxy-project"><a class="anchor" href="#check-out-niord-proxy-project"></a><a class="link" href="#check-out-niord-proxy-project">5.2. Check out Niord-Proxy Project</a></h3>
+<div class="paragraph">
+<p>Either use your favorite IDE (assume IntelliJ) to check out the
+<a href="https://github.com/NiordOrg/niord-proxy">niord-proxy</a> project, or check it out from the command line:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>git clone https://github.com/NiordOrg/niord-proxy.git
+cd niord-proxy</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Import the niord-proxy project in IntelliJ via its pom.xml.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="starting-niord-proxy"><a class="anchor" href="#starting-niord-proxy"></a><a class="link" href="#starting-niord-proxy">5.3. Starting Niord-Proxy</a></h3>
+<div class="paragraph">
+<p>The Niord Proxy can be run as an executable jar:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>mvn clean install
+java -Dswarm.http.port=9000 \
+    -Dniord-proxy.executionMode=DEVELOPMENT \
+    -Dniord-proxy.server=http://localhost:8080 \
+    -Dniord-proxy.repoType=SHARED \
+    -Dniord-proxy.repoRootPath=/Users/carolus/.niord-dk/repo \
+    -Dniord-proxy.timeZone=Europe/Copenhagen \
+    -Dniord-proxy.areas="urn:mrn:iho:country:dk|56|11|6,urn:mrn:iho:country:gl|70|-40|4,urn:mrn:iho:country:fo|62|-7|8" \
+    -Dniord-proxy.analyticsTrackingId= \
+    -jar target/niord-proxy-swarm.jar</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>An easier alternative is to run the <code>org.niord.proxy.NiordProxyMain</code> main class directly from your IDE
+(e.g. IntelliJ). Use the same <em>VM Options</em> as for the executable jar above.</p>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-07 12:44:49 CET
+Last updated 2017-11-10 13:34:32 CET
 </div>
 </div>
 <script type="text/x-mathjax-config">
