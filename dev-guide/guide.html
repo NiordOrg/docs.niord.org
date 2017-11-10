@@ -1042,14 +1042,12 @@ always involve a country-specific customized project, such as the
 <a href="https://github.com/GhanaNauticalnfo/niord-gh">niord-gh</a> project for Ghana.</p>
 </div>
 <div class="paragraph">
-<p>The Development setup described in this section will be based on <em>niord-dk</em>.</p>
+<p>The development setup described in this section will be based on <em>niord-dk</em>.</p>
 </div>
 <div class="paragraph">
 <p>The <a href="https://github.com/NiordOrg/niord-appsrv">niord-appsrv</a> project contains scripts for
-setting up Wildfly, Keycloak, etc.</p>
-</div>
-<div class="paragraph">
-<p>However, the easiest way to get started developing on the Niord project is to use Docker for the databases
+setting up Wildfly, Keycloak, etc.
+However, the easiest way to get started developing on the Niord project is to use Docker for the databases
 and Keycloak. This is the set-up described below.</p>
 </div>
 <div class="sect2">
@@ -1154,7 +1152,7 @@ which can be used to create user groups and assign domain roles to the groups:</
 </div>
 </div>
 <div class="paragraph">
-<p>Import or open the niord-dk project in your favorite IDE. Here we describe  the <em>IntelliJ</em> set-up:</p>
+<p>Configure the Wildfly server in <em>IntelliJ</em>:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1199,24 +1197,24 @@ deleted.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Withing a minute or so, this will import domains, areas, categories, etc. needed to run the Niord-DK project.
+<p>Within a minute or so, this will import domains, areas, categories, etc. needed to run the Niord-DK project.
 First clean up a bit:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>In Niord, under Sysadmin &#8594; Domains, click the "Create in Keycloak" button for the "NW" and "NM" domains.
+<p>In Niord, under Sysadmin &#8594; Domains, click the "Create in Keycloak" button for each of the imported domains.
 This will create the two domains in Keycloak.</p>
 </li>
 <li>
-<p>In Keycloak, edit the "Sysadmin" user group. Under "Role Mappings", select first "niord-nw" then "niord-nm" and assign
-the "sysadmin" client roles to the group.</p>
+<p>In Keycloak, edit the "Sysadmin" user group. Under "Role Mappings", select the clients created for the
+imported domains one by one, and assign the "sysadmin" client roles to the group.</p>
 </li>
 <li>
-<p>While in Keycloak, you may also want to define new user groups for editors and admins, and assign the appropriate
-client roles for "niord-nw" and "niord-nm" to the groups.
-Additionally, for admin-related groups (who should be able to manage users in Niord), assign the "manage-clients" and
-"manage-users" client roles of the "realm-management" client to the groups.</p>
+<p>While in Keycloak, you may also want to define new user groups for <em>editors</em> and <em>admins</em>, and assign
+the appropriate client roles for the imported domains to the groups.<br>
+Additionally, for admin-related groups (who should be able to manage users in Niord), assign the
+"manage-clients" and "manage-users" client roles of the "realm-management" client to the groups.</p>
 </li>
 <li>
 <p>Delete the "Master" domain in Niord and the corresponding "niord-client-master" client in Keycloak.</p>
