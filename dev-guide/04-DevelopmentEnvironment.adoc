@@ -27,10 +27,35 @@ The set-up described in this section assumes that you are using Linux / MacOS X.
 If you are using Windows, you will probably need to adjust the various commands and scripts
 accordingly. Consider using Git Bash for the easiest migration.
 
+=== Check out Niord Projects
+
+As mentioned, the development set-up used in this document is based on the Danish Niord project.
+
+Either use your favorite IDE (assume IntelliJ) to check out the
+https://github.com/NiordOrg/niord[niord] and
+https://github.com/NiordOrg/niord-dk[niord-dk] projects, or check them out from the command line:
+
+
+    git clone https://github.com/NiordOrg/niord.git
+    cd niord
+    mvn clean install
+    cd ..
+    git clone https://github.com/NiordOrg/niord-dk.git
+    cd niord-dk
+    mvn clean install
+
+The rest of the section will assume that you are working in the _niord-dk_ directory.
+
+Import the niord-dk project in IntelliJ via its pom.xml.
+Under the "Maven Projects" also import the parent niord project. This will allow you to work and debug
+both code-bases from within IntelliJ.
+
 === Starting MySQL and Keycloak
 
-You may want to start by creating a *.env* file in your working directory, which overrides the environment variables
-(such as database passwords) used in the docker compose file.
+Make sure your working directory is _niord-dk_.
+
+You may want to start by creating a *.env* file in your working directory,
+which overrides the environment variables (such as database passwords) used in the docker compose file.
 
 The following commands will start two MySQL databases, one for the application server
 and one for Keycloak, and also run Keycloak itself.
@@ -59,10 +84,6 @@ Import or open the niord-dk project in your favorite IDE. Here we describe  the 
 
 * Firstly, you may want to right-click the wildfly-10.1.0-Final folder and mark
   the folder as excluded.
-* From Github, also check out the niord-dk parent
-  https://github.com/NiordOrg/niord[niord] projects.
-* Import the niord-dk project in IntelliJ via its pom.xml.
-* Under the "Maven Projects" also import the parent niord project.
 * In Run -> Edit configuration..., configure a new local JBoss server based on the Wilfly
   installation produced above.
 * Deploy "niord-dk-web:war exploded" to the server.

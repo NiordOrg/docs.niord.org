@@ -539,9 +539,10 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#development-set-up">4. Development Set-Up</a>
 <ul class="sectlevel2">
 <li><a href="#prerequisites">4.1. Prerequisites</a></li>
-<li><a href="#starting-mysql-and-keycloak">4.2. Starting MySQL and Keycloak</a></li>
-<li><a href="#configuring-wildfly">4.3. Configuring Wildfly</a></li>
-<li><a href="#finishing-touches">4.4. Finishing touches</a></li>
+<li><a href="#check-out-niord-projects">4.2. Check out Niord Projects</a></li>
+<li><a href="#starting-mysql-and-keycloak">4.3. Starting MySQL and Keycloak</a></li>
+<li><a href="#configuring-wildfly">4.4. Configuring Wildfly</a></li>
+<li><a href="#finishing-touches">4.5. Finishing touches</a></li>
 </ul>
 </li>
 </ul>
@@ -1076,10 +1077,43 @@ accordingly. Consider using Git Bash for the easiest migration.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="starting-mysql-and-keycloak"><a class="anchor" href="#starting-mysql-and-keycloak"></a><a class="link" href="#starting-mysql-and-keycloak">4.2. Starting MySQL and Keycloak</a></h3>
+<h3 id="check-out-niord-projects"><a class="anchor" href="#check-out-niord-projects"></a><a class="link" href="#check-out-niord-projects">4.2. Check out Niord Projects</a></h3>
 <div class="paragraph">
-<p>You may want to start by creating a <strong>.env</strong> file in your working directory, which overrides the environment variables
-(such as database passwords) used in the docker compose file.</p>
+<p>As mentioned, the development set-up used in this document is based on the Danish Niord project.</p>
+</div>
+<div class="paragraph">
+<p>Either use your favorite IDE (assume IntelliJ) to check out the
+<a href="https://github.com/NiordOrg/niord">niord</a> and
+<a href="https://github.com/NiordOrg/niord-dk">niord-dk</a> projects, or check them out from the command line:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>git clone https://github.com/NiordOrg/niord.git
+cd niord
+mvn clean install
+cd ..
+git clone https://github.com/NiordOrg/niord-dk.git
+cd niord-dk
+mvn clean install</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The rest of the section will assume that you are working in the <em>niord-dk</em> directory.</p>
+</div>
+<div class="paragraph">
+<p>Import the niord-dk project in IntelliJ via its pom.xml.
+Under the "Maven Projects" also import the parent niord project. This will allow you to work and debug
+both code-bases from within IntelliJ.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="starting-mysql-and-keycloak"><a class="anchor" href="#starting-mysql-and-keycloak"></a><a class="link" href="#starting-mysql-and-keycloak">4.3. Starting MySQL and Keycloak</a></h3>
+<div class="paragraph">
+<p>Make sure your working directory is <em>niord-dk</em>.</p>
+</div>
+<div class="paragraph">
+<p>You may want to start by creating a <strong>.env</strong> file in your working directory,
+which overrides the environment variables (such as database passwords) used in the docker compose file.</p>
 </div>
 <div class="paragraph">
 <p>The following commands will start two MySQL databases, one for the application server
@@ -1110,7 +1144,7 @@ which can be used to create user groups and assign domain roles to the groups:</
 </div>
 </div>
 <div class="sect2">
-<h3 id="configuring-wildfly"><a class="anchor" href="#configuring-wildfly"></a><a class="link" href="#configuring-wildfly">4.3. Configuring Wildfly</a></h3>
+<h3 id="configuring-wildfly"><a class="anchor" href="#configuring-wildfly"></a><a class="link" href="#configuring-wildfly">4.4. Configuring Wildfly</a></h3>
 <div class="paragraph">
 <p>Next, create and configure a Wildfly installation using:</p>
 </div>
@@ -1127,16 +1161,6 @@ which can be used to create user groups and assign domain roles to the groups:</
 <li>
 <p>Firstly, you may want to right-click the wildfly-10.1.0-Final folder and mark
 the folder as excluded.</p>
-</li>
-<li>
-<p>From Github, also check out the niord-dk parent
-<a href="https://github.com/NiordOrg/niord">niord</a> projects.</p>
-</li>
-<li>
-<p>Import the niord-dk project in IntelliJ via its pom.xml.</p>
-</li>
-<li>
-<p>Under the "Maven Projects" also import the parent niord project.</p>
 </li>
 <li>
 <p>In Run &#8594; Edit configuration&#8230;&#8203;, configure a new local JBoss server based on the Wilfly
@@ -1165,7 +1189,7 @@ deleted.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="finishing-touches"><a class="anchor" href="#finishing-touches"></a><a class="link" href="#finishing-touches">4.4. Finishing touches</a></h3>
+<h3 id="finishing-touches"><a class="anchor" href="#finishing-touches"></a><a class="link" href="#finishing-touches">4.5. Finishing touches</a></h3>
 <div class="paragraph">
 <p>Import the Danish test base data into Niord:</p>
 </div>
