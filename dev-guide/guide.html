@@ -539,6 +539,9 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#development-set-up">4. Development Set-Up</a>
 <ul class="sectlevel2">
 <li><a href="#prerequisites">4.1. Prerequisites</a></li>
+<li><a href="#starting-mysql-and-keycloak">4.2. Starting MySQL and Keycloak</a></li>
+<li><a href="#configuring-wildfly">4.3. Configuring Wildfly</a></li>
+<li><a href="#finishing-touches">4.4. Finishing touches</a></li>
 </ul>
 </li>
 </ul>
@@ -1031,16 +1034,159 @@ resource bundles, etc.</p>
 <div class="sect1">
 <h2 id="development-set-up"><a class="anchor" href="#development-set-up"></a><a class="link" href="#development-set-up">4. Development Set-Up</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>The <a href="https://github.com/NiordOrg/niord-appsrv">niord-appsrv</a> project contains scripts for
+setting up Wildfly, Keycloak, etc.</p>
+</div>
+<div class="paragraph">
+<p>However, the easiest way to get started developing on this project is to use Docker for the databases
+and Keycloak. This is the set-up described below.</p>
+</div>
 <div class="sect2">
 <h3 id="prerequisites"><a class="anchor" href="#prerequisites"></a><a class="link" href="#prerequisites">4.1. Prerequisites</a></h3>
-
+<div class="ulist">
+<ul>
+<li>
+<p>Java 8+</p>
+</li>
+<li>
+<p>Maven</p>
+</li>
+<li>
+<p>Docker</p>
+</li>
+<li>
+<p>Docker Compose</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The set-up described in this section assumes that you are using Linux / MacOS X.
+If you are using Windows, you will probably need to adjust the various commands and scripts
+accordingly. Consider using Git Bash for the easiest migration.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="starting-mysql-and-keycloak"><a class="anchor" href="#starting-mysql-and-keycloak"></a><a class="link" href="#starting-mysql-and-keycloak">4.2. Starting MySQL and Keycloak</a></h3>
+<div class="paragraph">
+<p>You may want to start by creating a <strong>.env</strong> file in your working directory, which overrides the environment variables
+(such as database passwords) used in the docker compose file.</p>
+</div>
+<div class="paragraph">
+<p>The following commands will start two MySQL databases, one for the application server
+and one for Keycloak, and also run Keycloak itself.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>mkdir $HOME/.niord-dk
+docker-compose -f dev/docker-dev-compose.yml pull
+docker-compose -f dev/docker-dev-compose.yml up -d</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The initial <strong>mkdir</strong> command is just to avoid permission problems since docker would otherwise create it as owned
+by root.</p>
+</div>
+<div class="paragraph">
+<p>Once this is up and running, create a Keycloak admin user (default niordadmin/keycloak)
+which can be used to create user groups and assign domain roles to the groups:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>./dev/keycloak-admin-user.sh</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Enter <a href="http://localhost:8090/auth/" class="bare">http://localhost:8090/auth/</a> and check that you can log in using the Keycloak admin user.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="configuring-wildfly"><a class="anchor" href="#configuring-wildfly"></a><a class="link" href="#configuring-wildfly">4.3. Configuring Wildfly</a></h3>
+<div class="paragraph">
+<p>Next, create and configure a Wildfly installation using:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>./dev/install-wildfly.sh</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Import or open the niord-dk project in your favorite IDE. Here we describe  the <strong>IntelliJ</strong> set-up:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Firstly, you may want to right-click the wildfly-10.1.0-Final folder and mark
+the folder as excluded.</p>
+</li>
+<li>
+<p>From Github, also check out the niord-dk parent
+[niord](<a href="https://github.com/NiordOrg/niord" class="bare">https://github.com/NiordOrg/niord</a>) projects.</p>
+</li>
+<li>
+<p>Import the niord-dk project in IntelliJ via its pom.xml.</p>
+</li>
+<li>
+<p>Under the "Maven Projects" also import the parent niord project.</p>
+</li>
+<li>
+<p>In Run &#8594; Edit configuration&#8230;&#8203;, configure a new local JBoss server based on the Wilfly
+installation produced above.</p>
+</li>
+<li>
+<p>Deploy "niord-dk-web:war exploded" to the server.</p>
+</li>
+<li>
+<p>If you have only updated web resources, there is no need to re-deploy the web application. Use the "Update resources"
+function instead.</p>
+</li>
+<li>
+<p>To get rid of superfluous IntelliJ code editor warnings, disable the "Declaration access can be weaker"
+and "Dangling Javadoc comment" inspections.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The Keycloak docker image creates an initial domain, "Master", and a Niord user, sysadmin/sysadmin,
+that should be used for the initial configuration of the system, whereupon they should be
+deleted.</p>
+</div>
+<div class="paragraph">
+<p>Enter <a href="http://localhost:8080" class="bare">http://localhost:8080</a> and check that you can log in using the Niord sysadmin user.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="finishing-touches"><a class="anchor" href="#finishing-touches"></a><a class="link" href="#finishing-touches">4.4. Finishing touches</a></h3>
+<div class="paragraph">
+<p>Import the Danish test base data into Niord:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>./dev/install-base-data.sh</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Withing a minute or so, this will import domains, areas, categories, etc. needed to run the Niord-DK project.
+First clean up a bit:
+* In Niord, under Sysadmin &#8594; Domains, click the "Create in Keycloak" button for the "NW" and "NM" domains.
+  This will create the two domains in Keycloak.
+* In Keycloak, edit the "Sysadmin" user group. Under "Role Mappings", select first "niord-nw" then "niord-nm" and assign
+  the "sysadmin" client roles to the group.
+* While in Keycloak, you may also want to define new user groups for editors and admins, and assign the appropriate
+  client roles for "niord-nw" and "niord-nm" to the groups.
+  Additionally, for admin-related groups (who should be able to manage users in Niord), assign the "manage-clients" and
+  "manage-users" client roles of the "realm-management" client to the groups.
+* Delete the "Master" domain in Niord and the corresponding "niord-client-master" client in Keycloak.
+* Go through the configuration and settings of the Niord Sysadmin pages and adjust as
+  appropriate.</p>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-08 07:04:53 CET
+Last updated 2017-11-07 12:44:49 CET
 </div>
 </div>
 <script type="text/x-mathjax-config">
