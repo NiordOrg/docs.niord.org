@@ -54,4 +54,8 @@ include::04-NiordDevelopmentEnvironment.adoc[]
 
 include::05-NiordProxyDevelopmentEnvironment.adoc[]
 
+<<<
+
+include::06-NiordDockerContainers.adoc[]
+
 

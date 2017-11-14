@@ -521,6 +521,7 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#webapp-coding-conventions">3. Webapp Coding Conventions</a></li>
 <li><a href="#niord-development-set-up">4. Niord Development Set-Up</a></li>
 <li><a href="#niord-proxy-development-set-up">5. Niord-Proxy Development Set-Up</a></li>
+<li><a href="#niord-docker-containers">6. Niord Docker Containers</a></li>
 </ul>
 </div>
 </div>
@@ -1276,13 +1277,299 @@ java -Dswarm.http.port=9000 \
 <p>An easier alternative is to run the <code>org.niord.proxy.NiordProxyMain</code> main class directly from your IDE
 (e.g. IntelliJ). Use the same <em>VM Options</em> as for the executable jar above.</p>
 </div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="niord-docker-containers"><a class="anchor" href="#niord-docker-containers"></a><a class="link" href="#niord-docker-containers">6. Niord Docker Containers</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The previous sections described how to set up and configure a Niord development environment,
+which relied Docker containers for running MySQL and Keycloak.<br>
+Docker containers is indeed a very flexible and convenient way of running Niord,
+even in test and production.</p>
+</div>
+<div class="paragraph">
+<p>This section will outline how to create and push docker containers for Niord. If you do not
+rely on standard containers, please create your own Docker Hub at <a href="https://hub.docker.com" class="bare">https://hub.docker.com</a>, and
+update the scripts and procedures accordingly.<br>
+In particular, you will need to create a Docker Hub repo for your own customized <em>niord-appsrv</em>.</p>
+</div>
+<div class="paragraph">
+<p>The <a href="https://github.com/NiordOrg/niord-docker">niord-docker</a> repository contains a collection
+of bash scripts for creating and pushing docker containers, which may be used for inspiration.</p>
+</div>
+<div class="sect2">
+<h3 id="prerequisites-3"><a class="anchor" href="#prerequisites-3"></a><a class="link" href="#prerequisites-3">6.1. Prerequisites</a></h3>
+<div class="paragraph">
+<p>In order to build the projects and create docker containers, the following should be installed:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Java 8</p>
+</li>
+<li>
+<p>Docker</p>
+</li>
+<li>
+<p>Docker Compose</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="checking-out-projects"><a class="anchor" href="#checking-out-projects"></a><a class="link" href="#checking-out-projects">6.2. Checking out Projects</a></h3>
+<div class="paragraph">
+<p>Assume that you have checked out the following projects, which is the Danish flavoured Niord system:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">git clone https://github.com/NiordOrg/niord.git
+git clone https://github.com/NiordOrg/niord-dk.git
+git clone https://github.com/NiordOrg/niord-proxy.git
+git clone https://github.com/NiordOrg/niord-docker.git</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="building-projects"><a class="anchor" href="#building-projects"></a><a class="link" href="#building-projects">6.3. Building Projects</a></h3>
+<div class="paragraph">
+<p>A standard update script could execute the following updates:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash"># Build niord project
+cd niord
+git pull
+mvn clean install
+
+# Build niord-dk project.
+# NB: use the &quot;dist&quot; profile as this will merge JavaScripts and CSS files
+#     into single files and enable support for HTML 5 App Cache.
+cd ../niord-dk
+git pull
+mvn -P dist clean install
+
+# Build niord-proxy project
+cd ../niord-proxy
+git pull
+mvn clean install
+
+# Update niord-docker
+cd ../niord-docker
+git pull</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="creating-docker-containers"><a class="anchor" href="#creating-docker-containers"></a><a class="link" href="#creating-docker-containers">6.4. Creating Docker Containers</a></h3>
+<div class="paragraph">
+<p>The example below demonstrates how to build some of the relevant docker containers.
+Create your own versions of the scripts which points to your own Docker Hub organization
+rather than <em>dmadk</em>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash"># log in to dockerhub in order to push the images
+docker login
+
+# Build niord-appsrv docker image
+cd niord-docker/02-niord-appsrv/
+./build-niord-appsrv.sh build ../../niord-dk/niord-dk-web/target/niord-dk-web.war
+./build-niord-appsrv.sh push
+
+# Build niord-keycloak docker image
+cd ../03-niord-keycloak/
+./build-niord-keycloak.sh build
+./build-niord-keycloak.sh push
+
+# Build niord-proxy docker image
+cd ../06-niord-proxy/
+./build-niord-proxy.sh build ../../niord-proxy/target/niord-proxy-swarm.jar
+./build-niord-proxy.sh push</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="running-a-complete-niord-system"><a class="anchor" href="#running-a-complete-niord-system"></a><a class="link" href="#running-a-complete-niord-system">6.5. Running a Complete Niord System</a></h3>
+<div class="paragraph">
+<p>The following example will illustrate how to run a complete Niord system using Docker containers.</p>
+</div>
+<div class="paragraph">
+<p>The example is based on the <em>GhanaNautical.info</em> project, which is a Ghana-flavoured version
+of Niord, since this is a very self-contained set-up where everything is created within a single
+Amazon WS account, ranging from an EC2 linux instance, the purchase of DNS names, generation
+of SSL certificates, configuration of mail accounts, SMTP, etc.</p>
+</div>
+<div class="paragraph">
+<p>Setting up and configuring Amazon WS is beyond the scope of this manual, which will merely focus
+on how to run Niord as Docker-containers withing the Amazon WS infrastructure depicted below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/NiordGhanaInfrastructure.png" alt="Niord Ghana Infrastructure" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>In this set-up the $NIORD_HOME directory is situated at <code>/data/niord-gh</code>. An initial bootstrapping
+settings file should be created at <code>/data/niord-gh/niord.json</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="json">[
+  {
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">key</span><span class="delimiter">&quot;</span></span>         : <span class="string"><span class="delimiter">&quot;</span><span class="content">niord.home</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">The root directory for the Niord application</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">value</span><span class="delimiter">&quot;</span></span>       : <span class="string"><span class="delimiter">&quot;</span><span class="content">/data/niord-gh</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">web</span><span class="delimiter">&quot;</span></span>         : <span class="value">false</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">editable</span><span class="delimiter">&quot;</span></span>    : <span class="value">true</span>
+  },
+  {
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">key</span><span class="delimiter">&quot;</span></span>         : <span class="string"><span class="delimiter">&quot;</span><span class="content">baseUri</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">The base application server URI</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">value</span><span class="delimiter">&quot;</span></span>       : <span class="string"><span class="delimiter">&quot;</span><span class="content">https://niord.ghananautical.info</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">web</span><span class="delimiter">&quot;</span></span>         : <span class="value">false</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">editable</span><span class="delimiter">&quot;</span></span>    : <span class="value">true</span>
+  },
+  {
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">key</span><span class="delimiter">&quot;</span></span>         : <span class="string"><span class="delimiter">&quot;</span><span class="content">authServerUrl</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">The Keycloak URL</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">value</span><span class="delimiter">&quot;</span></span>       : <span class="string"><span class="delimiter">&quot;</span><span class="content">https://niord-keycloak.ghananautical.info/auth</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">web</span><span class="delimiter">&quot;</span></span>         : <span class="value">false</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">editable</span><span class="delimiter">&quot;</span></span>    : <span class="value">true</span>
+  },
+  {
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">key</span><span class="delimiter">&quot;</span></span>         : <span class="string"><span class="delimiter">&quot;</span><span class="content">authServerSslRequired</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">Either 'external', 'none' or 'all'</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">value</span><span class="delimiter">&quot;</span></span>       : <span class="string"><span class="delimiter">&quot;</span><span class="content">none</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">web</span><span class="delimiter">&quot;</span></span>         : <span class="value">false</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">editable</span><span class="delimiter">&quot;</span></span>    : <span class="value">true</span>
+ },
+ {
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">key</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">analyticsTrackingId</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">The google analytics tracking ID.</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">value</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">TBD</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">web</span><span class="delimiter">&quot;</span></span> : <span class="value">true</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">editable</span><span class="delimiter">&quot;</span></span> : <span class="value">true</span>
+ },
+ {
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">key</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">mailSender</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">The sender e-mail address</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">value</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">niord@ghananautical.info</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">web</span><span class="delimiter">&quot;</span></span> : <span class="value">false</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">editable</span><span class="delimiter">&quot;</span></span> : <span class="value">true</span>
+ },
+ {
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">key</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">mailValidRecipients</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">Comma-separated list of valid mail recipients, or 'ALL' for all recipients, or 'LOG' for simulation</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">value</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">ALL</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">web</span><span class="delimiter">&quot;</span></span> : <span class="value">false</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">editable</span><span class="delimiter">&quot;</span></span> : <span class="value">true</span>
+ },
+ {
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">key</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">lightCharacterUrl</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">Help link for light character input fields</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">value</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">https://en.wikipedia.org/wiki/Light_characteristic</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">web</span><span class="delimiter">&quot;</span></span> : <span class="value">true</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">editable</span><span class="delimiter">&quot;</span></span> : <span class="value">true</span>
+ }
+]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Next, create a <code>.env</code> file in the working directory of the linux user. This should contain passwords
+and settings for <em>docker-compose</em>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="conf">NIORD_HOME=/data/niord-gh
+MYSQL_ROOT_PASSWORD=TBD
+KCDB_PASSWORD=TBD
+NIORDDB_PASSWORD=TBD
+AMAZON_SES_USER=TBD
+AMAZON_SES_PASSWORD=TBD
+PROXY_TRACKING_ID=TBD</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Start the Niord system from the docker-compose file found in the
+<a href="https://github.com/GhanaNauticalnfo/niord-gh">niord-gh</a> Github repository:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">git clone https://github.com/GhanaNauticalnfo/niord-gh.git
+docker-compose -f niord-gh/docker/docker-test-compose.yml pull
+docker-compose -f niord-gh/docker/docker-test-compose.yml up -d</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The first time the Niord system is started, add a Keycloak admin user,
+which can be used to create user groups and assign domain roles to the groups:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">cd ~/niord-gh
+./keycloak-admin-user.sh</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Also, deploy the initial base data (charts, areas, domains, etc.) for the new installation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">zip -j /tmp/niord-basedata.zip ~/niord-gh/niord-gh-basedata/*.json
+sudo mkdir -p /data/niord-gh/batch-jobs/batch-sets/
+sudo mv /tmp/niord-basedata.zip /data/niord-gh/batch-jobs/batch-sets/</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Within a minute or so, this will import domains, areas, categories, etc., needed to run
+the Niord Ghana project. First clean up a bit:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>In Niord, under Sysadmin &#8594; Domains, click the "Create in Keycloak" button for
+the "NW" and "NM" domains. This will create the two domains in Keycloak.</p>
+</li>
+<li>
+<p>In Keycloak, edit the "Sysadmin" user group. Under "Role Mappings", select first
+"niord-nw" then "niord-nm" and assign the "sysadmin" client roles to the group.</p>
+</li>
+<li>
+<p>While in Keycloak, you may also want to define new user groups for editors and admins,
+and assign the appropriate client roles for "niord-nw" and "niord-nm" to the groups.
+Additionally, for admin-related groups (who should be able to manage users in Niord),
+assign the "manage-clients" and "manage-users" client roles of the "realm-management"
+client to the groups.</p>
+</li>
+<li>
+<p>Delete the "Master" domain in Niord and the corresponding "niord-client-master" client in Keycloak.</p>
+</li>
+<li>
+<p>Go through the configuration and settings of the Niord Sysadmin pages and adjust as appropriate.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Lastly, update the root crontab, using "sudo crontab -e", to call the niord-backup
+docker script periodically:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">45 * * * * /usr/bin/docker exec niord-backup /hourly-backup.sh &gt;&gt; /data/niord-gh/backup/backup.log 2&gt;&amp;1
+20 07 * * * /usr/bin/docker exec niord-backup /daily-backup.sh &gt;&gt; /data/niord-gh/backup/backup.log 2&gt;&amp;1</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-10 13:34:32 CET
+Last updated 2017-11-14 09:31:55 CET
 </div>
 </div>
 <script type="text/x-mathjax-config">
