@@ -1,8 +1,6 @@
 
 :imagesdir: images
 
-IMPORTANT: NB - This document is in the process of being written.
-
 == Introduction
 
 Niord (Nautical Information Directory) is a system for producing and publishing
