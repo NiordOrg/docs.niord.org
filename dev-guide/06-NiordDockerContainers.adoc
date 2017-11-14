@@ -140,13 +140,6 @@ settings file should be created at +/data/niord-gh/niord.json+:
     "editable"    : true
  },
  {
-    "key" : "analyticsTrackingId",
-    "description" : "The google analytics tracking ID.",
-    "value" : "TBD",
-    "web" : true,
-    "editable" : true
- },
- {
     "key" : "mailSender",
     "description" : "The sender e-mail address",
     "value" : "niord@ghananautical.info",
@@ -158,13 +151,6 @@ settings file should be created at +/data/niord-gh/niord.json+:
     "description" : "Comma-separated list of valid mail recipients, or 'ALL' for all recipients, or 'LOG' for simulation",
     "value" : "ALL",
     "web" : false,
-    "editable" : true
- },
- {
-    "key" : "lightCharacterUrl",
-    "description" : "Help link for light character input fields",
-    "value" : "https://en.wikipedia.org/wiki/Light_characteristic",
-    "web" : true,
     "editable" : true
  }
 ]
