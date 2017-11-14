@@ -20,9 +20,14 @@ of bash scripts for creating and pushing docker containers, which may be used fo
 
 In order to build the projects and create docker containers, the following should be installed:
 
-* Java 8
+* Java 8+
+* Maven
 * Docker
 * Docker Compose
+
+The set-up described in this section assumes that you are using Linux / MacOS X.
+If you are using Windows, you will probably need to adjust the various commands and scripts
+accordingly. Consider using Git Bash for the easiest migration.
 
 === Checking out Projects
 
