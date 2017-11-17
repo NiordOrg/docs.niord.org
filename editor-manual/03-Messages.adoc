@@ -181,6 +181,15 @@ Niord allows administrators to define _publications_ such as weekly Notices to M
 These publications are based on lists of messages. The _Publication_ filter thus allows the user
 to filter on messages belonging to one or more publications.
 
+==== Promulgation Filter ====
+
+image::MessageFilterPromulgation.png[Promulgation Type, 400]
+
+Niord allows system administrators to define _promulgation types_, such as NAVTEX, SafetyNET
+and Twitter, which may be associated with messages. Please refer to <<Promulgation Editor Field>>.
+The _Promulgation_ filter thus allows the user to filter on messages associated with one or more
+promulgation types.
+
 ==== User Filter ====
 
 image::MessageFilterUser.png[User, 400]
