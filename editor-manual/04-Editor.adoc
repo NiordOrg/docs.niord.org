@@ -587,7 +587,9 @@ At the left side of the page, the user may preview the message details in all su
 model languages.
 
 At the right side, there is a status panel listing the current status of the message, and buttons
-for manually changing the message status.
+for manually changing the message status throughout the lifecycle of the message:
+
+image::Message-Status-Diagram.png[Message Statuses, 600px]
 
 The valid status transitions are listed below. The state change buttons are only visible when
 they are valid.
