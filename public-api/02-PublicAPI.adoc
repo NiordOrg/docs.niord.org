@@ -13,7 +13,7 @@ Currently, there are three live Niord systems that may be used for accessing the
 |System |Base URL |Description
 
 |DMA Alpha Site
-|https://niord.e-navigation.net[niord.e-navigation.net]
+|https://niord.t-dma.dk[niord.t-dma.dk]
 |Used for alpha testing the Niord system. Contains junk data as well as production data
 from the Danish Maritime Authority.
 
@@ -28,7 +28,7 @@ for inspecting and testing the REST API on a live system.
 
 The Swagger API is available at */api.html*.
 
-Example: https://niord.e-navigation.net/api.html#!/messages/[DMA Alpha Site Swagger Page^].
+Example: https://niord.t-dma.dk/api.html#!/messages/[DMA Alpha Site Swagger Page^].
 
 === Niord Message Model
 The Niord Message Model, returned by the public REST API, is the combined model used to represent
