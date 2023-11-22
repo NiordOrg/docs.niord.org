@@ -1,0 +1,184 @@
+
+:imagesdir: images
+
+== Java Coding Conventions
+
+Niord is fairly consistent about using naming and coding conventions, and understanding these conventions
+makes it easier to read the code.
+
+Each _logical entity_ of Niord, such as an _area_, a _chart_, a _message_ or a _publication_, is
+implemented using JPA entities, JSON-serializable value objects, business logic, REST interfaces, and
+batch import classes.
+
+=== Area Example
+
+As an example, consider the _Area_ entity, which represents a specific area in the Areas tree. The classes used
+to implement areas, can be seen below:
+
+image::PackageStructure.png[Package Structure, 300]
+
+The classes are spread across three niord sub-projects:
+
+[cols="20,80",options="header"]
+|===
+|Projects|Description
+
+| https://github.com/NiordOrg/niord/tree/master/niord-model[niord-model]
+| Contains the link:../model/model.html[Niord Message Model]. The message model is made up of
+  value objects. +
+  Third-party application can define a dependency on this project if they integrate with Niord via
+  the link:../public-api/api.html[Public REST API].
+
+| https://github.com/NiordOrg/niord/tree/master/niord-core[niord-core]
+| Contains the actual entity classes and business logic (session beans). +
+  May also define system model value objects, in as much as these may extend the niord-model classes.
+
+| https://github.com/NiordOrg/niord/tree/master/niord-web[niord-web]
+| Contains the JAX-RS REST interface used by clients (such as the Niord web application) to access the
+  entities and execute business logic.
+
+|===
+
+
+==== Classes and Naming Conventions
+
+[cols="30,70",options="header"]
+|===
+|Classes|Description
+
+| +AreaVo+
+| The link:../model/model.html[Niord Message Model] representation of an area. +
+  The +Vo+ suffix is used for all _value objects_, which are essentially JSON-serializable
+  versions of the real entities.
+
+| +AreaDescVo+
+| Contains a language code and all localizable attributes of +AreaVo+.
+  These associated entities have a +Desc+ suffix, as in +AreaDescVo+.
+
+| +Area+
+| The JPA entity definition of an area. +
+  Whereas there will be a strong correlation between the attributes of the +Area+ entity and the +AreaVo+
+  value object, the entity class may define additional attributes, which are not part of the
+  public niord-model class. The entity class thus constitutes a _system model_.
+
+| +AreaDesc+
+| The JPA entity definition of the area description entity, i.e. the localizable attributes of an area.
+
+| +SystemAreaVo+
+| When a _system model_ entity, such as +Area+, contains attributes not included in the value objects
+  of the link:../model/model.html[Niord Message Model], then a value object with a +System+ prefix
+  is introduced to capture the additional attributes. +
+  As such, +SystemAreaVo+ will extend +AreaVo+ and includes the additional attributes.
+
+| +AreaService+
+| Each entity will have a companion stateless session bean or singleton EJB, with a +Service+ suffix.
+  This class defines the business logic and life-cycle management functions of the entity.
+
+| +BatchAreaImportReader+ +
+  +BatchAreaImportProcessor+ +
+  +BatchAreaImportWriter+
+| Many of the Niord model entities have an associated batch job for importing the entities. +
+  The batch job is typically implemented using the Java EE batch API, and the three phases
+  will be implemented by classes that have a +Batch+ prefix and the +Reader+, +Processor+ and +Writer+
+  suffixes respectively.
+
+| +AreaRestService+
+| Each Niord entity will also be associated with a JAX-RS REST interface. +
+  This interface is typically a thin wrapper on top of the service interface, and will have the
+  +RestService+ suffix. +
+  The REST interface also performs all the security and permission checks used to protect the
+  Niord system.
+
+|===
+
+
+=== Localization
+
+Almost all entities in Niord are localizable to any number of languages. +
+As can be seen from the link:../model/model.html[Niord Message Model], this is implemented by
+associating an entity with a list of classes that contain a language code
+and all localizable attributes.
+
+Area contains one localizable attributes; _name_:
+
+[source,java]
+----
+public class AreaVo implements ILocalizable<AreaDescVo>, IJsonSerializable {
+    List<AreaDescVo> descs;
+}
+
+public class AreaDescVo implements ILocalizedDesc, IJsonSerializable {
+    String lang;
+    String name;
+}
+----
+
+
+=== Serialization and De-serialization
+
+All Niord entities have methods for converting to and fro their _value object_ representation.
+
+In the simplest form, the JPA entity model will define a constructor that takes the _value object_
+representation as a parameter, and it will have a +toVo()+ function that returns the _value object_
+representation of the entity. Example:
+
+[source,java]
+----
+@Entity
+public class Domain extends BaseEntity<Integer> {
+    public Domain() {}
+    public Domain(DomainVo domain) {
+        // Instantiate entity from value object
+    }
+    public DomainVo toVo() {
+        // instantiate and return a value object from entity
+    }
+}
+----
+
+Sometimes, however, things are a little more complex, as is the case for +Area+.
+
++Area+ has two _value object_ representations, +AreaVo+ and +SystemAreaVo+.
+When, say, a public REST API call returns a message with an associated area, then the +AreaVo+ should be
+returned. If, however, a system administrator edits an area via the Niord webapp, then the +SystemAreaVo+
+representation should be used. +
+So, +Area.toVo()+ actually takes the target value object class as a parameter, and leave it to the
+REST service to decide which representation to use.
+
+Another complexity in serializing an entity to its _value object_, is that often you wish to exact
+control over which fields to return. +
+One example is language control. Most of the REST API calls will only return the localizable entities
+(e.g. +AreaDescVo+) for the requested language. This preserves bandwidth and makes client code simpler. +
+Another good example is control over the hierarchical relationship of Areas.
+When a message with an associated area (say, "Kattegat") is returned from a REST call, then you want
+the _parent_ relationship of areas to be included ("Kattegat" should include a parent-reference
+to "Denmark). Alternatively, when editing the area tree on the _Areas_ admin page, then you want
+the REST call to return root areas with their _children_ relationship.
+
+To facilitate this type of serialization control, Niord use a +DataFilter+ helper class, which
+defines the fields and language to include. To control the serialization of an entire tree of
+related entities, the fields can be prefixed with the entity name, as seen in the example below:
+
+[source,java]
+----
+DataFilter filter = DataFilter.get()
+    .fields("Message.details", "Message.geometry", "Area.parent", "Category.parent")
+    .lang("en");
+----
+
+Hence, the resulting serialization code for +Area+ will thus be:
+
+[source,java]
+----
+@Entity
+public class Area extends TreeBaseEntity<Area> implements ILocalizable<AreaDesc> {
+    public Area() {}
+    public Area(AreaVo area, DataFilter filter) {
+        // Instantiate entity from value object
+    }
+    public <A extends AreaVo> A toVo(Class<A> clz, DataFilter filter) {
+        // instantiate and return a value object from entity
+    }
+}
+----
+

@@ -1,0 +1,48 @@
+
+:imagesdir: images
+
+== Niord-Proxy Development Set-Up
+
+The Niord-Proxy is a simple client-facing website that retrieves and renders messages from a
+Niord back-end server.
+
+=== Prerequisites
+
+* Java 8+
+* Maven 3.x
+
+When setting up the development environment for the Niord-Proxy, you need to point it to an existing
+Niord service, from where it will fetch data, i.e. the active messages and publications.
+
+The set-up in this document will assume that you are running a development version of the Niord service,
+as described in the <<Niord Development Set-Up>> section.
+
+=== Check out Niord-Proxy Project
+
+Either use your favorite IDE (assume IntelliJ) to check out the
+https://github.com/NiordOrg/niord-proxy[niord-proxy] project, or check it out from the command line:
+
+
+    git clone https://github.com/NiordOrg/niord-proxy.git
+    cd niord-proxy
+
+Import the niord-proxy project in IntelliJ via its pom.xml.
+
+=== Starting Niord-Proxy
+
+
+The Niord Proxy can be run as an executable jar:
+
+    mvn clean install
+    java -Dswarm.http.port=9000 \
+        -Dniord-proxy.executionMode=DEVELOPMENT \
+        -Dniord-proxy.server=http://localhost:8080 \
+        -Dniord-proxy.repoType=SHARED \
+        -Dniord-proxy.repoRootPath=/Users/carolus/.niord-dk/repo \
+        -Dniord-proxy.timeZone=Europe/Copenhagen \
+        -Dniord-proxy.areas="urn:mrn:iho:country:dk|56|11|6,urn:mrn:iho:country:gl|70|-40|4,urn:mrn:iho:country:fo|62|-7|8" \
+        -Dniord-proxy.analyticsTrackingId= \
+        -jar target/niord-proxy-swarm.jar
+
+An easier alternative is to run the +org.niord.proxy.NiordProxyMain+ main class directly from your IDE
+(e.g. IntelliJ). Use the same _VM Options_ as for the executable jar above.

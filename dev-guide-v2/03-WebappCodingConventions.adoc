@@ -1,0 +1,71 @@
+
+:imagesdir: images
+
+== Webapp Coding Conventions
+
+The other big chunk of code in Niord is the AngularJS and JavaScript-based web application.
+
+=== Organization of Angular Sources
+
+The web application is organized as follows:
+
+image::WebAppStructure.png[Package Structure, 240]
+
+All source files developed as part of Niord, is placed in the _app_ folder.
+All external dependencies, such as third-party AngularJS directives, are placed in the _ext_ folder.
+
+Under _app_, the angular sources, such as directives, controllers, services and partials (html),
+are primarily organized by _main page_.
+So, all sources for the _Messages_ page are in the _messages_ folder, etc.
+
+=== Application Cache
+
+The Niord web application use various HTML 5 features, such as _Local Storage_ and _Application Cache_.
+The _Application Cache_ in particular, makes day-to-day use of Niord substantially faster for end users.
+
+WARNING: Application Cache has supposedly been deprecated, and is to be replaced with a _Service Workers_
+mechanism. However, Service Workers are not yet supported by Safari (read: iOS).
+
+The niord-web project can be built using the "dist" profile:
+
+    cd niord-web
+    mvn -P dist clean install
+
+This will perform the following modifications to the resulting war file:
+
+* All Niord CSS and JavaScript files will be merged into single files.
+* An HTML5 Application Cache manifest file is generated to facilitate caching.
+
+=== Overlay Wars
+
+Another mightily important feature used by Niord, is the web-application overlay mechanism.
+
+In reality, the Niord project would not be used in production by itself.
+Rather, developers would create a country-specific version (such as niord-dk for Denmark,
+or niord-gh for Ghana) with all the customizations and legacy integration needed for that
+particular country.
+
+The main trick is to create a web application that functions as an _overlay_ of the Niord web application.
+This allows the developer to selectively replace individual files, such as AngularJS files, CSS files,
+resource bundles, etc.
+
+The pom.xml file of the new web application, should define the overlay as:
+
+[source,xml]
+----
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-war-plugin</artifactId>
+    <version>2.4</version>
+    <configuration>
+        <workDirectory>target/overlay</workDirectory>
+        <overlays>
+            <overlay>
+                <groupId>org.niord</groupId>
+                <artifactId>niord-web</artifactId>
+            </overlay>
+        </overlays>
+    </configuration>
+</plugin>
+----
+
