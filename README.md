@@ -2,6 +2,7 @@
 
 This project contains the Documentation for Niord and may be accessed using http://docs.niord.org.
 
+
 ## Format
 The documentation is written and maintained in the AsciiDoc format. 
 
