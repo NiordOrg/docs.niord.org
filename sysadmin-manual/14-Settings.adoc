@@ -62,7 +62,7 @@ Example:
 [
   {
     "key"         : "baseUri",
-    "description" : "The base application server URI",
+    "description" : "The base app URI",
     "value"       : "https://niord.e-navigation.net",
     "web"         : false,
     "editable"    : true
@@ -80,10 +80,9 @@ Example:
 
 === Settings from Environment Variables
 
-When the Niord application server (Wildfly) starts up, settings may be instantiated using
-environment variables.
+When the Niord app starts up, settings may be instantiated using environment variables.
 
-Example: In order to specify the "niord.home" system setting, instantiate Wildfly with the argument
+Example: In order to specify the "niord.home" system setting, instantiate the app with the argument
 "-Dniord.home=/home/enav/niord".
 
 If settings are defined from environment variables, they are essentially read-only. A sysadmin
@@ -144,7 +143,7 @@ Example:
     "value": "https://localhost-kc.e-navigation.net/auth"
   },
   {
-    "description": "The base application server URI",
+    "description": "The base app URI",
     "key": "baseUri",
     "type": "String",
     "value": "https://localhost.e-navigation.net"

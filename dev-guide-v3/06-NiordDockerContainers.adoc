@@ -1,0 +1,27 @@
+
+:imagesdir: images
+
+== Building Niord App as Docker Container
+To build the Niord App as a docker container you can use
+
+[source,bash]
+----
+# Standing in niord-dk, create the jars needed for the Docker image
+mvn clean package
+
+# build the docker image. Change the target container name to your liking
+docker build -f niord-dk-web/src/main/docker/Dockerfile.jvm -t dma/niord-dk-app:1.0.0 niord-dk-web
+----
+
+////
+You can also run the complete Niord System, with the Niord App as a Docker container. 
+
+[source,bash]
+----
+# Standing in niord-dk, create the jars needed for the Docker image
+mvn clean package
+
+# build the docker image. Change the target container name to your liking
+docker build -f niord-dk-web/src/main/docker/Dockerfile.jvm -t dma/niord-dk-app:1.0.0 niord-dk-web
+----
+////

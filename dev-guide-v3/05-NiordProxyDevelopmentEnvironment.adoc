@@ -8,8 +8,8 @@ Niord back-end server.
 
 === Prerequisites
 
-* Java 8+
-* Maven 3.x
+* Java 8
+* Maven 3.5.4 (Project does not supper Maven 3.6.0 or greater)
 
 When setting up the development environment for the Niord-Proxy, you need to point it to an existing
 Niord service, from where it will fetch data, i.e. the active messages and publications.

@@ -1,0 +1,80 @@
+
+:imagesdir: images
+
+== Niord Development Set-Up
+
+As described in the <<Overlay Wars>> section, a concrete implementation of the Niord system will almost
+always involve a country-specific customized project, such as the
+https://github.com/NiordOrg/niord-dk[niord-dk] project for Denmark, or the
+https://github.com/GhanaNauticalnfo/niord-gh[niord-gh] project for Ghana (This project is still running on (Wildfly) Niord 2.0).
+
+The development setup described in this section will be based on _niord-dk_.
+
+=== Prerequisites
+
+* Java 21
+* Maven
+* Docker
+
+The set-up described in this section assumes that you are using Linux / MacOS X.
+If you are using Windows, you will probably need to adjust the various commands and scripts
+accordingly. Consider using Git Bash for the easiest migration.
+
+=== Check out Niord Projects
+
+As mentioned, the development set-up used in this document is based on the Danish Niord project.
+
+Either use your favorite IDE (assume IntelliJ) to check out the
+https://github.com/NiordOrg/niord[niord] and
+https://github.com/NiordOrg/niord-dk[niord-dk] projects, or check them out from the command line:
+
+
+    git clone https://github.com/NiordOrg/niord.git
+    cd niord
+    mvn clean install
+    cd ..
+    git clone https://github.com/NiordOrg/niord-dk.git
+    cd niord-dk
+    mvn clean install
+
+The rest of the section will assume that you are working in the _niord-dk_ directory.
+
+Import the niord-dk project in IntelliJ via its pom.xml.
+Under the "Maven Projects" also import the parent niord project. This will allow you to work and debug
+both code-bases from within IntelliJ.
+
+The first time around, IntelliJ may have created a new unversioned directory, _niord-dk-web/overlays_.
+Just delete it and build again.
+
+=== Using Docker to start needed services for development purposes
+
+Make sure your working directory is _niord-dk_ and run
+
+  docker compose up
+  
+Which will start the following services:
+
+* niord-db          : Database for Niord (MySQL)
+* niord-mq          : Message Queue used for promulgation of messages (ActiveMQ)
+* niord-smtp:       : Used for testing receiving mails (mailhog)
+* niord-jeager      : A Jaeger services for collection requests traces 
+* niord-keycloak    : A Keycloak instance for testing Niord
+* niord-keycloak-db : A Database (MySQL) for use by Keycloak
+
+=== Running the Niord App
+
+Next, run the Quarkus development script:
+
+    ./q-dev.sh
+
+This will startup the application and create a Niord home directory (niord-dk/home-niord-dk) that Niord uses to store various files. The script will also bootstrap the database with data after 10-20 seconds.
+
+The Keycloak docker image creates an initial domain, "Master", and a Niord user, sysadmin/sysadmin,
+that should be used for the initial configuration of the system, whereupon they should be
+deleted.
+
+Enter http://localhost:8080 and check that you can log in using the Niord sysadmin/sysadmin user.
+
+=== Starting over
+If you end up with a system that doesn't work try starting over by deleting the container group (niord-dk) in Docker. And the niord-dk/home-niord-dk directory.
+Then run docker compose and q-dev.sh again.

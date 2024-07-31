@@ -3,6 +3,9 @@
 
 == Introduction
 
+* This version of the development guideline is for Niord 3.0. 
+Niord 3.0 is based on the Quarkus framework and replaces Niord 2.0 which was based on Wildfly.
+
 Niord (Nautical Information Directory) is a system for producing and publishing
 Navigational Warnings (_NW_) and Notices to Mariners T&P (_NM_).
 
@@ -17,11 +20,11 @@ The guide will cover topics, such as coding conventions, how to set up a develop
 
 === Developer Profile
 
-For the development process to be effective, the developer sshould preferably have a thorough knowledge
+For the development process to be effective, the developer should preferably have a thorough knowledge
 of the following technologies:
 
-* Java 8
-* Java EE 7: Niord uses the entire Java EE 7 stack, specially EJB, JPA, JAX-RS, Servlets, Batch API,
+* Java 21
+* Jakarta EE: Niord uses the entire Jakarta EE stack, specially JPA, JAX-RS, Servlets, Batch API,
              CDI, etc.
 * AngularJS + Bootstrap
 * MySQL
@@ -30,8 +33,9 @@ of the following technologies:
 It would also be advantageous, if the developer has some knowledge of the following technologies:
 
 * OpenLayers
-* Wildfly 10
-* JBOSS Keycloak
+* ActiveMQ Artemis
+* Quarkus
+* Keycloak
 * Freemarker
 * Maven
 * Git(hub)
@@ -56,12 +60,6 @@ the active messages from the Niord production system.
 
 |https://github.com/GhanaNauticalnfo/niord-gh[niord-gh] | Extensions for the Ghanaian Niord production
 system (NB: separate repo).
-
-|https://github.com/NiordOrg/niord-appsrv[niord-appsrv] | Resources for installing and configuring the
-middleware used by the Niord production system, i.e. MySQL, Wildfly and Keycloak.
-
-|https://github.com/NiordOrg/niord-docker[niord-docker] | Scripts and configuration files for creating
-and pushing all Docker-containers needed for running a Niord production system.
 
 |===
 

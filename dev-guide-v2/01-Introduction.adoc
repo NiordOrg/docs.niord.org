@@ -3,8 +3,6 @@
 
 == Introduction
 
-* This version of the development guideline is for Niord 2.0 which is no longer under development. Niord 3.0 is the current version, where Wildfly has been replaced by Quarkus.*
-
 Niord (Nautical Information Directory) is a system for producing and publishing
 Navigational Warnings (_NW_) and Notices to Mariners T&P (_NM_).
 
