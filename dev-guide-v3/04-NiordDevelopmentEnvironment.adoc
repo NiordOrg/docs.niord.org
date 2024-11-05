@@ -65,7 +65,7 @@ Which will start the following services:
 
 Next (make sure you are in the niord-dk repository), run the Quarkus development script:
 
-    ./q-dev.sh
+    ./qdev.sh
 
 This will startup the application and create a Niord home directory (niord-dk/home-niord-dk) that Niord uses to store various files. The script will also bootstrap the database with data after 10-20 seconds.
 
