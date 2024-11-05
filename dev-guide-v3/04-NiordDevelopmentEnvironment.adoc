@@ -63,7 +63,7 @@ Which will start the following services:
 
 === Running the Niord App
 
-Next, run the Quarkus development script:
+Next (make sure you are in the niord-dk repository), run the Quarkus development script:
 
     ./q-dev.sh
 
