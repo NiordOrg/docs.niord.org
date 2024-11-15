@@ -73,7 +73,7 @@ The Keycloak docker image creates an initial domain, "Master", and a Niord user,
 that should be used for the initial configuration of the system, whereupon they should be
 deleted.
 
-Enter http://localhost:8080 and check that you can log in using the Niord sysadmin/sysadmin user.
+Enter http://localhost:8888 and check that you can log in using the Niord sysadmin/sysadmin user.
 
 === Starting over
 If you end up with a system that doesn't work try starting over by deleting the container group (niord-dk) in Docker. And the niord-dk/home-niord-dk directory.
