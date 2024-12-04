@@ -26,9 +26,9 @@ from the Danish Maritime Authority.
 The Niord Public REST API is integrated with http://swagger.io[Swagger], which provides a web-based UI
 for inspecting and testing the REST API on a live system.
 
-The Swagger API is available at */api.html*.
+The Swagger API is available at */swagger/swagger-ui.html/.
 
-Example: https://niord.t-dma.dk/api.html#!/messages/[DMA Alpha Site Swagger Page^].
+Example: https://niord.dma.dk/swagger/swagger-ui.html/[DMA Niord Swagger Page^].
 
 === Niord Message Model
 The Niord Message Model, returned by the public REST API, is the combined model used to represent
