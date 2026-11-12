@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.26">
+<title>The operators' guide</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<style>
+/*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
+/* Uncomment the following line when using as a custom stylesheet */
+/* @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700"; */
+html{font-family:sans-serif;-webkit-text-size-adjust:100%}
+a{background:none}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+b,strong{font-weight:bold}
+abbr{font-size:.9em}
+abbr[title]{cursor:help;border-bottom:1px dotted #dddddf;text-decoration:none}
+dfn{font-style:italic}
+hr{height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+audio,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type=checkbox],input[type=radio]{padding:0}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,::before,::after{box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;line-height:1;position:relative;cursor:auto;-moz-tab-size:4;-o-tab-size:4;tab-size:4;word-wrap:anywhere;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:0}
+p{line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #dddddf;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:1px solid #dedede;word-wrap:normal}
+table thead,table tfoot{background:#f7f8f7}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt{background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.center{margin-left:auto;margin-right:auto}
+.stretch{width:100%}
+.clearfix::before,.clearfix::after,.float-group::before,.float-group::after{content:" ";display:table}
+.clearfix::after,.float-group::after{clear:both}
+:not(pre).nobreak{word-wrap:normal}
+:not(pre).nowrap{white-space:nowrap}
+:not(pre).pre-wrap{white-space:pre-wrap}
+:not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
+pre{color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;line-height:1.45;text-rendering:optimizeSpeed}
+pre code,pre pre{color:inherit;font-size:inherit;line-height:inherit}
+pre.nowrap,pre.nowrap pre{white-space:pre;word-wrap:normal}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background:#f7f7f7;border:1px solid #ccc;border-radius:3px;box-shadow:0 1px 0 rgba(0,0,0,.2),inset 0 0 0 .1em #fff;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
+b.button::before,b.button::after{position:relative;top:-1px;font-weight:400}
+b.button::before{content:"[";padding:0 3px 0 2px}
+b.button::after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin:0 auto;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header::before,#header::after,#content::before,#content::after,#footnotes::before,#footnotes::after,#footer::before,#footer::after{content:" ";display:table}
+#header::after,#content::after,#footnotes::after,#footer::after{clear:both}
+#content{margin-top:1.25em}
+#content::before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
+#header>h1:only-child{border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span::before{content:"\00a0\2013\00a0"}
+#header .details br+span.author::before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark::before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber::after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #dddddf;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #e7e7e9;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #e7e7e9;left:auto;right:0}}
+@media screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border:1px solid #e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:none;background:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:hsla(0,0%,100%,.8);line-height:1.44}
+#content{margin-bottom:.625em}
+.sect1{padding-bottom:.625em}
+@media screen and (min-width:768px){#content{margin-bottom:1.25em}
+.sect1{padding-bottom:1.25em}}
+.sect1:last-child{padding-bottom:0}
+.sect1+.sect1{border-top:1px solid #e7e7e9}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor::before,h2>a.anchor::before,h3>a.anchor::before,#toctitle>a.anchor::before,.sidebarblock>.content>.title>a.anchor::before,h4>a.anchor::before,h5>a.anchor::before,h6>a.anchor::before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+details{margin-left:1.25rem}
+details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;outline:none;-webkit-tap-highlight-color:transparent}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"";border:solid transparent;border-left:solid;border-width:.3em 0 .3em .5em;position:absolute;top:.5em;left:-1.25rem;transform:translateX(15%)}
+details[open]>summary::before{border:solid transparent;border-top:solid;border-width:.5em .3em 0;transform:translateY(15%)}
+details>summary::after{content:"";width:1.25rem;height:1em;position:absolute;top:.3em;left:-1.25rem}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
+.paragraph.lead>p,#preamble>.sectionbody>[class=paragraph]:first-of-type p{font-size:1.21875em;line-height:1.6;color:rgba(0,0,0,.85)}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:none}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
+.sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
+@media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
+@media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
+.literalblock pre,.listingblock>.content>pre:not(.highlight),.listingblock>.content>pre[class=highlight],.listingblock>.content>pre[class^="highlight "]{background:#f7f7f8}
+.literalblock.output pre{color:#f7f7f8;background:rgba(0,0,0,.9)}
+.listingblock>.content{position:relative}
+.listingblock pre>code{display:block}
+.listingblock code[data-lang]::before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:inherit;opacity:.5}
+.listingblock:hover code[data-lang]::before{display:block}
+.listingblock.terminal pre .command::before{content:attr(data-prompt);padding-right:.5em;color:inherit;opacity:.5}
+.listingblock.terminal pre .command:not([data-prompt])::before{content:"$"}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.prettyprint{background:#f7f7f8}
+pre.prettyprint .linenums{line-height:1.45;margin-left:2em}
+pre.prettyprint li{background:none;list-style-type:inherit;padding-left:0}
+pre.prettyprint li code[data-lang]::before{opacity:1}
+pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
+table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
+table.linenotable td.code{padding-left:.75em}
+table.linenotable td.linenos,pre.pygments .linenos{border-right:1px solid;opacity:.35;padding-right:.5em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+pre.pygments span.linenos{display:inline-block;margin-right:.75em}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote::before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.75em;margin-right:.5ex;text-align:right}
+.verseblock{margin:0 1em 1.25em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans-serif;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract blockquote::before,.quoteblock.excerpt blockquote::before,.quoteblock .quoteblock blockquote::before{display:none}
+.quoteblock.abstract blockquote,.quoteblock.abstract p,.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{line-height:1.6;word-spacing:0}
+.quoteblock.abstract{margin:0 1em 1.25em;display:block}
+.quoteblock.abstract>.title{margin:0 0 .375em;font-size:1.15em;text-align:center}
+.quoteblock.excerpt>blockquote,.quoteblock .quoteblock{padding:0 0 .25em 1em;border-left:.25em solid #dddddf}
+.quoteblock.excerpt,.quoteblock .quoteblock{margin-left:0}
+.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{color:inherit;font-size:1.0625rem}
+.quoteblock.excerpt .attribution,.quoteblock .quoteblock .attribution{color:inherit;font-size:.85rem;text-align:left;margin-right:0}
+p.tableblock:last-child{margin-bottom:0}
+td.tableblock>.content{margin-bottom:1.25em;word-wrap:anywhere}
+td.tableblock>.content>:last-child{margin-bottom:-1.25em}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all>*>tr>*{border-width:1px}
+table.grid-cols>*>tr>*{border-width:0 1px}
+table.grid-rows>*>tr>*{border-width:1px 0}
+table.frame-all{border-width:1px}
+table.frame-ends{border-width:1px 0}
+table.frame-sides{border-width:0 1px}
+table.frame-none>colgroup+*>:first-child>*,table.frame-sides>colgroup+*>:first-child>*{border-top-width:0}
+table.frame-none>:last-child>:last-child>*,table.frame-sides>:last-child>:last-child>*{border-bottom-width:0}
+table.frame-none>*>tr>:first-child,table.frame-ends>*>tr>:first-child{border-left-width:0}
+table.frame-none>*>tr>:last-child,table.frame-ends>*>tr>:last-child{border-right-width:0}
+table.stripes-all>*>tr,table.stripes-odd>*>tr:nth-of-type(odd),table.stripes-even>*>tr:nth-of-type(even),table.stripes-hover>*>tr:hover{background:#f8f8f7}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+li>p:empty:only-child::before{content:"";display:inline-block}
+ul.checklist>li>p:first-child{margin-left:-1em}
+ul.checklist>li>p:first-child>.fa-square-o:first-child,ul.checklist>li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist>li>p:first-child>input[type=checkbox]:first-child{margin-right:.25em}
+ul.inline{display:flex;flex-flow:row wrap;list-style:none;margin:0 0 .625em -1.25em}
+ul.inline>li{margin-left:1.25em}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+td.hdlist2{word-wrap:anywhere}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist td:not([class]):first-child{padding:.4em .75em 0;line-height:1;vertical-align:top}
+.colist td:not([class]):first-child img{max-width:none}
+.colist td:not([class]):last-child{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:4px solid #fff;box-shadow:0 0 0 1px #ddd}
+.imageblock.left{margin:.25em .625em 1.25em 0}
+.imageblock.right{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active,#footnotes .footnote a:first-of-type:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background:#00fafa}
+.black{color:#000}
+.black-background{background:#000}
+.blue{color:#0000bf}
+.blue-background{background:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background:#fa00fa}
+.gray{color:#606060}
+.gray-background{background:#7d7d7d}
+.green{color:#006000}
+.green-background{background:#007d00}
+.lime{color:#00bf00}
+.lime-background{background:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background:#7d0000}
+.navy{color:#000060}
+.navy-background{background:#00007d}
+.olive{color:#606000}
+.olive-background{background:#7d7d00}
+.purple{color:#600060}
+.purple-background{background:#7d007d}
+.red{color:#bf0000}
+.red-background{background:#fa0000}
+.silver{color:#909090}
+.silver-background{background:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background:#fafa00}
+span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note::before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip::before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning::before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution::before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important::before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background:rgba(0,0,0,.8);border-radius:50%;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]::after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@page{margin:1.25cm .75cm}
+@media print{*{box-shadow:none!important;text-shadow:none!important}
+html{font-size:80%}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare)::after,a[href^="https:"]:not(.bare)::after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]{border-bottom:1px dotted}
+abbr[title]::after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#header,#content,#footnotes,#footer{max-width:none}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #dddddf!important;padding-bottom:0!important}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span::before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]::before{display:block}
+#footer{padding:0 .9375em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+@media amzn-kf8,print{#header>h1:first-child{margin-top:1.25rem}
+.sect1{padding:0!important}
+.sect1+.sect1{border:0}
+#footer{background:none}
+#footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
+@media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class="article toc2 toc-left">
+<div id="header">
+<h1>The operators' guide</h1>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#finding-your-way">Finding your way</a></li>
+<li><a href="#what-a-fresh-deployment-holds">What a fresh deployment holds</a>
+<ul class="sectlevel2">
+<li><a href="#how-to-see-it-worked">How to see it worked</a></li>
+</ul>
+</li>
+<li><a href="#the-bootstrap-once-on-a-new-database">The bootstrap: once, on a new database</a></li>
+<li><a href="#if-the-sysadmin-pages-are-out-of-reach">If the sysadmin pages are out of reach</a></li>
+<li><a href="#what-you-set-up-in-order">What you set up, in order</a>
+<ul class="sectlevel2">
+<li><a href="#1-keycloak-who-may-sign-in-and-the-domain-clients">1. Keycloak: who may sign in, and the domain clients</a></li>
+<li><a href="#2-domains-and-their-time-zones">2. Domains and their time zones</a></li>
+<li><a href="#3-areas">3. Areas</a></li>
+<li><a href="#4-charts">4. Charts</a></li>
+<li><a href="#5-sources">5. Sources</a></li>
+<li><a href="#6-categories">6. Categories</a></li>
+<li><a href="#7-message-series-and-their-numbering">7. Message series and their numbering</a></li>
+<li><a href="#8-publication-categories-and-publications">8. Publication categories and publications</a></li>
+<li><a href="#9-promulgation-types-and-their-transmitters">9. Promulgation types and their transmitters</a></li>
+<li><a href="#10-mailing-lists-and-their-triggers">10. Mailing lists and their triggers</a></li>
+<li><a href="#11-dictionaries-and-texts">11. Dictionaries and texts</a></li>
+<li><a href="#12-templates-and-reports-by-import">12. Templates and reports, by import</a></li>
+<li><a href="#13-firing-areas-and-their-schedules">13. Firing areas and their schedules</a></li>
+<li><a href="#14-aton-data">14. AtoN data</a></li>
+<li><a href="#15-settings">15. Settings</a></li>
+<li><a href="#16-users-groups-and-roles">16. Users, groups and roles</a></li>
+<li><a href="#17-a-first-message">17. A first message</a></li>
+</ul>
+</li>
+<li><a href="#a-new-language-in-a-running-deployment">A new language in a running deployment</a></li>
+<li><a href="#the-servers-home-folder">The server&#8217;s home folder</a></li>
+<li><a href="#the-servers-clock">The server&#8217;s clock</a></li>
+<li><a href="#cut-over-from-an-existing-deployment">Cut-over from an existing deployment</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph kit-source">
+<p><a href="../../index.html">Niord documentation</a> › <a href="../index.html">Country kit guides</a><br>
+This guide ships in the country kit package as <code>docs/operators-guide.md</code>. It is rendered here from the kit as it
+stands in the source this site was built from; a country reads the copy of the version it builds on in
+<code>.niord/kit/</code>. A guide this page names only by its file in the kit package is not on this site: it is
+read in the kit package only.</p>
+</div>
+<div class="paragraph">
+<p>For the operators of a country&#8217;s deployment: its sysadmins and admins. It says what a new deployment
+already holds, and what you set up in it yourself, in the order one step depends on another. You
+work only in the administration app and in Keycloak&#8217;s admin console: no code, no files, no
+repository. Read the kit package&#8217;s <code>docs/responsibilities-and-upgrades.md</code> first for who
+owns what.</p>
+</div>
+<div class="paragraph">
+<p>Before you start, the installer has deployed the images and run the bootstrap once on the new
+database (Staging in the kit package&#8217;s <code>docs/country-guide.md</code> in the country guide&#8217;s Deploy). That part is verified
+at the deploy step (<a href="README.html#about-these-guides">About these guides</a>).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="finding-your-way"><a class="anchor" href="#finding-your-way"></a><a class="link" href="#finding-your-way">Finding your way</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The administration app&#8217;s menu has two areas, <strong>Admin</strong> and <strong>Sysadmin</strong>. Each holds sections, and
+this guide names a place as area &gt; section: Sysadmin &gt; Domains is the Domains section of the
+Sysadmin area. Every section&#8217;s page has a Help link into the user manuals at
+<a href="../../index.html">docs.niord.org</a>: the
+<a href="../../admin-manual/manual.html">admin manual</a>, the
+<a href="../../sysadmin-manual/manual.html">sysadmin manual</a> and the
+<a href="../../editor-manual/manual.html">editor manual</a>. This guide links the same pages
+and gives each step itself; the manuals describe the pages in full.</p>
+</div>
+<div class="paragraph">
+<p>The Sysadmin area needs the sysadmin role, and Admin needs admin or more. The app checks your roles
+in the domain you work in, which you choose in the menu.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="what-a-fresh-deployment-holds"><a class="anchor" href="#what-a-fresh-deployment-holds"></a><a class="link" href="#what-a-fresh-deployment-holds">What a fresh deployment holds</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The base product&#8217;s bootstrap gives every new deployment the same start, in English only:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>The master domain</strong>, Keycloak ID <code>niord-client-master</code>, named Master, with no message series and
+no time zone. It is active (since 4.0.123), so a sysadmin with the role on its client reaches the
+Sysadmin pages on it; a country&#8217;s bootstrap may leave it inactive by restating it with
+<code>"active": false</code> only.</p>
+</li>
+<li>
+<p><strong>The base product&#8217;s templates and scripts:</strong> the message templates, the mail templates and the
+scripts they use, under Sysadmin &gt; Script Resources.</p>
+</li>
+<li>
+<p><strong>The built-in print reports</strong> <code>standard</code>, <code>draft</code> and <code>public</code>, under Sysadmin &gt; Print Reports.</p>
+</li>
+<li>
+<p><strong>The generic categories</strong>, among them <strong>Firing Exercises</strong>. The firing schedules find that
+category by its exact English name to file the messages they generate. Never rename it.</p>
+</li>
+<li>
+<p><strong>The parameter types</strong> the templates use, under Sysadmin &gt; Parameter Types.</p>
+</li>
+<li>
+<p><strong>The promulgation types</strong> NAVTEX, Twitter and Audio, in English and linked to no domain.</p>
+</li>
+<li>
+<p><strong>The AtoN dictionary</strong>, <code>aton</code>, under Sysadmin &gt; Dictionaries, beside the texts the backend
+writes at every start.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>It holds no settings beyond those the backend writes at its first start, and no messages.</p>
+</div>
+<div class="paragraph">
+<p>The country&#8217;s own bootstrap is applied in the same run, after the base product&#8217;s. Where it names
+something the base product&#8217;s archive created, its values win. What it holds is your country&#8217;s
+maintainers' choice: typically your domains and their series, your reports, your promulgation types
+and links, and your languages on the base product&#8217;s entries. Ask them for the list.</p>
+</div>
+<div class="sect2">
+<h3 id="how-to-see-it-worked"><a class="anchor" href="#how-to-see-it-worked"></a><a class="link" href="#how-to-see-it-worked">How to see it worked</a></h3>
+<div class="paragraph">
+<p>These pages are in the Sysadmin area, which opens once step 1 below is done.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Sysadmin &gt; Script Resources, Print Reports, Categories, Parameter Types, Promulgation Types and
+Dictionaries list what the bootstrap brought, and Sysadmin &gt; Domains lists the country&#8217;s domains.</p>
+</li>
+<li>
+<p>Sysadmin &gt; Batch Jobs lists the jobs the backend ran since its last start. Right after the
+bootstrap, that is its import jobs (<code>script-resource-import</code>, <code>domain-import</code>, <code>category-import</code>
+and the others), each completed. Their <strong>logs&#8230;&#8203;</strong> say what each added and, for the country&#8217;s
+archive, what it replaced. A restart of the backend empties the list, so read the logs before
+one. After a restart, the lists of the first bullet are the check.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="the-bootstrap-once-on-a-new-database"><a class="anchor" href="#the-bootstrap-once-on-a-new-database"></a><a class="link" href="#the-bootstrap-once-on-a-new-database">The bootstrap: once, on a new database</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The installer runs the bootstrap once, after the install, with the base product&#8217;s archive first and
+then the country&#8217;s. The command itself is verified at the deploy step. It answers in one of these
+ways:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Accepted.</strong> The bootstrap then runs on its own and takes 5 to 20 seconds.</p>
+</li>
+<li>
+<p><strong>Refused: the backend is still starting.</strong> Nothing happened. Ask again in a moment.</p>
+</li>
+<li>
+<p><strong>Refused: the database is not new.</strong> It holds data, or a bootstrap ran or started on it before.
+The refusal names the state or the first table that holds a row. Nothing happened. If it says a
+bootstrap is running, wait for that one&#8217;s outcome.</p>
+</li>
+<li>
+<p><strong>Refused: an archive breaks a rule, or is too large.</strong> The answer names the archive and the
+rule. By default an upload takes 1 MB a part and 10 MB a request. Nothing happened.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>There is no retry. A bootstrap that failed, or broke off, is refused for good on that database.
+The remedy is a new, empty database, the backend started on it, and the same command with the same
+archives. Never restart a bootstrap&#8217;s import job from Sysadmin &gt; Batch Jobs: the page refuses it,
+with "The batch execution was not restarted".</p>
+</div>
+<div class="imageblock kit-diagram">
+<div class="content">
+<img src="operators-guide-diagram-1.svg" alt="Diagram. The installer runs the bootstrap command once → Accepted: it runs on its own, 5 to 20 seconds. The installer runs the bootstrap command once → Refused: the backend is still starting. Nothing happened. Refused: the backend is still starting. Nothing happened → The installer runs the bootstrap command once (ask again in a moment). The installer runs the bootstrap command once → Refused: the database is not new. Nothing happened. The installer runs the bootstrap command once → Refused: an archive breaks a rule, or is too large. Nothing happened. Accepted: it runs on its own, 5 to 20 seconds → Refused for good on that database (it fails or breaks off). Refused for good on that database → A new, empty database, the backend started on it, the same command and archives.">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="if-the-sysadmin-pages-are-out-of-reach"><a class="anchor" href="#if-the-sysadmin-pages-are-out-of-reach"></a><a class="link" href="#if-the-sysadmin-pages-are-out-of-reach">If the sysadmin pages are out of reach</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The administration app grants a role only on an active domain whose Keycloak client your sysadmin
+holds a role on. A deployment bootstrapped with the base product&#8217;s archive alone has the master
+domain, active since 4.0.123, so the Sysadmin pages are reachable on it with the <code>sysadmin</code> role on
+<code>niord-client-master</code>. If a country&#8217;s bootstrap left the master domain inactive and brought no
+active domain of its own, no domain grants a role and the Sysadmin pages send you back to the start
+page; since there is no retry, the database is then recreated empty and bootstrapped again with
+both archives, and the country&#8217;s maintainers correct the archive first.</p>
+</div>
+<div class="paragraph">
+<p>The usual case looks the same: the country&#8217;s domain is active, but its Keycloak client does
+not exist yet, or your sysadmin holds no role on it. The menu then shows Messages only. Do step 1
+below.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="what-you-set-up-in-order"><a class="anchor" href="#what-you-set-up-in-order"></a><a class="link" href="#what-you-set-up-in-order">What you set up, in order</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Each step says what to do, where, and how to see it worked. Where a domain field names something a
+later step creates (areas, categories, series), come back to the domain once it exists.</p>
+</div>
+<div class="paragraph">
+<p>Each step starts with its tag: <strong>Mandatory</strong> for every deployment, or <strong>When it applies</strong> for a
+deployment that has the case its line names. The guides' index explains the tags
+(<a href="README.html#what-is-mandatory-and-what-is-optional">What is mandatory, and what is optional</a>).</p>
+</div>
+<div class="paragraph">
+<p>The drawing shows every step, all 17. An arrow leads from a step to a step that needs it, and a
+dotted arrow is a domain field that names a later step&#8217;s data. Step 1 opens the administration app
+for every other step, so only its arrow to step 2 is drawn. The steps in the box need no other step,
+and no step needs them.</p>
+</div>
+<div class="imageblock kit-diagram">
+<div class="content">
+<img src="operators-guide-diagram-2.svg" alt="Diagram. Step 1: Keycloak, the first domain client → Step 2: Domains. Step 3: Areas → Step 2: Domains. Step 6: Categories → Step 2: Domains. Step 7: Message series → Step 2: Domains. Step 2: Domains → Step 8: Publications. Step 2: Domains → Step 14: AtoN data. Step 2: Domains → Step 16: Users, groups and roles. Step 2: Domains → Step 9: Promulgation types. Step 3: Areas → Step 9: Promulgation types. Step 2: Domains → Step 13: Firing schedules. Step 3: Areas → Step 13: Firing schedules. Step 7: Message series → Step 13: Firing schedules. Step 2: Domains → Step 17: A first message. Step 7: Message series → Step 17: A first message. Steps that need no other step: Step 4: Charts; Step 5: Sources; Step 10: Mailing lists; Step 11: Dictionaries and texts; Step 12: Templates and reports; Step 15: Settings.">
+</div>
+</div>
+<div class="sect2">
+<h3 id="1-keycloak-who-may-sign-in-and-the-domain-clients"><a class="anchor" href="#1-keycloak-who-may-sign-in-and-the-domain-clients"></a><a class="link" href="#1-keycloak-who-may-sign-in-and-the-domain-clients">1. Keycloak: who may sign in, and the domain clients</a></h3>
+<div class="paragraph">
+<p><strong>Mandatory.</strong> In Keycloak&#8217;s admin console, in the realm the deployment signs in to:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The client <code>niord-web</code> is the administration app&#8217;s sign-in.</p>
+</li>
+<li>
+<p>Each domain is a client whose client ID is the domain&#8217;s Keycloak ID. It holds the roles <code>user</code>,
+<code>editor</code>, <code>admin</code> and <code>sysadmin</code>, each including the one before it. No one signs in through it;
+it only holds roles. The administration app grants a role only from the client of the domain you
+choose in the menu.</p>
+</li>
+<li>
+<p>The client <code>niord-client-master</code> is the base product&#8217;s own. The backend honours a role on it in
+every domain, so it counts for calls to the backend&#8217;s interface, such as the bootstrap command.
+The administration app does not read it: a role there opens no area of the app.</p>
+</li>
+<li>
+<p>The app acts in Keycloak with the signed-in person&#8217;s own rights. A sysadmin who creates domain
+clients needs the <code>realm-management</code> client&#8217;s <code>manage-clients</code> role, and an admin who manages
+users needs its <code>manage-users</code> role. Give these through a group.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Your first sysadmin needs the <code>sysadmin</code> role twice: on <code>niord-client-master</code>, and on the client of
+the first active domain, which your country&#8217;s bootstrap brought. Ask your maintainers for that
+domain&#8217;s Keycloak ID.</p>
+</div>
+<div class="imageblock kit-diagram">
+<div class="content">
+<img src="operators-guide-diagram-3.svg" alt="Diagram. Your first sysadmin group → sysadmin on niord-client-master. sysadmin on niord-client-master → The backend&#8217;s interface in every domain, such as the bootstrap command. Your first sysadmin group → sysadmin on the client of the first active domain. sysadmin on the client of the first active domain → The Sysadmin area, with that domain chosen in the menu.">
+</div>
+</div>
+<div class="paragraph">
+<p>That first client does not exist until someone presses <strong>Create in Keycloak</strong>, and the button is in
+the Sysadmin area, which the app shows only to a sysadmin of the chosen domain. So create this one
+client by hand, unless the realm the installer set up already holds it:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Clients, <strong>Create client</strong>. The client ID is the domain&#8217;s Keycloak ID. Keycloak&#8217;s defaults on
+the next two pages work, since the client only holds roles. Save. (<strong>Create in Keycloak</strong> makes
+its clients from the backend&#8217;s template: the domain&#8217;s name as the name, bearer-only, <strong>Client
+authentication</strong> on, <strong>Standard flow</strong> and <strong>Direct access grants</strong> on and the other flows off,
+<code>/*</code> as the redirect URI, and full scope off.)</p>
+</li>
+<li>
+<p>On the client&#8217;s <strong>Roles</strong> tab, create <code>user</code>, <code>editor</code>, <code>admin</code> and <code>sysadmin</code>.</p>
+</li>
+<li>
+<p>Open <code>editor</code> and add <code>user</code> as an associated role. Do the same for <code>admin</code> with <code>editor</code>, and
+for <code>sysadmin</code> with <code>admin</code>.</p>
+</li>
+<li>
+<p>Give the first sysadmin&#8217;s group the client&#8217;s <code>sysadmin</code> role, beside the <code>sysadmin</code> role on
+<code>niord-client-master</code>: Groups, the group, <strong>Role mapping</strong>, <strong>Assign role</strong>, filtered by
+clients. Users, the user, <strong>Groups</strong> names the user&#8217;s group.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Every later domain&#8217;s client comes from <strong>Create in Keycloak</strong>: save the domain in step 2, open it
+again, and press the button. Whether the installer&#8217;s realm holds the first client, and the
+production realm itself, are verified at the deploy step.</p>
+</div>
+<div class="paragraph">
+<p>How to see it worked: your sysadmin signs in, chooses the domain in the menu, and the Sysadmin area
+appears. After <strong>Create in Keycloak</strong>, Sysadmin &gt; Domains shows a tick beside the domain&#8217;s Keycloak
+ID, and the domain&#8217;s editor says the client exists in Keycloak. The manual:
+<a href="../../sysadmin-manual/manual.html#keycloak-integration">Keycloak integration</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="2-domains-and-their-time-zones"><a class="anchor" href="#2-domains-and-their-time-zones"></a><a class="link" href="#2-domains-and-their-time-zones">2. Domains and their time zones</a></h3>
+<div class="paragraph">
+<p><strong>Mandatory.</strong> Every domain has its time zone, and every domain but the first (step 1) its client
+from <strong>Create in Keycloak</strong>. Create with <strong>New Domain</strong> only the domains your bootstrap did not
+bring; open each one it brought with the pencil, check its fields, and press <strong>Create in Keycloak</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Sysadmin &gt; Domains, <strong>New Domain</strong>. Give each domain:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>a <strong>Keycloak ID</strong>, unique, which is also its Keycloak client;</p>
+</li>
+<li>
+<p><strong>Active</strong> ticked: only an active domain appears in the menu&#8217;s domain list;</p>
+</li>
+<li>
+<p>a <strong>Name</strong>;</p>
+</li>
+<li>
+<p>a <strong>Time Zone</strong>. Choose the zone of the waters the domain covers; leave none blank by accident.
+The zone formats the times the administration app shows while this domain is chosen in the
+menu; with no zone, the app uses the browser&#8217;s own. It also formats the times the backend writes
+into the domain&#8217;s message texts and documents, the PDFs the public site offers among them. The
+public site&#8217;s pages do not read it: they show times in the zone your country&#8217;s build names, UTC
+unless the maintainers set another. That zone is your maintainers' setting, not yours: ask them to
+set it to the zone you choose here
+(The public site&#8217;s time zone in the kit package&#8217;s <code>docs/country-guide-in-depth.md</code>);</p>
+</li>
+<li>
+<p><strong>Publish</strong> ticked for a domain whose messages the public site shows. The field&#8217;s hint reads
+"Promulgate messages by default"; in this app the public site and the public interface serve only
+the messages of domains that are active and have Publish ticked;</p>
+</li>
+<li>
+<p>the map centre, sort order, colour and the AtoNs and Templates flags as the manual describes.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Then press <strong>Save Domain</strong>, open the domain again with the pencil, and press <strong>Create in Keycloak</strong>.</p>
+</div>
+<div class="paragraph">
+<p>How to see it worked: the domain is in the list with its time zone, and in the menu&#8217;s domain list.
+The manual: <a href="../../sysadmin-manual/manual.html#domains">Domains</a>. Two things the
+manual leaves out: <strong>Create in Keycloak</strong> shows only on a saved domain, and the copy button beside
+the pencil starts a new domain from an existing one.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="3-areas"><a class="anchor" href="#3-areas"></a><a class="link" href="#3-areas">3. Areas</a></h3>
+<div class="paragraph">
+<p><strong>When it applies:</strong> for the areas your bootstrap did not bring. A message needs no area, so a
+deployment whose bootstrap brought its areas skips this step.</p>
+</div>
+<div class="paragraph">
+<p>Admin &gt; Areas, <strong>New area</strong> and <strong>New sub-area</strong>, as a tree. An area of type <strong>Firing area</strong> gets a
+firing schedule in step 13.</p>
+</div>
+<div class="paragraph">
+<p>How to see it worked: the tree shows the areas, and a domain&#8217;s <strong>Areas</strong> field offers them. The
+manual: <a href="../../admin-manual/manual.html#areas">Areas</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="4-charts"><a class="anchor" href="#4-charts"></a><a class="link" href="#4-charts">4. Charts</a></h3>
+<div class="paragraph">
+<p><strong>When it applies:</strong> if your messages name the charts they concern.</p>
+</div>
+<div class="paragraph">
+<p>Admin &gt; Charts, <strong>New Chart</strong>, or <strong>Import&#8230;&#8203;</strong> from the page&#8217;s menu with a file your maintainers
+give you.</p>
+</div>
+<div class="paragraph">
+<p>How to see it worked: the chart list shows them, and the message editor&#8217;s chart field offers them.
+The manual: <a href="../../admin-manual/manual.html#charts">Charts</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="5-sources"><a class="anchor" href="#5-sources"></a><a class="link" href="#5-sources">5. Sources</a></h3>
+<div class="paragraph">
+<p><strong>When it applies:</strong> if your messages name their sources.</p>
+</div>
+<div class="paragraph">
+<p>Admin &gt; Sources, <strong>New Source</strong>.</p>
+</div>
+<div class="paragraph">
+<p>How to see it worked: the message editor&#8217;s source field offers them. The manual:
+<a href="../../admin-manual/manual.html#sources">Sources</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="6-categories"><a class="anchor" href="#6-categories"></a><a class="link" href="#6-categories">6. Categories</a></h3>
+<div class="paragraph">
+<p><strong>When it applies:</strong> if you need categories beyond the bootstrap&#8217;s, or a domain offers only some of
+them. A domain with no categories linked offers every category except those whose own <strong>Domains</strong>
+field names other domains only. The base product&#8217;s categories name no domain.</p>
+</div>
+<div class="paragraph">
+<p>Sysadmin &gt; Categories, <strong>New category</strong> and <strong>New sub-category</strong>. A category may be a template
+category, with its script resources and template parameters. Link categories to domains in the
+category&#8217;s <strong>Domains</strong> field or the domain&#8217;s <strong>Categories</strong> field. Keep the name <strong>Firing
+Exercises</strong> as it is.</p>
+</div>
+<div class="paragraph">
+<p>How to see it worked: the tree shows the categories, and the message editor of a linked domain
+offers them. The manual: <a href="../../sysadmin-manual/manual.html#categories">Categories</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="7-message-series-and-their-numbering"><a class="anchor" href="#7-message-series-and-their-numbering"></a><a class="link" href="#7-message-series-and-their-numbering">7. Message series and their numbering</a></h3>
+<div class="paragraph">
+<p><strong>Mandatory.</strong> Every domain you write messages in has its series: a message is verified and
+published only with one. Create those your bootstrap did not bring.</p>
+</div>
+<div class="paragraph">
+<p>Sysadmin &gt; Message Series, <strong>New Message Series</strong>: the <strong>Message Series ID</strong>, the
+<strong>Main Type</strong> (Navigational Warnings or Notices to Mariners), the <strong>Number Sequence Type</strong> (Yearly,
+Continuous, Manual or None), the <strong>Short Format</strong> with its tokens, and for a warning series the
+<strong>NAVTEX Preamble</strong>. <strong>Next number</strong> sets the number the next published message gets. Then add the
+series to its domain: Sysadmin &gt; Domains, the domain&#8217;s <strong>Message Series</strong> field.</p>
+</div>
+<div class="paragraph">
+<p>How to see it worked: the series list shows the series with its sequence and next number, and the
+domain list shows the series beside its domain. The manual:
+<a href="../../sysadmin-manual/manual.html#message-series">Message series</a>. This app
+adds a <strong>Search Index</strong> field, which leaves a series' messages out of the free-text search.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="8-publication-categories-and-publications"><a class="anchor" href="#8-publication-categories-and-publications"></a><a class="link" href="#8-publication-categories-and-publications">8. Publication categories and publications</a></h3>
+<div class="paragraph">
+<p><strong>When it applies:</strong> if you issue publications, or your messages cite them.</p>
+</div>
+<div class="paragraph">
+<p>Admin &gt; Publication categories first: each category groups publications on the public site, and its
+<strong>Show on the public site</strong> decides whether they appear there. Then Admin &gt; Publications, in the
+domain the publications belong to: <strong>New</strong> creates a publication series, and its issues are
+released under it. <strong>Can be cited from messages in</strong> names the domains whose messages may cite it.</p>
+</div>
+<div class="paragraph">
+<p>How to see it worked: the publication appears on the public site&#8217;s publications page when its
+category is shown there and an issue is published. The manual&#8217;s
+<a href="../../admin-manual/manual.html#publications">Publications</a> chapter describes the
+earlier page: this app&#8217;s series and issues work as the page&#8217;s own texts say.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="9-promulgation-types-and-their-transmitters"><a class="anchor" href="#9-promulgation-types-and-their-transmitters"></a><a class="link" href="#9-promulgation-types-and-their-transmitters">9. Promulgation types and their transmitters</a></h3>
+<div class="paragraph">
+<p><strong>When it applies:</strong> if you promulgate messages, by NAVTEX, SafetyNET, Twitter, audio or a service
+of your own.</p>
+</div>
+<div class="paragraph">
+<p>Sysadmin &gt; Promulgation Types. <strong>Add Promulgation Type</strong> for each of your own (a SafetyNET type, a
+second NAVTEX type), choosing its <strong>Service ID</strong>. For the base product&#8217;s NAVTEX, Twitter and Audio,
+open each with the pencil and set its <strong>Domains</strong> and its <strong>Language</strong>. A type&#8217;s own settings open
+from its editor once it is saved: a NAVTEX type&#8217;s <strong>Transmitters</strong> and a SafetyNET type&#8217;s <strong>Areas</strong>,
+each with <strong>Manage&#8230;&#8203;</strong>, and Twitter&#8217;s <strong>Settings</strong>, with <strong>Update Settings&#8230;&#8203;</strong>.</p>
+</div>
+<div class="paragraph">
+<p>How to see it worked: the list shows each type with its domains and language, and the message
+editor of a linked domain offers it. The manual:
+<a href="../../sysadmin-manual/manual.html#promulgation-types">Promulgation types</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="10-mailing-lists-and-their-triggers"><a class="anchor" href="#10-mailing-lists-and-their-triggers"></a><a class="link" href="#10-mailing-lists-and-their-triggers">10. Mailing lists and their triggers</a></h3>
+<div class="paragraph">
+<p><strong>When it applies:</strong> if you send messages by mail.</p>
+</div>
+<div class="paragraph">
+<p>Admin &gt; Mailing Lists, <strong>New Mailing List</strong>, then <strong>Add Trigger</strong>: a Status Change trigger (for
+Published, Cancelled or Expired) or a Scheduled one, each with the template it sends. Add the
+recipients with <strong>Manage Recipients</strong>: users, and contacts from Admin &gt; Users &amp; Contacts, Contacts
+tab.</p>
+</div>
+<div class="paragraph">
+<p>How to see it worked: <strong>Test trigger</strong> on a trigger, then Sysadmin &gt; Mail Queue shows the mail. The
+manuals: <a href="../../admin-manual/manual.html#mailing-lists">Mailing lists</a> and their
+<a href="../../sysadmin-manual/manual.html#mailing-list-triggers">triggers</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="11-dictionaries-and-texts"><a class="anchor" href="#11-dictionaries-and-texts"></a><a class="link" href="#11-dictionaries-and-texts">11. Dictionaries and texts</a></h3>
+<div class="paragraph">
+<p><strong>When it applies:</strong> if a text the backend serves needs other wording, or your maintainers give you
+a dictionary file.</p>
+</div>
+<div class="paragraph">
+<p>Sysadmin &gt; Dictionaries holds the texts the backend serves (<code>web</code>, <code>message</code>, <code>mail</code>, <code>pdf</code> and
+<code>template</code>) and the AtoN dictionary. Change a value with the pencil. <strong>Import&#8230;&#8203;</strong> takes a
+dictionary file and shows a preview first: <strong>Would add</strong> for keys this deployment lacks, ticked, and
+<strong>Would overwrite</strong> for keys it has with other values, which change only when you tick them.</p>
+</div>
+<div class="paragraph">
+<p>How to see it worked: the changed text shows where it is used, after a reload. The manual:
+<a href="../../sysadmin-manual/manual.html#dictionaries">Dictionaries</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="12-templates-and-reports-by-import"><a class="anchor" href="#12-templates-and-reports-by-import"></a><a class="link" href="#12-templates-and-reports-by-import">12. Templates and reports, by import</a></h3>
+<div class="paragraph">
+<p><strong>When it applies:</strong> when your maintainers give you a template&#8217;s, script&#8217;s or report&#8217;s import file.</p>
+</div>
+<div class="paragraph">
+<p>The templates and reports your country adds or changes arrive as import files from your
+maintainers, never by themselves.</p>
+</div>
+<div class="paragraph">
+<p>Sysadmin &gt; Script Resources, <strong>Import&#8230;&#8203;</strong>: the preview lists <strong>Would add</strong> (ticked), <strong>Would
+overwrite</strong> (unticked), <strong>Unchanged</strong> and <strong>Refused</strong> with each path&#8217;s reason. <strong>Show diff</strong> puts
+this deployment&#8217;s row beside the file&#8217;s. An overwrite happens only for a path you tick. <strong>Import
+ticked</strong> starts the import job. Every write is recorded with your user name and the source Import,
+and the pencil&#8217;s <strong>Revision History</strong> shows it.</p>
+</div>
+<div class="paragraph">
+<p>Sysadmin &gt; Print Reports, <strong>Import&#8230;&#8203;</strong>, has no preview: a report the file names replaces the
+report with the same id whole. <strong>Export&#8230;&#8203;</strong> first, to keep a copy.</p>
+</div>
+<div class="paragraph">
+<p>How to see it worked: the import&#8217;s batch job is completed, and the script resource&#8217;s revision
+history shows the import. The manual:
+<a href="../../sysadmin-manual/manual.html#script-resources">Script resources</a> and
+<a href="../../sysadmin-manual/manual.html#print-reports">Print reports</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="13-firing-areas-and-their-schedules"><a class="anchor" href="#13-firing-areas-and-their-schedules"></a><a class="link" href="#13-firing-areas-and-their-schedules">13. Firing areas and their schedules</a></h3>
+<div class="paragraph">
+<p><strong>When it applies:</strong> if your waters have firing areas.</p>
+</div>
+<div class="paragraph">
+<p>The firing areas are areas of type <strong>Firing area</strong> (step 3). One domain holds a message per firing
+area, and another receives the generated firing exercises, each with its series. Then Sysadmin &gt;
+Firing Schedules, <strong>New Firing Schedule</strong>: the <strong>Domain</strong>, the <strong>Target Domain</strong>, the <strong>Target
+Message Series</strong>, the <strong>Scheduled Days</strong>, and <strong>Generate firing exercises</strong> ticked.</p>
+</div>
+<div class="paragraph">
+<p>How to see it worked: in the firing areas' domain the menu shows <strong>Schedule</strong>, the Firing Area
+Schedule page. A scheduled exercise appears there, and after <strong>Update Firing Exercises&#8230;&#8203;</strong> as a
+message in the target domain under the category Firing Exercises. The manual:
+<a href="../../sysadmin-manual/manual.html#firing-schedules">Firing schedules</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="14-aton-data"><a class="anchor" href="#14-aton-data"></a><a class="link" href="#14-aton-data">14. AtoN data</a></h3>
+<div class="paragraph">
+<p><strong>When it applies:</strong> if a domain shows AtoNs.</p>
+</div>
+<div class="paragraph">
+<p>The administration app has no page that loads AtoN records. A domain&#8217;s <strong>AtoNs</strong> flag switches the
+AtoN layer on for that domain, and the AtoN dictionary comes with the bootstrap. Ask your country&#8217;s
+maintainers how your deployment gets its AtoN records.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="15-settings"><a class="anchor" href="#15-settings"></a><a class="link" href="#15-settings">15. Settings</a></h3>
+<div class="paragraph">
+<p><strong>Mandatory.</strong> Sysadmin &gt; Settings lists the settings an operator may change, with <strong>Filter</strong>. The
+pencil changes a value, and only the value. There is no reset and no delete. Only the keys the code
+declares are listed: a row of an earlier version that no code declares stays in the database,
+unlisted. A password value is never shown. <strong>Import&#8230;&#8203;</strong> and <strong>Export&#8230;&#8203;</strong> take a settings file.</p>
+</div>
+<div class="paragraph">
+<p>Check at least the addresses (<code>baseUri</code>, <code>adminAppUrl</code>, <code>authServerUrl</code>), the mail sender
+(<code>mailSender</code>), and <code>documentationUrl</code>, which the Help links open. The language keys are in
+<a href="#a-new-language-in-a-running-deployment">A new language in a running deployment</a>.</p>
+</div>
+<div class="paragraph">
+<p>A value can also be given to the server at its start, as a system property or an environment
+variable with the setting&#8217;s name. For a text setting, such a value wins over the page&#8217;s, and the
+page does not show it. A list or other JSON setting, such as <code>modelLanguages</code>, is changed on the
+page only: both applications read its stored value whatever the server was given, and the server
+cannot read a list given that way. The page lists the stored value, and the pencil changes that one, which the server uses only once
+the start-up value is no longer given. The local launcher gives <code>adminAppUrl</code> that way, so on a
+local run its row may read empty while the server uses the launcher&#8217;s address. Ask your installer
+which settings a deployment gives at its start.</p>
+</div>
+<div class="paragraph">
+<p>How to see it worked: the list shows the new value. The manual:
+<a href="../../sysadmin-manual/manual.html#settings">Settings</a> describes the earlier
+model: its file and environment sections no longer hold.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="16-users-groups-and-roles"><a class="anchor" href="#16-users-groups-and-roles"></a><a class="link" href="#16-users-groups-and-roles">16. Users, groups and roles</a></h3>
+<div class="paragraph">
+<p><strong>Mandatory.</strong> In Keycloak&#8217;s admin console, give people their roles through groups: a group holds a
+domain client&#8217;s role (<code>user</code>, <code>editor</code>, <code>admin</code> or <code>sysadmin</code>). The app shows a person what their
+role on the chosen domain&#8217;s client allows, so a person who works in three domains needs a role on
+each of the three clients. A role on <code>niord-client-master</code> counts for the backend&#8217;s interface in
+every domain, such as scripts and the bootstrap command, never for the app&#8217;s areas and menus.</p>
+</div>
+<div class="paragraph">
+<p>Admin &gt; Users &amp; Contacts, Users tab, searches the realm&#8217;s users, adds one with <strong>Add</strong>, and moves a
+user in and out of the current domain&#8217;s groups. Niord keeps its own record of a person from their
+first sign-in.</p>
+</div>
+<div class="paragraph">
+<p>How to see it worked: the person signs in and sees the areas their role allows. The manuals:
+<a href="../../admin-manual/manual.html#users-contacts">Users &amp; contacts</a> and
+<a href="../../sysadmin-manual/manual.html#user-groups">user groups</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="17-a-first-message"><a class="anchor" href="#17-a-first-message"></a><a class="link" href="#17-a-first-message">17. A first message</a></h3>
+<div class="paragraph">
+<p><strong>Mandatory.</strong> In the menu&#8217;s <strong>Editor</strong>, choose a domain with a series, then <strong>New blank NW</strong>. Fill
+in the <strong>Type</strong>, which is required; the series, in the <strong>ID</strong> field, which is chosen already when
+the domain has one series; the area; and the text. Save. On the message&#8217;s status page use <strong>Verify
+message&#8230;&#8203;</strong>, and then <strong>Publish message&#8230;&#8203;</strong>, which a draft does not offer until it is verified.</p>
+</div>
+<div class="paragraph">
+<p>How to see it worked: the message has its number in the series' short format, and it shows on the
+public site. On a local run that is checked by hand; on a deployment it is verified at the deploy
+step. The manual: <a href="../../editor-manual/manual.html#editor">Editor</a> and the
+<a href="../../editor-manual/manual.html#status-editor-page">status page</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="a-new-language-in-a-running-deployment"><a class="anchor" href="#a-new-language-in-a-running-deployment"></a><a class="link" href="#a-new-language-in-a-running-deployment">A new language in a running deployment</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>When it applies:</strong> when your maintainers ship a new language. A deployment that already has its
+settings keeps them: the backend adds at its start only the settings it lacks, and never changes one
+it has. So the new language stays off in both applications until you turn it on. Once the version
+with the language runs, on Sysadmin &gt; Settings, change with the pencil:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>modelLanguages</code>, a JSON list such as <code>["en", "zz"]</code>: the message languages, a field each in the
+editor;</p>
+</li>
+<li>
+<p><code>siteLanguages</code>, a JSON list: the administration app&#8217;s languages. A language the build ships no
+texts for is left out;</p>
+</li>
+<li>
+<p><code>infoSiteLanguages</code>, a JSON list: the public site&#8217;s languages, again only those the build ships;</p>
+</li>
+<li>
+<p><code>defaultLanguage</code>, a text such as <code>zz</code>, only when the new language becomes the default. It must be
+one of <code>modelLanguages</code>; otherwise the first of them is used;</p>
+</li>
+<li>
+<p><code>infoDefaultLanguage</code>, a text, only when the new language becomes the public site&#8217;s default. It
+must be one of the public site&#8217;s languages; otherwise the first of them is used.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Ask your maintainers which of the lists the language joins: a language may be a message language
+only, without texts for the applications. For the two text keys, <code>defaultLanguage</code> and
+<code>infoDefaultLanguage</code>, a value the server is given at its start wins over the page (step 15). The
+three lists are JSON, and both applications read the value the page shows. Then reload both
+applications: each reads its languages when it loads.</p>
+</div>
+<div class="paragraph">
+<p>How to see it worked: the administration app&#8217;s language menu in its header lists the language, and
+the editor shows a field for it. The public site&#8217;s menu offers it beside its other languages.</p>
+</div>
+<div class="paragraph">
+<p>The names and texts that exist already, such as those of areas, categories and domains, have no
+text in the new language until someone fills its field in their editors, or imports a file your
+maintainers give.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="the-servers-home-folder"><a class="anchor" href="#the-servers-home-folder"></a><a class="link" href="#the-servers-home-folder">The server&#8217;s home folder</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The backend keeps its files in its home folder: the repository of attachments, the batch files, the
+archives and the message index. The setting <code>niord.home</code> names it. Your country&#8217;s own defaults set
+it to <code>${NIORD_HOME}</code>, which the server reads as the folder the deployment mounts.</p>
+</div>
+<div class="paragraph">
+<p>How to see it worked: Sysadmin &gt; Settings lists <code>niord.home</code> with the value <code>${NIORD_HOME}</code>. The
+backend&#8217;s start log says <code>Default setting niord.home = ${NIORD_HOME} (country)</code>. Do not change the
+value on the page. The volume itself is verified at the deploy step.</p>
+</div>
+<div class="paragraph">
+<p>The base product&#8217;s generic deployable, without a country, follows <code>NIORD_HOME</code> too (since 4.0.123):
+when no <code>niord.home</code> property or variable is set, its <code>niord.home</code> takes the <code>NIORD_HOME</code> system
+property, else the environment variable, ahead of the database row; only without any of them does
+it fall back to <code>${user.home}/.niord</code>. Check the Settings page on such a deployment before anyone
+enters data.</p>
+</div>
+<div class="paragraph">
+<p><strong>The execution mode.</strong> A fresh database starts in mode <code>test</code> (since 4.0.124): both frontends then
+show a TEST ribbon, the public site included. A production deployment sets the environment variable
+<code>mode=production</code> in its chart values; the backend reads a system property or environment variable
+named like a setting ahead of the stored row, so no database edit is needed, and a deployment whose
+values forgot it shows the ribbon instead of passing as production.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="the-servers-clock"><a class="anchor" href="#the-servers-clock"></a><a class="link" href="#the-servers-clock">The server&#8217;s clock</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The backend runs in UTC. Times stored without a
+zone are written and read in the server&#8217;s zone, so a server on a zone with summer time would shift
+them by an hour in the autumn hour that happens twice. The domains' time zones (step 2) format what
+the administration app and the backend&#8217;s documents show; the public site uses the zone its build
+names (step 2). The chart and the images set UTC; that is verified at the deploy step.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="cut-over-from-an-existing-deployment"><a class="anchor" href="#cut-over-from-an-existing-deployment"></a><a class="link" href="#cut-over-from-an-existing-deployment">Cut-over from an existing deployment</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>When it applies:</strong> if your deployment takes over an existing database. Such a deployment is not
+bootstrapped: the database holds data. Templates are data in the database, so a template the new
+version needs and the old database never had is missing until you import it.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Read the missing-path report first.</strong> In the app you see it in the Script Resources import&#8217;s
+preview: an add the report lists is marked <strong>In the missing-path report</strong>, and <strong>Only the paths
+the missing-path report lists</strong> ticks those and no other. Import only them, and tick no
+overwrite. The backend also logs the report at every start.</p>
+</li>
+<li>
+<p><strong>An import is your own decision</strong>, never a step of an upgrade. Data on any environment other than
+a developer&#8217;s own changes only when a person says so.</p>
+</li>
+<li>
+<p><strong>A stale script row</strong> copied from an older deployment stays as it is until a sysadmin imports the
+release file that carries the current one and ticks its overwrite.</p>
+</li>
+<li>
+<p><strong>The message index</strong> (a known fault, not yet fixed): an index of an older format in the home folder&#8217;s
+<code>message-index</code> folder stops the start. The remedy, the installer emptying that folder before the
+first start, is not verified.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Every part on a real volume is verified at the deploy step.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2026-11-12 08:22:02 UTC
+</div>
+</div>
+</body>
+</html>
