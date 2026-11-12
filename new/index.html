@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+<meta name="robots" content="noindex, nofollow">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="The guides of Niord, the system for Navigational Warnings and Notices to Mariners">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Niord Documentation</title>
+  </head>
+
+  <!--
+    The landing page of docs.niord.org. build.sh copies it into the site and then drops each
+    element with data-subsite="<folder>" whose guide the build did not produce; "@master" in such an
+    element's links becomes the folder's master document. So an entry may be written before its
+    guide exists: it shows from the first build that holds the guide (guides/README.md).
+  -->
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/NiordOrg">View on GitHub</a>
+
+          <h1 id="project_title">Niord Documentation</h1>
+          <h2 id="project_tagline">Guides for Niord, the system for Navigational Warnings and Notices to Mariners</h2>
+
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+
+<h3 id="welcome">Welcome to the Niord documentation</h3>
+
+<p>Niord is an open-source system for maritime safety information. Editors write, publish and
+promulgate Navigational Warnings and Notices to Mariners in its administration application, and
+mariners read them on its public site. The organisation behind Niord is the Danish Emergency
+Management Agency.</p>
+
+<p>The guides on this site describe the current version of Niord: one base product that every
+country runs, with a thin layer of its own for each country's languages, look and data.</p>
+
+<div data-subsite="whats-new">
+<h3 id="whats-new">New to this version?</h3>
+<ul>
+  <li>
+    <a href="whats-new/whats-new.html">What changed since the old Niord</a>
+    (<a href="whats-new/whats-new.pdf">pdf</a>): for those who know the earlier Niord, what is new,
+    what has moved and what is gone.
+  </li>
+</ul>
+</div>
+
+<h3 id="manuals">User manuals</h3>
+
+<ul>
+  <li data-subsite="editor-manual">
+    <a href="editor-manual/manual.html">User Manual for Editors</a>
+    (<a href="editor-manual/manual.pdf">pdf</a>): writing, verifying and publishing messages.
+  </li>
+  <li data-subsite="admin-manual">
+    <a href="admin-manual/manual.html">User Manual for Admins</a>
+    (<a href="admin-manual/manual.pdf">pdf</a>): the data editors work with, such as areas, charts,
+    sources, publications, users and mailing lists.
+  </li>
+  <li data-subsite="sysadmin-manual">
+    <a href="sysadmin-manual/manual.html">User Manual for Sysadmins</a>
+    (<a href="sysadmin-manual/manual.pdf">pdf</a>): setting up and running a deployment, from domains
+    and message series to templates, reports and settings.
+  </li>
+</ul>
+
+<div data-subsite="public-site">
+<h3 id="mariners">For mariners</h3>
+<ul>
+  <li>
+    <a href="public-site/manual.html">The public site</a>
+    (<a href="public-site/manual.pdf">pdf</a>): finding, reading and printing the warnings and
+    notices, on a list or a map, and downloading the publications.
+  </li>
+</ul>
+</div>
+
+<h3 id="integration">Integration</h3>
+
+<ul>
+  <li data-subsite="public-api">
+    <a href="public-api/api.html">Niord Public API</a>
+    (<a href="public-api/api.pdf">pdf</a>): the public REST interface that other systems read
+    messages and publications from.
+  </li>
+  <li data-subsite="model">
+    <a href="model/model.html">Niord Model</a>
+    (<a href="model/model.pdf">pdf</a>): the message model, Niord's main interchange format.
+  </li>
+  <li data-subsite="presentation">
+    <a href="presentation/presentation.html">Niord Message Presentation</a>
+    (<a href="presentation/presentation.pdf">pdf</a>): guidelines for how a client presents Niord
+    messages.
+  </li>
+</ul>
+
+<h3 id="developers">Developers and countries</h3>
+
+<ul>
+  <li data-subsite="dev-guide-v4">
+    <a href="dev-guide-v4/guide.html">Developer Guide (Niord v4)</a>
+    (<a href="dev-guide-v4/guide.pdf">pdf</a>): how the system is built, how to run it on your
+    own machine, and how to change it.
+  </li>
+  <li data-subsite="country-kit">
+    <a href="country-kit/index.html">Country kit guides</a>: how a country's deployment is built on
+    the base product, with the guides for its designers and operators. The guides for the people
+    who build a country are listed there and ship in the country kit package.
+  </li>
+</ul>
+
+<h3 id="archive">Archive</h3>
+
+<p>The development guides of earlier versions, kept as they were written, with a note at the top
+of each that points to the current guide.</p>
+
+<ul>
+  <li data-subsite="dev-guide-v3">
+    <a href="dev-guide-v3/guide.html">Development Guide (Niord v3, Quarkus)</a>
+    (<a href="dev-guide-v3/guide.pdf">pdf</a>)
+  </li>
+  <li data-subsite="dev-guide-v2">
+    <a href="dev-guide-v2/guide.html">Development Guide (Niord v2, Wildfly)</a>
+    (<a href="dev-guide-v2/guide.pdf">pdf</a>)
+  </li>
+</ul>
+
+          <p><img src="images/niord.png" width="115" alt="Niord"></p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+      </footer>
+    </div>
+
+  </body>
+</html>

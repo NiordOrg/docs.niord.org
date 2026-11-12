@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg height='131pt' preserveAspectRatio='xMidYMid meet' viewBox='0.00 0.00 600.50 131.00' width='601pt' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns='http://www.w3.org/2000/svg'>
+<g class='graph' id='graph0' transform='scale(1 1) rotate(0) translate(4 127)'>
+<title>lifecycle</title>
+<polygon fill='white' points='-4,4 -4,-127 596.5,-127 596.5,4 -4,4' stroke='none'/>
+
+<g class='node' id='node1'>
+<title>Draft</title>
+<path d='M42,-62C42,-62 12,-62 12,-62 6,-62 0,-56 0,-50 0,-50 0,-38 0,-38 0,-32 6,-26 12,-26 12,-26 42,-26 42,-26 48,-26 54,-32 54,-38 54,-38 54,-50 54,-50 54,-56 48,-62 42,-62' fill='none' stroke='black'/>
+<text font-family='sans-serif' font-size='11.00' text-anchor='middle' x='27' y='-40.3'>Draft</text>
+</g>
+
+<g class='node' id='node2'>
+<title>Verified</title>
+<path d='M204.25,-86C204.25,-86 171,-86 171,-86 165,-86 159,-80 159,-74 159,-74 159,-62 159,-62 159,-56 165,-50 171,-50 171,-50 204.25,-50 204.25,-50 210.25,-50 216.25,-56 216.25,-62 216.25,-62 216.25,-74 216.25,-74 216.25,-80 210.25,-86 204.25,-86' fill='none' stroke='black'/>
+<text font-family='sans-serif' font-size='11.00' text-anchor='middle' x='187.62' y='-64.3'>Verified</text>
+</g>
+
+<g class='edge' id='edge1'>
+<title>Draft&#45;&gt;Verified</title>
+<path d='M54.11,-60.97C59.79,-63.88 65.93,-66.45 72,-68 96.52,-74.25 124.96,-74.29 147.37,-72.75' fill='none' stroke='black'/>
+<polygon fill='black' points='147.64,-76.24 157.31,-71.92 147.05,-69.27 147.64,-76.24' stroke='black'/>
+<text font-family='sans-serif' font-size='9.00' text-anchor='middle' x='106.5' y='-76.29'>Verify</text>
+</g>
+
+<g class='node' id='node6'>
+<title>Deleted</title>
+<path d='M384.12,-36C384.12,-36 349.38,-36 349.38,-36 343.38,-36 337.38,-30 337.38,-24 337.38,-24 337.38,-12 337.38,-12 337.38,-6 343.38,0 349.38,0 349.38,0 384.12,0 384.12,0 390.12,0 396.12,-6 396.12,-12 396.12,-12 396.12,-24 396.12,-24 396.12,-30 390.12,-36 384.12,-36' fill='none' stroke='black'/>
+<text font-family='sans-serif' font-size='11.00' text-anchor='middle' x='366.75' y='-14.3'>Deleted</text>
+</g>
+
+<g class='edge' id='edge6'>
+<title>Draft&#45;&gt;Deleted</title>
+<path d='M54.32,-35.82C60.09,-34.3 66.21,-32.92 72,-32 161.92,-17.77 269.1,-16.57 325.86,-17.15' fill='none' stroke='black'/>
+<polygon fill='black' points='325.62,-20.65 335.67,-17.28 325.72,-13.65 325.62,-20.65' stroke='black'/>
+<text font-family='sans-serif' font-size='9.00' text-anchor='middle' x='187.62' y='-24.69'>Delete</text>
+</g>
+
+<g class='edge' id='edge2'>
+<title>Verified&#45;&gt;Draft</title>
+<path d='M160.16,-49.54C154.12,-46.22 147.55,-43.26 141,-41.5 116.43,-34.88 87.75,-35.61 65.43,-37.94' fill='none' stroke='black'/>
+<polygon fill='black' points='65.09,-34.46 55.58,-39.14 65.93,-41.41 65.09,-34.46' stroke='black'/>
+<text font-family='sans-serif' font-size='9.00' text-anchor='middle' x='106.5' y='-55.45'>Revert to draft,</text>
+<text font-family='sans-serif' font-size='9.00' text-anchor='middle' x='106.5' y='-44.2'>or save</text>
+</g>
+
+<g class='node' id='node3'>
+<title>Published</title>
+<path d='M389,-96C389,-96 344.5,-96 344.5,-96 338.5,-96 332.5,-90 332.5,-84 332.5,-84 332.5,-72 332.5,-72 332.5,-66 338.5,-60 344.5,-60 344.5,-60 389,-60 389,-60 395,-60 401,-66 401,-72 401,-72 401,-84 401,-84 401,-90 395,-96 389,-96' fill='none' stroke='black'/>
+<text font-family='sans-serif' font-size='11.00' text-anchor='middle' x='366.75' y='-74.3'>Published</text>
+</g>
+
+<g class='edge' id='edge3'>
+<title>Verified&#45;&gt;Published</title>
+<path d='M216.69,-69.58C244.7,-71.17 288.18,-73.62 320.96,-75.47' fill='none' stroke='black'/>
+<polygon fill='black' points='320.38,-78.94 330.56,-76.01 320.77,-71.95 320.38,-78.94' stroke='black'/>
+<text font-family='sans-serif' font-size='9.00' text-anchor='middle' x='274.38' y='-89'>Publish, or the</text>
+<text font-family='sans-serif' font-size='9.00' text-anchor='middle' x='274.38' y='-77.75'>publish&#45;from date</text>
+</g>
+
+<g class='edge' id='edge7'>
+<title>Verified&#45;&gt;Deleted</title>
+<path d='M216.69,-60.08C246.23,-51.74 292.96,-38.55 326.22,-29.16' fill='none' stroke='black'/>
+<polygon fill='black' points='326.8,-32.63 335.48,-26.55 324.9,-25.89 326.8,-32.63' stroke='black'/>
+<text font-family='sans-serif' font-size='9.00' text-anchor='middle' x='274.38' y='-57.29'>Delete</text>
+</g>
+
+<g class='node' id='node4'>
+<title>Cancelled</title>
+<path d='M580.5,-123C580.5,-123 535.25,-123 535.25,-123 529.25,-123 523.25,-117 523.25,-111 523.25,-111 523.25,-99 523.25,-99 523.25,-93 529.25,-87 535.25,-87 535.25,-87 580.5,-87 580.5,-87 586.5,-87 592.5,-93 592.5,-99 592.5,-99 592.5,-111 592.5,-111 592.5,-117 586.5,-123 580.5,-123' fill='none' stroke='black'/>
+<text font-family='sans-serif' font-size='11.00' text-anchor='middle' x='557.88' y='-101.3'>Cancelled</text>
+</g>
+
+<g class='edge' id='edge4'>
+<title>Published&#45;&gt;Cancelled</title>
+<path d='M401.13,-82.76C431.9,-87.16 477.82,-93.71 511.84,-98.57' fill='none' stroke='black'/>
+<polygon fill='black' points='510.98,-101.98 521.38,-99.93 511.97,-95.05 510.98,-101.98' stroke='black'/>
+<text font-family='sans-serif' font-size='9.00' text-anchor='middle' x='462.12' y='-99.72'>Cancel</text>
+</g>
+
+<g class='node' id='node5'>
+<title>Expired</title>
+<path d='M574.5,-69C574.5,-69 541.25,-69 541.25,-69 535.25,-69 529.25,-63 529.25,-57 529.25,-57 529.25,-45 529.25,-45 529.25,-39 535.25,-33 541.25,-33 541.25,-33 574.5,-33 574.5,-33 580.5,-33 586.5,-39 586.5,-45 586.5,-45 586.5,-57 586.5,-57 586.5,-63 580.5,-69 574.5,-69' fill='none' stroke='black'/>
+<text font-family='sans-serif' font-size='11.00' text-anchor='middle' x='557.88' y='-47.3'>Expired</text>
+</g>
+
+<g class='edge' id='edge5'>
+<title>Published&#45;&gt;Expired</title>
+<path d='M401.13,-73.24C433.71,-68.58 483.28,-61.51 517.71,-56.59' fill='none' stroke='black'/>
+<polygon fill='black' points='517.86,-60.11 527.26,-55.23 516.87,-53.18 517.86,-60.11' stroke='black'/>
+<text font-family='sans-serif' font-size='9.00' text-anchor='middle' x='462.12' y='-72.72'>the publish&#45;to date</text>
+</g>
+</g>
+</svg>

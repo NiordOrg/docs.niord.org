@@ -1,0 +1,1744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.26">
+<title>What Changed Since the Old Niord</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<style>
+/*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
+/* Uncomment the following line when using as a custom stylesheet */
+/* @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700"; */
+html{font-family:sans-serif;-webkit-text-size-adjust:100%}
+a{background:none}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+b,strong{font-weight:bold}
+abbr{font-size:.9em}
+abbr[title]{cursor:help;border-bottom:1px dotted #dddddf;text-decoration:none}
+dfn{font-style:italic}
+hr{height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+audio,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type=checkbox],input[type=radio]{padding:0}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,::before,::after{box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;line-height:1;position:relative;cursor:auto;-moz-tab-size:4;-o-tab-size:4;tab-size:4;word-wrap:anywhere;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:0}
+p{line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #dddddf;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:1px solid #dedede;word-wrap:normal}
+table thead,table tfoot{background:#f7f8f7}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt{background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.center{margin-left:auto;margin-right:auto}
+.stretch{width:100%}
+.clearfix::before,.clearfix::after,.float-group::before,.float-group::after{content:" ";display:table}
+.clearfix::after,.float-group::after{clear:both}
+:not(pre).nobreak{word-wrap:normal}
+:not(pre).nowrap{white-space:nowrap}
+:not(pre).pre-wrap{white-space:pre-wrap}
+:not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
+pre{color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;line-height:1.45;text-rendering:optimizeSpeed}
+pre code,pre pre{color:inherit;font-size:inherit;line-height:inherit}
+pre.nowrap,pre.nowrap pre{white-space:pre;word-wrap:normal}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background:#f7f7f7;border:1px solid #ccc;border-radius:3px;box-shadow:0 1px 0 rgba(0,0,0,.2),inset 0 0 0 .1em #fff;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
+b.button::before,b.button::after{position:relative;top:-1px;font-weight:400}
+b.button::before{content:"[";padding:0 3px 0 2px}
+b.button::after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin:0 auto;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header::before,#header::after,#content::before,#content::after,#footnotes::before,#footnotes::after,#footer::before,#footer::after{content:" ";display:table}
+#header::after,#content::after,#footnotes::after,#footer::after{clear:both}
+#content{margin-top:1.25em}
+#content::before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
+#header>h1:only-child{border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span::before{content:"\00a0\2013\00a0"}
+#header .details br+span.author::before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark::before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber::after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #dddddf;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #e7e7e9;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #e7e7e9;left:auto;right:0}}
+@media screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border:1px solid #e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:none;background:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:hsla(0,0%,100%,.8);line-height:1.44}
+#content{margin-bottom:.625em}
+.sect1{padding-bottom:.625em}
+@media screen and (min-width:768px){#content{margin-bottom:1.25em}
+.sect1{padding-bottom:1.25em}}
+.sect1:last-child{padding-bottom:0}
+.sect1+.sect1{border-top:1px solid #e7e7e9}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor::before,h2>a.anchor::before,h3>a.anchor::before,#toctitle>a.anchor::before,.sidebarblock>.content>.title>a.anchor::before,h4>a.anchor::before,h5>a.anchor::before,h6>a.anchor::before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+details{margin-left:1.25rem}
+details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;outline:none;-webkit-tap-highlight-color:transparent}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"";border:solid transparent;border-left:solid;border-width:.3em 0 .3em .5em;position:absolute;top:.5em;left:-1.25rem;transform:translateX(15%)}
+details[open]>summary::before{border:solid transparent;border-top:solid;border-width:.5em .3em 0;transform:translateY(15%)}
+details>summary::after{content:"";width:1.25rem;height:1em;position:absolute;top:.3em;left:-1.25rem}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
+.paragraph.lead>p,#preamble>.sectionbody>[class=paragraph]:first-of-type p{font-size:1.21875em;line-height:1.6;color:rgba(0,0,0,.85)}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:none}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
+.sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
+@media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
+@media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
+.literalblock pre,.listingblock>.content>pre:not(.highlight),.listingblock>.content>pre[class=highlight],.listingblock>.content>pre[class^="highlight "]{background:#f7f7f8}
+.literalblock.output pre{color:#f7f7f8;background:rgba(0,0,0,.9)}
+.listingblock>.content{position:relative}
+.listingblock pre>code{display:block}
+.listingblock code[data-lang]::before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:inherit;opacity:.5}
+.listingblock:hover code[data-lang]::before{display:block}
+.listingblock.terminal pre .command::before{content:attr(data-prompt);padding-right:.5em;color:inherit;opacity:.5}
+.listingblock.terminal pre .command:not([data-prompt])::before{content:"$"}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.prettyprint{background:#f7f7f8}
+pre.prettyprint .linenums{line-height:1.45;margin-left:2em}
+pre.prettyprint li{background:none;list-style-type:inherit;padding-left:0}
+pre.prettyprint li code[data-lang]::before{opacity:1}
+pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
+table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
+table.linenotable td.code{padding-left:.75em}
+table.linenotable td.linenos,pre.pygments .linenos{border-right:1px solid;opacity:.35;padding-right:.5em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+pre.pygments span.linenos{display:inline-block;margin-right:.75em}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote::before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.75em;margin-right:.5ex;text-align:right}
+.verseblock{margin:0 1em 1.25em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans-serif;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract blockquote::before,.quoteblock.excerpt blockquote::before,.quoteblock .quoteblock blockquote::before{display:none}
+.quoteblock.abstract blockquote,.quoteblock.abstract p,.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{line-height:1.6;word-spacing:0}
+.quoteblock.abstract{margin:0 1em 1.25em;display:block}
+.quoteblock.abstract>.title{margin:0 0 .375em;font-size:1.15em;text-align:center}
+.quoteblock.excerpt>blockquote,.quoteblock .quoteblock{padding:0 0 .25em 1em;border-left:.25em solid #dddddf}
+.quoteblock.excerpt,.quoteblock .quoteblock{margin-left:0}
+.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{color:inherit;font-size:1.0625rem}
+.quoteblock.excerpt .attribution,.quoteblock .quoteblock .attribution{color:inherit;font-size:.85rem;text-align:left;margin-right:0}
+p.tableblock:last-child{margin-bottom:0}
+td.tableblock>.content{margin-bottom:1.25em;word-wrap:anywhere}
+td.tableblock>.content>:last-child{margin-bottom:-1.25em}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all>*>tr>*{border-width:1px}
+table.grid-cols>*>tr>*{border-width:0 1px}
+table.grid-rows>*>tr>*{border-width:1px 0}
+table.frame-all{border-width:1px}
+table.frame-ends{border-width:1px 0}
+table.frame-sides{border-width:0 1px}
+table.frame-none>colgroup+*>:first-child>*,table.frame-sides>colgroup+*>:first-child>*{border-top-width:0}
+table.frame-none>:last-child>:last-child>*,table.frame-sides>:last-child>:last-child>*{border-bottom-width:0}
+table.frame-none>*>tr>:first-child,table.frame-ends>*>tr>:first-child{border-left-width:0}
+table.frame-none>*>tr>:last-child,table.frame-ends>*>tr>:last-child{border-right-width:0}
+table.stripes-all>*>tr,table.stripes-odd>*>tr:nth-of-type(odd),table.stripes-even>*>tr:nth-of-type(even),table.stripes-hover>*>tr:hover{background:#f8f8f7}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+li>p:empty:only-child::before{content:"";display:inline-block}
+ul.checklist>li>p:first-child{margin-left:-1em}
+ul.checklist>li>p:first-child>.fa-square-o:first-child,ul.checklist>li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist>li>p:first-child>input[type=checkbox]:first-child{margin-right:.25em}
+ul.inline{display:flex;flex-flow:row wrap;list-style:none;margin:0 0 .625em -1.25em}
+ul.inline>li{margin-left:1.25em}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+td.hdlist2{word-wrap:anywhere}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist td:not([class]):first-child{padding:.4em .75em 0;line-height:1;vertical-align:top}
+.colist td:not([class]):first-child img{max-width:none}
+.colist td:not([class]):last-child{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:4px solid #fff;box-shadow:0 0 0 1px #ddd}
+.imageblock.left{margin:.25em .625em 1.25em 0}
+.imageblock.right{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active,#footnotes .footnote a:first-of-type:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background:#00fafa}
+.black{color:#000}
+.black-background{background:#000}
+.blue{color:#0000bf}
+.blue-background{background:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background:#fa00fa}
+.gray{color:#606060}
+.gray-background{background:#7d7d7d}
+.green{color:#006000}
+.green-background{background:#007d00}
+.lime{color:#00bf00}
+.lime-background{background:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background:#7d0000}
+.navy{color:#000060}
+.navy-background{background:#00007d}
+.olive{color:#606000}
+.olive-background{background:#7d7d00}
+.purple{color:#600060}
+.purple-background{background:#7d007d}
+.red{color:#bf0000}
+.red-background{background:#fa0000}
+.silver{color:#909090}
+.silver-background{background:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background:#fafa00}
+span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note::before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip::before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning::before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution::before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important::before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background:rgba(0,0,0,.8);border-radius:50%;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]::after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@page{margin:1.25cm .75cm}
+@media print{*{box-shadow:none!important;text-shadow:none!important}
+html{font-size:80%}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare)::after,a[href^="https:"]:not(.bare)::after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]{border-bottom:1px dotted}
+abbr[title]::after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#header,#content,#footnotes,#footer{max-width:none}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #dddddf!important;padding-bottom:0!important}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span::before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]::before{display:block}
+#footer{padding:0 .9375em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+@media amzn-kf8,print{#header>h1:first-child{margin-top:1.25rem}
+.sect1{padding:0!important}
+.sect1+.sect1{border:0}
+#footer{background:none}
+#footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
+@media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class="book toc2 toc-left">
+<div id="header">
+<h1>What Changed Since the Old Niord</h1>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#introduction">1. Introduction</a>
+<ul class="sectlevel2">
+<li><a href="#how-this-guide-is-organised">1.1. How This Guide Is Organised</a></li>
+<li><a href="#the-base-product-and-the-countries">1.2. The Base Product and the Countries</a></li>
+<li><a href="#the-technology-in-brief">1.3. The Technology in Brief</a></li>
+</ul>
+</li>
+<li><a href="#everyone">2. For Everyone</a>
+<ul class="sectlevel2">
+<li><a href="#everyone-finding-your-way">2.1. Finding Your Way Around</a></li>
+<li><a href="#everyone-signing-in">2.2. Signing In and Out</a></li>
+<li><a href="#everyone-domains-and-languages">2.3. Domains and Languages</a></li>
+<li><a href="#everyone-updates">2.4. When Niord Is Updated</a></li>
+<li><a href="#everyone-links">2.5. Links to Messages</a></li>
+<li><a href="#everyone-gone">2.6. Gone, and What to Use Instead</a></li>
+</ul>
+</li>
+<li><a href="#editors">3. For Editors</a>
+<ul class="sectlevel2">
+<li><a href="#editors-finding-messages">3.1. Finding Messages</a></li>
+<li><a href="#editors-writing">3.2. Writing a Message</a></li>
+<li><a href="#editors-status-and-publishing">3.3. Verifying, Publishing and Copying</a></li>
+<li><a href="#editors-positions">3.4. Positions</a></li>
+<li><a href="#editors-schedule">3.5. The Firing Area Schedule</a></li>
+<li><a href="#editors-gone">3.6. Gone, and What to Use Instead</a></li>
+</ul>
+</li>
+<li><a href="#administrators">4. For Administrators</a>
+<ul class="sectlevel2">
+<li><a href="#administrators-admin-area">4.1. The Admin Area</a></li>
+<li><a href="#administrators-base-data">4.2. Charts, Areas and Sources</a></li>
+<li><a href="#administrators-users">4.3. Users and Contacts</a></li>
+<li><a href="#administrators-mailing-lists">4.4. Mailing Lists</a></li>
+<li><a href="#administrators-publications">4.5. Publications</a></li>
+<li><a href="#administrators-gone">4.6. Gone, and What to Use Instead</a></li>
+</ul>
+</li>
+<li><a href="#system-administrators">5. For System Administrators</a>
+<ul class="sectlevel2">
+<li><a href="#sysadmin-area">5.1. The Sysadmin Area</a></li>
+<li><a href="#sysadmin-data">5.2. Where Templates, Texts and Reports Come From</a></li>
+<li><a href="#sysadmin-jobs-and-imports">5.3. Batch Jobs and Imports</a></li>
+<li><a href="#sysadmin-configuration">5.4. Configuration</a></li>
+<li><a href="#sysadmin-integration">5.5. Integration With Other Systems</a></li>
+<li><a href="#sysadmin-gone">5.6. Gone, and What to Use Instead</a></li>
+</ul>
+</li>
+<li><a href="#mariners">6. For Mariners Using the Public Site</a>
+<ul class="sectlevel2">
+<li><a href="#mariners-reading">6.1. Reading the Messages</a></li>
+<li><a href="#mariners-publications">6.2. Publications</a></li>
+<li><a href="#mariners-other-sites">6.3. For Sites That Show the Messages</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="introduction"><a class="anchor" href="#introduction"></a><a class="link" href="#introduction">1. Introduction</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Niord (Nautical Information Directory) is a system for producing and publishing Navigational
+Warnings (<em>NW</em>) and Notices to Mariners (<em>NM</em>). The Danish Emergency Management Agency is the
+organisation behind Niord.</p>
+</div>
+<div class="paragraph">
+<p>Niord has been rebuilt. The administration application that editors, administrators and system
+administrators work in has been written anew, the public site where mariners read the warnings and
+notices has been replaced, and the server behind both has been rebuilt as well. Most of what you
+did in the old Niord you can still do, in the same order and with the same words, but many screens
+look different, some functions have moved, a few are new and a few are gone.</p>
+</div>
+<div class="paragraph">
+<p>This guide is for you if you used the old Niord, the application the earlier user manuals
+describe, and now open the new one. It lists what you will notice, and for each change it says
+what it was, what it is now and where to find it. It does not repeat the manuals: each change
+links to the chapter of the
+<a href="../editor-manual/manual.html">editor manual</a>,
+<a href="../admin-manual/manual.html">administrator manual</a> or
+<a href="../sysadmin-manual/manual.html">system administrator manual</a> that describes it in full.</p>
+</div>
+<div class="sect2">
+<h3 id="how-this-guide-is-organised"><a class="anchor" href="#how-this-guide-is-organised"></a><a class="link" href="#how-this-guide-is-organised">1.1. How This Guide Is Organised</a></h3>
+<div class="paragraph">
+<p>The chapters follow the roles a user can hold, and within a chapter the changes are grouped by
+task:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#everyone">For everyone</a>: the layout, signing in, domains, languages, help and links.</p>
+</li>
+<li>
+<p><a href="#editors">For editors</a>: finding messages, writing and publishing them, positions, the firing
+schedule and publications seen from a message.</p>
+</li>
+<li>
+<p><a href="#administrators">For administrators</a>: the Admin area, base data, users, mailing lists and the
+new publications model.</p>
+</li>
+<li>
+<p><a href="#system-administrators">For system administrators</a>: the Sysadmin area, where templates and
+texts come from, imports, batch jobs, settings and integration.</p>
+</li>
+<li>
+<p><a href="#mariners">For mariners using the public site</a>: the new public site.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The chapters about the administration application each end with a table of what is gone and what
+to use instead. A user with a higher role should read
+the chapters of the lower roles too: an administrator is usually also an editor.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="the-base-product-and-the-countries"><a class="anchor" href="#the-base-product-and-the-countries"></a><a class="link" href="#the-base-product-and-the-countries">1.2. The Base Product and the Countries</a></h3>
+<div class="paragraph">
+<p>Niord is now one <em>base product</em> that every deployment shares. A country builds its own deployment
+on the base product and adds what only it needs: its domains, its languages, its texts and
+branding, and sometimes pages of its own. The deployments in Denmark and in Greenland are each such
+a country. This guide describes the base product. If your deployment shows a page or a field that
+this guide does not mention, it most likely belongs to your country&#8217;s additions.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="the-technology-in-brief"><a class="anchor" href="#the-technology-in-brief"></a><a class="link" href="#the-technology-in-brief">1.3. The Technology in Brief</a></h3>
+<div class="paragraph">
+<p>You need nothing but a current web browser. The administration application and the public site are
+web applications built with Angular. The server is a Spring Boot application that keeps its data
+in a PostgreSQL database, with PostGIS for positions and areas, and signing in is handled by
+Keycloak.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="everyone"><a class="anchor" href="#everyone"></a><a class="link" href="#everyone">2. For Everyone</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>These changes meet every user of the administration application, whatever their role, and most of
+them meet a visitor who has not signed in as well.</p>
+</div>
+<div class="sect2">
+<h3 id="everyone-finding-your-way"><a class="anchor" href="#everyone-finding-your-way"></a><a class="link" href="#everyone-finding-your-way">2.1. Finding Your Way Around</a></h3>
+<div class="sect3">
+<h4 id="everyone-header"><a class="anchor" href="#everyone-header"></a><a class="link" href="#everyone-header">2.1.1. The header and the main menu</a></h4>
+<div class="paragraph">
+<p>The old application had a main menu bar with the pages as links. The new header has the Niord logo
+(a link to the home page), the menu items <em>Messages</em>, <em>Editor</em>, <em>Schedule</em>, <em>Admin</em> and <em>Sysadmin</em>,
+and to the right of them <em>Help</em>, the domain menu, your account menu and the language menu.
+<em>Messages</em> is always there; each of the other items appears only when your role in the current
+domain allows you to open the page behind it, and <em>Schedule</em> only in a domain that has a firing
+schedule.
+See <a href="../editor-manual/manual.html#home">Home</a> in the editor manual.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="everyone-narrow-screens"><a class="anchor" href="#everyone-narrow-screens"></a><a class="link" href="#everyone-narrow-screens">2.1.2. Narrow screens</a></h4>
+<div class="paragraph">
+<p>On a narrow window or a tablet, the menu items fold into one menu button that opens a single list
+of everything the header holds. The domain menu stays visible beside that button, because it tells
+you which data you are working on.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="everyone-home-page"><a class="anchor" href="#everyone-home-page"></a><a class="link" href="#everyone-home-page">2.1.3. The home page</a></h4>
+<div class="paragraph">
+<p>The home page is a map of the published messages that fills the window, with a small welcome panel
+on top of it. When you have not signed in, the panel has a <em>Login</em> button. See
+<a href="../editor-manual/manual.html#home">Home</a> in the editor manual.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="everyone-help"><a class="anchor" href="#everyone-help"></a><a class="link" href="#everyone-help">2.1.4. Help</a></h4>
+<div class="paragraph">
+<p>The <em>Help</em> item in the header opens the section of the user manual that describes the page you are
+on. Many dialogs have a help link of their own, which opens the section about that dialog. The
+address of the manuals is a setting a system administrator can change, so a deployment can point
+the help at its own copy of the guides.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="everyone-test-badge"><a class="anchor" href="#everyone-test-badge"></a><a class="link" href="#everyone-test-badge">2.1.5. A badge on a test deployment</a></h4>
+<div class="paragraph">
+<p>A deployment that is not the production system shows a red badge under the logo, for example
+<em>TEST</em>. It is there so that nobody mistakes test data for the real warnings and notices. A
+production deployment shows no badge.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="everyone-signing-in"><a class="anchor" href="#everyone-signing-in"></a><a class="link" href="#everyone-signing-in">2.2. Signing In and Out</a></h3>
+<div class="sect3">
+<h4 id="everyone-login"><a class="anchor" href="#everyone-login"></a><a class="link" href="#everyone-login">2.2.1. The login page</a></h4>
+<div class="paragraph">
+<p><em>Login</em> takes you to the login page of the sign-in service, Keycloak, and back again once you have
+signed in. How you sign in, with a password or through your organisation&#8217;s own login, is set up for
+each deployment, so the old manual&#8217;s description of one organisation&#8217;s login no longer applies in
+general. See <a href="../editor-manual/manual.html#home">Home</a> in the editor manual.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="everyone-account-menu"><a class="anchor" href="#everyone-account-menu"></a><a class="link" href="#everyone-account-menu">2.2.2. Your account and password</a></h4>
+<div class="paragraph">
+<p>On a wide window, the account control in the header is a button with an icon and no text. Before
+you sign in it is the <em>Login</em> button; once you have signed in it shows a person icon, and pointing at
+it shows your name. Its menu has <em>Edit &lt;your name&gt;</em>, which opens your account pages in the sign-in
+service, where you change your password and profile, and <em>Logout</em>. On a narrow window, <em>Edit &lt;your
+name&gt;</em> and <em>Logout</em> (or <em>Login</em>, before you sign in) are entries in the list of the menu button.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="everyone-browsing-as-guest"><a class="anchor" href="#everyone-browsing-as-guest"></a><a class="link" href="#everyone-browsing-as-guest">2.2.3. Browsing without signing in</a></h4>
+<div class="paragraph">
+<p>You can open the <em>Messages</em> page without signing in and read the published messages, in all its
+views, but you cannot change anything. Pages for editors, administrators and system administrators
+ask you to sign in first.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="everyone-session-expired"><a class="anchor" href="#everyone-session-expired"></a><a class="link" href="#everyone-session-expired">2.2.4. When your session expires</a></h4>
+<div class="paragraph">
+<p>If your session expires, or the sign-in service cannot be reached, the application does not reload
+or log you out. Instead it carries on as if you had not signed in and shows a strip under the header,
+for example <em>Your session has expired — you&#8217;re browsing as a guest.</em>, with a <em>Login</em> button. That
+button takes you to the sign-in service and back to the same address, but it loads the application
+afresh: your message selection is emptied, and if the editor holds changes you have not saved, the
+browser first asks whether to leave the page. Signing in or out from the header does the same.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="everyone-domains-and-languages"><a class="anchor" href="#everyone-domains-and-languages"></a><a class="link" href="#everyone-domains-and-languages">2.3. Domains and Languages</a></h3>
+<div class="sect3">
+<h4 id="everyone-switching-domain"><a class="anchor" href="#everyone-switching-domain"></a><a class="link" href="#everyone-switching-domain">2.3.1. Switching domain reloads the page</a></h4>
+<div class="paragraph">
+<p>You still work in a <em>current domain</em>, chosen in the domain menu, where a pencil marks the domains
+you can edit and an eye those you can only view. What is new is that choosing another domain loads
+the application afresh, at the same address in most cases. A page that shows a single publication or
+one of its issues belongs to the domain that owns it, so from there you land on the <em>Publications</em> list instead. Your
+message selection is emptied. If the editor holds changes you have not saved, the browser first
+asks whether to leave the page, and the changes are discarded if you go on, so save your work
+before you switch.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="everyone-remembered-choices"><a class="anchor" href="#everyone-remembered-choices"></a><a class="link" href="#everyone-remembered-choices">2.3.2. What the browser remembers</a></h4>
+<div class="paragraph">
+<p>The browser remembers your domain and your language until you change them, as before. The old
+manual said they were kept in cookies; the new application keeps them in the browser&#8217;s local
+storage, which you clear in the same place as cookies. A link that ends in <code>?domain=</code> followed by a
+domain&#8217;s id opens the application in that domain.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="everyone-languages"><a class="anchor" href="#everyone-languages"></a><a class="link" href="#everyone-languages">2.3.3. Languages</a></h4>
+<div class="paragraph">
+<p>The languages in the language menu are set up for each deployment. The base product itself comes
+with English only; a country adds its own languages. Some labels can be reworded by a system
+administrator in the dictionaries without a new version of the application.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="everyone-updates"><a class="anchor" href="#everyone-updates"></a><a class="link" href="#everyone-updates">2.4. When Niord Is Updated</a></h3>
+<div class="sect3">
+<h4 id="everyone-update-banner"><a class="anchor" href="#everyone-update-banner"></a><a class="link" href="#everyone-update-banner">2.4.1. The update banner</a></h4>
+<div class="paragraph">
+<p>The old application kept a copy of itself in the browser, and after an update it showed an
+out-of-date warning on the home page, which you cleared by emptying the browser&#8217;s cache. The new
+application notices by itself when a newer version has been installed and shows a banner under the
+header, <em>Please refresh web-browser</em>, on whatever page you are on. Click <em>Retry</em> in the banner to
+load the new version; there is no cache to clear.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="everyone-links"><a class="anchor" href="#everyone-links"></a><a class="link" href="#everyone-links">2.5. Links to Messages</a></h3>
+<div class="sect3">
+<h4 id="everyone-message-links"><a class="anchor" href="#everyone-message-links"></a><a class="link" href="#everyone-message-links">2.5.1. Links that open a message</a></h4>
+<div class="paragraph">
+<p>A message has an address of its own, which you can copy from the browser and send to someone: it
+opens the <em>Messages</em> page with that message shown. Links in older mails and posts, written in the
+old form with <code>#/message/</code> in them, still open the message.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="everyone-new-tab"><a class="anchor" href="#everyone-new-tab"></a><a class="link" href="#everyone-new-tab">2.5.2. Opening a message in a new tab</a></h4>
+<div class="paragraph">
+<p>The rows of the message lists are real links. A middle-click, or a click with <kbd>Ctrl</kbd> held,
+opens the message in a new browser tab, while a plain click opens it in the current one.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="everyone-gone"><a class="anchor" href="#everyone-gone"></a><a class="link" href="#everyone-gone">2.6. Gone, and What to Use Instead</a></h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 35%;">
+<col style="width: 65%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Gone</th>
+<th class="tableblock halign-left valign-top">Use instead</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The out-of-date warning on the home page, and clearing the browser&#8217;s cache after an update</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The update banner: click <em>Retry</em>. See <a href="#everyone-update-banner">The update banner</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A selection of messages that lasted for the whole browser session</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The selection now lasts until the page is reloaded, the domain is switched, or you sign in or
+  out. Print, mail or tag the selection before you do any of these. See <a href="#editors-selection">Selecting messages with the star</a>.</p></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="editors"><a class="anchor" href="#editors"></a><a class="link" href="#editors">3. For Editors</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>These changes meet editors in their daily work. Most of them also meet a user with the <em>User</em> role,
+who reads and comments on messages without editing them.</p>
+</div>
+<div class="sect2">
+<h3 id="editors-finding-messages"><a class="anchor" href="#editors-finding-messages"></a><a class="link" href="#editors-finding-messages">3.1. Finding Messages</a></h3>
+<div class="sect3">
+<h4 id="editors-five-views"><a class="anchor" href="#editors-five-views"></a><a class="link" href="#editors-five-views">3.1.1. Five views, with Selection as one of them</a></h4>
+<div class="paragraph">
+<p>The <em>Messages</em> page had four view modes, <em>Table</em>, <em>Grid</em>, <em>Details</em> and <em>Map</em>, and the selected
+messages on a sub-page of their own. Now <em>Selection</em> is a fifth tab beside the four views, with a
+badge that counts the selected messages and a cross that clears the selection. Switching between
+the tabs keeps your filter. See <a href="../editor-manual/manual.html#messages">Messages</a> in the editor
+manual.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="editors-selection"><a class="anchor" href="#editors-selection"></a><a class="link" href="#editors-selection">3.1.2. Selecting messages with the star</a></h4>
+<div class="paragraph">
+<p>You select and deselect a message with its star, in the lists and in the message details. The
+selection is kept while you search, filter and change view, but it is emptied when you reload the
+page, switch domain, or sign in or out; the old application kept it for the whole browser session. <em>Select all</em> in
+the <em>Actions</em> menu selects the messages loaded so far, not every message the search could find.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="editors-load-more"><a class="anchor" href="#editors-load-more"></a><a class="link" href="#editors-load-more">3.1.3. Long result lists load in pages</a></h4>
+<div class="paragraph">
+<p>A long search result is loaded a page at a time. A button at the bottom of the list says which
+messages it will fetch, out of how many, for example <em>Load 100 - 200 of 340 messages</em>, and adds them
+to the list. If loading fails, a
+<em>Retry</em> button fetches the same page again without losing what is already shown.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="editors-hold-e"><a class="anchor" href="#editors-hold-e"></a><a class="link" href="#editors-hold-e">3.1.4. Hold E to open a message in the editor</a></h4>
+<div class="paragraph">
+<p>If you hold down the <kbd>E</kbd> key while you click a message in the <em>Table</em>, <em>Grid</em>, <em>Details</em> or
+<em>Selection</em> view, the message opens straight in the editor instead of in the message details. It
+works only for a message you may open in the editor; any other message opens as usual. On some
+laptop touchpads a tap is ignored while a key is held down; a mouse click always works.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="editors-overdue-marker"><a class="anchor" href="#editors-overdue-marker"></a><a class="link" href="#editors-overdue-marker">3.1.5. A red bar marks an overdue follow-up date</a></h4>
+<div class="paragraph">
+<p>A message whose follow-up date has passed has a red bar along the left edge of its row in the
+<em>Table</em>, <em>Details</em> and <em>Selection</em> views. Point at the row to read <em>Requires attention (e.g.
+expired/overdue warning)</em>. The rest of the row keeps its usual colours.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="editors-message-details"><a class="anchor" href="#editors-message-details"></a><a class="link" href="#editors-message-details">3.1.6. Message details open as a panel on the right</a></h4>
+<div class="paragraph">
+<p>The message details used to open in a dialog. They now open in a panel on the right of the list,
+and the page&#8217;s address names the message, so you can copy it and send it to someone. As before,
+the panel has the previous and next arrows, a <em>Back</em> arrow after you have followed a
+reference, the selection star and a menu with <em>Edit</em>, <em>Copy</em>, <em>Print</em> and the tag actions. See
+<a href="../editor-manual/manual.html#message-details">Message Details</a> in the editor manual.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="editors-tags"><a class="anchor" href="#editors-tags"></a><a class="link" href="#editors-tags">3.1.7. Tags: a picker and a tag manager</a></h4>
+<div class="paragraph">
+<p>The old <em>Message Tag</em> dialog has been split in two. Adding messages to a tag, removing them and
+choosing tags in the filter now happen in a small picker that opens where you click, with chips
+for private, domain and public tags. Creating, editing and deleting tags happens in <em>Manage tags…</em>,
+which you open from the <em>Actions</em> menu of the <em>Messages</em> page. A tag&#8217;s name cannot be changed once
+it is created, and only an administrator can unlock a locked tag. See
+<a href="../editor-manual/manual.html#message-tags">Message Tags</a> in the editor manual.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="editors-actions-menu"><a class="anchor" href="#editors-actions-menu"></a><a class="link" href="#editors-actions-menu">3.1.8. Who may use the actions</a></h4>
+<div class="paragraph">
+<p><em>Update selection status…</em> in the <em>Actions</em> menu, which changes the status of all the selected
+messages at once, was an action for administrators only. It is now open to editors. <em>Import&#8230;&#8203;</em> is
+still for administrators. See
+<a href="../editor-manual/manual.html#update-selection-status-action">Update Selection Status Action</a> in
+the editor manual.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="editors-writing"><a class="anchor" href="#editors-writing"></a><a class="link" href="#editors-writing">3.2. Writing a Message</a></h3>
+<div class="sect3">
+<h4 id="editors-start-screen"><a class="anchor" href="#editors-start-screen"></a><a class="link" href="#editors-start-screen">3.2.1. The start screen: Create a message</a></h4>
+<div class="paragraph">
+<p>When you open <em>Editor</em> in the main menu you no longer get a blank editor page with a template
+field. You get a start screen, <em>Create a message</em>, with a card for each type of message you can
+create in the current domain: <em>Navigational Warning</em>, <em>Notice to Mariners</em>, or both. A domain with
+only one type shows one card. Each card has a <em>New blank NW</em> (or <em>NM</em>) button and, where the domain
+uses templates, <em>Select NW template…</em> (or <em>NM</em>). Below the cards are your <em>Recently edited drafts</em>. See
+<a href="../editor-manual/manual.html#blank-editor-page">Blank Editor Page</a> in the editor manual.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="editors-templates"><a class="anchor" href="#editors-templates"></a><a class="link" href="#editors-templates">3.2.2. Templates on a page of their own</a></h4>
+<div class="paragraph">
+<p>The old two dialogs for choosing and running message templates are gone. Choosing a template on
+the start screen, or <em>Run template…</em> in the <em>Categories</em> field of an open message, opens the page
+<em>Execute templates</em>. There you pick templates in a <em>Select templates</em> panel, which shows an example
+when you point at a template, fill in the <em>Base fields</em> and the <em>Template parameters</em>, and watch a
+preview of the result as you type. <em>Execute</em> replaces the whole message and opens it, unsaved, for
+editing. See
+<a href="../editor-manual/manual.html#message-template-execution">Message Template Execution</a> in the
+editor manual.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="editors-editor-header"><a class="anchor" href="#editors-editor-header"></a><a class="link" href="#editors-editor-header">3.2.3. Save, Clear and Back sit in the header</a></h4>
+<div class="paragraph">
+<p>The old editor marked unsaved changes with a red save icon beside its title and had <em>Save Message</em>
+and <em>Reload Message</em> buttons at the bottom of the page. The header of the editor now holds <em>Back</em>,
+which returns to the message list with your filter, a reload button, the title, a status chip that
+reads <em>Unsaved changes</em> or <em>All changes saved</em>, <em>Clear</em> and <em>Save</em>. Because it is the header, you can
+save from any of the editor&#8217;s tabs. See <a href="../editor-manual/manual.html#editor">Editor</a> in the
+editor manual.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="editors-unsaved-changes"><a class="anchor" href="#editors-unsaved-changes"></a><a class="link" href="#editors-unsaved-changes">3.2.4. Leaving with unsaved changes</a></h4>
+<div class="paragraph">
+<p>If you leave the editor, or open another message in it, while you have unsaved changes, you are
+asked first whether to leave without saving. Saving a <em>Verified</em> message asks for confirmation too,
+because saving it returns it to <em>Draft</em>. The <em>Status</em>, <em>Comments</em> and <em>History</em> tabs appear once the
+message has been saved for the first time.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="editors-live-preview"><a class="anchor" href="#editors-live-preview"></a><a class="link" href="#editors-live-preview">3.2.5. A live preview beside the fields</a></h4>
+<div class="paragraph">
+<p>To the right of the fields, a <em>Live preview</em> shows the message as it will look, and changes as you
+type. Clicking a part of the preview opens the field it comes from. On a narrow window the preview
+is a panel you open with the <em>Preview</em> button in the header. See
+<a href="../editor-manual/manual.html#editor">Editor</a> in the editor manual.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="editors-status-stepper"><a class="anchor" href="#editors-status-stepper"></a><a class="link" href="#editors-status-stepper">3.2.6. The status steps above the preview</a></h4>
+<div class="paragraph">
+<p>Above the preview, a row of steps shows where the message is: <em>Draft</em>, <em>Verified</em>, <em>Published</em> and,
+at the end, <em>Expired</em> or <em>Cancelled</em>. The steps only show the status; for an editor, a button beside
+them moves the message on: <em>Verify</em> on a <em>Draft</em> message and <em>Publish</em> on a <em>Verified</em> one. A <em>Verified</em>
+message with a <em>Publish from</em> date shows the date it is scheduled to be published instead of the
+<em>Publish</em> button. The one step you can click is <em>Draft</em> on a <em>Verified</em> message, which reverts the
+message to draft. Deleting, cancelling and copying stay on the <em>Status</em> page.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="editors-optional-fields"><a class="anchor" href="#editors-optional-fields"></a><a class="link" href="#editors-optional-fields">3.2.7. Manage optional fields</a></h4>
+<div class="paragraph">
+<p>Which fields the editor shows is still decided by the deployment, by the message&#8217;s series, areas
+and categories. To show a field that is hidden, use <em>Manage optional fields…</em> on the <em>Edit</em> page,
+which replaces the old <em>More Fields</em> actions at the bottom of the <em>Action</em> menu. <em>Expand all
+fields</em> and <em>Collapse all fields</em> are in the editor&#8217;s <em>Actions</em> menu.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="editors-part-types"><a class="anchor" href="#editors-part-types"></a><a class="link" href="#editors-part-types">3.2.8. Two new part types</a></h4>
+<div class="paragraph">
+<p>A message part could be of the type <em>Details</em>, <em>Time</em>, <em>Positions</em> or <em>Note</em>. Two types have been
+added, <em>Prohibition</em> and <em>Signals</em>, and like the others they decide which fields a part shows.
+Parts can now be reordered by dragging them by their grip, as well as with the arrow buttons. See
+<a href="../editor-manual/manual.html#editor">Editor</a> in the editor manual.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="editors-publication-field"><a class="anchor" href="#editors-publication-field"></a><a class="link" href="#editors-publication-field">3.2.9. Citing a publication</a></h4>
+<div class="paragraph">
+<p>The <em>Publication</em> field of a message still writes a reference to a publication into the message&#8217;s
+text. With the new publications model, the dialog that inserts it offers the published issues of
+the series that may be cited, rather than a list of publications. See
+<a href="#administrators-publications">Publications</a> for what series and issues are.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="editors-status-and-publishing"><a class="anchor" href="#editors-status-and-publishing"></a><a class="link" href="#editors-status-and-publishing">3.3. Verifying, Publishing and Copying</a></h3>
+<div class="sect3">
+<h4 id="editors-status-page"><a class="anchor" href="#editors-status-page"></a><a class="link" href="#editors-status-page">3.3.1. The Status page</a></h4>
+<div class="paragraph">
+<p>The <em>Status</em> page shows the message as it will be published. A row of buttons above it, one for
+each of the deployment&#8217;s message languages, switches the language of the preview; it starts at the
+language the application is shown in. Its buttons are disabled while the message has unsaved changes, so
+save first. A <em>Verified</em> message with a <em>Publish from</em> date shows the date it is scheduled to be
+published instead of a <em>Publish</em> button. See
+<a href="../editor-manual/manual.html#status-editor-page">Status Editor Page</a> in the editor manual.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="editors-copy-and-cancel"><a class="anchor" href="#editors-copy-and-cancel"></a><a class="link" href="#editors-copy-and-cancel">3.3.2. Copying and cancelling ask first</a></h4>
+<div class="paragraph">
+<p><em>Copy Message</em> used to open the copy in the editor at once. <em>Copy message…</em> now opens a dialog,
+<em>Copy Message?</em>, where a copy of a Notice to Mariners can be given a reference to the message it
+was copied from with <em>Include reference to copied message</em>. <em>Cancel message…</em> opens a dialog too,
+and for a Notice to Mariners its <em>Create cancellation message</em> starts a new message that announces
+the cancellation.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="editors-publications-panel"><a class="anchor" href="#editors-publications-panel"></a><a class="link" href="#editors-publications-panel">3.3.3. Which publications a message is in</a></h4>
+<div class="paragraph">
+<p>The <em>Status</em> page has a new <em>Publications</em> panel. It lists each publication series the message
+appears in, with the number of issues, and marks whether the message is <em>Published</em> in it,
+<em>Withdrawn</em> from it or <em>Pending</em>, which means it would be in the issue being prepared but can still
+change before that issue is published.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="editors-positions"><a class="anchor" href="#editors-positions"></a><a class="link" href="#editors-positions">3.4. Positions</a></h3>
+<div class="sect3">
+<h4 id="editors-position-tools"><a class="anchor" href="#editors-position-tools"></a><a class="link" href="#editors-position-tools">3.4.1. New drawing tools, Undo and Redo</a></h4>
+<div class="paragraph">
+<p>The position editor opens in a large window over the editor. Its tools are now <em>Point</em>, <em>Line</em>,
+<em>Area</em>, <em>Box</em>, <em>Select</em>, <em>Delete</em> and <em>Measure</em>, and it has <em>Undo</em> and <em>Redo</em>. Its <em>Actions</em> menu
+offers <em>Merge geometries</em>, <em>Split geometries</em> and <em>Convert</em> to a line, an area or points. See
+<a href="../editor-manual/manual.html#position-editor">Position Editor</a> in the editor manual.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="editors-position-files"><a class="anchor" href="#editors-position-files"></a><a class="link" href="#editors-position-files">3.4.2. Positions from a file, or as text</a></h4>
+<div class="paragraph">
+<p>You can drop a GeoJSON, KML or WKT file on the map to add its positions. The import dialog still
+offers <em>From Area</em>, <em>From Text</em> and <em>From UTM</em>. <em>Edit as text</em>, in the <em>Positions</em> field and in the
+position editor, lets you type or paste the positions instead of drawing them.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="editors-schedule"><a class="anchor" href="#editors-schedule"></a><a class="link" href="#editors-schedule">3.5. The Firing Area Schedule</a></h3>
+<div class="sect3">
+<h4 id="editors-schedule-menu"><a class="anchor" href="#editors-schedule-menu"></a><a class="link" href="#editors-schedule-menu">3.5.1. Schedule is an item in the main menu</a></h4>
+<div class="paragraph">
+<p>The firing schedule was a <em>Schedule</em> sub-page of the domain that holds the firing areas. It is now
+the <em>Schedule</em> item in the main menu, shown to editors in a domain that has a firing schedule, and
+opens the page <em>Firing Area Schedule</em>. You pick a day, edit each firing area&#8217;s periods in the list,
+and see the areas on a map. See
+<a href="../sysadmin-manual/manual.html#maintain-firing-exercise-schedule">Maintain Firing Exercise
+Schedule</a> in the system administrator manual.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="editors-schedule-updates"><a class="anchor" href="#editors-schedule-updates"></a><a class="link" href="#editors-schedule-updates">3.5.2. How often the firing exercises are updated</a></h4>
+<div class="paragraph">
+<p><em>Update Firing Exercises…</em> still updates the firing exercise messages from the schedule at once.
+The system also updates them on its own every hour, so a change to the schedule reaches the
+messages within the hour even if you do not press the button.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="editors-gone"><a class="anchor" href="#editors-gone"></a><a class="link" href="#editors-gone">3.6. Gone, and What to Use Instead</a></h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 35%;">
+<col style="width: 65%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Gone</th>
+<th class="tableblock halign-left valign-top">Use instead</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <em>Selection</em> sub-page</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <em>Selection</em> tab of the <em>Messages</em> page. See <a href="#editors-five-views">Five views, with Selection as one of them</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <em>Message Tag</em> dialog</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The tag picker, and <em>Manage tags…</em> in the <em>Actions</em> menu. See <a href="#editors-tags">Tags: a picker and a tag manager</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The blank editor page with its template field</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The start screen, <em>Create a message</em>. See <a href="#editors-start-screen">The start screen: Create a message</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <em>Template Selection</em> and <em>Template Execution</em> dialogs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <em>Execute templates</em> page. See <a href="#editors-templates">Templates on a page of their own</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The red save icon, and the <em>Save Message</em> and <em>Reload Message</em> buttons at the bottom of the page</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The editor&#8217;s header: the status chip, <em>Save</em> and the reload button. See <a href="#editors-editor-header">Save, Clear and Back sit in the header</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <em>More Fields</em> actions in the <em>Action</em> menu</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Manage optional fields…</em> on the <em>Edit</em> page. See <a href="#editors-optional-fields">Manage optional fields</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Subtract Geometries</em> in the position editor</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No direct replacement. Draw the remaining area as it should be, or import it from a file.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adding the selected messages to a publication, or removing them, from the message list or the
+  editor&#8217;s menu</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A publication now finds its messages by its own criteria. An administrator adds or leaves out a
+  single message by hand on the issue. See <a href="#administrators-publications">Publications</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A message tag for each issue of a publication, such as a weekly Notices to Mariners</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Filter the message list with the <em>Publication</em> filter, which picks an issue. Tags made by the old
+  publications stay as they were.</p></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="administrators"><a class="anchor" href="#administrators"></a><a class="link" href="#administrators">4. For Administrators</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>These changes meet users with the <em>Admin</em> role, who look after the base data that editors depend
+on: charts, areas, sources, publications, users and mailing lists.</p>
+</div>
+<div class="sect2">
+<h3 id="administrators-admin-area"><a class="anchor" href="#administrators-admin-area"></a><a class="link" href="#administrators-admin-area">4.1. The Admin Area</a></h3>
+<div class="sect3">
+<h4 id="administrators-rail-and-overview"><a class="anchor" href="#administrators-rail-and-overview"></a><a class="link" href="#administrators-rail-and-overview">4.1.1. A list of sections instead of one page of tiles</a></h4>
+<div class="paragraph">
+<p>The old <em>Admin</em> page showed the base data as tiles on one page. The <em>Admin</em> area now has a list of
+its sections down the left side and an <em>Overview</em> page with a card for each: <em>Charts</em>, <em>Areas</em>,
+<em>Publications</em>, <em>Publication categories</em>, <em>Sources</em>, <em>Users &amp; Contacts</em> and <em>Mailing Lists</em>. The
+list stays on screen, so you move between sections in one click. See
+<a href="../admin-manual/manual.html#admin-page">Admin Page</a> in the administrator manual.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="administrators-domain-access"><a class="anchor" href="#administrators-domain-access"></a><a class="link" href="#administrators-domain-access">4.1.2. Access follows the current domain</a></h4>
+<div class="paragraph">
+<p>As before, you reach the <em>Admin</em> area when you hold the <em>Admin</em> role in the domain you are working
+in. The new application checks this against the current domain only, so switching to a domain
+where you are not an administrator takes the <em>Admin</em> item out of the menu.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="administrators-drawers"><a class="anchor" href="#administrators-drawers"></a><a class="link" href="#administrators-drawers">4.1.3. Editing in a side panel</a></h4>
+<div class="paragraph">
+<p>Charts, sources, users, mailing lists and the other lists are edited in a panel that slides in from
+the right over the list, instead of on a page of their own. If you close the panel with unsaved
+changes, you are asked first. Lists are filtered by typing in the box above them and show 20 rows
+to a page.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="administrators-model-language"><a class="anchor" href="#administrators-model-language"></a><a class="link" href="#administrators-model-language">4.1.4. Seeing the data in another language</a></h4>
+<div class="paragraph">
+<p><em>Areas</em>, <em>Sources</em> and <em>Publication categories</em> have a <em>Model language</em> choice above the list. It
+shows the names in another of the deployment&#8217;s message languages, without changing the language of
+the application.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="administrators-base-data"><a class="anchor" href="#administrators-base-data"></a><a class="link" href="#administrators-base-data">4.2. Charts, Areas and Sources</a></h3>
+<div class="sect3">
+<h4 id="administrators-charts"><a class="anchor" href="#administrators-charts"></a><a class="link" href="#administrators-charts">4.2.1. Charts</a></h4>
+<div class="paragraph">
+<p>A chart number can no longer be changed once the chart is created. The map beside the list shows
+the coverage of the charts on the current page, each labelled with its number. A chart&#8217;s coverage
+can be drawn on the map or, with <em>Edit as text</em>, typed or pasted as text. See
+<a href="../admin-manual/manual.html#charts">Charts</a> in the administrator manual.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="administrators-areas-actions"><a class="anchor" href="#administrators-areas-actions"></a><a class="link" href="#administrators-areas-actions">4.2.2. New actions in the Areas menu</a></h4>
+<div class="paragraph">
+<p>The cog menu of the <em>Areas</em> page has two new actions for re-indexing, and a third, for firing
+areas, that is described in the next section. <em>Re-index areas</em> recomputes the order of the area
+tree. <em>Re-index published messages</em> recomputes the order of every published message of the current
+domain within its area. It overwrites any order editors have set by hand, in every area: a message in an
+area that sorts its messages by position is placed by its position, and every other message,
+including one that has no position, is reset to the same neutral value, so the order among those
+messages is lost. See <a href="../admin-manual/manual.html#areas">Areas</a> in the administrator manual.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="administrators-firing-area-messages"><a class="anchor" href="#administrators-firing-area-messages"></a><a class="link" href="#administrators-firing-area-messages">4.2.3. Generating the firing area messages</a></h4>
+<div class="paragraph">
+<p><em>Generate firing area messages…</em>, in the same cog menu, creates a message for each firing area. It
+asks for the message series to use and, if you like, a tag to put the messages in, and it is shown
+only in a domain that has a firing schedule. The old manuals described this function on a country&#8217;s
+own integration page; it is now part of the base product.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="administrators-area-extent"><a class="anchor" href="#administrators-area-extent"></a><a class="link" href="#administrators-area-extent">4.2.4. Area extents as text</a></h4>
+<div class="paragraph">
+<p>Like a chart&#8217;s coverage, an area&#8217;s extent can now be typed or pasted as text with <em>Edit as text</em>,
+or imported, as well as drawn.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="administrators-users"><a class="anchor" href="#administrators-users"></a><a class="link" href="#administrators-users">4.3. Users and Contacts</a></h3>
+<div class="sect3">
+<h4 id="administrators-users-tab"><a class="anchor" href="#administrators-users-tab"></a><a class="link" href="#administrators-users-tab">4.3.1. Who sees the Users tab</a></h4>
+<div class="paragraph">
+<p>The <em>Users</em> tab of <em>Users &amp; Contacts</em> is shown only to an administrator who also holds the
+<em>manage-users</em> role of the sign-in service, Keycloak. Without that role you see the <em>Contacts</em> tab
+only. The <em>Keycloak…</em> link above the list opens the sign-in service&#8217;s own administration pages,
+where a user can be renamed. See
+<a href="../admin-manual/manual.html#users-contacts">Users &amp; Contacts</a> in the administrator manual.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="administrators-deleting-users"><a class="anchor" href="#administrators-deleting-users"></a><a class="link" href="#administrators-deleting-users">4.3.2. Deleting a user</a></h4>
+<div class="paragraph">
+<p>The old manual said a user could be deleted only if the user had never created or edited a message
+or a comment. Delete now removes the user&#8217;s account from the sign-in service at once, whatever the
+user has done in Niord. To keep the account but take away the access, remove the user from the
+user groups instead.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="administrators-user-fields"><a class="anchor" href="#administrators-user-fields"></a><a class="link" href="#administrators-user-fields">4.3.3. Creating a user</a></h4>
+<div class="paragraph">
+<p>First and last name are separate fields, and the user name cannot be changed once the user is
+created. The password field is never filled in: leave it empty to keep the password. The
+<em>Required actions</em> <em>Update Profile</em>, <em>Update Password</em> and <em>Verify Email</em> are sent only when the
+user is created.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="administrators-mailing-lists"><a class="anchor" href="#administrators-mailing-lists"></a><a class="link" href="#administrators-mailing-lists">4.4. Mailing Lists</a></h3>
+<div class="sect3">
+<h4 id="administrators-mailing-lists-one-page"><a class="anchor" href="#administrators-mailing-lists-one-page"></a><a class="link" href="#administrators-mailing-lists-one-page">4.4.1. One page for both administrators and system administrators</a></h4>
+<div class="paragraph">
+<p><em>Mailing Lists</em> is still a section of the <em>Admin</em> area. An administrator manages the recipients of
+each list, and a system administrator also creates, edits, copies and deletes lists and their
+triggers on the same page. A list is edited in a side panel where each trigger is a card you can
+fold away. See <a href="../admin-manual/manual.html#mailing-lists">Mailing Lists</a> in the administrator
+manual and <a href="../sysadmin-manual/manual.html#mailing-lists">Mailing Lists</a> in the system
+administrator manual.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="administrators-mailing-list-recipients"><a class="anchor" href="#administrators-mailing-list-recipients"></a><a class="link" href="#administrators-mailing-list-recipients">4.4.2. Recipients</a></h4>
+<div class="paragraph">
+<p>Users and contacts are added to a list in two separate parts of the recipients panel, and each part
+has its own <em>Save</em>. The buttons that add or remove all recipients act only on the rows your filter
+shows.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="administrators-mailing-list-triggers"><a class="anchor" href="#administrators-mailing-list-triggers"></a><a class="link" href="#administrators-mailing-list-triggers">4.4.3. Triggers</a></h4>
+<div class="paragraph">
+<p>A scheduled trigger cannot be saved without a time zone. <em>Test</em> runs a trigger as it stands in the
+panel, before you save it, so you can try a change first.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="administrators-publications"><a class="anchor" href="#administrators-publications"></a><a class="link" href="#administrators-publications">4.5. Publications</a></h3>
+<div class="paragraph">
+<p>Publications have changed more than anything else in Niord. The old model of publication
+templates, publications, file types, message tag filters and a <em>Recording</em> status has been replaced
+by series and issues. The screens for publications are still being finished, so this section
+describes the model only in outline; see
+<a href="../admin-manual/manual.html#publications">Publications</a> in the administrator manual for the
+screens.</p>
+</div>
+<div class="sect3">
+<h4 id="administrators-publications-model"><a class="anchor" href="#administrators-publications-model"></a><a class="link" href="#administrators-publications-model">4.5.1. Series, issues, one-off publications and categories</a></h4>
+<div class="paragraph">
+<p>A <em>series</em> is a publication as a standing thing, for example a weekly Notices to Mariners. It holds
+the settings that all its issues follow: its category, how often it comes out, how its content is
+made, which messages it selects and how its files are named. An <em>issue</em> is one released document of
+a series, for example the Notices to Mariners of one week. A <em>one-off publication</em> is a publication
+that comes out once, such as a single uploaded document or a link to one. A <em>category</em> groups
+publications, and decides whether they are shown on the public site.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Category  "Notices to Mariners"     (shown on the public site, or not)
+ |
+ +-- Series  "Weekly Notices to Mariners"
+ |     +-- Issue  week 26    published
+ |     +-- Issue  week 27    published
+ |     +-- Issue  week 28    open: being prepared
+ |
+ +-- One-off publication  "List of firing areas"
+       +-- its single issue</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="administrators-publications-content"><a class="anchor" href="#administrators-publications-content"></a><a class="link" href="#administrators-publications-content">4.5.2. How a series gets its content</a></h4>
+<div class="paragraph">
+<p>A series' content is <em>Generated from criteria</em>, an <em>Uploaded PDF</em>, an <em>External link</em> or
+<em>Reference only</em>. A generated series chooses its messages by criteria, such as message series,
+areas and categories, instead of the old message tag filter. It also says how a message belongs to
+an issue: <em>Published in the issue&#8217;s interval</em>, <em>In force at the cut-off</em>, or <em>Compiled from another
+series</em>, which builds, for example, a yearly list from the weekly issues.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="administrators-publications-issues"><a class="anchor" href="#administrators-publications-issues"></a><a class="link" href="#administrators-publications-issues">4.5.3. Preparing and publishing an issue</a></h4>
+<div class="paragraph">
+<p>An issue is prepared while it is open: it shows which messages it will hold and which the criteria
+leave out, and why. Before you publish it, a <em>Checklist</em> shows what is ready and what needs
+your attention. When you publish it, its list of messages is frozen and its document is made; in a series that comes out regularly, the next issue then opens by
+itself. A published issue can be amended, given a new edition or withdrawn from the public site,
+and every change is kept in its history.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="administrators-publications-curation"><a class="anchor" href="#administrators-publications-curation"></a><a class="link" href="#administrators-publications-curation">4.5.4. Adding or leaving out a message by hand</a></h4>
+<div class="paragraph">
+<p>On an open issue, a message can be added by hand or left out of the issue, always with a reason
+that is kept in the history. An administrator may do this from the issue&#8217;s page in the <em>Admin</em>
+area. The server also accepts a separate role for it, <em>publication-curate</em>, but because the pages
+for publications are in the <em>Admin</em> area, that role on its own gives no page to work from; see
+<a href="#sysadmin-roles">A new role for publications</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="administrators-publications-domains"><a class="anchor" href="#administrators-publications-domains"></a><a class="link" href="#administrators-publications-domains">4.5.5. Publications belong to a domain</a></h4>
+<div class="paragraph">
+<p>The <em>Publications</em> page lists the series and one-off publications of the current domain only, and
+a publication can be changed only from the domain that owns it. A setting on each publication
+decides from which domains its issues can be cited in a message.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="administrators-publication-categories"><a class="anchor" href="#administrators-publication-categories"></a><a class="link" href="#administrators-publication-categories">4.5.6. Publication categories have a section of their own</a></h4>
+<div class="paragraph">
+<p>Publication categories were a tab of the old <em>Publications</em> page. They are now the section
+<em>Publication categories</em>, with the fields <em>Category ID</em>, <em>Name</em>, <em>Description</em>, <em>Show on the public
+site</em> and <em>Order</em>, and a column that counts the publications in each. A category cannot be deleted
+while a series or a publication belongs to it. See
+<a href="../admin-manual/manual.html#publication-categories">Publication Categories</a> in the
+administrator manual.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="administrators-gone"><a class="anchor" href="#administrators-gone"></a><a class="link" href="#administrators-gone">4.6. Gone, and What to Use Instead</a></h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 35%;">
+<col style="width: 65%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Gone</th>
+<th class="tableblock halign-left valign-top">Use instead</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <em>Admin</em> page with tiles</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <em>Admin</em> area&#8217;s list of sections and its <em>Overview</em> page. See
+  <a href="#administrators-rail-and-overview">A list of sections instead of one page of tiles</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Publication templates</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A series: it holds the settings every issue follows. See <a href="#administrators-publications-model">Series, issues, one-off publications and categories</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The file types <em>None</em>, <em>Link</em>, <em>Uploaded File</em> and <em>Message</em> of a publication</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A series' content: <em>Reference only</em>, <em>External link</em>, <em>Uploaded PDF</em> or <em>Generated from
+  criteria</em>. See <a href="#administrators-publications-content">How a series gets its content</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <em>Message Tag Filter</em> of a publication</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The criteria of a series. See <a href="#administrators-publications-content">How a series gets its content</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <em>Recording</em> status and <em>Release Publication&#8230;&#8203;</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An open issue, and publishing it after the checklist. See <a href="#administrators-publications-issues">Preparing and publishing an issue</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <em>Publication Categories</em> tab of the <em>Publications</em> page</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <em>Publication categories</em> section. See <a href="#administrators-publication-categories">Publication categories have a section of their own</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deleting a user only when the user has no history</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Delete removes the account at once; to keep it, remove the user from the groups. See
+  <a href="#administrators-deleting-users">Deleting a user</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Importing charts, areas or sources by copying a file into a folder on the server</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Import&#8230;&#8203;</em> in the cog menu of the section. See <a href="#sysadmin-no-folders">No more folders that start an import</a>.</p></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="system-administrators"><a class="anchor" href="#system-administrators"></a><a class="link" href="#system-administrators">5. For System Administrators</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>These changes meet users with the <em>Sysadmin</em> role, who set up and configure Niord. The biggest one
+is not a screen but a rule: a deployment&#8217;s data is changed only by the people who run it. A new
+version of Niord may add texts and settings the deployment never had, but it never changes or
+deletes what is there.</p>
+</div>
+<div class="sect2">
+<h3 id="sysadmin-area"><a class="anchor" href="#sysadmin-area"></a><a class="link" href="#sysadmin-area">5.1. The Sysadmin Area</a></h3>
+<div class="sect3">
+<h4 id="sysadmin-rail-and-overview"><a class="anchor" href="#sysadmin-rail-and-overview"></a><a class="link" href="#sysadmin-rail-and-overview">5.1.1. A list of sections and an overview</a></h4>
+<div class="paragraph">
+<p>Like the <em>Admin</em> area, the <em>Sysadmin</em> area has its sections down the left side and an <em>Overview</em>
+page with a card for each. The <em>Sysadmin</em> role counts in the domain you are working in, so
+switching to a domain where you do not hold it takes the area out of the menu. See
+<a href="../sysadmin-manual/manual.html#sysadmin-page">Sysadmin Page</a> in the system administrator
+manual.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="sysadmin-copy"><a class="anchor" href="#sysadmin-copy"></a><a class="link" href="#sysadmin-copy">5.1.2. Copy, and editing in a side panel</a></h4>
+<div class="paragraph">
+<p>Most lists are edited in a side panel instead of on an edit page. Message series, domains,
+dictionary entries, parameter types, script resources and mailing lists have a <em>Copy</em> action,
+which opens a new record filled in from the one you copied.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sysadmin-data"><a class="anchor" href="#sysadmin-data"></a><a class="link" href="#sysadmin-data">5.2. Where Templates, Texts and Reports Come From</a></h3>
+<div class="sect3">
+<h4 id="sysadmin-database-only"><a class="anchor" href="#sysadmin-database-only"></a><a class="link" href="#sysadmin-database-only">5.2.1. The database is the only source</a></h4>
+<div class="paragraph">
+<p>In the old Niord, templates and standard texts came with the application and could be loaded again
+from it with a reload. Now every template, script, text and report is read from the database and
+nowhere else. Templates, scripts and reports arrive once, when a new deployment is set up, and after
+that only when a system administrator imports them. Texts and settings are added at start-up
+instead: a new version of Niord can bring new text keys and new settings, which are added the first
+time it starts. A new version never changes or deletes what a deployment holds, and it never adds
+again a text or a setting that an operator deleted. Something an operator deleted stays deleted
+until somebody imports it again. See
+<a href="../sysadmin-manual/manual.html#script-resources">Script Resources</a> in the system administrator
+manual.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="sysadmin-release-files"><a class="anchor" href="#sysadmin-release-files"></a><a class="link" href="#sysadmin-release-files">5.2.2. New templates arrive as files to import</a></h4>
+<div class="paragraph">
+<p>When a new version of Niord brings a new or changed template, it comes as a release file that a
+system administrator imports on the <em>Script Resources</em> page. Nothing reaches a running deployment
+until it is imported. A list of template paths that the data names but the database lacks, the
+<em>missing-path report</em>, is written to the server log at start-up and marks those paths in the
+import.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="sysadmin-import-preview"><a class="anchor" href="#sysadmin-import-preview"></a><a class="link" href="#sysadmin-import-preview">5.2.3. Imports show what they would change</a></h4>
+<div class="paragraph">
+<p>The imports of <em>Script Resources</em> and <em>Dictionaries</em> now show what the file would do before
+anything is written: what it would add, what it would overwrite, what is unchanged and what it
+refuses, with the reason. New entries are ticked and changed ones are not; for a changed script
+you see the two versions side by side. Only what you tick is imported. See
+<a href="../sysadmin-manual/manual.html#dictionaries">Dictionaries</a> in the system administrator manual.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="sysadmin-dictionary-delete"><a class="anchor" href="#sysadmin-dictionary-delete"></a><a class="link" href="#sysadmin-dictionary-delete">5.2.4. Deleting a dictionary entry</a></h4>
+<div class="paragraph">
+<p>Before you delete a dictionary entry, the confirmation lists what uses it: parameter types,
+scripts and the parts of Niord that read it. An entry that a parameter type lists cannot be
+deleted. An entry that you delete stays deleted after a restart; to restore it, import it again,
+and the import offers it unticked as <em>Deleted by an operator</em>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="sysadmin-print-reports"><a class="anchor" href="#sysadmin-print-reports"></a><a class="link" href="#sysadmin-print-reports">5.2.5. The built-in print reports</a></h4>
+<div class="paragraph">
+<p>The old manual said that Niord always ensures two standard reports. A new deployment now gets three
+built-in reports when it is set up, <em>standard</em>, <em>draft</em> and <em>public</em>, the last one used by the
+public site&#8217;s print. Niord does not create them again, so a report you delete stays deleted until
+you import it again on the <em>Print Reports</em> page. See
+<a href="../sysadmin-manual/manual.html#print-reports">Print Reports</a> in the system administrator
+manual.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sysadmin-jobs-and-imports"><a class="anchor" href="#sysadmin-jobs-and-imports"></a><a class="link" href="#sysadmin-jobs-and-imports">5.3. Batch Jobs and Imports</a></h3>
+<div class="sect3">
+<h4 id="sysadmin-no-folders"><a class="anchor" href="#sysadmin-no-folders"></a><a class="link" href="#sysadmin-no-folders">5.3.1. No more folders that start an import</a></h4>
+<div class="paragraph">
+<p>The old manuals said that an import could be started by copying a file into a folder under
+<code>$NIORD_HOME/batch-jobs/</code>. No folder on the server starts a job any more. Every import is started
+from its page, with <em>Import&#8230;&#8203;</em> in the cog menu, or from the <em>Batch Jobs</em> page. See
+<a href="../sysadmin-manual/manual.html#batch-jobs">Batch Jobs</a> in the system administrator manual.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="sysadmin-batch-sets"><a class="anchor" href="#sysadmin-batch-sets"></a><a class="link" href="#sysadmin-batch-sets">5.3.2. Batch sets</a></h4>
+<div class="paragraph">
+<p>A batch set, a zip file that starts several imports at once, is uploaded on the <em>Batch Jobs</em> page.
+A set that names the script resource, dictionary or settings import, or the JavaScript job, is
+refused whole and starts nothing; those run from their own pages.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="sysadmin-execute-javascript"><a class="anchor" href="#sysadmin-execute-javascript"></a><a class="link" href="#sysadmin-execute-javascript">5.3.3. Execute JavaScript</a></h4>
+<div class="paragraph">
+<p>The <em>Batch Jobs</em> page has <em>Execute JavaScript</em>, which runs a script on the server as a batch job,
+with full access to the system. It asks for confirmation first, and the script&#8217;s output appears
+only in that job&#8217;s log files.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="sysadmin-setup-jobs"><a class="anchor" href="#sysadmin-setup-jobs"></a><a class="link" href="#sysadmin-setup-jobs">5.3.4. The jobs that set up a deployment</a></h4>
+<div class="paragraph">
+<p>The jobs that loaded a new deployment&#8217;s first data are listed on the <em>Batch Jobs</em> page like any
+other job, but they cannot be restarted from there. The first set of data is loaded once; if that
+fails, the deployment is set up again on an empty database.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sysadmin-configuration"><a class="anchor" href="#sysadmin-configuration"></a><a class="link" href="#sysadmin-configuration">5.4. Configuration</a></h3>
+<div class="sect3">
+<h4 id="sysadmin-settings"><a class="anchor" href="#sysadmin-settings"></a><a class="link" href="#sysadmin-settings">5.4.1. Settings</a></h4>
+<div class="paragraph">
+<p>The <em>Settings</em> page lists only the settings that Niord&#8217;s code declares as editable; values the
+system keeps for itself, such as the time the areas were last changed, are not listed. A setting row left over from
+an older version, which no code reads, stays in the database but is neither listed nor exported. A
+few settings worth knowing: <code>documentationUrl</code> decides where every <em>Help</em> link goes,
+<code>adminIntegrationPageEnabled</code> shows the <em>Niord Integration</em> page, and <code>mailValidRecipients</code> decides
+whether mails are really sent. See <a href="../sysadmin-manual/manual.html#settings">Settings</a> in the
+system administrator manual.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="sysadmin-message-series"><a class="anchor" href="#sysadmin-message-series"></a><a class="link" href="#sysadmin-message-series">5.4.2. Message series</a></h4>
+<div class="paragraph">
+<p>A series has a new field, <em>Exclude messages from free-text search index</em>. An <em>Insert</em> menu beside
+the short format lists the tokens you can use, among them <code>${week}</code>, <code>${week-2-digits}</code> and, for an
+NM series, <code>${t-or-p}</code>. The next number is changed in a small window with <em>Compute</em> and <em>Update</em>,
+and series have no import or export. See
+<a href="../sysadmin-manual/manual.html#message-series">Message Series</a> in the system administrator
+manual.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="sysadmin-domains"><a class="anchor" href="#sysadmin-domains"></a><a class="link" href="#sysadmin-domains">5.4.3. Domains</a></h4>
+<div class="paragraph">
+<p>A domain must have a time zone; it cannot be saved without one, because every date in that domain
+is shown in it. A domain&#8217;s client in the sign-in service is still created with the domain, and if
+that failed, the domain&#8217;s panel shows it and offers <em>Create in Keycloak</em>. See
+<a href="../sysadmin-manual/manual.html#domains">Domains</a> in the system administrator manual.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="sysadmin-promulgation"><a class="anchor" href="#sysadmin-promulgation"></a><a class="link" href="#sysadmin-promulgation">5.4.4. Promulgation types</a></h4>
+<div class="paragraph">
+<p>Audio is now part of the base product, not of one country&#8217;s version, and a new deployment starts
+with the promulgation types NAVTEX, Twitter and Audio. A type&#8217;s own settings, such as the NAVTEX
+transmitters, can be edited once the type has been saved. See
+<a href="../sysadmin-manual/manual.html#promulgation-types">Promulgation Types</a> in the system
+administrator manual.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="sysadmin-categories"><a class="anchor" href="#sysadmin-categories"></a><a class="link" href="#sysadmin-categories">5.4.5. Categories and templates</a></h4>
+<div class="paragraph">
+<p>A template category has a <em>Test…</em> button that runs the template on its example message and shows
+the result in each language. The cog menu has <em>Re-index categories</em>, which recomputes the order of
+the whole category tree. See <a href="../sysadmin-manual/manual.html#categories">Categories</a> in the
+system administrator manual.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="sysadmin-firing-schedules"><a class="anchor" href="#sysadmin-firing-schedules"></a><a class="link" href="#sysadmin-firing-schedules">5.4.6. Firing schedules</a></h4>
+<div class="paragraph">
+<p>The <em>Firing Schedules</em> page still configures the generator of firing exercise messages. The
+generator runs every hour, and <em>Update firing exercises&#8230;&#8203;</em> in the page&#8217;s cog menu runs it at once.
+Editors maintain the schedule itself from the <em>Schedule</em> item in the main menu, and the firing area
+messages are generated from the <em>Areas</em> page. See
+<a href="../sysadmin-manual/manual.html#firing-schedules">Firing Schedules</a> in the system administrator
+manual.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="sysadmin-roles"><a class="anchor" href="#sysadmin-roles"></a><a class="link" href="#sysadmin-roles">5.4.7. A new role for publications</a></h4>
+<div class="paragraph">
+<p>Besides <em>user</em>, <em>editor</em>, <em>admin</em> and <em>sysadmin</em>, the server knows a new client role,
+<em>publication-curate</em>, which allows a user to add a message to a publication issue by hand or leave
+one out. An administrator may do the same without it. Two things limit the role for now. Niord
+does not create it: when Niord creates a domain&#8217;s client in the sign-in service, together with
+the domain or with <em>Create in Keycloak</em> on the <em>Domains</em> page, the client gets only <em>user</em>, <em>editor</em>, <em>admin</em> and <em>sysadmin</em>, so the
+role exists only where the realm&#8217;s set-up file has it or a system administrator has added it to the
+client by hand. And the pages for publications are in the <em>Admin</em> area, which needs the <em>admin</em> or
+<em>sysadmin</em> role, so a user who holds only <em>publication-curate</em> has no page to work from. A role
+counts only when it is held as a client role for the domain; a realm role with the same name gives
+nothing.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sysadmin-integration"><a class="anchor" href="#sysadmin-integration"></a><a class="link" href="#sysadmin-integration">5.5. Integration With Other Systems</a></h3>
+<div class="sect3">
+<h4 id="sysadmin-niord-integration"><a class="anchor" href="#sysadmin-niord-integration"></a><a class="link" href="#sysadmin-niord-integration">5.5.1. The Niord Integration page</a></h4>
+<div class="paragraph">
+<p>The old <em>Integration</em> chapter described import panels that belonged to one country&#8217;s deployment.
+The base product has the page <em>Niord Integration</em> instead, which pulls the published messages of
+chosen message series from another Niord server into series of this one, about once an hour, and
+on demand from the row&#8217;s action. It is shown only when the setting <code>adminIntegrationPageEnabled</code> is
+on. A country may add integration pages of its own. See
+<a href="../sysadmin-manual/manual.html#integration">Integration</a> in the system administrator manual.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sysadmin-gone"><a class="anchor" href="#sysadmin-gone"></a><a class="link" href="#sysadmin-gone">5.6. Gone, and What to Use Instead</a></h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 35%;">
+<col style="width: 65%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Gone</th>
+<th class="tableblock halign-left valign-top">Use instead</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reloading script resources and standard dictionaries from the application</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Import the release file or the texts file, with the preview. See <a href="#sysadmin-import-preview">Imports show what they would change</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Copying a file into a <code>batch-jobs</code> folder on the server to start an import</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Import&#8230;&#8203;</em> on the section&#8217;s page, or a batch set on the <em>Batch Jobs</em> page. See
+  <a href="#sysadmin-no-folders">No more folders that start an import</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Standard reports that Niord re-created by itself</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The built-in reports come once with a new deployment; import them again if they were deleted.
+  See <a href="#sysadmin-print-reports">The built-in print reports</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Settings rows that no code reads, on the <em>Settings</em> page</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Nothing: they are kept in the database but no longer shown. See <a href="#sysadmin-settings">Settings</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The import panels of the old <em>Integration</em> chapter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Niord Integration</em> for another Niord server; a country&#8217;s own pages for anything else. See
+  <a href="#sysadmin-niord-integration">The Niord Integration page</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The AtoN module page</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The new application has no AtoN page. A domain&#8217;s <em>AtoNs</em> flag and a category&#8217;s AtoN filter are
+  kept with the data.</p></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="mariners"><a class="anchor" href="#mariners"></a><a class="link" href="#mariners">6. For Mariners Using the Public Site</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The public site is where mariners and anyone else read the Navigational Warnings and Notices to
+Mariners without signing in. It has been replaced by a new site. It shows the same messages, but it
+looks different, and a few things work differently. The base product&#8217;s site is in English; a
+country&#8217;s site adds its own languages, which you choose with the language buttons in the menu bar.</p>
+</div>
+<div class="sect2">
+<h3 id="mariners-reading"><a class="anchor" href="#mariners-reading"></a><a class="link" href="#mariners-reading">6.1. Reading the Messages</a></h3>
+<div class="sect3">
+<h4 id="mariners-views"><a class="anchor" href="#mariners-views"></a><a class="link" href="#mariners-views">6.1.1. Details, List and Map</a></h4>
+<div class="paragraph">
+<p>The menu bar has three views of the messages. <em>Details</em>, where the site opens, shows the full text
+of every message under the heading of its area. <em>List</em> shows one line for each message, with its
+number and title. <em>Map</em> shows the messages on a chart, and lists the messages that have no position
+in a panel called <em>Additional Messages</em>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="mariners-filter"><a class="anchor" href="#mariners-filter"></a><a class="link" href="#mariners-filter">6.1.2. Choosing what is shown</a></h4>
+<div class="paragraph">
+<p>Above the messages, <em>Navigational Warnings</em> and <em>Notices to Mariners</em> switch each kind of message on
+or off; one of them is always on. <em>Show Active Now</em> limits the list to the messages in force at
+this moment. <em>Print</em> opens the messages you are looking at as a PDF document, ready to print or
+save.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="mariners-one-message"><a class="anchor" href="#mariners-one-message"></a><a class="link" href="#mariners-one-message">6.1.3. One message, and links to it</a></h4>
+<div class="paragraph">
+<p>Clicking a message in the <em>List</em> or on the <em>Map</em> opens it in a window with its map, its full text,
+arrows to the previous and next message, and a button that prints that message alone. A single
+message also has an address of its own, <code>/messages/details/message/</code> followed by its id, which you
+can bookmark or send to someone.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="mariners-addresses"><a class="anchor" href="#mariners-addresses"></a><a class="link" href="#mariners-addresses">6.1.4. Addresses without the "#"</a></h4>
+<div class="paragraph">
+<p>The addresses of the old public site had a <code>#</code> in them, for example <code>/#/messages/map</code>. The new
+site&#8217;s addresses have none: the map is simply <code>/messages/map</code>. Bookmarks and links written for the
+old site still work, because the new site turns them into the new form when it opens.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="mariners-publications"><a class="anchor" href="#mariners-publications"></a><a class="link" href="#mariners-publications">6.2. Publications</a></h3>
+<div class="sect3">
+<h4 id="mariners-downloads"><a class="anchor" href="#mariners-downloads"></a><a class="link" href="#mariners-downloads">6.2.1. The Downloads page</a></h4>
+<div class="paragraph">
+<p><em>Downloads</em> in the menu bar lists the publications, such as the weekly Notices to Mariners, grouped
+by category. Its first tab, <em>Active NtM and Publications</em>, holds the publications that are current
+now. The second, <em>Historical NtM and Publications</em>, holds older ones: choose a period under <em>Date
+Interval</em> to see what was published in it.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="mariners-browse"><a class="anchor" href="#mariners-browse"></a><a class="link" href="#mariners-browse">6.2.2. Download or browse an issue</a></h4>
+<div class="paragraph">
+<p>A publication with a document has a <em>Download</em> link, which opens it. A publication made from
+messages also has <em>Browse</em>, which shows the messages of that issue on the <em>Details</em> view of the site, so you
+can read them there instead of in the document.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="mariners-what-is-listed"><a class="anchor" href="#mariners-what-is-listed"></a><a class="link" href="#mariners-what-is-listed">6.2.3. Why a publication is or is not listed</a></h4>
+<div class="paragraph">
+<p>A publication is listed when three things are all true: its category is one the site shows, it has
+not been withdrawn, and the period in which it is public has begun. A withdrawn publication
+disappears from the site, from the historical tab as well, but messages that cite it still show
+the reference.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="mariners-other-sites"><a class="anchor" href="#mariners-other-sites"></a><a class="link" href="#mariners-other-sites">6.3. For Sites That Show the Messages</a></h3>
+<div class="sect3">
+<h4 id="mariners-teaser"><a class="anchor" href="#mariners-teaser"></a><a class="link" href="#mariners-teaser">6.3.1. The teaser for other web sites</a></h4>
+<div class="paragraph">
+<p>Another web site can show a small map of the current messages, the <em>teaser</em>, which leads to the
+public site when it is clicked. Its address is <code>/teaser</code>, and it accepts <code>area</code> to limit it to one
+area and <code>lang</code> to choose the language. A teaser address written in the old form, with <code>#?</code> before
+these parameters, still works.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="mariners-phones"><a class="anchor" href="#mariners-phones"></a><a class="link" href="#mariners-phones">6.3.2. On a phone</a></h4>
+<div class="paragraph">
+<p>The site works on a phone. On a narrow screen the menu bar shows its icons without their labels,
+and the panel of messages without a position can be made smaller so that it leaves the map free.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2026-11-12 07:47:09 UTC
+</div>
+</div>
+</body>
+</html>
