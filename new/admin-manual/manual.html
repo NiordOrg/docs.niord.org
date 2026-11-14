@@ -3076,11 +3076,13 @@ is deleted in Keycloak at once, whatever the user has done in Niord, and the use
 sign in. The messages, comments and history the user made in Niord are kept, with the user&#8217;s name.</p>
 </div>
 <div class="paragraph">
-<p>Only the Keycloak account is deleted. Niord keeps its own record of the user, with the user&#8217;s
-mailing lists: a deleted user stays a recipient of those lists and goes on receiving their mails,
-and is still offered in the <em>Manage Recipients</em> drawer (<a href="#manage-mailing-list-recipients">Managing Mailing List Recipients</a>). So
-before you delete a user, take the user off every list on the <strong>Mailing lists</strong> tab
-(<a href="#managing-user-mailing-lists">Managing User Mailing Lists</a>).</p>
+<p>Niord also takes the user off every mailing list, and off the lists' mails that wait to be sent,
+and forgets the user&#8217;s e-mail address. So no list mails the user any more, the <em>Manage Recipients</em>
+drawer (<a href="#manage-mailing-list-recipients">Managing Mailing List Recipients</a>) no longer offers the user, and a comment&#8217;s <strong>E-mail
+notification</strong> no longer suggests the user. Niord does this before it deletes the account, so if
+the delete fails, the user may already be off the lists: delete the user again. If you create a
+user again with the same user name, the address comes back but the lists do not: add the user to
+them again on the <strong>Mailing lists</strong> tab (<a href="#managing-user-mailing-lists">Managing User Mailing Lists</a>).</p>
 </div>
 <div class="paragraph">
 <p>To take away a user&#8217;s access but keep the account, take the user out of all groups instead.</p>
@@ -3574,7 +3576,7 @@ example <code>[ "PUBLISHED" ]</code>) and its filter in <code>messageFilter</cod
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-11-12 07:47:09 UTC
+Last updated 2026-11-13 07:41:14 UTC
 </div>
 </div>
 <script type="text/x-mathjax-config">
