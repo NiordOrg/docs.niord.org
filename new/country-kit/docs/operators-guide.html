@@ -517,7 +517,8 @@ and gives each step itself; the manuals describe the pages in full.</p>
 </div>
 <div class="paragraph">
 <p>The Sysadmin area needs the sysadmin role, and Admin needs admin or more. The app checks your roles
-in the domain you work in, which you choose in the menu.</p>
+on the Keycloak client of the domain you work in, which you choose in the menu, and on the client
+<code>niord-client-master</code>, whose roles count in every domain.</p>
 </div>
 </div>
 </div>
@@ -613,7 +614,8 @@ bootstrap is running, wait for that one&#8217;s outcome.</p>
 </li>
 <li>
 <p><strong>Refused: an archive breaks a rule, or is too large.</strong> The answer names the archive and the
-rule. By default an upload takes 1 MB a part and 10 MB a request. Nothing happened.</p>
+rule. By default an upload takes 50 MB a part and 50 MB a request, which is also the body limit
+of the chart&#8217;s proxy. Nothing happened.</p>
 </li>
 </ul>
 </div>
@@ -634,18 +636,15 @@ with "The batch execution was not restarted".</p>
 <h2 id="if-the-sysadmin-pages-are-out-of-reach"><a class="anchor" href="#if-the-sysadmin-pages-are-out-of-reach"></a><a class="link" href="#if-the-sysadmin-pages-are-out-of-reach">If the sysadmin pages are out of reach</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The administration app grants a role only on an active domain whose Keycloak client your sysadmin
-holds a role on. A deployment bootstrapped with the base product&#8217;s archive alone has the master
-domain, active since 4.0.123, so the Sysadmin pages are reachable on it with the <code>sysadmin</code> role on
-<code>niord-client-master</code>. If a country&#8217;s bootstrap left the master domain inactive and brought no
-active domain of its own, no domain grants a role and the Sysadmin pages send you back to the start
-page; since there is no retry, the database is then recreated empty and bootstrapped again with
-both archives, and the country&#8217;s maintainers correct the archive first.</p>
+<p>The administration app grants a role from the Keycloak client of the domain chosen in the menu, and
+from <code>niord-client-master</code> in every domain, also while no domain is chosen. A sysadmin with the
+<code>sysadmin</code> role on <code>niord-client-master</code> therefore reaches the Sysadmin pages whatever the menu
+shows, also when a country&#8217;s bootstrap left the master domain inactive and brought no active domain
+of its own: Sysadmin &gt; Domains lists the inactive domains too, and a domain is made active there.</p>
 </div>
 <div class="paragraph">
-<p>The usual case looks the same: the country&#8217;s domain is active, but its Keycloak client does
-not exist yet, or your sysadmin holds no role on it. The menu then shows Messages only. Do step 1
-below.</p>
+<p>A sysadmin without that role sees Messages only when the country&#8217;s domain is active but its
+Keycloak client does not exist yet, or when the sysadmin holds no role on it. Do step 1 below.</p>
 </div>
 </div>
 </div>
@@ -669,7 +668,7 @@ and no step needs them.</p>
 </div>
 <div class="imageblock kit-diagram">
 <div class="content">
-<img src="operators-guide-diagram-2.svg" alt="Diagram. Step 1: Keycloak, the first domain client → Step 2: Domains. Step 3: Areas → Step 2: Domains. Step 6: Categories → Step 2: Domains. Step 7: Message series → Step 2: Domains. Step 2: Domains → Step 8: Publications. Step 2: Domains → Step 14: AtoN data. Step 2: Domains → Step 16: Users, groups and roles. Step 2: Domains → Step 9: Promulgation types. Step 3: Areas → Step 9: Promulgation types. Step 2: Domains → Step 13: Firing schedules. Step 3: Areas → Step 13: Firing schedules. Step 7: Message series → Step 13: Firing schedules. Step 2: Domains → Step 17: A first message. Step 7: Message series → Step 17: A first message. Steps that need no other step: Step 4: Charts; Step 5: Sources; Step 10: Mailing lists; Step 11: Dictionaries and texts; Step 12: Templates and reports; Step 15: Settings.">
+<img src="operators-guide-diagram-2.svg" alt="Diagram. Step 1: Keycloak, the first sysadmin → Step 2: Domains. Step 3: Areas → Step 2: Domains. Step 6: Categories → Step 2: Domains. Step 7: Message series → Step 2: Domains. Step 2: Domains → Step 8: Publications. Step 2: Domains → Step 14: AtoN data. Step 2: Domains → Step 16: Users, groups and roles. Step 2: Domains → Step 9: Promulgation types. Step 3: Areas → Step 9: Promulgation types. Step 2: Domains → Step 13: Firing schedules. Step 3: Areas → Step 13: Firing schedules. Step 7: Message series → Step 13: Firing schedules. Step 2: Domains → Step 17: A first message. Step 7: Message series → Step 17: A first message. Steps that need no other step: Step 4: Charts; Step 5: Sources; Step 10: Mailing lists; Step 11: Dictionaries and texts; Step 12: Templates and reports; Step 15: Settings.">
 </div>
 </div>
 <div class="sect2">
@@ -685,13 +684,14 @@ and no step needs them.</p>
 <li>
 <p>Each domain is a client whose client ID is the domain&#8217;s Keycloak ID. It holds the roles <code>user</code>,
 <code>editor</code>, <code>admin</code> and <code>sysadmin</code>, each including the one before it. No one signs in through it;
-it only holds roles. The administration app grants a role only from the client of the domain you
-choose in the menu.</p>
+it only holds roles. A role on it counts while that domain is chosen in the menu.</p>
 </li>
 <li>
-<p>The client <code>niord-client-master</code> is the base product&#8217;s own. The backend honours a role on it in
-every domain, so it counts for calls to the backend&#8217;s interface, such as the bootstrap command.
-The administration app does not read it: a role there opens no area of the app.</p>
+<p>The client <code>niord-client-master</code> is the base product&#8217;s own. A role on it counts in every domain,
+in the backend&#8217;s interface, such as the bootstrap command, and in the administration app alike:
+<code>sysadmin</code> there opens the Sysadmin area whatever domain is chosen in the menu, and <code>admin</code> and
+<code>editor</code> open their areas the same way. Give a role there only to a person who is to hold it in
+every domain.</p>
 </li>
 <li>
 <p>The app acts in Keycloak with the signed-in person&#8217;s own rights. A sysadmin who creates domain
@@ -701,19 +701,22 @@ users needs its <code>manage-users</code> role. Give these through a group.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>Your first sysadmin needs the <code>sysadmin</code> role twice: on <code>niord-client-master</code>, and on the client of
-the first active domain, which your country&#8217;s bootstrap brought. Ask your maintainers for that
-domain&#8217;s Keycloak ID.</p>
+<p>Give your first sysadmin the <code>sysadmin</code> role on <code>niord-client-master</code>. It opens the Sysadmin area
+in every domain, and the backend&#8217;s interface, such as the bootstrap command. The <code>sysadmin</code> role on
+a domain&#8217;s client is then optional for this person; it is how a sysadmin of one domain alone is
+made.</p>
 </div>
 <div class="imageblock kit-diagram">
 <div class="content">
-<img src="operators-guide-diagram-3.svg" alt="Diagram. Your first sysadmin group → sysadmin on niord-client-master. sysadmin on niord-client-master → The backend&#8217;s interface in every domain, such as the bootstrap command. Your first sysadmin group → sysadmin on the client of the first active domain. sysadmin on the client of the first active domain → The Sysadmin area, with that domain chosen in the menu.">
+<img src="operators-guide-diagram-3.svg" alt="Diagram. Your first sysadmin group → sysadmin on niord-client-master. sysadmin on niord-client-master → The backend&#8217;s interface in every domain, such as the bootstrap command. sysadmin on niord-client-master → The Sysadmin area, whatever domain is chosen in the menu. Your first sysadmin group → sysadmin on a domain&#8217;s client (optional). sysadmin on a domain&#8217;s client → The Sysadmin area, with that domain chosen in the menu.">
 </div>
 </div>
 <div class="paragraph">
-<p>That first client does not exist until someone presses <strong>Create in Keycloak</strong>, and the button is in
-the Sysadmin area, which the app shows only to a sysadmin of the chosen domain. So create this one
-client by hand, unless the realm the installer set up already holds it:</p>
+<p>With that role, your sysadmin presses <strong>Create in Keycloak</strong> for the first domain too (step 2), so
+no client has to be made by hand. Making one by hand is optional, for a realm whose first sysadmin
+is to hold no role on <code>niord-client-master</code>: that sysadmin reaches the Sysadmin area only through
+the first domain&#8217;s client, so create it by hand, unless the realm the installer set up already
+holds it. Ask your maintainers for that domain&#8217;s Keycloak ID.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -732,29 +735,30 @@ authentication</strong> on, <strong>Standard flow</strong> and <strong>Direct ac
 for <code>sysadmin</code> with <code>admin</code>.</p>
 </li>
 <li>
-<p>Give the first sysadmin&#8217;s group the client&#8217;s <code>sysadmin</code> role, beside the <code>sysadmin</code> role on
-<code>niord-client-master</code>: Groups, the group, <strong>Role mapping</strong>, <strong>Assign role</strong>, filtered by
-clients. Users, the user, <strong>Groups</strong> names the user&#8217;s group.</p>
+<p>Give the first sysadmin&#8217;s group the client&#8217;s <code>sysadmin</code> role: Groups, the group, <strong>Role
+mapping</strong>, <strong>Assign role</strong>, filtered by clients. Users, the user, <strong>Groups</strong> names the user&#8217;s
+group.</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>Every later domain&#8217;s client comes from <strong>Create in Keycloak</strong>: save the domain in step 2, open it
+<p>Every client not made by hand comes from <strong>Create in Keycloak</strong>: save the domain in step 2, open it
 again, and press the button. Whether the installer&#8217;s realm holds the first client, and the
 production realm itself, are verified at the deploy step.</p>
 </div>
 <div class="paragraph">
-<p>How to see it worked: your sysadmin signs in, chooses the domain in the menu, and the Sysadmin area
-appears. After <strong>Create in Keycloak</strong>, Sysadmin &gt; Domains shows a tick beside the domain&#8217;s Keycloak
-ID, and the domain&#8217;s editor says the client exists in Keycloak. The manual:
+<p>How to see it worked: your sysadmin signs in and the Sysadmin area appears in the menu (with a role
+on a domain&#8217;s client only, once that domain is chosen there). After <strong>Create in Keycloak</strong>,
+Sysadmin &gt; Domains shows a tick beside the domain&#8217;s Keycloak ID, and the domain&#8217;s editor says the
+client exists in Keycloak. The manual:
 <a href="../../sysadmin-manual/manual.html#keycloak-integration">Keycloak integration</a>.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="2-domains-and-their-time-zones"><a class="anchor" href="#2-domains-and-their-time-zones"></a><a class="link" href="#2-domains-and-their-time-zones">2. Domains and their time zones</a></h3>
 <div class="paragraph">
-<p><strong>Mandatory.</strong> Every domain has its time zone, and every domain but the first (step 1) its client
-from <strong>Create in Keycloak</strong>. Create with <strong>New Domain</strong> only the domains your bootstrap did not
+<p><strong>Mandatory.</strong> Every domain has its time zone, and its client from <strong>Create in Keycloak</strong>, unless
+that client was made by hand (step 1). Create with <strong>New Domain</strong> only the domains your bootstrap did not
 bring; open each one it brought with the pencil, check its fields, and press <strong>Create in Keycloak</strong>.</p>
 </div>
 <div class="paragraph">
@@ -774,7 +778,9 @@ bring; open each one it brought with the pencil, check its fields, and press <st
 <li>
 <p>a <strong>Time Zone</strong>. Choose the zone of the waters the domain covers; leave none blank by accident.
 The zone formats the times the administration app shows while this domain is chosen in the
-menu; with no zone, the app uses the browser&#8217;s own. It also formats the times the backend writes
+menu; with no zone, the app shows times in the browser&#8217;s own, and every date field is disabled
+until the domain has a zone, its tooltip reading "No time zone: choose a domain, or ask a sysadmin
+to give this domain a time zone". It also formats the times the backend writes
 into the domain&#8217;s message texts and documents, the PDFs the public site offers among them. The
 public site&#8217;s pages do not read it: they show times in the zone your country&#8217;s build names, UTC
 unless the maintainers set another. That zone is your maintainers' setting, not yours: ask them to
@@ -871,7 +877,8 @@ published only with one. Create those your bootstrap did not bring.</p>
 <p>Sysadmin &gt; Message Series, <strong>New Message Series</strong>: the <strong>Message Series ID</strong>, the
 <strong>Main Type</strong> (Navigational Warnings or Notices to Mariners), the <strong>Number Sequence Type</strong> (Yearly,
 Continuous, Manual or None), the <strong>Short Format</strong> with its tokens, and for a warning series the
-<strong>NAVTEX Preamble</strong>. <strong>Next number</strong> sets the number the next published message gets. Then add the
+<strong>NAVTEX Preamble</strong>. <strong>Next number</strong> sets the number the next published message gets; a number below one a message of
+the series already has is refused, and <strong>Compute</strong> gives the next free one. Then add the
 series to its domain: Sysadmin &gt; Domains, the domain&#8217;s <strong>Message Series</strong> field.</p>
 </div>
 <div class="paragraph">
@@ -1043,8 +1050,9 @@ model: its file and environment sections no longer hold.</p>
 <p><strong>Mandatory.</strong> In Keycloak&#8217;s admin console, give people their roles through groups: a group holds a
 domain client&#8217;s role (<code>user</code>, <code>editor</code>, <code>admin</code> or <code>sysadmin</code>). The app shows a person what their
 role on the chosen domain&#8217;s client allows, so a person who works in three domains needs a role on
-each of the three clients. A role on <code>niord-client-master</code> counts for the backend&#8217;s interface in
-every domain, such as scripts and the bootstrap command, never for the app&#8217;s areas and menus.</p>
+each of the three clients. A role on <code>niord-client-master</code> counts in every domain, for the
+backend&#8217;s interface, such as scripts and the bootstrap command, and for the app&#8217;s areas and menus
+alike: give it only to a person who is to hold that role in every domain.</p>
 </div>
 <div class="paragraph">
 <p>Admin &gt; Users &amp; Contacts, Users tab, searches the realm&#8217;s users, adds one with <strong>Add</strong>, and moves a
@@ -1146,10 +1154,12 @@ enters data.</p>
 </div>
 <div class="paragraph">
 <p><strong>The execution mode.</strong> A fresh database starts in mode <code>test</code> (since 4.0.124): both frontends then
-show a TEST ribbon, the public site included. A production deployment sets the environment variable
-<code>mode=production</code> in its chart values; the backend reads a system property or environment variable
-named like a setting ahead of the stored row, so no database edit is needed, and a deployment whose
-values forgot it shows the ribbon instead of passing as production.</p>
+show a TEST ribbon, the public site included. A production deployment adds <code>-Dmode=production</code> to
+its chart value <code>app.javaOpts</code>, which the chart passes to the backend as <code>JAVA_TOOL_OPTIONS</code>; keep
+the options the value already holds, such as <code>-XX:MaxRAMPercentage=70.0 -XX:+UseG1GC</code>, the chart&#8217;s
+default. The chart has no value of its own for the mode. The backend reads a system property or
+environment variable named like a setting ahead of the stored row, so no database edit is needed,
+and a deployment whose values forgot it shows the ribbon instead of passing as production.</p>
 </div>
 </div>
 </div>
@@ -1204,7 +1214,7 @@ first start, is not verified.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-11-12 09:35:00 UTC
+Last updated 2026-11-17 14:15:05 UTC
 </div>
 </div>
 </body>

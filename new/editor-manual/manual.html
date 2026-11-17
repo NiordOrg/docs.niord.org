@@ -923,7 +923,8 @@ those that are <em>Published</em>, <em>Cancelled</em> or <em>Expired</em>.</p>
 <li>
 <p>Logged in with a role in the current domain, you can also find the messages in the other
 statuses, drafts included, with the <a href="#status-filter">Status Filter</a>, and you can use the actions
-for your role.</p>
+for your role. A role on the base product&#8217;s own client, <code>niord-client-master</code>, counts in every
+domain.</p>
 </li>
 </ul>
 </div>
@@ -1286,10 +1287,9 @@ an exception: with either of them on and no status picked, the list holds the me
 or the publication in every status, drafts and deleted messages included.</p>
 </div>
 <div class="paragraph">
-<p>Every status is offered when you are logged in. Without logging in, or with the <em>Domain</em> filter set
-to another domain, only the public statuses are offered: <em>Published</em>, <em>Cancelled</em> and <em>Expired</em>. In
-a domain where you hold no role, the other statuses are offered too, but only public messages are
-found.</p>
+<p>Every status is offered when you are logged in with a role in the current domain. Without logging
+in, in a domain where you hold no role, or with the <em>Domain</em> filter set to another domain, only the
+public statuses are offered: <em>Published</em>, <em>Cancelled</em> and <em>Expired</em>.</p>
 </div>
 </div>
 <div class="sect3">
@@ -1533,11 +1533,15 @@ found, or with the messages you have selected.</p>
 list.</p>
 </li>
 <li>
-<p>When you are logged in, you can also print and mail the selection, run a report, tag messages,
-manage tags, and export.</p>
+<p>When you are logged in, you can also export the messages the filter has found.</p>
 </li>
 <li>
-<p>Editors can also change the status of the selected messages and sort the messages of an area.</p>
+<p>When you are logged in with a role in the current domain, you can also print and export the
+selection, run a report, tag messages and manage tags.</p>
+</li>
+<li>
+<p>Editors can also mail the selection, change the status of the selected messages and sort the
+messages of an area.</p>
 </li>
 <li>
 <p>Administrators can also import messages.</p>
@@ -1620,8 +1624,8 @@ To print the result, or keep it open, click <em>Open in new window</em>.</p>
 </div>
 </div>
 <div class="paragraph">
-<p><em>E-mail selection&#8230;&#8203;</em> mails the messages you have selected. The dialog <em>Mail 2 selected
-messages</em> asks for:</p>
+<p><em>E-mail selection&#8230;&#8203;</em>, for editors, mails the messages you have selected. The dialog <em>Mail 2
+selected messages</em> asks for:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1639,8 +1643,10 @@ also mail someone who is not a user of Niord.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>Click <em>Send Mail</em> to send a mail with the details of the selected messages. This can be useful when,
-for example, you follow up on the work a Notice to Mariners describes.</p>
+<p>Click <em>Send Mail</em> to mail the details of the selected messages. This can be useful when, for
+example, you follow up on the work a Notice to Mariners describes. Niord queues the mail and sends
+it shortly after, as the message on the screen says; a mail that cannot be delivered is listed for
+the system administrators in the Mail Queue.</p>
 </div>
 </div>
 <div class="sect3">
@@ -1826,6 +1832,11 @@ of many messages at once, which you otherwise do one message at a time on the ed
 same change for every message it fits, pick it in <em>Change all statuses</em>, for example <em>Draft →
 Verified</em>. Click <em>Update</em> and confirm to change the statuses.</p>
 </div>
+<div class="paragraph">
+<p>The statuses change together or not at all. If one of the changes is refused, for example because
+another editor changed that message after you opened the dialog, no status is changed, a message
+names the message and the reason, and the dialog stays open.</p>
+</div>
 </div>
 <div class="sect3">
 <h4 id="sort-area-action"><a class="anchor" href="#sort-area-action"></a><a class="link" href="#sort-area-action">4.4.15. Sort Area Action</a></h4>
@@ -1933,7 +1944,8 @@ offered to everyone.</p>
 <li>
 <p><em>Add to tag…</em> opens the tag picker for this message. <em>Add to</em> followed by a tag&#8217;s name adds the
 message to the tag you used last, in one click. <em>Remove from…</em> lists the tags the message is in,
-to take it out of one. These items are offered when you are logged in.</p>
+to take it out of one. These items are offered when you are logged in with a role in the current
+domain.</p>
 </li>
 </ul>
 </div>
@@ -2244,8 +2256,10 @@ the section that describes the tab.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>All changes saved</em> / <em>Unsaved changes</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the message has changes you have not saved. If you change a field back to what it was,
-the message counts as unchanged again (but see <a href="#editor-status-flow">the status buttons</a>).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the message has changes you have not saved. A new message, a copy or the result of a
+template that you have not saved yet has unsaved changes from the start, so you can save it at
+once. If you change a field of a saved message back to what it was, the message counts as
+unchanged again.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Clear</strong></p></td>
@@ -2291,10 +2305,10 @@ asking you. Only a user with the editor role can revert a message: for other use
 button too, but Niord refuses the change ("Could not revert to draft").</p>
 </div>
 <div class="paragraph">
-<p>The buttons are disabled as soon as you change the message, and stay disabled until the message is
-saved or reloaded. Changing a field back to what it was is not enough: the header then says <em>All
-changes saved</em> and <strong>Save</strong> is disabled, but these buttons stay disabled. Click Reload message (the
-circular arrows in the header) to enable them again. The statuses are described in
+<p>The buttons are disabled while the message has unsaved changes: as soon as you change it, until it
+is saved or reloaded. If you change a field back to what it was, they are enabled again, as <strong>Save</strong>
+is disabled again. A message that has never been saved, or the result of a template that you have
+not saved yet, keeps them disabled until it is saved. The statuses are described in
 <a href="#status-editor-page">The Status Page</a>.</p>
 </div>
 <div class="imageblock">
@@ -2408,7 +2422,8 @@ Reload button and the print, compare and tag actions of the <em>Actions</em> men
 <div class="paragraph">
 <p>Your changes are kept when you switch between the four tabs. If you leave the editor, or open
 another message in it, while there are unsaved changes, Niord asks whether to leave without
-saving. Closing the browser tab asks too.</p>
+saving. A new message, a copy or the result of a template that you have not saved yet counts, even
+when you have not changed a field. Closing the browser tab asks too.</p>
 </div>
 <div class="paragraph">
 <p>If two editors change the same message at the same time, the one who saves last wins: the
@@ -3092,10 +3107,16 @@ the list is open:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Click <strong>Upload attachments</strong> to choose files, or drop them on the field. Each attachment is a row:</p>
+<p>Click <strong>Upload attachments</strong> to choose files, or drop them on the field. Files chosen or dropped
+together are uploaded one after the other and added in the order you picked them. The message shows
+its attachments in the order of the rows. Each attachment is a row:</p>
 </div>
 <div class="ulist">
 <ul>
+<li>
+<p>The grip at the start of the row changes the order: drag the row by it to another place, or
+select the grip and press the up or down arrow key to move the row one place.</p>
+</li>
 <li>
 <p><strong>Icon</strong> and <strong>File</strong>: click either to open the file.</p>
 </li>
@@ -3352,9 +3373,9 @@ Niord in.</p>
 <p>On the right, the status panel shows the message&#8217;s status and the buttons for what can be done
 with it now, and the <em>Publications</em> panel shows the publications the message is in
 (<a href="#message-publications-panel">Publications Panel</a>). The buttons are shown to editors only. Like the buttons above
-the live preview, they are disabled as soon as you change the message, until it is saved or
-reloaded; if you have changed a field and then changed it back, click Reload message in the header
-(see <a href="#editor-status-flow">Live Preview and Status</a>).</p>
+the live preview, they are disabled while the message has unsaved changes, until it is saved or
+reloaded; changing a field back to what it was enables them again (see
+<a href="#editor-status-flow">Live Preview and Status</a>).</p>
 </div>
 <div class="sect3">
 <h4 id="message-statuses"><a class="anchor" href="#message-statuses"></a><a class="link" href="#message-statuses">5.3.1. Statuses</a></h4>
@@ -3531,6 +3552,12 @@ publish-from date and save it, verify it again, and publish it.</p>
 <strong>Also cancel the referenced messages</strong>, as in the picture above. Tick it to cancel them as this message is published. Click
 <strong>Publish</strong> to publish.</p>
 </div>
+<div class="paragraph">
+<p>The publication and the cancellations are one change: if one of the referenced messages cannot be
+cancelled, nothing is published or cancelled, and a message says why. A referenced message of another
+domain cannot be cancelled from your domain: publish without ticking the option, or ask that domain to
+cancel it.</p>
+</div>
 </div>
 <div class="sect3">
 <h4 id="cancel-message"><a class="anchor" href="#cancel-message"></a><a class="link" href="#cancel-message">5.3.4. Cancelling a Message</a></h4>
@@ -3630,6 +3657,12 @@ message itself is unchanged.</p>
 <li>
 <p><em>Pending</em>: the message will be in the issue now being prepared. A pending row is worked out as of
 now and can still change before the issue&#8217;s cut-off.</p>
+</li>
+<li>
+<p><em>Missed by a released issue</em>: the message&#8217;s publish date lies in the period of an issue that was
+published before the message was, so the issue went out without it and the message is in no
+issue of that series. The date below is the start of that period. An administrator can amend the
+issue to take the message in.</p>
 </li>
 </ul>
 </div>
@@ -4191,7 +4224,9 @@ degrees and minutes. You can change positions here:</p>
 <p>Click a position to change it. Type the new position and press Enter; Escape leaves it as it
 was. A position Niord cannot read is marked red and stays open. You can type
 <code>55° 10.000'N - 015° 16.000'E</code>, the same without the symbols (<code>55 10.000N 015 16.000E</code>), or
-decimal degrees (<code>55.1667N 15.2667E</code>); a comma also works as the decimal sign.</p>
+decimal degrees (<code>55.1667N 15.2667E</code>); a comma also works as the decimal sign. Niord does not
+read a position that cannot exist: minutes of 60 or more, more than 90° of latitude or 180° of
+longitude, or a sign before the degrees (the N, S, E or W gives the side).</p>
 </li>
 <li>
 <p>Point at a position to see its buttons: <strong>+</strong> (<em>Add a position after this one</em>), on lines and areas,
@@ -4266,7 +4301,8 @@ Without it, a single position is a point and several positions are a MultiPoint.
 (N or S, E or W). You can write degrees and minutes (<code>55° 10.000'N 015° 16.000'E</code>), degrees,
 minutes and seconds (<code>55° 10' 30"N</code>), or decimal degrees, with a point or a comma as the decimal
 sign. A line may start with a number, such as <code>1)</code>, and there may be a dash between latitude and
-longitude.</p>
+longitude. Minutes and seconds must be below 60, the latitude at most 90° and the longitude at
+most 180°, and the degrees take no sign: the hemisphere letter gives the side.</p>
 </li>
 <li>
 <p>For an area, list its corners: Niord closes the outline, so you do not repeat the first corner at
@@ -4337,8 +4373,10 @@ two examples.</p>
 <li>
 <p><strong>From UTM</strong>: positions in the Universal Transverse Mercator (UTM) system, one on each line: the
 zone and its latitude band, then the easting and the northing, such as <code>32V 624726.15 6207884.60</code>.
-One position becomes a point and several positions become a MultiPoint; a line Niord cannot read
-is left out. <strong>Show examples</strong> shows the format and a link to a map of the UTM zones.</p>
+One position becomes a point and several positions become a MultiPoint. Blank lines are skipped,
+and a comma also works as the decimal sign. When Niord cannot read one of the lines, it reads none
+of them: the text field gets a red frame and nothing can be imported until the line is corrected.
+<strong>Show examples</strong> shows the format and a link to a map of the UTM zones.</p>
 </li>
 </ul>
 </div>
@@ -4544,6 +4582,13 @@ template, but several can run together: a message with a part for each template.
 templates do not fill, and save it.</p>
 </div>
 <div class="paragraph">
+<p>While a parameter marked with a star is empty, <strong>Execute</strong> cannot be clicked, and a line beside it
+names what is missing: "Fill in the parameters marked * to execute:" followed by the parameters'
+names. The preview keeps following your changes. A tick box is never missing, and in a framed group
+of parameters the starred ones count once you fill in any part of the group, or when the group
+itself is starred.</p>
+</div>
+<div class="paragraph">
 <p>The templates write the message as a whole, from the facts on the page:</p>
 </div>
 <div class="ulist">
@@ -4699,7 +4744,7 @@ end on the right. Click a field and pick the time: the hour, the minutes, and AM
 out.</p>
 </li>
 <li>
-<p><strong>Clear</strong> takes out all the lines.</p>
+<p><strong>Clear</strong> takes out all the lines, except a period that started on an earlier day (see below).</p>
 </li>
 <li>
 <p><strong>Save</strong> stores the lines as the area&#8217;s firing periods, for that area and that day only, and closes
@@ -4709,10 +4754,46 @@ periods of the day. <strong>Cancel</strong> closes the row and leaves the period
 </ul>
 </div>
 <div class="paragraph">
-<p>A firing period lies within the day shown. A period without a start time starts at midnight, and
-one without an end time lasts until the end of the day; a line with neither is left out. For an
-exercise that goes on past midnight, enter one period until the end of the day and another from
-midnight on the next day. When Niord cannot store the periods it says "Error updating firing
+<p>A firing period is entered on the day it starts. A period without a start time starts at midnight,
+and one without an end time lasts until 23:59; a line with neither is left out. To fire until
+midnight, enter 00:00 (12:00 AM) as the end: the period then lasts until midnight at the end of the
+day shown, and the firing exercise message reads, for example, "hours 09:00 - 24:00". For an
+exercise that goes on past midnight, enter one period until 00:00 and another from 00:00 on the
+next day.</p>
+</div>
+<div class="paragraph">
+<p>A period must end after it starts. When the end of a line is before its start, or the same, the
+line says "The period must end after it starts. To fire until midnight, enter 00:00 as the end."
+and <strong>Save</strong> cannot be clicked until the line is corrected.</p>
+</div>
+<div class="paragraph">
+<p>An older period can be stored with its end before its start, because Niord did not check this
+earlier (for example 09:00 to 00:00 of the same day, or 08:00 to 23:00 of the day before). Such a
+period has a warning mark beside it in the day&#8217;s list;
+pointing at the mark says what is wrong. Its time fields can look right ("8:00 AM - 11:00 PM"), so
+when you open the row, the line under it names the end it was saved with, for example "This period
+was saved with its end at 24 Nov 2026, 11:00 PM CET, before its start. Choose the end time again to
+correct it." Pick the end time again (the same time, 00:00, or the end it should have) and save:
+the end is then stored on the day shown. An end of 00:00 is stored as midnight at the end of that
+day.</p>
+</div>
+<div class="paragraph">
+<p>Such an older period that was meant to go on past midnight, for example one stored as 22:00 to
+02:00 of 24 Nov, is also shown on the day after it starts, for its early hours. Its dates are shown
+on both ends ("24 Nov 2026, 10:00 PM - 24 Nov 2026, 2:00 AM CET"), so it does not read as that
+night&#8217;s hours. On the later day it cannot be changed, as any period of an earlier day (see below):
+correct it on the day it starts. A period stored as 09:00 to 00:00 of the same day, or 08:00 to
+23:00 of the day before, is shown on its start day only.</p>
+</div>
+<div class="paragraph">
+<p>A period that started on the day before and goes on past midnight (made, for example, by another
+system) is also shown on the later day. There it cannot be changed: it shows as text with "Starts
+on an earlier day. Edit it on that day.", <strong>Clear</strong> leaves it, and <strong>Save</strong> keeps it as it is. On the
+day it starts you can change its start time, and it keeps its end on the next day. A changed end
+time is read on the day shown, so an end before the start makes the line say "The period must end
+after it starts. It runs past midnight: to keep firing after midnight, end it at 00:00 and add a
+period from 00:00 on the next day." Times and dates are shown on both ends of such a period, and of
+a period until midnight. A period you do not change is saved as it was. When Niord cannot store the periods it says "Error updating firing
 periods".</p>
 </div>
 <div class="paragraph">
@@ -4801,7 +4882,7 @@ complete the drafts and publish them.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-11-13 07:41:14 UTC
+Last updated 2026-11-17 13:36:14 UTC
 </div>
 </div>
 <script type="text/x-mathjax-config">
