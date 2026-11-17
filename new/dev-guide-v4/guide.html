@@ -637,9 +637,9 @@ documents in the source repository that are kept up to date with the code. Where
 such a document disagree, the document in the repository is right.</p>
 </div>
 <div class="paragraph">
-<p>The source code of Niord 4 lives in one repository, which is not public yet; it is to move to
-the NiordOrg organisation on GitHub (<a href="https://github.com/NiordOrg" class="bare">https://github.com/NiordOrg</a>). This guide therefore names
-files as paths relative to the root of that repository, such as <code>be/README.md</code>.</p>
+<p>The source code of Niord 4 lives in one public repository in the NiordOrg organisation on GitHub
+(<a href="https://github.com/NiordOrg" class="bare">https://github.com/NiordOrg</a>). This guide names files as paths relative to the root of that
+repository, such as <code>be/README.md</code>.</p>
 </div>
 <div class="paragraph">
 <p>Earlier versions have guides of their own, kept as an archive:
@@ -2319,12 +2319,12 @@ piece of work can collect several smaller pull requests on a long-lived <code>fe
 first, and reach <code>main</code> as one pull request at the end.</p>
 </li>
 <li>
-<p>Open a pull request as a draft while you are still working on it. A draft runs no checks;
-marking it ready for review starts them.</p>
+<p>Open a pull request as a draft while you are still working on it. The checks run on a draft as
+they do on a pull request that is ready for review.</p>
 </li>
 <li>
-<p>Each new push to a pull request that is ready for review starts the checks again and cancels the
-run in progress, so push when a piece of work is done rather than after every commit.</p>
+<p>Each new push to a pull request starts its checks again and cancels the run in progress, so push
+when a piece of work is done rather than after every commit.</p>
 </li>
 <li>
 <p>A change to the base product that changes what a country may use or must do is recorded in
@@ -2341,10 +2341,10 @@ in <code>be/docs/potential-errors.md</code>, frontend ones in <code>fe/docs/back
 <h3 id="continuous-integration"><a class="anchor" href="#continuous-integration"></a><a class="link" href="#continuous-integration">9.2. Continuous integration</a></h3>
 <div class="paragraph">
 <p>The workflows are in <code>.github/workflows/</code> at the root of the repository; GitHub reads them nowhere
-else. The checking workflows run on pull requests into <code>main</code> once they are ready for review. On a
+else. The checking workflows run on every pull request, into any branch, drafts included. On a
 pull request, each workflow first looks at which files the change touches and skips the work that
 does not concern it. On a push to <code>main</code>, a workflow starts only when the push touches the paths it
-watches, and <code>guides.yml</code> never runs on a push: it runs on pull requests into <code>main</code> that touch the
+watches, and <code>guides.yml</code> never runs on a push: it runs on pull requests that touch the
 guides or their sources, and by hand.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
@@ -2389,13 +2389,14 @@ guides or their sources, and by hand.</p>
 <div class="sect2">
 <h3 id="the-gates"><a class="anchor" href="#the-gates"></a><a class="link" href="#the-gates">9.3. The gates</a></h3>
 <div class="paragraph">
-<p>The branch protection of <code>main</code> will require three checks: <strong>Frontend gate</strong> for the administration
-application, <strong>Info gate</strong> for the public site and <strong>Unit tests</strong> for the backend. The two gates are
-jobs that summarise their workflow: each is green only when every other job of its workflow
-succeeded. <strong>Unit tests</strong> is not such a gate. It is the backend&#8217;s unit-test job itself and says
-nothing about the integration tests or the generated country, which are jobs of their own beside
-it. Until the branch protection is switched on, every check is advisory, so read every check,
-these and the others, before merging.</p>
+<p>A ruleset on <code>main</code> requires three checks before a pull request merges: <strong>Frontend gate</strong> for the
+administration application, <strong>Info gate</strong> for the public site and <strong>Unit tests</strong> for the backend. The
+two gates are jobs that summarise their workflow: each is green only when every other job of its
+workflow succeeded. <strong>Unit tests</strong> is not such a gate. It is the backend&#8217;s unit-test job itself and
+says nothing about the integration tests or the generated country, which are jobs of their own
+beside it and are not required for the merge. So read every check, the required ones and the
+others, before merging: a red run of the integration tests on <code>main</code> stops the publication of that
+commit.</p>
 </div>
 </div>
 <div class="sect2">
@@ -2410,15 +2411,15 @@ these and the others, before merging.</p>
 (<code>./test-it --its-only -pl niord -Dit.test=&lt;class&gt;</code> in <code>be/</code>) or one spec file in <code>fe/</code>.</p>
 </li>
 <li>
-<p>Run the whole suite once, as the last step before review. For a pull request into <code>main</code>, the
-continuous integration does that.</p>
+<p>Run the whole suite once, as the last step before review. The continuous integration does that
+on the pull request, into <code>main</code> or into a <code>feature/**</code> branch.</p>
 </li>
 <li>
-<p>A pull request into a <code>feature/**</code> branch gets no continuous integration at all. Run
-<code>./verify-local --base origin/feature/&lt;name&gt;</code> at the root of the repository instead, and paste
-the summary it prints into the pull request. It runs the same steps as the workflows for the
-parts the branch changed: the whole backend suite with the check that the integration tests
-really ran, the frontend gates, and the example country when the branch reaches it.</p>
+<p><code>./verify-local</code> at the root of the repository runs the same steps locally, for when you want
+the result before you push (<code>--base origin/feature/&lt;name&gt;</code> for a branch that goes into a feature
+branch). It covers the parts the branch changed: the whole backend suite with the check that the
+integration tests really ran, the frontend gates, and the example country when the branch
+reaches it.</p>
 </li>
 </ul>
 </div>
@@ -2430,9 +2431,11 @@ the end-to-end tests and the manual checks of the public site&#8217;s image.</p>
 <div class="sect2">
 <h3 id="licence"><a class="anchor" href="#licence"></a><a class="link" href="#licence">9.5. Licence</a></h3>
 <div class="paragraph">
-<p>Niord is open source under the Apache License 2.0, stated in <code>be/LICENSE</code> and <code>fe/LICENSE</code>. Most of
-the backend&#8217;s Java files carry the licence header; the frontend&#8217;s files carry none, and their licence
-is stated in <code>fe/LICENSE</code> and <code>fe/README.md</code> only.</p>
+<p>Niord is open source under the Apache License 2.0, stated in <code>LICENSE</code> at the root of the repository
+and in <code>be/LICENSE</code> and <code>fe/LICENSE</code>. <code>NOTICE</code>, beside the root <code>LICENSE</code>, quotes the copyright lines
+of the files and names the parts that are under a licence of their own and the third-party material
+the repository holds. Most of the backend&#8217;s Java files carry the licence header; the frontend&#8217;s
+files carry none, and their licence is stated in <code>fe/LICENSE</code> and <code>fe/README.md</code> only.</p>
 </div>
 </div>
 </div>
@@ -2440,7 +2443,7 @@ is stated in <code>fe/LICENSE</code> and <code>fe/README.md</code> only.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-11-13 07:41:14 UTC
+Last updated 2026-11-17 13:36:14 UTC
 </div>
 </div>
 </body>

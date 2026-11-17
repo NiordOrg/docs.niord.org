@@ -18,7 +18,7 @@
 <title>n_keycloak</title>
 <path fill="#eef3f8" stroke="#3d5a78" d="M445.91,-189.62C445.91,-189.62 307.25,-189.62 307.25,-189.62 301.25,-189.62 295.25,-183.62 295.25,-177.62 295.25,-177.62 295.25,-164.54 295.25,-164.54 295.25,-158.54 301.25,-152.54 307.25,-152.54 307.25,-152.54 445.91,-152.54 445.91,-152.54 451.91,-152.54 457.91,-158.54 457.91,-164.54 457.91,-164.54 457.91,-177.62 457.91,-177.62 457.91,-183.62 451.91,-189.62 445.91,-189.62"/>
 <text text-anchor="middle" x="376.58" y="-174.13" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#1d2b3a">Step 1: Keycloak, the first</text>
-<text text-anchor="middle" x="376.58" y="-160.63" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#1d2b3a">domain client</text>
+<text text-anchor="middle" x="376.58" y="-160.63" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#1d2b3a">sysadmin</text>
 </g>
 <!-- n_domains -->
 <g id="node2" class="node">

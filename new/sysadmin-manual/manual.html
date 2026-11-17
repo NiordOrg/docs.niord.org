@@ -1013,10 +1013,8 @@ next published message will get:</p>
 </li>
 <li>
 <p><strong>Next number</strong>: the number. <strong>Compute</strong> fills in the number that follows the highest number of the
-series' messages published in that year (for a <em>Continuous</em> series, in the current year), or 1
-when there are none. For a <em>Continuous</em> series, whose numbers run on from year to year, that can
-be wrong: early in a year, before the year&#8217;s first message, <strong>Compute</strong> gives 1. Check the number
-before you click <strong>Update</strong>.</p>
+series' messages published in that year (for a <em>Continuous</em> series, whose numbers run on from
+year to year, in any year), or 1 when there are none. Check the number before you click <strong>Update</strong>.</p>
 </li>
 <li>
 <p><strong>Update</strong> stores the number at once; <strong>Cancel</strong> closes the panel without storing it.</p>
@@ -2223,8 +2221,15 @@ Parameter</em> dialog and the pencil the <em>Edit Parameter</em> dialog; both ha
 </li>
 <li>
 <p><strong>Mandatory</strong>: the editor sees the parameter&#8217;s label marked with a red asterisk, and a list
-parameter cannot be cleared once a value is chosen. Niord does not check that the editor gives a
-value: a template that cannot do without one has to cope with an empty value itself.</p>
+parameter cannot be cleared once a value is chosen. On the <em>Execute templates</em> page, <strong>Execute</strong> is
+held back while a mandatory parameter is empty, and a line beside it names the parameters still
+to fill in; the preview keeps running. A tick box is never empty: unticked is a value. A mandatory
+parameter inside a composite type counts only when the composite parameter is mandatory in the
+template or one of its other parameters has a value, so a group the editor leaves wholly empty
+does not hold <strong>Execute</strong> back; a mandatory composite parameter none of whose parameters is
+mandatory needs one of them filled. <strong>Test…</strong> in the Categories editor gives a template no
+parameters, and a template run directly through the REST API is not checked, so a template that
+cannot do without a value still has to cope with an empty one itself.</p>
 </li>
 <li>
 <p><strong>Position List</strong>: the parameter is asked once for each position of the message (below).</p>
@@ -4712,7 +4717,7 @@ lets the call through only when the caller has the <em>admin</em> role in the cu
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-11-13 07:41:14 UTC
+Last updated 2026-11-17 13:36:14 UTC
 </div>
 </div>
 <script type="text/x-mathjax-config">
